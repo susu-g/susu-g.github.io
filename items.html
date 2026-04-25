@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shabu Meat House</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --blue-light: #e8f4f8;
+      --blue-mid: #b8dce8;
+      --blue-accent: #4a9ebe;
+      --blue-deep: #2a7a9e;
+      --ink: #1a2a32;
+      --ink-soft: #4a5a62;
+      --cream: #f9fbfc;
+      --border: #d4eaf3;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); }
+    .nav-logo span { color: var(--blue-accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--ink-soft); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--blue-accent); }
+
+    .hero {
+      min-height: 88vh; display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; gap: 4rem; padding: 6rem 6rem 4rem; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -100px; right: -100px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--blue-mid) 0%, transparent 70%);
+      opacity: 0.4; pointer-events: none;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-eyebrow { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue-accent); margin-bottom: 1.2rem; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 700; line-height: 1.1; color: var(--ink); margin-bottom: 1.5rem; }
+    .hero-title em { font-style: italic; color: var(--blue-accent); }
+    .hero-desc { font-size: 1.05rem; color: var(--ink-soft); max-width: 420px; margin-bottom: 2.5rem; font-weight: 300; line-height: 1.8; }
+    .hero-cta { display: inline-flex; align-items: center; gap: 0.6rem; background: var(--blue-accent); color: white; padding: 0.85rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: background 0.2s, transform 0.2s; }
+    .hero-cta:hover { background: var(--blue-deep); transform: translateY(-2px); }
+    .hero-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .hero-card { background: white; border-radius: 16px; padding: 1.8rem 1.5rem; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(74,158,190,0.08); transition: transform 0.3s; }
+    .hero-card:hover { transform: translateY(-4px); }
+    .hero-card:nth-child(2) { margin-top: 2rem; }
+    .hero-card:nth-child(4) { margin-top: -2rem; }
+    .hero-card-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .hero-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; }
+    .hero-card p { font-size: 0.8rem; color: var(--ink-soft); }
+
+    section { padding: 5rem 6rem; }
+    .section-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue-accent); margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 700; color: var(--ink); margin-bottom: 1rem; line-height: 1.2; }
+    .section-sub { color: var(--ink-soft); font-size: 1rem; max-width: 500px; font-weight: 300; line-height: 1.8; }
+
+    .categories-section { background: white; }
+    .cat-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 2.5rem 0 2rem; }
+    .cat-tab { padding: 0.5rem 1.2rem; border-radius: 50px; border: 1.5px solid var(--border); background: transparent; color: var(--ink-soft); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+    .cat-tab:hover, .cat-tab.active { background: var(--blue-accent); border-color: var(--blue-accent); color: white; }
+
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .product-card { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1.4rem; display: flex; justify-content: space-between; align-items: center; transition: all 0.2s; gap: 1rem; }
+    .product-card:hover { border-color: var(--blue-accent); box-shadow: 0 4px 16px rgba(74,158,190,0.12); transform: translateY(-2px); }
+    .product-name { font-size: 0.9rem; font-weight: 500; color: var(--ink); margin-bottom: 0.15rem; }
+    .product-chinese { font-size: 0.82rem; color: var(--blue-deep); font-weight: 400; margin-bottom: 0.2rem; }
+    .product-unit { font-size: 0.75rem; color: var(--ink-soft); }
+    .product-price { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--blue-deep); white-space: nowrap; flex-shrink: 0; }
+
+    .order-section { background: linear-gradient(135deg, var(--blue-light) 0%, var(--cream) 100%); }
+    .order-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: start; }
+    .order-info h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem; color: var(--ink); }
+    .order-steps { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .order-steps li { display: flex; align-items: flex-start; gap: 1rem; font-size: 0.92rem; color: var(--ink-soft); }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--blue-accent); color: white; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+    .order-form { background: white; border-radius: 20px; padding: 2.5rem; border: 1px solid var(--border); box-shadow: 0 8px 40px rgba(74,158,190,0.08); }
+    .order-form h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--ink); }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 500; color: var(--ink-soft); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .form-group input, .form-group textarea { width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; color: var(--ink); background: var(--cream); transition: border-color 0.2s; outline: none; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--blue-accent); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit { width: 100%; padding: 0.9rem; background: var(--blue-accent); color: white; border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: background 0.2s, transform 0.2s; margin-top: 0.5rem; }
+    .form-submit:hover { background: var(--blue-deep); transform: translateY(-1px); }
+    .wechat-note { margin-top: 1rem; text-align: center; font-size: 0.82rem; color: var(--ink-soft); }
+    .wechat-note strong { color: var(--blue-deep); }
+
+    .info-section { background: white; }
+    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+    .info-card { padding: 2rem; border-radius: 16px; background: var(--cream); border: 1px solid var(--border); }
+    .info-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+    .info-card h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; }
+    .info-card p { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.7; }
+
+    footer { background: var(--ink); color: rgba(255,255,255,0.6); padding: 3rem 6rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: white; font-weight: 700; }
+    .footer-logo span { color: var(--blue-mid); }
+    footer p { font-size: 0.82rem; }
+
+    .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--blue-deep); color: white; padding: 0.9rem 2rem; border-radius: 50px; font-size: 0.9rem; font-weight: 500; transition: transform 0.3s ease; z-index: 999; box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 900px) {
+      .hero, section { padding: 4rem 2rem; }
+      .hero { grid-template-columns: 1fr; gap: 3rem; min-height: auto; }
+      .hero-visual { display: none; }
+      .order-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .info-grid { grid-template-columns: 1fr; }
+      footer { padding: 2rem; flex-direction: column; text-align: center; }
+      nav { padding: 0 1.5rem; }
+      .nav-links { gap: 1rem; }
+    }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-text > * { animation: fadeUp 0.6s ease both; }
+    .hero-eyebrow { animation-delay: 0.1s; }
+    .hero-title { animation-delay: 0.2s; }
+    .hero-desc { animation-delay: 0.3s; }
+    .hero-cta { animation-delay: 0.4s; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Shabu <span>Meat House</span></div>
+  <ul class="nav-links">
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#order">Order</a></li>
+    <li><a href="#info">Visit Us</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Montreal's Hotpot Specialty Store</p>
+    <h1 class="hero-title">Premium cuts for your <em>perfect</em> hotpot</h1>
+    <p class="hero-desc">Fresh meat rolls, premium soup bases, vegetables, and everything you need for an authentic shabu shabu experience — all in one place.</p>
+    <a href="#shop" class="hero-cta">Browse Our Products ↓</a>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card"><div class="hero-card-icon">🥩</div><h3>Premium Meats</h3><p>Lamb, beef & pork rolls</p></div>
+    <div class="hero-card"><div class="hero-card-icon">🍲</div><h3>Soup Bases 火锅底料</h3><p>Mala, tomato, mushroom & clear</p></div>
+    <div class="hero-card"><div class="hero-card-icon">🥬</div><h3>Fresh Produce 新鲜蔬果</h3><p>Seasonal vegetables & fruits</p></div>
+    <div class="hero-card"><div class="hero-card-icon">🫙</div><h3>Condiments 调料</h3><p>Dipping sauces & seasonings</p></div>
+  </div>
+</section>
+
+<section class="categories-section" id="shop">
+  <p class="section-label">Our Products / 我们的产品</p>
+  <h2 class="section-title">Browse by Category</h2>
+  <p class="section-sub">Everything you need for a complete hotpot experience, sourced fresh.</p>
+  <div class="cat-tabs">
+    <button class="cat-tab active" onclick="filterCat('all', this)">All 全部</button>
+    <button class="cat-tab" onclick="filterCat('lamb', this)">🐑 Lamb 羊肉</button>
+    <button class="cat-tab" onclick="filterCat('beef', this)">🥩 Beef 牛肉</button>
+    <button class="cat-tab" onclick="filterCat('pork', this)">🐷 Pork 猪肉</button>
+    <button class="cat-tab" onclick="filterCat('other', this)">🍖 Other Meats 其他</button>
+    <button class="cat-tab" onclick="filterCat('soup', this)">🍲 Soup Bases 火锅底料</button>
+    <button class="cat-tab" onclick="filterCat('noodles', this)">🍜 Noodles 面条</button>
+    <button class="cat-tab" onclick="filterCat('vegetables', this)">🥬 Vegetables 蔬菜</button>
+    <button class="cat-tab" onclick="filterCat('mushrooms', this)">🍄 Mushrooms 菌菇</button>
+    <button class="cat-tab" onclick="filterCat('fruits', this)">🍑 Fruits 水果</button>
+    <button class="cat-tab" onclick="filterCat('sides', this)">🥚 Sides 配菜</button>
+    <button class="cat-tab" onclick="filterCat('condiments', this)">🫙 Condiments 调料</button>
+    <button class="cat-tab" onclick="filterCat('dipping', this)">🥣 Dipping Sauces 蘸料</button>
+    <button class="cat-tab" onclick="filterCat('drinks', this)">🥤 Drinks 饮料</button>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<section class="order-section" id="order">
+  <p class="section-label">Pre-Order / 预订</p>
+  <h2 class="section-title">Reserve Your Items</h2>
+  <p class="section-sub">Send us your order ahead of time and pick it up in store. Pay on arrival.</p>
+  <div class="order-grid">
+    <div class="order-info">
+      <h3>How it works</h3>
+      <ul class="order-steps">
+        <li><span class="step-num">1</span><span>Browse the catalogue above and note what you'd like to order.</span></li>
+        <li><span class="step-num">2</span><span>Fill out the form with your name, pickup date, and items.</span></li>
+        <li><span class="step-num">3</span><span>We'll confirm your order via WeChat: <strong>shabumeat</strong>.</span></li>
+        <li><span class="step-num">4</span><span>Come in and pay on pickup. Simple as that!</span></li>
+      </ul>
+    </div>
+    <div class="order-form">
+      <h3>Place a Pre-Order / 提交预订</h3>
+      <div class="form-group">
+        <label>Your Name / 姓名</label>
+        <input type="text" id="fname" placeholder="Full name" />
+      </div>
+      <div class="form-group">
+        <label>WeChat ID <span style="font-weight:300;text-transform:none;">(so we can confirm)</span></label>
+        <input type="text" id="fwechat" placeholder="Your WeChat ID / 微信号" />
+      </div>
+      <div class="form-group">
+        <label>Preferred Pickup Date / 取货日期</label>
+        <input type="date" id="fdate" />
+      </div>
+      <div class="form-group">
+        <label>Items You'd Like / 所需商品</label>
+        <textarea id="fitems" placeholder="e.g. 2x Lamb Shoulder Rolls 羊肉卷, 1x Little Sheep Mala Soup Base 小肥羊麻辣底料..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitOrder()">Send Pre-Order Request / 提交预订</button>
+      <p class="wechat-note">Or message us on WeChat 微信: <strong>shabumeat</strong></p>
+    </div>
+  </div>
+</section>
+
+<section class="info-section" id="info">
+  <p class="section-label">Visit Us / 门店信息</p>
+  <h2 class="section-title">Find Shabu Meat House</h2>
+  <p class="section-sub">Come in store to browse our full selection and pick up your order.</p>
+  <div class="info-grid">
+    <div class="info-card"><div class="info-icon">📍</div><h3>Location / 地址</h3><p>[Your address here]<br/>Montreal, QC</p></div>
+    <div class="info-card"><div class="info-icon">🕐</div><h3>Hours / 营业时间</h3><p>[Your hours here]<br/>e.g. Mon–Sun: 10am – 8pm</p></div>
+    <div class="info-card"><div class="info-icon">💬</div><h3>WeChat / 微信</h3><p>Message us at<br/><strong style="color:var(--blue-deep)">shabumeat</strong><br/>for orders & inquiries 预订咨询</p></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Shabu <span>Meat House</span></div>
+  <p>© 2025 Shabu Meat House. All rights reserved.</p>
+  <p>WeChat 微信: shabumeat</p>
+</footer>
+
+<div class="toast" id="toast">✅ Order request sent! We'll reach out on WeChat soon. 我们将通过微信与您确认。</div>
+
+<script>
+  const products = [
+    // LAMB
+    { name: "Lamb Shoulder Rolls", zh: "羊肉卷", price: "$15.99/lb", unit: "per lb", cat: "lamb" },
+    { name: "Lamb Shoulder (AUS)", zh: "澳大利亚羊肉卷", price: "$13.99/lb", unit: "per lb", cat: "lamb" },
+    { name: "New Zealand Lamb Shoulder Rolls", zh: "新西兰羊肉卷", price: "$15.99/lb", unit: "per lb", cat: "lamb" },
+    { name: "Lamb Leg Boneless Chunk", zh: "无骨羊腿", price: "$12.99/lb", unit: "per lb", cat: "lamb" },
+    { name: "Mutton Leg Bone In Chunk", zh: "有骨老羊腿", price: "$10.99/lb", unit: "per lb", cat: "lamb" },
+    // BEEF
+    { name: "Beef Short Plate Rolls", zh: "牛五花卷", price: "$12.99/lb", unit: "per lb", cat: "beef" },
+    { name: "Beef Short Plate Tray", zh: "牛五花卷 (托盘)", price: "Variable", unit: "per ea", cat: "beef" },
+    { name: "Beef Chuck Rolls", zh: "牛眉头卷", price: "$14.99/lb", unit: "per lb", cat: "beef" },
+    { name: "Beef Flat Iron Sliced", zh: "雪花牛", price: "$14.99/lb", unit: "per lb", cat: "beef" },
+    { name: "Beef Ribeye", zh: "牛肋眼", price: "$21.99/lb", unit: "per lb", cat: "beef" },
+    { name: "Beef Short Plate", zh: "牛五花", price: "$10.99/lb", unit: "per lb", cat: "beef" },
+    { name: "Beef Ox Tail", zh: "牛尾", price: "$13.99/lb", unit: "per lb", cat: "beef" },
+    { name: "Beef Balls", zh: "牛肉丸", price: "$8.00/ea", unit: "per ea", cat: "beef" },
+    { name: "Beef Omasum Scalded", zh: "牛百叶丝", price: "$8.00/ea", unit: "per ea", cat: "beef" },
+    { name: "Beef Honeycomb Tripe Scalded", zh: "金钱肚丝", price: "$8.00/ea", unit: "per ea", cat: "beef" },
+    { name: "Beef Tripe Scalded", zh: "牛草肚丝", price: "$8.00/ea", unit: "per ea", cat: "beef" },
+    // PORK
+    { name: "Pork Shoulder Rolls", zh: "猪梅头肉卷", price: "$7.88/lb", unit: "per lb", cat: "pork" },
+    { name: "Pork Belly Skin Off Thick Cut", zh: "无皮猪腩片", price: "$7.99/lb", unit: "per lb", cat: "pork" },
+    // OTHER
+    { name: "Finger Meat", zh: "手指肉", price: "$11.99/lb", unit: "per lb", cat: "other" },
+    // SOUP BASES
+    { name: "Little Sheep Soup Base – Mala Spicy", zh: "小肥羊麻辣火锅底料", price: "$5.90/ea", unit: "per ea", cat: "soup" },
+    { name: "Little Sheep Soup Base – Mushroom", zh: "小肥羊菌菇火锅底料", price: "$5.90/ea", unit: "per ea", cat: "soup" },
+    { name: "Little Sheep Soup Base – Tomato", zh: "小肥羊番茄火锅底料", price: "$5.90/ea", unit: "per ea", cat: "soup" },
+    { name: "Little Sheep Soup Base – Hot", zh: "小肥羊火锅汤料-辣汤", price: "$5.90/ea", unit: "per ea", cat: "soup" },
+    { name: "XIAOLONGKAN Soup Base – Tallow Spicy", zh: "小龙坎牛油火锅底料", price: "$6.00/ea", unit: "per ea", cat: "soup" },
+    { name: "XIAOLONGKAN Soup Base – Clear", zh: "小龙坎清汤火锅底料", price: "$5.00/ea", unit: "per ea", cat: "soup" },
+    { name: "XIAOLONGKAN Soup Base – Tomato", zh: "小龙坎番茄火锅底料", price: "$6.00/ea", unit: "per ea", cat: "soup" },
+    { name: "XIAOLONGKAN Classic Hotpot Seasoning", zh: "小龙坎经典火锅底料", price: "$5.00/ea", unit: "per ea", cat: "soup" },
+    { name: "XIAOLONGKAN Classic Hotpot Seasoning Cube", zh: "小龙坎经典火锅底料块", price: "$8.00/ea", unit: "per ea", cat: "soup" },
+    { name: "Kikkoman Sukiyaki Aged Rice Sauce", zh: "龟甲万寿喜烧陈年酱汁", price: "$6.00/ea", unit: "per ea", cat: "soup" },
+    // NOODLES
+    { name: "JOYSHARE Sweet Potato Noodle – Wide", zh: "韩国红薯粉丝-宽条", price: "$4.50/ea", unit: "per ea", cat: "noodles" },
+    { name: "JOYSHARE Sweet Potato Noodle – Round", zh: "韩国红薯粉丝-圆", price: "$4.50/ea", unit: "per ea", cat: "noodles" },
+    { name: "Joyshare Jiangxi Rice Vermicelli", zh: "江西米粉", price: "$2.50/ea", unit: "per ea", cat: "noodles" },
+    { name: "LanZhou Fresh Noodle", zh: "京都兰州拉面", price: "$3.00/ea", unit: "per ea", cat: "noodles" },
+    { name: "Long Thin Noodle", zh: "京都龙须面", price: "$3.00/ea", unit: "per ea", cat: "noodles" },
+    // VEGETABLES
+    { name: "Napa", zh: "大白菜", price: "$1.79/lb", unit: "per lb", cat: "vegetables" },
+    { name: "Baby Napa", zh: "娃娃菜", price: "$2.59/lb", unit: "per lb", cat: "vegetables" },
+    { name: "Baby Bok Choy", zh: "小白菜", price: "$2.99/lb", unit: "per lb", cat: "vegetables" },
+    { name: "Daikon", zh: "萝卜", price: "$1.68/lb", unit: "per lb", cat: "vegetables" },
+    { name: "Green Onion", zh: "葱", price: "$1.59/ea", unit: "per ea", cat: "vegetables" },
+    { name: "2/$2.30 Green Onion", zh: "葱 (2件特价)", price: "2/$2.30", unit: "per ea", cat: "vegetables" },
+    { name: "Cilantro", zh: "香菜", price: "$1.89/ea", unit: "per ea", cat: "vegetables" },
+    { name: "2/$3 Cilantro", zh: "香菜 (2件特价)", price: "2/$3.00", unit: "per ea", cat: "vegetables" },
+    { name: "Tong Ho", zh: "茼蒿", price: "$2.99/lb", unit: "per lb", cat: "vegetables" },
+    // MUSHROOMS
+    { name: "Mushroom White 227g", zh: "蘑菇", price: "$2.80/ea", unit: "per ea", cat: "mushrooms" },
+    { name: "Mushroom Brown", zh: "褐蘑菇", price: "$2.80/ea", unit: "per ea", cat: "mushrooms" },
+    { name: "2/$5 Mushroom", zh: "蘑菇 (2件特价)", price: "2/$5.00", unit: "per ea", cat: "mushrooms" },
+    { name: "Enoki", zh: "金针菇", price: "$1.60/ea", unit: "per ea", cat: "mushrooms" },
+    { name: "2/$2.80 Enoki", zh: "金针菇 (2件特价)", price: "2/$2.80", unit: "per ea", cat: "mushrooms" },
+    { name: "JOYSHARE Black Fungus", zh: "乐享东北黑木耳", price: "$8.00/ea", unit: "per ea", cat: "mushrooms" },
+    // FRUITS
+    { name: "Longan", zh: "龙眼", price: "$15.00/ea", unit: "per ea", cat: "fruits" },
+    { name: "Mango Ataulfo", zh: "阿道夫芒果", price: "$18.00/ea", unit: "per ea", cat: "fruits" },
+    { name: "Ataulfo Mango Case", zh: "阿道夫芒果 (箱)", price: "$18.00/ea", unit: "per ea", cat: "fruits" },
+    { name: "Mango Haden", zh: "海顿芒果", price: "$20.00/ea", unit: "per ea", cat: "fruits" },
+    { name: "Mango Tommy", zh: "汤米芒果", price: "$18.00/ea", unit: "per ea", cat: "fruits" },
+    { name: "Qiuyue Pear", zh: "秋月梨", price: "$20.00/ea", unit: "per ea", cat: "fruits" },
+    // SIDES
+    { name: "Soft Tofu 300g", zh: "软豆腐", price: "$2.00/ea", unit: "per ea", cat: "sides" },
+    { name: "Medium Firm Tofu 700g", zh: "板豆腐", price: "$3.00/ea", unit: "per ea", cat: "sides" },
+    { name: "Firm Tofu 500g", zh: "硬豆腐", price: "$3.50/ea", unit: "per ea", cat: "sides" },
+    { name: "Extra Firm Tofu 350g", zh: "特硬豆腐", price: "$4.00/ea", unit: "per ea", cat: "sides" },
+    { name: "Spam 340g (25% Less Sodium)", zh: "午餐肉 (低钠)", price: "$6.00/ea", unit: "per ea", cat: "sides" },
+    { name: "Ben & Jerry's Tonight Dough Ice Cream", zh: "冰淇淋", price: "$8.50/ea", unit: "per ea", cat: "sides" },
+    // CONDIMENTS
+    { name: "Kikkoman Premium Soy Sauce 750ml", zh: "龟甲万特选大豆酱油", price: "$10.00/ea", unit: "per ea", cat: "condiments" },
+    { name: "Kimlan Vinegar", zh: "金兰醋", price: "$6.00/ea", unit: "per ea", cat: "condiments" },
+    { name: "XIAOLONGKAN Red Pepper Powder", zh: "小龙坎干碟辣椒面", price: "$3.99/ea", unit: "per ea", cat: "condiments" },
+    { name: "JoyShare Pure Sesame Paste", zh: "乐享纯芝麻酱", price: "$6.99/ea", unit: "per ea", cat: "condiments" },
+    // DIPPING
+    { name: "Little Sheep Dipping Sauce – Original", zh: "小肥羊蘸料盒装-清香", price: "$2.00/ea", unit: "per ea", cat: "dipping" },
+    { name: "Little Sheep Dipping Sauce – Spicy", zh: "小肥羊蘸料盒装-香辣", price: "$2.00/ea", unit: "per ea", cat: "dipping" },
+    { name: "XIAOLONGKAN Sesame Dip – Original", zh: "小龙坎火锅麻酱原味", price: "$1.90/ea", unit: "per ea", cat: "dipping" },
+    { name: "XIAOLONGKAN Sesame Dip – Spicy", zh: "小龙坎火锅麻酱香辣", price: "$1.90/ea", unit: "per ea", cat: "dipping" },
+    // DRINKS
+    { name: "Coke", zh: "可口可乐", price: "$1.50/ea", unit: "per ea", cat: "drinks" },
+    { name: "Diet Coke", zh: "健怡可乐", price: "$1.50/ea", unit: "per ea", cat: "drinks" },
+    { name: "Coke Zero", zh: "零度可乐", price: "$1.50/ea", unit: "per ea", cat: "drinks" },
+    { name: "Nestea", zh: "雀巢冰茶", price: "$1.50/ea", unit: "per ea", cat: "drinks" },
+  ];
+
+  function renderProducts(cat) {
+    const grid = document.getElementById('productsGrid');
+    const filtered = cat === 'all' ? products : products.filter(p => p.cat === cat);
+    grid.innerHTML = filtered.map(p => `
+      <div class="product-card">
+        <div>
+          <div class="product-name">${p.name}</div>
+          ${p.zh ? `<div class="product-chinese">${p.zh}</div>` : ''}
+          <div class="product-unit">${p.unit}</div>
+        </div>
+        <div class="product-price">${p.price}</div>
+      </div>
+    `).join('');
+  }
+
+  function filterCat(cat, btn) {
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    renderProducts(cat);
+  }
+
+  function submitOrder() {
+    const name = document.getElementById('fname').value.trim();
+    const items = document.getElementById('fitems').value.trim();
+    if (!name || !items) { alert('Please fill in your name and the items you want.'); return; }
+    const toast = document.getElementById('toast');
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+    document.getElementById('fname').value = '';
+    document.getElementById('fwechat').value = '';
+    document.getElementById('fdate').value = '';
+    document.getElementById('fitems').value = '';
+  }
+
+  renderProducts('all');
+</script>
+</body>
+</html>

@@ -129,7 +129,16 @@
   </style>
 </head>
 <body>
-
+  
+<nav>
+  <a class="nav-logo" href="index.html">Shabu <span>Meat House</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="items.html">All Items</a></li>
+    <li><a href="items.html#order" class="nav-cta">Pre-Order</a></li>
+  </ul>
+</nav>
+<!--
 <nav>
   <div class="nav-logo">Shabu <span>Meat House</span></div>
   <ul class="nav-links">
@@ -153,7 +162,7 @@
     <div class="hero-card"><div class="hero-card-icon">🫙</div><h3>Condiments 调料</h3><p>Dipping sauces & seasonings</p></div>
   </div>
 </section>
-
+-->
 <section class="categories-section" id="shop">
   <p class="section-label">Our Products / 我们的产品</p>
   <h2 class="section-title">Browse by Category</h2>
@@ -220,7 +229,7 @@
   <h2 class="section-title">Find Shabu Meat House</h2>
   <p class="section-sub">Come in store to browse our full selection and pick up your order.</p>
   <div class="info-grid">
-    <div class="info-card"><div class="info-icon">📍</div><h3>Location / 地址</h3><p>[Your address here]<br/>Montreal, QC</p></div>
+    <div class="info-card"><div class="info-icon">📍</div><h3>Location / 地址</h3><p>3272 Midland Ave #B-112]<br/>Scarborough, ON M1V 0C7</p></div>
     <div class="info-card"><div class="info-icon">🕐</div><h3>Hours / 营业时间</h3><p>[Your hours here]<br/>e.g. Mon–Sun: 10am – 8pm</p></div>
     <div class="info-card"><div class="info-icon">💬</div><h3>WeChat / 微信</h3><p>Message us at<br/><strong style="color:var(--blue-deep)">shabumeat</strong><br/>for orders & inquiries 预订咨询</p></div>
   </div>
@@ -237,14 +246,14 @@
 <script>
   const products = [
     // LAMB
-    { name: "Lamb Shoulder Rolls", zh: "羊肉卷", price: "$15.99/lb", unit: "per lb", cat: "lamb" },
+    //{ name: "Lamb Shoulder Rolls", zh: "羊肉卷", price: "$15.99/lb", unit: "per lb", cat: "lamb" },
     { name: "Lamb Shoulder (AUS)", zh: "澳大利亚羊肉卷", price: "$13.99/lb", unit: "per lb", cat: "lamb" },
     { name: "New Zealand Lamb Shoulder Rolls", zh: "新西兰羊肉卷", price: "$15.99/lb", unit: "per lb", cat: "lamb" },
     { name: "Lamb Leg Boneless Chunk", zh: "无骨羊腿", price: "$12.99/lb", unit: "per lb", cat: "lamb" },
     { name: "Mutton Leg Bone In Chunk", zh: "有骨老羊腿", price: "$10.99/lb", unit: "per lb", cat: "lamb" },
     // BEEF
     { name: "Beef Short Plate Rolls", zh: "牛五花卷", price: "$12.99/lb", unit: "per lb", cat: "beef" },
-    { name: "Beef Short Plate Tray", zh: "牛五花卷 (托盘)", price: "Variable", unit: "per ea", cat: "beef" },
+    //{ name: "Beef Short Plate Tray", zh: "牛五花卷 (托盘)", price: "Variable", unit: "per ea", cat: "beef" },
     { name: "Beef Chuck Rolls", zh: "牛眉头卷", price: "$14.99/lb", unit: "per lb", cat: "beef" },
     { name: "Beef Flat Iron Sliced", zh: "雪花牛", price: "$14.99/lb", unit: "per lb", cat: "beef" },
     { name: "Beef Ribeye", zh: "牛肋眼", price: "$21.99/lb", unit: "per lb", cat: "beef" },
@@ -282,21 +291,21 @@
     { name: "Baby Bok Choy", zh: "小白菜", price: "$2.99/lb", unit: "per lb", cat: "vegetables" },
     { name: "Daikon", zh: "萝卜", price: "$1.68/lb", unit: "per lb", cat: "vegetables" },
     { name: "Green Onion", zh: "葱", price: "$1.59/ea", unit: "per ea", cat: "vegetables" },
-    { name: "2/$2.30 Green Onion", zh: "葱 (2件特价)", price: "2/$2.30", unit: "per ea", cat: "vegetables" },
+    //{ name: "2/$2.30 Green Onion", zh: "葱 (2件特价)", price: "2/$2.30", unit: "per ea", cat: "vegetables" },
     { name: "Cilantro", zh: "香菜", price: "$1.89/ea", unit: "per ea", cat: "vegetables" },
-    { name: "2/$3 Cilantro", zh: "香菜 (2件特价)", price: "2/$3.00", unit: "per ea", cat: "vegetables" },
+    //{ name: "2/$3 Cilantro", zh: "香菜 (2件特价)", price: "2/$3.00", unit: "per ea", cat: "vegetables" },
     { name: "Tong Ho", zh: "茼蒿", price: "$2.99/lb", unit: "per lb", cat: "vegetables" },
     // MUSHROOMS
     { name: "Mushroom White 227g", zh: "蘑菇", price: "$2.80/ea", unit: "per ea", cat: "mushrooms" },
     { name: "Mushroom Brown", zh: "褐蘑菇", price: "$2.80/ea", unit: "per ea", cat: "mushrooms" },
-    { name: "2/$5 Mushroom", zh: "蘑菇 (2件特价)", price: "2/$5.00", unit: "per ea", cat: "mushrooms" },
+    //{ name: "2/$5 Mushroom", zh: "蘑菇 (2件特价)", price: "2/$5.00", unit: "per ea", cat: "mushrooms" },
     { name: "Enoki", zh: "金针菇", price: "$1.60/ea", unit: "per ea", cat: "mushrooms" },
-    { name: "2/$2.80 Enoki", zh: "金针菇 (2件特价)", price: "2/$2.80", unit: "per ea", cat: "mushrooms" },
+    //{ name: "2/$2.80 Enoki", zh: "金针菇 (2件特价)", price: "2/$2.80", unit: "per ea", cat: "mushrooms" },
     { name: "JOYSHARE Black Fungus", zh: "乐享东北黑木耳", price: "$8.00/ea", unit: "per ea", cat: "mushrooms" },
     // FRUITS
     { name: "Longan", zh: "龙眼", price: "$15.00/ea", unit: "per ea", cat: "fruits" },
     { name: "Mango Ataulfo", zh: "阿道夫芒果", price: "$18.00/ea", unit: "per ea", cat: "fruits" },
-    { name: "Ataulfo Mango Case", zh: "阿道夫芒果 (箱)", price: "$18.00/ea", unit: "per ea", cat: "fruits" },
+    //{ name: "Ataulfo Mango Case", zh: "阿道夫芒果 (箱)", price: "$19.00/ea", unit: "per ea", cat: "fruits" },
     { name: "Mango Haden", zh: "海顿芒果", price: "$20.00/ea", unit: "per ea", cat: "fruits" },
     { name: "Mango Tommy", zh: "汤米芒果", price: "$18.00/ea", unit: "per ea", cat: "fruits" },
     { name: "Qiuyue Pear", zh: "秋月梨", price: "$20.00/ea", unit: "per ea", cat: "fruits" },
@@ -308,7 +317,7 @@
     { name: "Spam 340g (25% Less Sodium)", zh: "午餐肉 (低钠)", price: "$6.00/ea", unit: "per ea", cat: "sides" },
     { name: "Ben & Jerry's Tonight Dough Ice Cream", zh: "冰淇淋", price: "$8.50/ea", unit: "per ea", cat: "sides" },
     // CONDIMENTS
-    { name: "Kikkoman Premium Soy Sauce 750ml", zh: "龟甲万特选大豆酱油", price: "$10.00/ea", unit: "per ea", cat: "condiments" },
+    { name: "Kikkoman Premium Soy Sauce 750ml", zh: "龟甲万特选大豆酱油", price: "$8.00/ea", unit: "per ea", cat: "condiments" },
     { name: "Kimlan Vinegar", zh: "金兰醋", price: "$6.00/ea", unit: "per ea", cat: "condiments" },
     { name: "XIAOLONGKAN Red Pepper Powder", zh: "小龙坎干碟辣椒面", price: "$3.99/ea", unit: "per ea", cat: "condiments" },
     { name: "JoyShare Pure Sesame Paste", zh: "乐享纯芝麻酱", price: "$6.99/ea", unit: "per ea", cat: "condiments" },
@@ -317,11 +326,11 @@
     { name: "Little Sheep Dipping Sauce – Spicy", zh: "小肥羊蘸料盒装-香辣", price: "$2.00/ea", unit: "per ea", cat: "dipping" },
     { name: "XIAOLONGKAN Sesame Dip – Original", zh: "小龙坎火锅麻酱原味", price: "$1.90/ea", unit: "per ea", cat: "dipping" },
     { name: "XIAOLONGKAN Sesame Dip – Spicy", zh: "小龙坎火锅麻酱香辣", price: "$1.90/ea", unit: "per ea", cat: "dipping" },
-    // DRINKS
+    /*// DRINKS
     { name: "Coke", zh: "可口可乐", price: "$1.50/ea", unit: "per ea", cat: "drinks" },
     { name: "Diet Coke", zh: "健怡可乐", price: "$1.50/ea", unit: "per ea", cat: "drinks" },
     { name: "Coke Zero", zh: "零度可乐", price: "$1.50/ea", unit: "per ea", cat: "drinks" },
-    { name: "Nestea", zh: "雀巢冰茶", price: "$1.50/ea", unit: "per ea", cat: "drinks" },
+    { name: "Nestea", zh: "雀巢冰茶", price: "$1.50/ea", unit: "per ea", cat: "drinks" },*/
   ];
 
   function renderProducts(cat) {

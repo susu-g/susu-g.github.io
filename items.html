@@ -19,35 +19,39 @@
 </nav>
 
 <section class="container">
-  <p class="section-label">Order Prep / 订单准备</p>
+  <p class="section-label">Our Products / 我们的产品</p>
   <h1 class="section-title">Full Catalogue</h1>
 
-  <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
-    <input type="text" id="searchInput" placeholder="Search products (English or 中文)..." onkeyup="filterProducts()" style="padding: 12px 20px; border-radius: 50px; border: 1px solid var(--border); flex: 1; min-width: 250px;">
-    <button onclick="toggleGuide()" class="btn-secondary" style="width: auto; border: 1.5px solid var(--blue-accent); color: var(--blue-accent); background: none; padding: 0 1.5rem; border-radius: 50px; cursor: pointer;">How much to buy?</button>
-  </div>
-
-  <div id="shopGuide" style="display: none; background: var(--blue-light); padding: 2rem; border-radius: 20px; margin-bottom: 2rem;">
-    <h3>Recommended per person:</h3>
-    <p>• Meat: 0.5lb - 0.75lb<br>• Veggies: 1.5 portions<br>• Soup: 1 base per 3-4 people</p>
+  <div style="margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
+    <input type="text" id="searchInput" placeholder="Search products (e.g. Beef, 羊肉)..." onkeyup="renderProducts()" style="padding: 12px 25px; border-radius: 50px; border: 1.5px solid var(--border); width: 100%; max-width: 500px; outline: none; font-family: inherit;">
+    
+    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('all')">All 全部</button>
+        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('lamb')">Lamb 羊肉</button>
+        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('beef')">Beef 牛肉</button>
+        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('pork')">Pork 猪肉</button>
+        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('soup')">Soup 汤底</button>
+        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('vegetables')">Veg 蔬菜</button>
+        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('sides')">Sides 配菜</button>
+    </div>
   </div>
 
   <div class="products-grid" id="productsGrid"></div>
 </section>
 
 <div class="floating-cart" onclick="toggleDrawer()">
-  🛒 View My List (<span id="cartCount">0</span>)
+  🛒 My List (<span id="cartCount">0</span>)
 </div>
 
 <div id="list-drawer">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-        <h2 style="font-family: 'Playfair Display';">My Order</h2>
+        <h2 style="font-family: 'Playfair Display';">My Order List</h2>
         <button onclick="toggleDrawer()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
     </div>
     <div id="cartItems"></div>
     <div style="border-top: 1px solid var(--border); margin-top: 2rem; padding-top: 1rem;">
         <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.2rem; margin-bottom: 1.5rem;">
-            <span>Total Estimated:</span>
+            <span>Subtotal:</span>
             <span id="cartTotal">$0.00</span>
         </div>
         <button class="btn-primary" onclick="copyForWeChat()">Copy for WeChat (复制订单)</button>
@@ -58,36 +62,83 @@
 
 <script>
     const products = [
-        { id: 1, name: "Australia Lamb Shoulder Rolls", zh: "澳大利亚羊肉卷", price: 13.99, unit: "lb", cat: "lamb" },
-        { id: 2, name: "Beef Short Plate Rolls", zh: "牛五花卷", price: 12.99, unit: "lb", cat: "beef" },
-        { id: 3, name: "Little Sheep Mala Soup Base", zh: "小肥羊麻辣底料", price: 5.90, unit: "ea", cat: "soup" }
-        // ... paste the rest of your products here ...
+        // LAMB
+        { name: "Australia Lamb Shoulder Rolls", zh: "澳大利亚羊肉卷", price: 13.99, unit: "lb", cat: "lamb" },
+        { name: "New Zealand Lamb Shoulder Rolls", zh: "新西兰羊肉卷", price: 15.99, unit: "lb", cat: "lamb" },
+        { name: "Lamb Leg Boneless Cube", zh: "无骨羊腿", price: 12.99, unit: "lb", cat: "lamb" },
+        { name: "Mutton Leg Bone-In Cube", zh: "有骨老羊腿", price: 10.99, unit: "lb", cat: "lamb" },
+        // BEEF
+        { name: "Beef Short Plate Rolls", zh: "牛五花卷", price: 12.99, unit: "lb", cat: "beef" },
+        { name: "Beef Chuck Rolls", zh: "牛眉头卷", price: 14.99, unit: "lb", cat: "beef" },
+        { name: "Beef Flat Iron Sliced", zh: "雪花牛", price: 14.99, unit: "lb", cat: "beef" },
+        { name: "Beef Ribeye", zh: "牛肋眼", price: 21.99, unit: "lb", cat: "beef" },
+        { name: "Beef Short Plate", zh: "牛五花", price: 10.99, unit: "lb", cat: "beef" },
+        { name: "Beef Ox Tail", zh: "牛尾", price: 13.99, unit: "lb", cat: "beef" },
+        { name: "Beef Balls", zh: "牛肉丸", price: 8.00, unit: "ea", cat: "beef" },
+        { name: "Beef Omasum Scalded", zh: "牛百叶丝", price: 8.00, unit: "ea", cat: "beef" },
+        { name: "Beef Honeycomb Tripe Scalded", zh: "金钱肚丝", price: 8.00, unit: "ea", cat: "beef" },
+        { name: "Beef Tripe Scalded", zh: "牛草肚丝", price: 8.00, unit: "ea", cat: "beef" },
+        // PORK
+        { name: "Pork Shoulder Rolls", zh: "猪梅头肉卷", price: 7.88, unit: "lb", cat: "pork" },
+        { name: "Pork Belly Skin Off Thick Cut", zh: "无皮猪腩片", price: 7.99, unit: "lb", cat: "pork" },
+        // SOUP BASES
+        { name: "Little Sheep – Mala Spicy", zh: "小肥羊麻辣火锅底料", price: 5.90, unit: "ea", cat: "soup" },
+        { name: "Little Sheep – Mushroom", zh: "小肥羊菌菇火锅底料", price: 5.90, unit: "ea", cat: "soup" },
+        { name: "Little Sheep – Tomato", zh: "小肥羊番茄火锅底料", price: 5.90, unit: "ea", cat: "soup" },
+        { name: "Little Sheep – Hot", zh: "小肥羊火锅汤料-辣汤", price: 5.90, unit: "ea", cat: "soup" },
+        { name: "XIAOLONGKAN – Tallow Spicy", zh: "小龙坎牛油火锅底料", price: 6.00, unit: "ea", cat: "soup" },
+        { name: "XIAOLONGKAN – Clear", zh: "小龙坎清汤火锅底料", price: 5.00, unit: "ea", cat: "soup" },
+        { name: "XIAOLONGKAN – Tomato", zh: "小龙坎番茄火锅底料", price: 6.00, unit: "ea", cat: "soup" },
+        // NOODLES
+        { name: "JOYSHARE Sweet Potato Noodle", zh: "韩国红薯粉丝", price: 4.50, unit: "ea", cat: "noodles" },
+        { name: "LanZhou Fresh Noodle", zh: "京都兰州拉面", price: 3.00, unit: "ea", cat: "noodles" },
+        // VEGETABLES
+        { name: "Napa", zh: "大白菜", price: 1.79, unit: "lb", cat: "vegetables" },
+        { name: "Baby Bok Choy", zh: "小白菜", price: 2.99, unit: "lb", cat: "vegetables" },
+        { name: "Tong Ho", zh: "茼蒿", price: 2.99, unit: "lb", cat: "vegetables" },
+        // SIDES
+        { name: "Soft Tofu 300g", zh: "软豆腐", price: 2.00, unit: "ea", cat: "sides" },
+        { name: "Spam 340g", zh: "午餐肉", price: 6.00, unit: "ea", cat: "sides" }
     ];
 
     let cart = JSON.parse(localStorage.getItem('shabuCart')) || {};
+    let currentCat = 'all';
 
     function renderProducts() {
         const grid = document.getElementById('productsGrid');
-        grid.innerHTML = products.map(p => `
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        
+        const filtered = products.filter(p => {
+            const matchesSearch = p.name.toLowerCase().includes(searchTerm) || p.zh.includes(searchTerm);
+            const matchesCat = currentCat === 'all' || p.cat === currentCat;
+            return matchesSearch && matchesCat;
+        });
+
+        grid.innerHTML = filtered.map(p => `
             <div class="product-card">
                 <div class="product-name">${p.name}</div>
                 <div class="product-zh">${p.zh}</div>
                 <div class="product-price">$${p.price.toFixed(2)} / ${p.unit}</div>
                 <div class="qty-controls">
-                    <button class="qty-btn" onclick="updateQty(${p.id}, -1)">-</button>
-                    <span class="qty-val" id="qty-${p.id}">${cart[p.id]?.qty || 0}</span>
-                    <button class="qty-btn" onclick="updateQty(${p.id}, 1)">+</button>
+                    <button class="qty-btn" onclick="updateQty('${p.name}', -1)">-</button>
+                    <span class="qty-val" id="qty-${p.name.replace(/\s+/g, '')}">${cart[p.name]?.qty || 0}</span>
+                    <button class="qty-btn" onclick="updateQty('${p.name}', 1)">+</button>
                 </div>
             </div>
         `).join('');
     }
 
-    function updateQty(id, change) {
-        const product = products.find(p => p.id === id);
-        if (!cart[id]) cart[id] = { ...product, qty: 0 };
+    function filterByCat(cat) {
+        currentCat = cat;
+        renderProducts();
+    }
+
+    function updateQty(name, change) {
+        const product = products.find(p => p.name === name);
+        if (!cart[name]) cart[name] = { ...product, qty: 0 };
         
-        cart[id].qty += change;
-        if (cart[id].qty <= 0) delete cart[id];
+        cart[name].qty += change;
+        if (cart[name].qty <= 0) delete cart[name];
         
         localStorage.setItem('shabuCart', JSON.stringify(cart));
         updateUI();
@@ -107,8 +158,8 @@
             total += item.price * item.qty;
             count += item.qty;
             cartItems.innerHTML += `
-                <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
-                    <span>${item.qty}x ${item.name}</span>
+                <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-size: 0.9rem;">
+                    <span><strong>${item.qty}x</strong> ${item.name}</span>
                     <span>$${(item.price * item.qty).toFixed(2)}</span>
                 </div>
             `;
@@ -119,20 +170,17 @@
     }
 
     function copyForWeChat() {
-        let text = "Shabu Meat House Order 订单:\n";
+        if (Object.keys(cart).length === 0) return alert("Your list is empty!");
+        let text = "Shabu Meat House Order 订单:\n---\n";
         Object.values(cart).forEach(item => {
-            text += `• ${item.qty}x ${item.name} ${item.zh}\n`;
+            text += `${item.qty}x ${item.name} ${item.zh}\n`;
         });
         text += `\nTotal: ${document.getElementById('cartTotal').innerText}\nWeChat: shabumeat`;
-        navigator.clipboard.writeText(text).then(() => alert("Copied! Paste into WeChat."));
+        navigator.clipboard.writeText(text).then(() => alert("List copied! Now paste it into WeChat."));
     }
 
     function toggleDrawer() { document.getElementById('list-drawer').classList.toggle('active'); }
-    function toggleGuide() { 
-        const g = document.getElementById('shopGuide');
-        g.style.display = g.style.display === 'none' ? 'block' : 'none';
-    }
-    function clearCart() { cart = {}; localStorage.removeItem('shabuCart'); updateUI(); }
+    function clearCart() { if(confirm("Clear list?")) { cart = {}; localStorage.removeItem('shabuCart'); updateUI(); } }
 
     window.onload = updateUI;
 </script>

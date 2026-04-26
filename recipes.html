@@ -4,15 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipes | Shabu Meat House</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Specific tweaks for recipe readability */
-        .recipe-meta { font-size: 0.85rem; color: var(--blue-deep); font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; }
-        .recipe-list { margin-top: 1rem; padding-left: 1.2rem; font-size: 0.9rem; color: var(--ink-soft); }
-        .recipe-list li { margin-bottom: 0.5rem; }
-        .prep-time { display: inline-block; background: var(--blue-light); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; margin-bottom: 1rem; }
-    </style>
 </head>
 <body>
 
@@ -21,81 +14,364 @@
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="items.html">Shop</a></li>
-    <li><a href="recipes.html" style="color: var(--blue-accent);">Recipes</a></li>
+    <li><a href="hotpot.html">Recipes</a></li>
+    <li><a href="recipes.html">More Recipes</a></li>
   </ul>
 </nav>
 
 <section class="container">
-    <p class="section-label">Culinary Tips / 烹饪指南</p>
-    <h1 class="section-title">The Art of Hotpot</h1>
-    <p style="max-width: 600px; margin-bottom: 3rem; color: var(--ink-soft);">
-        Master the perfect shabu-shabu experience at home. From mixing the ultimate dipping sauce to prepping our premium cuts.
-    </p>
+    <p class="section-label">Culinary Inspiration / 烹饪灵感</p>
+    <h1 class="section-title">Home Cooking Guides</h1>
+    <p class="subtitle">Turn our premium cuts into delicious daily meals. / 用我们的优质肉类开启美味日常。</p>
+    
+    <div class="recipes-grid">
+        
+        <div class="recipe-card">
+            <div class="recipe-header">
+                <span class="recipe-meta">Pressure Cooker / 压力锅</span>
+                <h2 class="recipe-title-en">Tomato & Beef "Finger" Stew</h2>
+                <h3 class="recipe-title-zh">西红柿炖牛腩块</h3>
+            </div>
+            <div class="recipe-content">
+                <h5>Directions / 步骤:</h5>
+                <ol>
+                    <li>Sear <b>Finger Meat</b> in the Instant Pot until browned. <br><span>在压力锅中将牛指肉煎至金黄。</span></li>
+                    <li>Add diced tomatoes, ginger slices, and a splash of soy sauce. <br><span>加入番茄块、姜片和生抽。</span></li>
+                    <li>Pressure cook for 35 mins. The beef becomes melt-in-your-mouth tender. <br><span>高压烹饪35分钟，让牛肉入口即化。</span></li>
+                </ol>
+            </div>
+            <button class="btn-add-recipe" onclick="addRecipe(['Finger Meat'])">+ Add Ingredients to List</button>
+        </div>
 
-    <div class="cat-tabs" style="display: flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap;">
-        <button class="qty-btn" style="width: auto; padding: 0 20px; border-radius: 50px;" onclick="filterRecipes('all')">All</button>
-        <button class="qty-btn" style="width: auto; padding: 0 20px; border-radius: 50px;" onclick="filterRecipes('sauce')">Sauces 蘸料</button>
-        <button class="qty-btn" style="width: auto; padding: 0 20px; border-radius: 50px;" onclick="filterRecipes('soup')">Soup Prep 汤底</button>
-        <button class="qty-btn" style="width: auto; padding: 0 20px; border-radius: 50px;" onclick="filterRecipes('meat')">Meat Tips 涮肉</button>
+        <div class="recipe-card">
+            <div class="recipe-header">
+                <span class="recipe-meta">Slow Cook / 慢炖</span>
+                <h2 class="recipe-title-en">Clear Daikon & Lamb Stew</h2>
+                <h3 class="recipe-title-zh">白萝卜炖羊肉</h3>
+            </div>
+            <div class="recipe-content">
+                <h5>Directions / 步骤:</h5>
+                <ol>
+                    <li>Parboil <b>Lamb Leg Cubes</b> to remove impurities, then rinse. <br><span>将羊腿肉块焯水去浮沫，洗净。</span></li>
+                    <li>Stew with <b>Daikon</b>, ginger, and scallions for 1.5 hours. <br><span>与白萝卜、姜片和葱段中小火慢炖1.5小时。</span></li>
+                    <li>Season with salt and white pepper for a clean, warming broth. <br><span>加入盐和白胡椒粉，汤头清甜暖胃。</span></li>
+                </ol>
+            </div>
+            <button class="btn-add-recipe" onclick="addRecipe(['Lamb Leg Boneless Cube', 'Daikon'])">+ Add Ingredients</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-header">
+                <span class="recipe-meta">Side Dish / 凉拌小菜</span>
+                <h2 class="recipe-title-en">Sesame Glass Noodle Salad</h2>
+                <h3 class="recipe-title-zh">凉拌红薯粉</h3>
+            </div>
+            <div class="recipe-content">
+                <h5>Directions / 步骤:</h5>
+                <ol>
+                    <li>Boil <b>Sweet Potato Noodles</b> for 8 mins until chewy. <br><span>将红薯粉丝煮8分钟至口感筋道。</span></li>
+                    <li>Toss with spinach, carrots, soy sauce, and <b>Sesame Oil</b>. <br><span>拌入菠菜、胡萝卜丝、生抽和香油。</span></li>
+                    <li>Top with toasted sesame seeds for a savory banchan style dish. <br><span>撒上芝麻，制作成美味的韩式凉拌菜。</span></li>
+                </ol>
+            </div>
+            <button class="btn-add-recipe" onclick="addRecipe(['JOYSHARE Sweet Potato Noodle – Wide', 'JoyShare Pure Sesame Paste'])">+ Add Ingredients</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-header">
+                <span class="recipe-meta">Spicy Pot / 辣锅</span>
+                <h2 class="recipe-title-en">Spicy Soft Tofu Stew with Beef</h2>
+                <h3 class="recipe-title-zh">牛肉嫩豆腐锅</h3>
+            </div>
+            <div class="recipe-content">
+                <h5>Directions / 步骤:</h5>
+                <ol>
+                    <li>Sauté garlic and chili flakes, add broth and <b>Soft Tofu</b>. <br><span>煸香蒜末和辣椒面，加入汤底和嫩豆腐。</span></li>
+                    <li>Drop in <b>Beef Short Plate Rolls</b>; they cook instantly. <br><span>放入牛五花卷，肉片会迅速煮熟。</span></li>
+                    <li>Finish with a raw egg and green onions while bubbling. <br><span>趁热打入生鸡蛋并撒上葱花。</span></li>
+                </ol>
+            </div>
+            <button class="btn-add-recipe" onclick="addRecipe(['Soft Tofu 300g', 'Beef Short Plate Rolls'])">+ Add Ingredients</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-header">
+                <span class="recipe-meta">High Heat / 爆炒</span>
+                <h2 class="recipe-title-en">"Mala" Sliced Lamb Stir-Fry</h2>
+                <h3 class="recipe-title-zh">麻辣爆炒羊肉</h3>
+            </div>
+            <div class="recipe-content">
+                <h5>Directions / 步骤:</h5>
+                <ol>
+                    <li>Heat oil until smoking; add <b>Lamb Shoulder Rolls</b>. <br><span>大火热油，倒入羊肉卷快速翻炒。</span></li>
+                    <li>Add dried chilies and Szechuan peppercorns for a numbing kick. <br><span>加入干辣椒和花椒，炒出麻辣香味。</span></li>
+                    <li>Quick sear for 2 mins to keep the lamb tender and smoky. <br><span>快速爆炒2分钟，保持羊肉鲜嫩出镬气。</span></li>
+                </ol>
+            </div>
+            <button class="btn-add-recipe" onclick="addRecipe(['Australia Lamb Shoulder Rolls', 'Green Onion'])">+ Add Ingredients</button>
+        </div>
+        
+        <div class="recipe-card">
+            <div class="recipe-header">
+                <span class="recipe-meta">Fusion / 慢炖</span>
+                <h2 class="recipe-title-en">Red Wine Slow-Braised Oxtail</h2>
+                <h3 class="recipe-title-zh">红酒烩牛尾</h3>
+            </div>
+            <div class="recipe-content">
+                <h5>Directions / 步骤:</h5>
+                <ol>
+                    <li>Dredge <b>Ox Tail</b> in flour and sear all sides. <br><span>牛尾裹少许面粉，各面煎至焦黄。</span></li>
+                    <li>Slow simmer with red wine, carrots, and onions for 3 hours. <br><span>加入红酒、胡萝卜和洋葱，小火慢炖3小时。</span></li>
+                    <li>The sauce will thicken into a rich gravy. <br><span>汤汁会浓缩成醇厚的肉汁。</span></li>
+                </ol>
+            </div>
+            <button class="btn-add-recipe" onclick="addRecipe(['Beef Ox Tail'])">+ Add Oxtail to List</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-header">
+                <span class="recipe-meta">5-Min Meal / 快捷午餐</span>
+                <h2 class="recipe-title-en">Beef Short Plate "Gyudon" Bowl</h2>
+                <h3 class="recipe-title-zh">日式肥牛饭</h3>
+            </div>
+            <div class="recipe-content">
+                <h5>Directions / 步骤:</h5>
+                <ol>
+                    <li>Simmer sliced onions in <b>Soy Sauce</b>, sugar, and dashi. <br><span>用生抽、糖和高汤煮软洋葱丝。</span></li>
+                    <li>Add <b>Beef Short Plate Rolls</b> until just cooked. <br><span>加入牛五花卷煮至变色。</span></li>
+                    <li>Pour over hot rice for an instant savory meal. <br><span>淋在热米饭上，简单美味。</span></li>
+                </ol>
+            </div>
+            <button class="btn-add-recipe" onclick="addRecipe(['Beef Short Plate Rolls', 'Kikkoman Premium Soy Sauce 750ml'])">+ Add Ingredients</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-header">
+                <span class="recipe-meta">Steamed / 叠叠锅</span>
+                <h2 class="recipe-title-en">Napa & Beef "Thousand Layer" Pot</h2>
+                <h3 class="recipe-title-zh">白菜肥牛叠叠锅</h3>
+            </div>
+            <div class="recipe-content">
+                <h5>Directions / 步骤:</h5>
+                <ol>
+                    <li>Layer <b>Napa</b> leaves with <b>Beef Chuck Rolls</b> in a pot. <br><span>在锅中交替叠放白菜叶和牛眉头卷。</span></li>
+                    <li>Steam with a dash of dashi or water for 10 mins. <br><span>加入少许高汤或水，盖盖焖煮10分钟。</span></li>
+                    <li>The cabbage juice creates a sweet, natural broth. <br><span>白菜煮出的汁水会形成天然清甜的汤底。</span></li>
+                </ol>
+            </div>
+            <button class="btn-add-recipe" onclick="addRecipe(['Napa', 'Beef Chuck Rolls'])">+ Add Ingredients</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-header">
+                <span class="recipe-meta">High Heat / 葱爆</span>
+                <h2 class="recipe-title-en">Stir-Fried Mutton with Scallion</h2>
+                <h3 class="recipe-title-zh">葱爆有骨羊</h3>
+            </div>
+            <div class="recipe-content">
+                <h5>Directions / 步骤:</h5>
+                <ol>
+                    <li>Sear <b>Mutton Leg Cubes</b> over very high heat. <br><span>大火快速煎熟有骨老羊腿块。</span></li>
+                    <li>Add plenty of sliced <b>Green Onions</b> and leeks. <br><span>加入大量的葱段或大葱。</span></li>
+                    <li>Season with soy sauce and vinegar for a classic Beijing style fry. <br><span>加入生抽和陈醋，做出经典的京味葱爆羊肉。</span></li>
+                </ol>
+            </div>
+            <button class="btn-add-recipe" onclick="addRecipe(['Mutton Leg Bone-In Cube', 'Green Onion'])">+ Add Ingredients</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-header">
+                <span class="recipe-meta">Textured Stir-Fry / 腐竹小炒</span>
+                <h2 class="recipe-title-en">Tofu Skin & Meat Roll Stir-Fry</h2>
+                <h3 class="recipe-title-zh">腐竹肥牛小炒</h3>
+            </div>
+            <div class="recipe-content">
+                <h5>Directions / 步骤:</h5>
+                <ol>
+                    <li>Soak Tofu Skin until soft, then stir-fry with peppers. <br><span>将腐竹泡软，与青椒一同翻炒。</span></li>
+                    <li>Add <b>Beef Short Plate Rolls</b> at the end to keep them tender. <br><span>最后加入牛五花卷，保持肉质鲜嫩。</span></li>
+                    <li>The tofu skin absorbs all the beef juices. <br><span>让腐竹充分吸收牛肉的油脂和香气。</span></li>
+                </ol>
+            </div>
+            <button class="btn-add-recipe" onclick="addRecipe(['Beef Short Plate Rolls'])">+ Add Beef to List</button>
+        </div>
+        <div class="recipe-card">
+            <div class="recipe-meta">Vegetable Side</div>
+            <div class="recipe-title-en">Garlic Blanched Tong Ho</div>
+            <div class="recipe-title-zh">蒜香茼蒿</div>
+            <ul class="recipe-steps">
+                <li>Wash <b>Tong Ho</b> and cut into sections.</li>
+                <li>Blanch in boiling water for 45s. Drain.</li>
+                <li>Toss with minced garlic, soy sauce, and sesame oil.</li>
+            </ul>
+            <button class="btn-add-recipe" onclick="addRecipe(['Tong Ho'])">+ Add Tong Ho to List</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-meta">Classic Cold Dish</div>
+            <div class="recipe-title-en">Sesame Dressing Tofu</div>
+            <div class="recipe-title-zh">麻酱拌豆腐</div>
+            <ul class="recipe-steps">
+                <li>Dice <b>Soft Tofu</b> into cubes.</li>
+                <li>Mix <b>Sesame Paste</b> with a bit of sugar and soy sauce.</li>
+                <li>Drizzle over tofu and top with chopped <b>Cilantro</b>.</li>
+            </ul>
+            <button class="btn-add-recipe" onclick="addRecipe(['Soft Tofu 300g', 'JoyShare Pure Sesame Paste', 'Cilantro'])">+ Add Ingredients</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-meta">Quick Stir-Fry</div>
+            <div class="recipe-title-en">Beef & Onion Flash-Fry</div>
+            <div class="recipe-title-zh">洋葱肥牛</div>
+            <ul class="recipe-steps">
+                <li>Sauté sliced onions until fragrant.</li>
+                <li>Add <b>Beef Short Plate Rolls</b>; fry until just browned.</li>
+                <li>Season with black pepper and oyster sauce.</li>
+            </ul>
+            <button class="btn-add-recipe" onclick="addRecipe(['Beef Short Plate Rolls'])">+ Add Beef to List</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-meta">Nutritious Soup</div>
+            <div class="recipe-title-en">Daikon & Ox Tail Stew</div>
+            <div class="recipe-title-zh">白萝卜炖牛尾</div>
+            <ul class="recipe-steps">
+                <li>Parboil <b>Ox Tail</b> to clean; rinse with cold water.</li>
+                <li>Slow cook with <b>Daikon</b> slices and ginger for 2 hours.</li>
+                <li>Season with salt to taste.</li>
+            </ul>
+            <button class="btn-add-recipe" onclick="addRecipe(['Beef Ox Tail', 'Daikon'])">+ Add Ingredients</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-meta">Lunch Favorite</div>
+            <div class="recipe-title-en">Spam & Egg Ramen</div>
+            <div class="recipe-title-zh">午餐肉餐蛋面</div>
+            <ul class="recipe-steps">
+                <li>Pan-fry slices of <b>Spam</b> until crispy on both sides.</li>
+                <li>Serve over <b>Fresh Noodles</b> in a simple broth.</li>
+                <li>Add a fried egg and <b>Baby Bok Choy</b>.</li>
+            </ul>
+            <button class="btn-add-recipe" onclick="addRecipe(['Spam 340g', 'LanZhou Fresh Noodle', 'Baby Bok Choy'])">+ Add Ingredients</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-meta">Healthy Side</div>
+            <div class="recipe-title-en">Oyster Sauce Bok Choy</div>
+            <div class="recipe-title-zh">蚝油小白菜</div>
+            <ul class="recipe-steps">
+                <li>Blanch <b>Baby Bok Choy</b> for 2 minutes.</li>
+                <li>Drain and drizzle with oyster sauce and fried garlic.</li>
+            </ul>
+            <button class="btn-add-recipe" onclick="addRecipe(['Baby Bok Choy'])">+ Add Bok Choy</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-meta">Savory Lamb</div>
+            <div class="recipe-title-en">Cumin Stir-Fried Lamb</div>
+            <div class="recipe-title-zh">孜然炒羊肉</div>
+            <ul class="recipe-steps">
+                <li>Stir-fry <b>Lamb Shoulder Rolls</b> with high heat.</li>
+                <li>Add plenty of cumin powder, chili flakes, and salt.</li>
+                <li>Top with <b>Cilantro</b> and <b>Green Onions</b>.</li>
+            </ul>
+            <button class="btn-add-recipe" onclick="addRecipe(['Australia Lamb Shoulder Rolls', 'Cilantro', 'Green Onion'])">+ Add Ingredients</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-meta">Korean Style</div>
+            <div class="recipe-title-en">Sweet Potato Noodle Salad</div>
+            <div class="recipe-title-zh">凉拌红薯粉丝</div>
+            <ul class="recipe-steps">
+                <li>Boil <b>Sweet Potato Noodles</b> until chewy (6-8 mins).</li>
+                <li>Toss with julienned cucumber, vinegar, and chili oil.</li>
+            </ul>
+            <button class="btn-add-recipe" onclick="addRecipe(['JOYSHARE Sweet Potato Noodle – Wide'])">+ Add Noodles</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-meta">Simple Soup</div>
+            <div class="recipe-title-en">Napa Cabbage & Tofu Soup</div>
+            <div class="recipe-title-zh">白菜豆腐汤</div>
+            <ul class="recipe-steps">
+                <li>Simmer <b>Napa</b> and <b>Firm Tofu</b> in chicken broth.</li>
+                <li>Add white pepper and a drop of sesame oil.</li>
+            </ul>
+            <button class="btn-add-recipe" onclick="addRecipe(['Napa', 'Firm Tofu 500g'])">+ Add Ingredients</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-meta">Classic Comfort</div>
+            <div class="recipe-title-en">Stir-Fried Tomato & Egg</div>
+            <div class="recipe-title-zh">西红柿炒鸡蛋</div>
+            <ul class="recipe-steps">
+                <li>Scramble eggs and set aside.</li>
+                <li>Cook tomatoes until soft, then mix eggs back in.</li>
+                <li>Serve over <b>LanZhou Fresh Noodles</b>.</li>
+            </ul>
+            <button class="btn-add-recipe" onclick="addRecipe(['LanZhou Fresh Noodle'])">+ Add Noodles</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-meta">Exotic Flavor</div>
+            <div class="recipe-title-en">Enoki Mushroom Salad</div>
+            <div class="recipe-title-zh">凉拌金针菇</div>
+            <ul class="recipe-steps">
+                <li>Blanch <b>Enoki</b> for 1 minute. Drain.</li>
+                <li>Mix with soy sauce, vinegar, and <b>Green Onion</b>.</li>
+            </ul>
+            <button class="btn-add-recipe" onclick="addRecipe(['Enoki', 'Green Onion'])">+ Add Ingredients</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-meta">Hot & Sour</div>
+            <div class="recipe-title-en">Vinegar Glazed Daikon</div>
+            <div class="recipe-title-zh">醋溜萝卜丝</div>
+            <ul class="recipe-steps">
+                <li>Shred <b>Daikon</b> and stir-fry quickly.</li>
+                <li>Add <b>Kimlan Vinegar</b> and a pinch of sugar.</li>
+            </ul>
+            <button class="btn-add-recipe" onclick="addRecipe(['Daikon', 'Kimlan Vinegar'])">+ Add Ingredients</button>
+        </div>
+
+        <div class="recipe-card">
+            <div class="recipe-meta">Dessert Idea</div>
+            <div class="recipe-title-en">Pear & Honey Soup</div>
+            <div class="recipe-title-zh">冰糖雪梨</div>
+            <ul class="recipe-steps">
+                <li>Steam <b>Qiuyue Pear</b> with rock sugar or honey.</li>
+                <li>Great for soothing the throat after a spicy hotpot!</li>
+            </ul>
+            <button class="btn-add-recipe" onclick="addRecipe(['Qiuyue Pear'])">+ Add Pear to List</button>
+        </div>
+
     </div>
 
-    <div class="products-grid" id="recipeGrid">
-        <div class="product-card" data-cat="sauce">
-            <div class="recipe-meta">Classic Sesame Dip</div>
-            <div class="product-zh">经典麻酱蘸料</div>
-            <span class="prep-time">⏱ 2 Mins</span>
-            <ul class="recipe-list">
-                <li>3 tbsp JoyShare Sesame Paste</li>
-                <li>1 tbsp Light Soy Sauce</li>
-                <li>1 tsp Fermented Bean Curd (optional)</li>
-                <li>Top with fresh cilantro and scallions</li>
-            </ul>
-        </div>
-
-        <div class="product-card" data-cat="soup">
-            <div class="recipe-meta">Perfect Mala Base</div>
-            <div class="product-zh">正宗麻辣汤底</div>
-            <span class="prep-time">⏱ 5 Mins</span>
-            <ul class="recipe-list">
-                <li>Add 1 pack Little Sheep Mala to 1.5L water</li>
-                <li>Add 4-5 slices of fresh ginger</li>
-                <li>Throw in a handful of dried red chilies</li>
-                <li>Boil for 5 mins before adding meats</li>
-            </ul>
-        </div>
-
-        <div class="product-card" data-cat="meat">
-            <div class="recipe-meta">The 15-Second Rule</div>
-            <div class="product-zh">涮肉金律</div>
-            <span class="prep-time">Pro Tip</span>
-            <p style="font-size: 0.9rem; color: var(--ink-soft); margin-top: 10px;">
-                For our **Beef Short Plate** and **Lamb Shoulder**, do not overcook! 
-                Dip the roll into boiling soup for exactly 15-20 seconds until it just turns from pink to brown. 
-                This preserves the "melt-in-your-mouth" texture.
-            </p>
-        </div>
     </div>
 </section>
 
 <footer>
     <div class="footer-logo">Shabu <span>Meat House</span></div>
-    <p style="margin: 1rem 0;">3272 Midland Ave Unit B-112, Scarborough, ON</p>
-    <p>© 2025 Shabu Meat House. All rights reserved.</p>
-    <p>WeChat 微信: <strong>shabumeat</strong></p>
+    <p>Scarborough, ON M1V 5N1</p>
+    <p>© 2025 Shabu Meat House. WeChat: shabumeat</p>
 </footer>
 
 <script>
-    function filterRecipes(cat) {
-        const cards = document.querySelectorAll('.product-card');
-        cards.forEach(card => {
-            if (cat === 'all' || card.getAttribute('data-cat') === cat) {
-                card.style.display = 'block';
+    function addRecipe(itemNames) {
+        let cart = JSON.parse(localStorage.getItem('shabuCart')) || {};
+        itemNames.forEach(name => {
+            if (!cart[name]) {
+                cart[name] = { name: name, qty: 1, unit: 'unit' }; 
             } else {
-                card.style.display = 'none';
+                cart[name].qty += 1;
             }
         });
+        localStorage.setItem('shabuCart', JSON.stringify(cart));
+        alert("Ingredients added to your Shopping List! / 材料已加入购物清单！");
     }
+    
 </script>
 
 </body>
 </html>
+

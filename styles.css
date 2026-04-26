@@ -73,6 +73,212 @@ section { padding: 4rem 5%; }
 }
 .btn-primary:hover { background: var(--blue-deep); }
 
+/* Directions Section Styling */
+.directions-container {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 3rem 2rem;
+    margin: 4rem auto;
+    max-width: 1200px;
+}
+
+.directions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.display-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--blue-deep);
+    margin-bottom: 2rem;
+}
+
+.contact-block {
+    margin-bottom: 2rem;
+}
+
+.contact-block h4 {
+    color: var(--blue-accent);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.contact-block p {
+    line-height: 1.6;
+    color: var(--ink-soft);
+}
+
+.maps-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--blue-deep);
+    text-decoration: underline;
+}
+
+.hours-list {
+    list-style: none;
+    padding: 0;
+}
+
+.hours-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.95rem;
+}
+
+.map-column {
+    height: 450px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+/* Mobile Responsive Fix */
+@media (max-width: 768px) {
+    .directions-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .map-column {
+        height: 300px;
+        order: -1; /* Puts the map on top for mobile users */
+    }
+
+    .directions-container {
+        padding: 1.5rem;
+        margin: 2rem 1rem;
+    }
+}
+/* --- Recipes Page Specific Styles --- */
+
+.subtitle {
+    color: var(--ink-soft);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.recipe-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(74,158,190,0.12);
+}
+
+.recipe-header {
+    margin-bottom: 1.5rem;
+}
+
+.recipe-meta {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--blue-accent);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.recipe-title-en {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 4px;
+}
+
+.recipe-title-zh {
+    font-size: 1rem;
+    color: var(--blue-deep);
+    font-weight: 500;
+}
+
+.recipe-content {
+    flex-grow: 1;
+    border-top: 1px solid #f0f4f7;
+    padding-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.recipe-content h5 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+.recipe-content ol {
+    padding-left: 1.2rem;
+}
+
+.recipe-content li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+    color: var(--ink);
+    font-weight: 500;
+}
+
+/* Bilingual translation styling */
+.recipe-content li span {
+    display: block;
+    font-size: 0.85rem;
+    color: #7a8a94;
+    font-weight: 400;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+.btn-add-recipe {
+    background: #fdfdfd;
+    color: var(--blue-deep);
+    border: 1.5px dashed var(--blue-accent);
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-add-recipe:hover {
+    background: var(--blue-light);
+    border-style: solid;
+    transform: scale(1.02);
+}
+
+@media (max-width: 600px) {
+    .recipes-grid {
+        grid-template-columns: 1fr;
+    }
+}
 /* Footer */
 footer { background: var(--ink); color: rgba(255,255,255,0.6); padding: 4rem 5%; text-align: center; }
 

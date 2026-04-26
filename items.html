@@ -218,29 +218,18 @@
         cartCount.innerText = count;
         cartTotal.innerText = `$${total.toFixed(2)}`;
     }
+
     function copyForWeChat() {
-        const cartItemsArray = Object.values(cart);
-        if (cartItemsArray.length === 0) return alert("Your list is empty!");
-
-        let text = "🥩 Shabu Meat House - Inquiry List\n";
-        text += "---------------------------\n";
-        
-        cartItemsArray.forEach(item => {
-            // Labeling by 'pcs' for soup/sides and 'qty/lb' for meat
-            const unitLabel = (item.unit === 'lb') ? 'unit(s)/lb' : 'pcs';
-            text += `• ${item.qty} ${unitLabel} x ${item.name}\n  (${item.zh})\n`;
+        if (Object.keys(cart).length === 0) return alert("Your list is empty!");
+        let text = "Shabu Meat House Order 订单:\n---\n";
+        Object.values(cart).forEach(item => {
+            text += `${item.qty}x ${item.name} ${item.zh}\n`;
         });
-
-        text += "---------------------------\n";
-        text += `Estimated Total: ${document.getElementById('cartTotal').innerText}\n\n`;
-        text += "⚠️ Note to Shop:\n";
+        text += `\nTotal: ${document.getElementById('cartTotal').innerText}\nWeChat: shabumeat`;
+        text += "⚠️ Note to Viewer:\n";
         text += "This is an inquiry list from the website. Please confirm availability and final weight for 'per lb' items in-store.";
-
-        navigator.clipboard.writeText(text).then(() => {
-            alert("Inquiry list copied! Paste this into WeChat to chat with us about these items.");
-        });
+        navigator.clipboard.writeText(text).then(() => alert("List copied! Now paste it into WeChat."));
     }
-
 
     function toggleDrawer() { document.getElementById('list-drawer').classList.toggle('active'); }
     function clearCart() { if(confirm("Clear list?")) { cart = {}; localStorage.removeItem('shabuCart'); updateUI(); } }

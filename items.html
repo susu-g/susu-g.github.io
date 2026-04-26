@@ -1,242 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu | Shabu Meat House</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menu | Shabu Meat House 涮肉屋</title>
+  <meta name="description" content="Browse all hotpot ingredients at Shabu Meat House Scarborough. 士嘉堡火锅食材。"/>
+  <meta name="keywords" content="hotpot, 火锅, Scarborough, 士嘉堡, Markham, Richmond Hill, North York, meat rolls, 肉卷, soup base, 火锅底料"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <style>
+    body{font-family:'Noto Sans SC','DM Sans',sans-serif;}
+    .notice-banner{background:#e8f4f8;border-bottom:1px solid #b8dce8;padding:.75rem 2rem;font-size:.85rem;color:#2a7a9e;text-align:center;}
+    .notice-banner strong{font-weight:700;}
+    .notice-zh{font-family:'Noto Sans SC',sans-serif;margin-left:.5rem;opacity:.85;}
+    .product-zh{font-family:'Noto Sans SC',sans-serif;font-size:1rem;font-weight:500;color:#2a7a9e;margin-bottom:2px;}
+    .product-name{font-size:.82rem;color:#4a5a62;margin-bottom:4px;}
+    .product-approx{font-size:.75rem;color:#888;font-style:italic;margin-bottom:4px;}
+    .product-deal-badge{display:inline-block;background:#e53935;color:white;font-size:.72rem;padding:2px 8px;border-radius:4px;font-weight:600;margin-bottom:6px;}
+    .product-image{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:8px;}
+    .product-card.sold-out{opacity:.5;}
+    .stock-badge-coming{display:inline-block;font-size:.68rem;background:#aaa;color:white;padding:2px 7px;border-radius:50px;font-weight:600;text-transform:uppercase;margin-bottom:4px;}
+    .size-select{width:100%;padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:.82rem;font-family:'Noto Sans SC','DM Sans',sans-serif;background:white;cursor:pointer;margin-bottom:8px;}
+    .controls-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;}
+    .stock-toggle{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--ink-soft);cursor:pointer;font-family:'Noto Sans SC','DM Sans',sans-serif;}
+    .stock-toggle input{accent-color:#4a9ebe;cursor:pointer;}
+    .guide-btn{background:#e8f4f8;border:1px solid #b8dce8;color:#2a7a9e;padding:6px 16px;border-radius:50px;font-size:.82rem;font-weight:500;cursor:pointer;font-family:'Noto Sans SC','DM Sans',sans-serif;}
+    .guide-panel{background:#f0f8fb;border:1px solid #b8dce8;border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;display:none;}
+    .guide-panel.active{display:block;}
+    .guide-panel h3{font-size:.95rem;color:#1a2a32;margin-bottom:.8rem;font-family:'Playfair Display',serif;}
+    .people-btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;}
+    .people-btn{padding:5px 14px;border-radius:50px;border:1.5px solid #b8dce8;background:white;font-size:.82rem;cursor:pointer;font-family:'Noto Sans SC','DM Sans',sans-serif;}
+    .people-btn.active{background:#4a9ebe;border-color:#4a9ebe;color:white;}
+    .recs{background:white;border-radius:8px;padding:1rem 1.2rem;display:none;}
+    .recs.active{display:block;}
+    .recs h4{font-size:.88rem;color:#1a2a32;margin-bottom:.5rem;}
+    .recs ul{list-style:none;display:flex;flex-direction:column;gap:.3rem;}
+    .recs li{font-size:.82rem;color:#4a5a62;padding-left:1rem;position:relative;}
+    .recs li::before{content:'checkmark';position:absolute;left:0;color:#4a9ebe;font-weight:700;}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+    .modal-overlay.active{display:flex;}
+    .modal-box{background:white;border-radius:16px;width:90%;max-width:560px;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;position:relative;}
+    .modal-head{padding:1.2rem 1.5rem .8rem;border-bottom:1px solid #eee;}
+    .modal-head h2{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:.5rem;}
+    .modal-notice{background:#e8f4f8;border:1px solid #b8dce8;border-radius:8px;padding:.5rem .8rem;font-size:.78rem;color:#2a7a9e;}
+    .modal-notice .zh{font-family:'Noto Sans SC',sans-serif;display:block;margin-top:2px;opacity:.85;}
+    .modal-close{position:absolute;top:1rem;right:1rem;background:#f0f0f0;border:none;width:30px;height:30px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    .modal-body{padding:1.2rem 1.5rem;overflow-y:auto;flex:1;}
+    .order-meta{font-size:.78rem;color:#888;margin-bottom:1rem;padding:.5rem .8rem;background:#f9f9f9;border-radius:6px;}
+    .order-meta span{font-weight:700;color:#2a7a9e;}
+    .modal-list-item{display:flex;justify-content:space-between;align-items:flex-start;padding:.7rem .8rem;background:#f9fbfc;border-radius:8px;margin-bottom:.6rem;gap:.8rem;}
+    .modal-item-zh{font-family:'Noto Sans SC',sans-serif;font-size:.9rem;color:#2a7a9e;font-weight:500;}
+    .modal-item-name{font-size:.78rem;color:#4a5a62;}
+    .modal-item-detail{font-size:.75rem;color:#888;margin-top:2px;}
+    .modal-item-remove{background:none;border:none;color:#e53935;cursor:pointer;font-size:1.1rem;opacity:.6;flex-shrink:0;}
+    .modal-item-remove:hover{opacity:1;}
+    .tax-note{font-size:.75rem;color:#888;margin-top:1rem;padding:.5rem .8rem;background:#fffde7;border-radius:6px;font-style:italic;}
+    .modal-foot{padding:1rem 1.5rem;border-top:1px solid #eee;display:flex;gap:.6rem;flex-wrap:wrap;}
+    .modal-foot button{flex:1;min-width:100px;padding:.7rem;border-radius:8px;font-family:'Noto Sans SC','DM Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;border:none;}
+    .btn-wechat{background:#4a9ebe;color:white;}
+    .btn-wechat:hover{background:#2a7a9e;}
+    .btn-print-modal{background:white;color:#4a9ebe;border:1.5px solid #4a9ebe!important;}
+    .btn-clear-modal{background:white;color:#e53935;border:1.5px solid #eee!important;}
+    .floating-cart{position:fixed;bottom:2rem;right:2rem;background:#2a7a9e;color:white;padding:.9rem 1.6rem;border-radius:50px;cursor:pointer;font-weight:700;box-shadow:0 8px 24px rgba(42,122,158,.4);z-index:90;font-family:'Noto Sans SC','DM Sans',sans-serif;font-size:.95rem;display:none;}
+    .floating-cart.visible{display:block;}
+    @media print{nav,footer,.floating-cart,.notice-banner,.modal-foot,.modal-close{display:none!important;}.modal-overlay{background:white!important;position:static!important;display:block!important;}.modal-box{box-shadow:none!important;max-height:none!important;}}
+    @media(max-width:768px){.controls-row{flex-direction:column;align-items:flex-start;}.modal-foot{flex-direction:column;}}
+  </style>
 </head>
 <body>
+
+<div class="notice-banner">
+  &#8505;&#65039; <strong>No online ordering &#26080;&#22312;&#32447;&#35746;&#36141;</strong> &mdash; This list is a planning guide only. Visit us in-store or message WeChat to order.
+  <span class="notice-zh">&#27492;&#28165;&#21333;&#20165;&#20026;&#36141;&#29289;&#25351;&#21335;&#12290;&#35831;&#21040;&#24215;&#25110;&#36890;&#36807;&#24494;&#20449;&#19979;&#21333;&#12290;</span>
+</div>
 
 <nav>
   <a class="nav-logo" href="index.html">Shabu <span>Meat House</span></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="items.html">Shop</a></li>
-    <li><a href="hotpot.html">Recipes</a></li>
-    <li><a href="recipes.html">More Recipes</a></li>
+    <li><a href="items.html" class="active">Shop</a></li>
+    <li><a href="recipes.html">Recipes</a></li>
   </ul>
 </nav>
 
 <section class="container">
-  <p class="section-label">Our Products / 我们的产品</p>
-  <h1 class="section-title">Full Catalogue</h1>
+  <p class="section-label">Our Products / &#25105;&#20204;&#30340;&#20135;&#21697;</p>
+  <h1 class="section-title">Full Catalogue <span style="font-family:'Noto Sans SC',sans-serif;font-size:.6em;color:#4a9ebe;">&#20840;&#37096;&#21830;&#21697;</span></h1>
 
-  <div style="margin-bottom: 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
-    <input type="text" id="searchInput" placeholder="Search products (e.g. Beef, 羊肉)..." onkeyup="renderProducts()" style="padding: 12px 25px; border-radius: 50px; border: 1.5px solid var(--border); width: 100%; max-width: 500px; outline: none; font-family: inherit;">
-    
-    <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('all')">All 全部</button>
-        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('lamb')">Lamb 羊肉</button>
-        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('beef')">Beef 牛肉</button>
-        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('pork')">Pork 猪肉</button>
-        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('soup')">Soup 汤底</button>
-        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('vegetables')">Veg 蔬菜</button>
-        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('mushrooms')">Mushrooms 菌菇</button>
-        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('fruits')">Fruits 水果</button>
-        <button class="qty-btn" style="width: auto; padding: 0 15px; border-radius: 50px;" onclick="filterByCat('sides')">Sides 配菜</button>
+  <div style="margin-bottom:2rem;display:flex;flex-direction:column;gap:1rem;">
+    <input type="text" id="searchInput" placeholder="Search / &#25628;&#32034; (e.g. Beef, &#32908;&#32905;)..." onkeyup="renderProducts()" style="padding:12px 25px;border-radius:50px;border:1.5px solid var(--border);width:100%;max-width:500px;outline:none;font-family:'Noto Sans SC',inherit;"/>
+    <div class="controls-row">
+      <button class="guide-btn" onclick="toggleGuide()">&#128203; Shopping Guide &#36141;&#29289;&#25351;&#21335;</button>
+      <label class="stock-toggle">
+        <input type="checkbox" id="showSoldOut" onchange="renderProducts()"/>
+        Show coming soon items &#26174;&#31034;&#21450;&#23558;&#19978;&#26550;&#21830;&#21697;
+      </label>
+    </div>
+    <div class="guide-panel" id="guidePanel">
+      <h3>How many people? &#20960;&#20301;&#29992;&#39�;&#65311;</h3>
+      <div class="people-btns">
+        <button class="people-btn" onclick="selectPeople(2,this)">2 people 2&#20154;</button>
+        <button class="people-btn" onclick="selectPeople(4,this)">4 people 4&#20154;</button>
+        <button class="people-btn" onclick="selectPeople(6,this)">6 people 6&#20154;</button>
+        <button class="people-btn" onclick="selectPeople(8,this)">8+ people 8+&#20154;</button>
+      </div>
+      <div class="recs" id="recs"></div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('all')">All &#20840;&#37096;</button>
+      <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('lamb')">Lamb &#32908;&#32905;</button>
+      <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('beef')">Beef &#29275;&#32905;</button>
+      <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('pork')">Pork &#29482;&#32905;</button>
+      <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('soup')">Soup &#27748;&#24213;</button>
+      <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('noodles')">Noodles &#38754;&#26465;</button>
+      <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('vegetables')">Veg &#34311;&#33756;</button>
+      <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('mushrooms')">Mushrooms &#33586;&#33618;</button>
+      <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('fruits')">Fruits &#27700;&#26524;</button>
+      <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('sides')">Sides &#37197;&#33756;</button>
+      <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('condiments')">Condiments &#35843;&#26009;</button>
+      <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('dipping')">Dipping &#34808;&#26009;</button>
     </div>
   </div>
-
-  <div class="products-grid" id="productsGrid"></div>
+  <div class="products-grid" id="productsGrid"><p style="color:#999;">Loading products...</p></div>
 </section>
 
-<div class="floating-cart" onclick="toggleDrawer()">
-  🛒 My List (<span id="cartCount">0</span>)
+<div class="floating-cart" id="floatingCart" onclick="openModal()">
+  &#128722; My List &#25105;&#30340;&#28165;&#21333; (<span id="cartCount">0</span>)
 </div>
 
-<div id="list-drawer">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-        <h2 style="font-family: 'Playfair Display';">My Order List</h2>
-        <button onclick="toggleDrawer()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">✕</button>
+<div class="modal-overlay" id="modalOverlay" onclick="overlayClose(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">&#215;</button>
+    <div class="modal-head">
+      <h2>My Shopping List &#25105;&#30340;&#28165;&#21333;</h2>
+      <div class="modal-notice">
+        &#8505;&#65039; <strong>Planning guide only &mdash; not a checkout. &#20165;&#20026;&#36141;&#29289;&#25351;&#21335; &mdash; &#38750;&#32467;&#36134;&#31995;&#32479;&#12290;</strong>
+        <span class="zh">&#22797;&#21046;&#21518;&#36890;&#36807;&#24494;&#20449; shabumeat &#21457;&#36865;&#65292;&#25105;&#20204;&#23558;&#22238;&#22797;&#30830;&#35748;&#12290;</span>
+      </div>
     </div>
-    <div id="cartItems"></div>
-    <div style="border-top: 1px solid var(--border); margin-top: 2rem; padding-top: 1rem;">
-        <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.2rem; margin-bottom: 1.5rem;">
-            <span>Subtotal:</span>
-            <span id="cartTotal">$0.00</span>
-        </div>
-        <button class="btn-primary" onclick="copyForWeChat()">Copy for WeChat (复制订单)</button>
-        <button class="btn-primary" onclick="window.print()" style="background: var(--ink-soft); margin-top: 10px;">Print List</button>
-        <button onclick="clearCart()" style="display: block; width: 100%; background: none; border: none; color: #999; margin-top: 20px; cursor: pointer;">Clear List</button>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-foot">
+      <button class="btn-wechat" onclick="copyForWeChat()">&#128203; Copy to Send via WeChat &#22797;&#21046;&#21457;&#36865;</button>
+      <button class="btn-print-modal" onclick="window.print()">&#128424;&#65039; Print &#25171;&#21360;</button>
+      <button class="btn-clear-modal" onclick="clearCart()">&#128465;&#65039; Clear &#28165;&#31354;</button>
     </div>
+  </div>
 </div>
 
 <script>
-    const products = [
-        // LAMB
-        { name: "Australia Lamb Shoulder Rolls", zh: "澳大利亚羊肉卷", price: 13.99, unit: "per lb", cat: "lamb" },
-        { name: "New Zealand Lamb Shoulder Rolls", zh: "新西兰羊肉卷", price: 15.99, unit: "per lb", cat: "lamb" },
-        { name: "Lamb Leg Boneless Cube", zh: "无骨羊腿", price: 12.99, unit: "per lb", cat: "lamb" },
-        { name: "Mutton Leg Bone-In Cube", zh: "有骨老羊腿", price: 10.99, unit: "per lb", cat: "lamb" },
-        // BEEF
-        { name: "Beef Short Plate Rolls", zh: "牛五花卷", price: 12.99, unit: "per lb", cat: "beef" },
-        { name: "Beef Chuck Rolls", zh: "牛眉头卷", price: 14.99, unit: "per lb", cat: "beef" },
-        { name: "Beef Flat Iron Sliced", zh: "雪花牛", price: 14.99, unit: "per lb", cat: "beef" },
-        { name: "Beef Ribeye", zh: "牛肋眼", price: 21.99, unit: "per lb", cat: "beef" },
-        { name: "Beef Short Plate", zh: "牛五花", price: 10.99, unit: "per lb", cat: "beef" },
-        { name: "Beef Ox Tail", zh: "牛尾", price: 13.99, unit: "per lb", cat: "beef" },
-        { name: "Beef Balls", zh: "牛肉丸", price: 8.00, unit: "per ea", cat: "beef" },
-        { name: "Beef Omasum Scalded", zh: "牛百叶丝", price: 8.00, unit: "per ea", cat: "beef" },
-        { name: "Beef Honeycomb Tripe Scalded", zh: "金钱肚丝", price: 8.00, unit: "per ea", cat: "beef" },
-        { name: "Beef Tripe Scalded", zh: "牛草肚丝", price: 8.00, unit: "per ea", cat: "beef" },
-        // PORK
-        { name: "Pork Shoulder Rolls", zh: "猪梅头肉卷", price: 7.88, unit: "per lb", cat: "pork" },
-        { name: "Pork Belly Skin Off Thick Cut", zh: "无皮猪腩片", price: 7.99, unit: "per lb", cat: "pork" },
-        // OTHER
-        { name: "Finger Meat", zh: "手指肉", price: 11.99, unit: "per lb", cat: "other" },
-        // SOUP BASES
-        { name: "Little Sheep Soup Base – Mala Spicy", zh: "小肥羊麻辣火锅底料", price: 5.90, unit: "per ea", cat: "soup" },
-        { name: "Little Sheep Soup Base – Mushroom", zh: "小肥羊菌菇火锅底料", price: 5.90, unit: "per ea", cat: "soup" },
-        { name: "Little Sheep Soup Base – Tomato", zh: "小肥羊番茄火锅底料", price: 5.90, unit: "per ea", cat: "soup" },
-        { name: "Little Sheep Soup Base – Hot", zh: "小肥羊火锅汤料-辣汤", price: 5.90, unit: "per ea", cat: "soup" },
-        { name: "XIAOLONGKAN Soup Base – Tallow Spicy", zh: "小龙坎牛油火锅底料", price: 6.00, unit: "per ea", cat: "soup" },
-        { name: "XIAOLONGKAN Soup Base – Clear", zh: "小龙坎清汤火锅底料", price: 5.00, unit: "per ea", cat: "soup" },
-        { name: "XIAOLONGKAN Soup Base – Tomato", zh: "小龙坎番茄火锅底料", price: 6.00, unit: "per ea", cat: "soup" },
-        { name: "XIAOLONGKAN Classic Hotpot Seasoning", zh: "小龙坎经典火锅底料", price: 5.00, unit: "per ea", cat: "soup" },
-        { name: "XIAOLONGKAN Classic Hotpot Seasoning Cube", zh: "小龙坎经典火锅底料块", price: 8.00, unit: "per ea", cat: "soup" },
-        { name: "Kikkoman Sukiyaki Aged Rice Sauce", zh: "龟甲万寿寿喜烧陈年酱汁", price: 6.00, unit: "per ea", cat: "soup" },
-        // NOODLES
-        { name: "JOYSHARE Sweet Potato Noodle – Wide", zh: "韩国红薯粉丝-宽条", price: 4.50, unit: "per ea", cat: "noodles" },
-        { name: "JOYSHARE Sweet Potato Noodle – Round", zh: "韩国红薯粉丝-圆", price: 4.50, unit: "per ea", cat: "noodles" },
-        { name: "Joyshare Jiangxi Rice Vermicelli", zh: "江西米粉", price: 2.50, unit: "per ea", cat: "noodles" },
-        { name: "LanZhou Fresh Noodle", zh: "京都兰州拉面", price: 3.00, unit: "per ea", cat: "noodles" },
-        { name: "Long Thin Noodle", zh: "京都龙须面", price: 3.00, unit: "per ea", cat: "noodles" },
-        // VEGETABLES
-        { name: "Napa", zh: "大白菜", price: 1.79, unit: "per lb", cat: "vegetables" },
-        { name: "Baby Napa", zh: "娃娃菜", price: 2.59, unit: "per lb", cat: "vegetables" },
-        { name: "Baby Bok Choy", zh: "小白菜", price: 2.99, unit: "per lb", cat: "vegetables" },
-        { name: "Daikon", zh: "萝卜", price: 1.68, unit: "per lb", cat: "vegetables" },
-        { name: "Green Onion", zh: "葱", price: 1.59, unit: "per ea", cat: "vegetables" },
-        { name: "Cilantro", zh: "香菜", price: 1.89, unit: "per ea", cat: "vegetables" },
-        { name: "Tong Ho", zh: "茼蒿", price: 2.99, unit: "per lb", cat: "vegetables" },
-        // MUSHROOMS
-        { name: "Mushroom White 227g", zh: "蘑菇", price: 2.80, unit: "per ea", cat: "mushrooms" },
-        { name: "Mushroom Brown", zh: "褐蘑菇", price: 2.80, unit: "per ea", cat: "mushrooms" },
-        { name: "Enoki", zh: "金针菇", price: 1.60, unit: "per ea", cat: "mushrooms" },
-        { name: "JOYSHARE Black Fungus", zh: "乐享东北黑木耳", price: 8.00, unit: "per ea", cat: "mushrooms" },
-        // FRUITS
-        { name: "Longan", zh: "龙眼", price: 15.00, unit: "per ea", cat: "fruits" },
-        { name: "Mango Ataulfo", zh: "阿道夫芒果", price: 18.00, unit: "per ea", cat: "fruits" },
-        { name: "Mango Haden", zh: "海顿芒果", price: 20.00, unit: "per ea", cat: "fruits" },
-        { name: "Mango Tommy", zh: "汤米芒果", price: 18.00, unit: "per ea", cat: "fruits" },
-        { name: "Qiuyue Pear", zh: "秋月梨", price: 20.00, unit: "per ea", cat: "fruits" },
-        // SIDES
-        { name: "Soft Tofu 300g", zh: "软豆腐", price: 2.00, unit: "per ea", cat: "sides" },
-        { name: "Medium Firm Tofu 700g", zh: "板豆腐", price: 3.00, unit: "per ea", cat: "sides" },
-        { name: "Firm Tofu 500g", zh: "硬豆腐", price: 3.50, unit: "per ea", cat: "sides" },
-        { name: "Extra Firm Tofu 350g", zh: "特硬豆腐", price: 4.00, unit: "per ea", cat: "sides" },
-        { name: "Spam 340g (25% Less Sodium)", zh: "午餐肉 (低钠)", price: 6.00, unit: "per ea", cat: "sides" },
-        { name: "Ben & Jerry's Tonight Dough Ice Cream", zh: "冰淇淋", price: 8.50, unit: "per ea", cat: "sides" },
-        // CONDIMENTS
-        { name: "Kikkoman Premium Soy Sauce 750ml", zh: "龟甲万特选大豆酱油", price: 8.00, unit: "per ea", cat: "condiments" },
-        { name: "Kimlan Vinegar", zh: "金兰醋", price: 6.00, unit: "per ea", cat: "condiments" },
-        { name: "XIAOLONGKAN Red Pepper Powder", zh: "小龙坎干碟辣椒面", price: 3.99, unit: "per ea", cat: "condiments" },
-        { name: "JoyShare Pure Sesame Paste", zh: "乐享纯芝麻酱", price: 6.99, unit: "per ea", cat: "condiments" },
-        // DIPPING
-        { name: "Little Sheep Dipping Sauce – Original", zh: "小肥羊蘸料盒装-清香", price: 2.00, unit: "per ea", cat: "dipping" },
-        { name: "Little Sheep Dipping Sauce – Spicy", zh: "小肥羊蘸料盒装-香辣", price: 2.00, unit: "per ea", cat: "dipping" },
-        { name: "XIAOLONGKAN Sesame Dip – Original", zh: "小龙坎火锅麻酱原味", price: 1.90, unit: "per ea", cat: "dipping" },
-        { name: "XIAOLONGKAN Sesame Dip – Spicy", zh: "小龙坎火锅麻酱香辣", price: 1.90, unit: "per ea", cat: "dipping" }
-    ];
+let products=[];
+let cart=JSON.parse(localStorage.getItem('shabuCart'))||{};
+let currentCat='all';
+let orderNum='',orderDate='';
 
-    let cart = JSON.parse(localStorage.getItem('shabuCart')) || {};
-    let currentCat = 'all';
+fetch('products.json')
+  .then(r=>r.json())
+  .then(data=>{products=data;renderProducts();updateCartUI();})
+  .catch(()=>{document.getElementById('productsGrid').innerHTML='<p style="color:#e53935;">Could not load products.json. Make sure it is in the same folder as this HTML file.</p>';});
 
-    function renderProducts() {
-        const grid = document.getElementById('productsGrid');
-        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-        
-        const filtered = products.filter(p => {
-            const matchesSearch = p.name.toLowerCase().includes(searchTerm) || (p.zh && p.zh.includes(searchTerm));
-            const matchesCat = currentCat === 'all' || p.cat === currentCat;
-            return matchesSearch && matchesCat;
-        });
+function genOrderNum(){
+  const n=new Date(),pad=v=>String(v).padStart(2,'0');
+  orderNum=`SMH-${n.getFullYear()}${pad(n.getMonth()+1)}${pad(n.getDate())}-${pad(n.getHours())}${pad(n.getMinutes())}`;
+  orderDate=n.toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});
+}
 
-        grid.innerHTML = filtered.map(p => {
-            // Find its position in the master list so quotes in names like Ben & Jerry's don't break the JS
-            const originalIndex = products.findIndex(orig => orig.name === p.name);
-            
-            // Safety net: forces a fallback number if you accidentally pass strings later on
-            const priceValue = typeof p.price === 'number' ? p.price : parseFloat(String(p.price).replace(/[^0-9.]/g, '')) || 0;
-            const priceDisplay = typeof p.price === 'number' ? `$${p.price.toFixed(2)}` : p.price;
-            
-            return `
-                <div class="product-card">
-                    <div class="product-name">${p.name}</div>
-                    <div class="product-zh">${p.zh || ''}</div>
-                    <div class="product-price">${priceDisplay} / ${p.unit || ''}</div>
-                    <div class="qty-controls">
-                        <button class="qty-btn" onclick="updateQty(${originalIndex}, -1)">-</button>
-                        <span class="qty-val" id="qty-${p.name.replace(/[^a-zA-Z0-9]/g, '')}">${cart[p.name]?.qty || 0}</span>
-                        <button class="qty-btn" onclick="updateQty(${originalIndex}, 1)">+</button>
-                    </div>
-                </div>
-            `;
-        }).join('');
-    }
+function renderProducts(){
+  const grid=document.getElementById('productsGrid');
+  const search=document.getElementById('searchInput').value.toLowerCase();
+  const showSoldOut=document.getElementById('showSoldOut').checked;
+  const filtered=products.filter(p=>{
+    const ms=p.name.toLowerCase().includes(search)||(p.zh&&p.zh.includes(search));
+    const mc=currentCat==='all'||p.cat===currentCat;
+    const mst=showSoldOut||p.stock!=='sold-out';
+    return ms&&mc&&mst;
+  });
+  if(!filtered.length){grid.innerHTML='<p style="color:#999;text-align:center;padding:3rem;">No items found</p>';return;}
+  grid.innerHTML=filtered.map(p=>{
+    const idx=products.indexOf(p);
+    const soldOut=p.stock==='sold-out';
+    const priceDisplay='$'+p.price.toFixed(2);
+    const imgHtml=p.image?`<img src="images/products/${p.image}" alt="${p.name}" class="product-image"/>`:'';
+    const approxHtml=(p.approxWeight&&p.approxTotal)?`<div class="product-approx">~${p.approxWeight} &middot; approx. ${p.approxTotal}/pkg</div>`:'';
+    const dealHtml=p.dealPrice?`<div class="product-deal-badge">&#127991;&#65039; ${p.dealPrice}</div>`:'';
+    return`<div class="product-card${soldOut?' sold-out':''}">${imgHtml}${soldOut?'<span class="stock-badge-coming">Coming Soon</span>':''}<div class="product-zh">${p.zh}</div><div class="product-name">${p.name}</div><div class="product-price">${priceDisplay} / ${p.unit}</div>${approxHtml}${dealHtml}${buildControls(p,idx,soldOut)}</div>`;
+  }).join('');
+}
 
-    function filterByCat(cat) {
-        currentCat = cat;
-        renderProducts();
-    }
+function buildControls(p,idx,soldOut){
+  if(soldOut)return`<div class="qty-controls"><button class="qty-btn" disabled style="opacity:.4;cursor:not-allowed;width:100%;">Coming Soon</button></div>`;
+  if(p.type==='deal'){
+    return`<div class="qty-controls" style="flex-direction:column;gap:6px;"><button class="qty-btn" style="width:100%;" onclick="addDeal(${idx},'single')">+ Single ($${p.price.toFixed(2)})</button><button class="qty-btn" style="width:100%;background:#e53935;color:white;border-color:#e53935;" onclick="addDeal(${idx},'deal')">${p.dealPrice}</button></div>`;
+  }
+  if(p.sizeOptions){
+    const opts=p.sizeOptions.map((s,i)=>`<option value="${i}">${s.label} &middot; ${s.approxWeight} &middot; ${s.approxTotal}</option>`).join('');
+    const safeKey=p.name.replace(/[^a-zA-Z0-9]/g,'');
+    return`<select class="size-select" id="size-${idx}">${opts}</select><div class="qty-controls"><button class="qty-btn" onclick="updateQty(${idx},-1)">-</button><span class="qty-val" id="qty-${safeKey}">0</span><button class="qty-btn" onclick="updateQty(${idx},1)">+</button></div>`;
+  }
+  const safeKey=p.name.replace(/[^a-zA-Z0-9]/g,'');
+  const qty=Object.values(cart).find(c=>c.name===p.name)?.qty||0;
+  return`<div class="qty-controls"><button class="qty-btn" onclick="updateQty(${idx},-1)">-</button><span class="qty-val" id="qty-${safeKey}">${qty}</span><button class="qty-btn" onclick="updateQty(${idx},1)">+</button></div>`;
+}
 
-    function updateQty(index, change) {
-        const product = products[index];
-        const name = product.name;
-        if (!cart[name]) cart[name] = { ...product, qty: 0 };
-        
-        cart[name].qty += change;
-        if (cart[name].qty <= 0) delete cart[name];
-        
-        localStorage.setItem('shabuCart', JSON.stringify(cart));
-        updateUI();
-    }
+function updateQty(idx,change){
+  const p=products[idx];
+  const sizeEl=document.getElementById(`size-${idx}`);
+  let key=p.name,sizeLabel='';
+  if(sizeEl&&p.sizeOptions){
+    const si=parseInt(sizeEl.value);
+    const s=p.sizeOptions[si];
+    key=`${p.name}__${s.label}`;
+    sizeLabel=`${s.label} (${s.approxWeight}, ${s.approxTotal})`;
+  }
+  if(!cart[key])cart[key]={...p,qty:0,key,sizeLabel};
+  cart[key].qty+=change;
+  if(cart[key].qty<=0)delete cart[key];
+  localStorage.setItem('shabuCart',JSON.stringify(cart));
+  updateCartUI();renderProducts();
+}
 
-    function updateUI() {
-        renderProducts();
-        const cartItems = document.getElementById('cartItems');
-        const cartCount = document.getElementById('cartCount');
-        const cartTotal = document.getElementById('cartTotal');
-        
-        let total = 0;
-        let count = 0;
-        cartItems.innerHTML = '';
+function addDeal(idx,type){
+  const p=products[idx];
+  const key=type==='deal'?`${p.name}__deal`:p.name;
+  const label=type==='deal'?p.dealPrice:`1x ($${p.price.toFixed(2)})`;
+  if(!cart[key])cart[key]={...p,qty:0,key,sizeLabel:label};
+  cart[key].qty+=1;
+  localStorage.setItem('shabuCart',JSON.stringify(cart));
+  updateCartUI();
+}
 
-        Object.values(cart).forEach(item => {
-            const priceValue = typeof item.price === 'number' ? item.price : parseFloat(String(item.price).replace(/[^0-9.]/g, '')) || 0;
-            total += priceValue * item.qty;
-            count += item.qty;
-            cartItems.innerHTML += `
-                <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-size: 0.9rem;">
-                    <span><strong>${item.qty}x</strong> ${item.name}</span>
-                    <span>$${(priceValue * item.qty).toFixed(2)}</span>
-                </div>
-            `;
-        });
+function updateCartUI(){
+  const count=Object.values(cart).reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartCount').textContent=count;
+  const fc=document.getElementById('floatingCart');
+  if(count>0)fc.classList.add('visible');
+  else fc.classList.remove('visible');
+}
 
-        cartCount.innerText = count;
-        cartTotal.innerText = `$${total.toFixed(2)}`;
-    }
+function openModal(){
+  genOrderNum();
+  const body=document.getElementById('modalBody');
+  const items=Object.values(cart);
+  if(!items.length){
+    body.innerHTML='<div style="text-align:center;padding:2rem;color:#999;"><p>Your list is empty.</p><p style="font-family:\'Noto Sans SC\',sans-serif;margin-top:.5rem;">清单为空。</p></div>';
+  }else{
+    body.innerHTML=`<div class="order-meta">Order # <span>${orderNum}</span> &nbsp;&middot;&nbsp; ${orderDate}</div>${items.map(item=>`<div class="modal-list-item"><div><div class="modal-item-zh">${item.zh}</div><div class="modal-item-name">${item.name}</div><div class="modal-item-detail">${item.qty}x &middot; ${item.sizeLabel||item.unit} &middot; $${item.price.toFixed(2)}</div></div><button class="modal-item-remove" onclick="removeItem('${(item.key||item.name).replace(/'/g,"\\'")}')">&#215;</button></div>`).join('')}<div class="tax-note">&#9888;&#65039; Prices are before tax. Some items may be subject to HST. 价格未含税。</div>`;
+  }
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow='hidden';
+}
 
-    function copyForWeChat() {
-        if (Object.keys(cart).length === 0) return alert("Your list is empty!");
-        let text = "Shabu Meat House Order 订单:\n---\n";
-        Object.values(cart).forEach(item => {
-            text += `${item.qty}x ${item.name} ${item.zh}\n`;
-        });
-        text += `\nTotal: ${document.getElementById('cartTotal').innerText}\nWeChat: shabumeat`;
-        text += "⚠️ Note to Viewer:\n";
-        text += "This is an inquiry list from the website. Please confirm availability and final weight for 'per lb' items in-store.";
-        navigator.clipboard.writeText(text).then(() => alert("List copied! Now paste it into WeChat."));
-    }
+function closeModal(){document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow='';}
+function overlayClose(e){if(e.target.id==='modalOverlay')closeModal();}
 
-    function toggleDrawer() { document.getElementById('list-drawer').classList.toggle('active'); }
-    function clearCart() { if(confirm("Clear list?")) { cart = {}; localStorage.removeItem('shabuCart'); updateUI(); } }
+function removeItem(key){
+  delete cart[key];
+  localStorage.setItem('shabuCart',JSON.stringify(cart));
+  updateCartUI();openModal();
+}
 
-    window.onload = updateUI;
+function copyForWeChat(){
+  const items=Object.values(cart);
+  if(!items.length){alert('Your list is empty!');return;}
+  let text=`Shabu Meat House Order 涮肉屋订单\nOrder #: ${orderNum}\nDate: ${orderDate}\n\n`;
+  items.forEach(item=>{
+    text+=`${item.qty}x ${item.zh} ${item.name}`;
+    if(item.sizeLabel)text+=` (${item.sizeLabel})`;
+    text+='\n';
+  });
+  text+=`\nWeChat: shabumeat`;
+  navigator.clipboard.writeText(text).then(()=>alert('Copied! Paste into WeChat (shabumeat).\n已复制！粘贴到微信发送。\n\nWe will reply to confirm your order.\n我们将回复确认。'));
+}
+
+function clearCart(){
+  if(!Object.keys(cart).length)return;
+  if(confirm('Clear all items? 清空所有商品？')){cart={};localStorage.removeItem('shabuCart');updateCartUI();closeModal();}
+}
+
+function filterByCat(cat){currentCat=cat;renderProducts();}
+function toggleGuide(){document.getElementById('guidePanel').classList.toggle('active');}
+function selectPeople(n,btn){
+  document.querySelectorAll('.people-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const data={
+    2:['1-2 meat varieties 肉类1-2种','1 soup base 汤底1个','2-3 vegetable types 蔬菜2-3种','1 noodle pack 面条1包','1-2 dipping sauces 蘸料1-2种'],
+    4:['3-4 meat varieties 肉类3-4种','1-2 soup bases 汤底1-2个','3-4 vegetable types 蔬菜3-4种','2 noodle packs 面条2包','2-3 dipping sauces 蘸料2-3种'],
+    6:['4-5 meat varieties 肉类4-5种','2 soup bases 汤底2个','5-6 vegetable types 蔬菜5-6种','3 noodle packs 面条3包','3-4 dipping sauces 蘸料3-4种'],
+    8:['5-6 meat varieties 肉类5-6种','2-3 soup bases 汤底2-3个','6-8 vegetable types 蔬菜6-8种','3-4 noodle packs 面条3-4包','4-5 dipping sauces 蘸料4-5种'],
+  };
+  const recs=document.getElementById('recs');
+  recs.innerHTML=`<h4>We recommend 建议:</h4><ul>${data[n].map(r=>`<li>${r}</li>`).join('')}</ul>`;
+  recs.classList.add('active');
+}
 </script>
-
 </body>
 </html>

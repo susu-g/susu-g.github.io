@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hotpot Guide | Shabu Meat House 涮肉屋</title>
+  <meta name="description" content="Plan your perfect hotpot at home. Use our interactive guide to calculate how much meat, soup base and sides you need. Shabu Meat House Scarborough."/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <style>
+    .planner-box {
+      background: var(--blue-light);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .p-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 0.8rem;
+    }
+    .p-row:last-child { margin-bottom: 0; }
+    .p-lbl {
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      min-width: 62px;
+      flex-shrink: 0;
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+    .pill {
+      padding: 4px 13px;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      background: white;
+      color: var(--ink);
+      font-size: 0.8rem;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.15s;
+    }
+    .pill:hover { border-color: var(--blue-accent); color: var(--blue-accent); }
+    .pill.on {
+      background: var(--blue-accent);
+      border-color: var(--blue-accent);
+      color: white;
+    }
+    .ctr { display: flex; align-items: center; gap: 8px; }
+    .cbtn {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: white;
+      color: var(--ink);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.15s;
+    }
+    .cbtn:hover { border-color: var(--blue-accent); }
+    .cval { font-size: 18px; font-weight: 700; color: var(--blue-deep); min-width: 18px; text-align: center; }
+    .broth-tip {
+      font-size: 0.78rem;
+      color: var(--blue-deep);
+      background: rgba(74,158,190,0.12);
+      border-radius: 8px;
+      padding: 5px 10px;
+      margin-top: 5px;
+      width: 100%;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .trackers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-bottom: 1.5rem;
+    }
+    .tracker {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
+    }
+    .tracker.ok { border-color: #4caf50; background: #f0faf0; }
+    .tracker.warn { border-color: #ff9800; background: #fff8f0; }
+    .tracker.low { border-color: #e53935; background: #fff5f5; }
+    .tr-lbl { font-size: 0.72rem; color: var(--ink-soft); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .tracker.ok .tr-lbl, .tracker.ok .tr-val, .tracker.ok .tr-msg { color: #2e7d32; }
+    .tracker.warn .tr-lbl, .tracker.warn .tr-val, .tracker.warn .tr-msg { color: #e65100; }
+    .tracker.low .tr-lbl, .tracker.low .tr-val, .tracker.low .tr-msg { color: #c62828; }
+    .tr-val { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
+    .tr-msg { font-size: 0.72rem; color: var(--ink-soft); margin-top: 3px; }
+    .cat-block {
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .cat-hd {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 11px 14px;
+      cursor: pointer;
+      background: white;
+      transition: background 0.15s;
+    }
+    .cat-hd:hover { background: var(--blue-light); }
+    .cat-left { display: flex; align-items: center; gap: 8px; }
+    .cat-title { font-size: 0.9rem; font-weight: 700; color: var(--ink); font-family: 'DM Sans', sans-serif; }
+    .rec-badge {
+      font-size: 0.68rem;
+      background: var(--blue-light);
+      color: var(--blue-deep);
+      border: 1px solid rgba(74,158,190,0.3);
+      padding: 2px 8px;
+      border-radius: 50px;
+    }
+    .cat-right { display: flex; align-items: center; gap: 8px; }
+    .cat-meta { font-size: 0.75rem; color: var(--ink-soft); }
+    .arr { font-size: 10px; color: var(--ink-soft); transition: transform 0.2s; display: inline-block; }
+    .arr.open { transform: rotate(180deg); }
+    .cat-body { display: none; border-top: 1px solid var(--border); }
+    .cat-body.open { display: block; }
+    .item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--border);
+      background: white;
+      transition: background 0.1s;
+    }
+    .item:last-child { border-bottom: none; }
+    .item:hover { background: var(--blue-light); }
+    .item.added { background: #f0faf0; }
+    .pop-dot { width: 5px; height: 5px; border-radius: 50%; background: #ff9800; flex-shrink: 0; }
+    .item-info { flex: 1; min-width: 0; }
+    .item-zh { font-size: 0.88rem; color: var(--blue-deep); font-family: 'Noto Sans SC', sans-serif; font-weight: 500; }
+    .item.added .item-zh { color: #2e7d32; }
+    .item-en { font-size: 0.75rem; color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .item-right { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
+    .item-hint {
+      font-size: 0.68rem;
+      color: var(--blue-deep);
+      background: var(--blue-light);
+      border: 1px solid rgba(74,158,190,0.3);
+      padding: 2px 7px;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+    .item-price { font-size: 0.78rem; color: var(--ink-soft); white-space: nowrap; }
+    .qty-row { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
+    .qbtn {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      border: 1.5px solid var(--border);
+      background: white;
+      color: var(--ink);
+      font-size: 14px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+      transition: border-color 0.15s;
+    }
+    .qbtn:hover { border-color: var(--blue-accent); }
+    .item.added .qbtn { border-color: #81c784; }
+    .qval { font-size: 0.85rem; font-weight: 700; color: var(--ink); min-width: 14px; text-align: center; }
+    .list-bar {
+      background: var(--blue-deep);
+      color: white;
+      border-radius: 12px;
+      padding: 0.9rem 1.2rem;
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .list-info { font-size: 0.85rem; color: rgba(255,255,255,0.85); }
+    .list-info span { font-weight: 700; color: white; }
+    .copy-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      background: transparent;
+      color: white;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.15s;
+    }
+    .copy-btn:hover { background: rgba(255,255,255,0.15); }
+    @media (max-width: 600px) {
+      .p-lbl { min-width: 52px; }
+      .pill { font-size: 0.72rem; padding: 3px 10px; }
+      .item-en { display: none; }
+      .item-hint { display: none; }
+      .trackers { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 380px) {
+      .trackers { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Shabu <span>Meat House</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="items.html">Shop</a></li>
+    <li><a href="guide.html" class="active">Guide</a></li>
+    <li><a href="recipes.html">Recipes</a></li>
+  </ul>
+</nav>
+
+<section class="container" style="padding-top: 2rem;">
+  <p class="section-label">Interactive Guide / 购物指南</p>
+  <h1 class="section-title">Plan Your Hotpot <span style="font-family:'Noto Sans SC',sans-serif;font-size:0.55em;color:var(--blue-accent);">火锅计划</span></h1>
+  <p style="color:var(--ink-soft);margin-bottom:1.5rem;max-width:560px;font-size:0.95rem;">Tell us about your group and we'll help you figure out what to get — and how much. Add items to your list, then copy it to send via WeChat.</p>
+
+  <div class="notice-banner" style="border-radius:10px;margin-bottom:1.5rem;">
+    &#8505;&#65039; <strong>No online ordering</strong> — this is a planning guide only. Visit us in-store or message WeChat <strong>shabumeat</strong> to order.
+    <span style="font-family:'Noto Sans SC',sans-serif;opacity:0.85;margin-left:4px;">此清单仅为购物指引，请到店或微信下单。</span>
+  </div>
+
+  <!-- PLANNER -->
+  <div class="planner-box">
+    <div class="p-row">
+      <span class="p-lbl">People 人数</span>
+      <div class="ctr">
+        <button class="cbtn" onclick="chg(-1)">−</button>
+        <span class="cval" id="pval">2</span>
+        <button class="cbtn" onclick="chg(1)">+</button>
+      </div>
+      <span style="font-size:0.8rem;color:var(--ink-soft)" id="plbl">people</span>
+    </div>
+    <div class="p-row">
+      <span class="p-lbl">Appetite 食量</span>
+      <button class="pill" onclick="setA('light',this)">Light 少</button>
+      <button class="pill on" onclick="setA('normal',this)">Normal 正常</button>
+      <button class="pill" onclick="setA('heavy',this)">Heavy 多</button>
+    </div>
+    <div class="p-row">
+      <span class="p-lbl">Focus 偏好</span>
+      <button class="pill" onclick="setF('meat',this)">Meat-heavy 多肉</button>
+      <button class="pill on" onclick="setF('balanced',this)">Balanced 均衡</button>
+      <button class="pill" onclick="setF('veg',this)">Veg-heavy 多菜</button>
+    </div>
+    <div class="p-row" style="align-items:flex-start">
+      <span class="p-lbl" style="padding-top:5px">Broth 汤底</span>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;flex:1">
+        <button class="pill on" onclick="setB('mala',this)">Mala 麻辣</button>
+        <button class="pill" onclick="setB('tomato',this)">Tomato 番茄</button>
+        <button class="pill" onclick="setB('mushroom',this)">Mushroom 菌菇</button>
+        <button class="pill" onclick="setB('clear',this)">Clear 清汤</button>
+        <button class="pill" onclick="setB('water',this)">Just water 清水</button>
+        <button class="pill" onclick="setB('split',this)">Split pot 鸳鸯锅</button>
+        <div class="broth-tip" id="btip">Little Sheep Mala or XIAOLONGKAN Tallow Spicy. Start with half a pack if spice-sensitive.</div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border);margin-top:0.9rem;padding-top:0.9rem;display:flex;align-items:baseline;gap:8px">
+      <span style="font-size:0.78rem;color:var(--ink-soft)">Estimated spend</span>
+      <span style="font-size:1.3rem;font-weight:700;color:var(--blue-deep)" id="est-range">$—</span>
+      <span style="font-size:0.72rem;color:var(--ink-soft)">before tax · weight-based</span>
+    </div>
+  </div>
+
+  <!-- TRACKERS -->
+  <div class="trackers" id="trackers"></div>
+
+  <!-- CATEGORIES -->
+  <div id="cats"></div>
+
+  <!-- LIST BAR -->
+  <div class="list-bar">
+    <div class="list-info"><span id="lcount">0</span> items added &nbsp;·&nbsp; est. <span id="lest">$—</span> &nbsp;·&nbsp; before tax, weight-based</div>
+    <button class="copy-btn" onclick="copyList()">&#128203; Copy for WeChat 复制发送</button>
+  </div>
+</section>
+<!-- STORE INFO + MAP -->
+<div class="directions-container">
+  <div class="directions-grid">
+    <div class="info-column">
+      <p class="section-label">Visit Us / 门店地址</p>
+      <h2 class="display-title">Shabu Meat House</h2>
+      <div class="contact-block">
+        <h4>📍 Address 地址</h4>
+        <p>3272 Midland Ave, Unit B-112<br/>Scarborough, ON M1V 0C7<br/>North-facing entrance 朝北入口</p>
+        <a href="https://maps.google.com/?q=3272+Midland+Ave+Scarborough+ON" target="_blank" class="maps-link">Open in Google Maps →</a>
+      </div>
+      <div class="contact-block">
+        <h4>⏰ Hours 营业时间</h4>
+        <ul class="hours-list">
+          <li><span>Mon 周一</span><span>12:00 PM – 6:00 PM</span></li>
+          <li><span>Tues 周二</span><span>12:00 PM – 6:00 PM</span></li>
+          <li><span>Wed 周三</span><span>12:00 PM – 4:00 PM</span></li>
+          <li><span>Thurs 周四</span><span>12:00 PM – 4:00 PM</span></li>
+          <li><span>Fri 周五</span><span>12:00 PM – 6:00 PM</span></li>
+          <li><span>Sat 周六</span><span>11:00 AM – 6:00 PM</span></li>
+          <li><span>Sun 周日</span><span>11:00 AM – 6:00 PM</span></li>
+        </ul>
+      </div>
+      <div class="contact-block">
+        <h4>💬 WeChat 微信</h4>
+        <p><strong style="color:var(--blue-deep);">shabumeat</strong><br/>Message us to place an order or ask about availability.<br/><span style="font-family:'Noto Sans SC',sans-serif;font-size:0.9em;">联系我们下单或询问库存。</span></p>
+      </div>
+    </div>
+    <div class="map-column">
+      <iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=779&amp;height=551&amp;hl=en&amp;q=b112-3272 midland ave&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://embed-googlemap.com">embed google map</a></div><style>.mapouter{position:relative;text-align:right;width:100%;height:551px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:551px;}.gmap_iframe {height:551px!important;}</style></div>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="footer-logo">Shabu <span>Meat House</span></div>
+  <p>3272 Midland Ave Unit B-112, Scarborough, ON M1V 0C7</p>
+  <p>© 2025 Shabu Meat House. All rights reserved.</p>
+  <p>WeChat 微信: <strong style="color:rgba(255,255,255,0.85);">shabumeat</strong></p>
+</footer>
+
+<script>
+var ppl=2,app='normal',focus='balanced',broth='mala';
+var cart={};
+var openCats={lamb:true,beef:true,pork:true,soup:true,veg:false,mushrooms:false,noodles:false,sides:false,dipping:true};
+var appMult={light:0.7,normal:1,heavy:1.35};
+var focusMult={meat:1.4,balanced:1,veg:0.6};
+var brothTips={
+  mala:'Little Sheep Mala or XIAOLONGKAN Tallow Spicy. Start with half a pack if spice-sensitive.',
+  tomato:'Little Sheep or XIAOLONGKAN Tomato. Light and crowd-friendly.',
+  mushroom:'Little Sheep Mushroom. Earthy and mild — good as a split-pot side.',
+  clear:'XIAOLONGKAN Clear base. Season with ginger and green onion.',
+  water:'No base needed. Add ginger and green onion to taste.',
+  split:'Pick one spicy + one mild. Both in stock.'
+};
+var brothRec={
+  mala:['ls-mala','xlk-tallow'],tomato:['ls-tomato','xlk-tomato'],
+  mushroom:['ls-mushroom'],clear:['xlk-clear'],water:[],split:['ls-mala','xlk-clear']
+};
+var cats=[
+  {id:'lamb',label:'Lamb 羊肉',isMeat:true,items:[
+    {id:'aus-lamb',zh:'澳大利亚羊肉卷',en:'Australia lamb shoulder rolls',price:'$13.99/lb',avgPkg:10.7,wLo:0.65,wHi:0.85,popular:true},
+    {id:'nz-lamb',zh:'新西兰羊肉卷',en:'New Zealand lamb shoulder rolls',price:'$15.99/lb',avgPkg:12.8,wLo:0.7,wHi:0.9,popular:false},
+    {id:'lamb-leg',zh:'无骨羊腿块',en:'Lamb leg boneless cube',price:'$12.99/lb',avgPkg:14.9,wLo:1.0,wHi:1.3,popular:false},
+    {id:'mutton',zh:'有骨老羊腿块',en:'Mutton leg bone-in cube',price:'$10.99/lb',avgPkg:12.1,wLo:1.0,wHi:1.3,popular:false},
+  ]},
+  {id:'beef',label:'Beef 牛肉',isMeat:true,items:[
+    {id:'beef-short',zh:'牛五花卷',en:'Beef short plate rolls',price:'$10.99/lb',avgPkg:9.7,wLo:0.78,wHi:0.98,popular:true},
+    {id:'beef-chuck',zh:'牛眉头卷',en:'Beef chuck rolls',price:'$14.99/lb',avgPkg:11.9,wLo:0.7,wHi:0.9,popular:true},
+    {id:'beef-balls',zh:'牛肉丸',en:'Beef balls',price:'$8.00 ea',avgPkg:8,wLo:0,wHi:0,popular:false},
+    {id:'omasum',zh:'牛百叶丝',en:'Beef omasum scalded',price:'$8.00 ea',avgPkg:8,wLo:0,wHi:0,popular:false},
+    {id:'oxtail',zh:'牛尾',en:'Beef ox tail',price:'$13.99/lb',avgPkg:16.1,wLo:1.0,wHi:1.3,popular:false},
+  ]},
+  {id:'pork',label:'Pork 猪肉',isMeat:true,items:[
+    {id:'pork-shoulder',zh:'猪梅头肉卷',en:'Pork shoulder rolls',price:'$7.88/lb',avgPkg:6.3,wLo:0.7,wHi:0.9,popular:true},
+    {id:'pork-belly',zh:'无皮猪腩片',en:'Pork belly thick cut',price:'$7.99/lb',avgPkg:6.4,wLo:0.7,wHi:0.9,popular:false},
+  ]},
+  {id:'soup',label:'Soup bases 汤底',isMeat:false,items:[
+    {id:'ls-mala',zh:'小肥羊麻辣底料',en:'Little Sheep mala spicy',price:'$5.90 ea',avgPkg:5.9,wLo:0,wHi:0,popular:true},
+    {id:'ls-tomato',zh:'小肥羊番茄底料',en:'Little Sheep tomato',price:'$5.90 ea',avgPkg:5.9,wLo:0,wHi:0,popular:false},
+    {id:'ls-mushroom',zh:'小肥羊菌菇底料',en:'Little Sheep mushroom',price:'$5.90 ea',avgPkg:5.9,wLo:0,wHi:0,popular:false},
+    {id:'xlk-tallow',zh:'小龙坎牛油底料',en:'XIAOLONGKAN tallow spicy',price:'$6.00 ea',avgPkg:6,wLo:0,wHi:0,popular:true},
+    {id:'xlk-clear',zh:'小龙坎清汤底料',en:'XIAOLONGKAN clear',price:'$5.00 ea',avgPkg:5,wLo:0,wHi:0,popular:false},
+    {id:'xlk-tomato',zh:'小龙坎番茄底料',en:'XIAOLONGKAN tomato',price:'$6.00 ea',avgPkg:6,wLo:0,wHi:0,popular:false},
+  ]},
+  {id:'veg',label:'Vegetables 蔬菜',isMeat:false,items:[
+    {id:'napa',zh:'大白菜',en:'Napa',price:'$1.79/lb',avgPkg:4.5,wLo:0,wHi:0,popular:true},
+    {id:'baby-napa',zh:'娃娃菜',en:'Baby napa',price:'$2.59/lb',avgPkg:3.2,wLo:0,wHi:0,popular:true},
+    {id:'bok-choy',zh:'小白菜',en:'Baby bok choy',price:'$2.99/lb',avgPkg:2.2,wLo:0,wHi:0,popular:false},
+    {id:'tong-ho',zh:'茼蒿',en:'Tong ho',price:'$2.99/lb',avgPkg:2.2,wLo:0,wHi:0,popular:true},
+    {id:'daikon',zh:'萝卜',en:'Daikon',price:'$1.68/lb',avgPkg:2.9,wLo:0,wHi:0,popular:false},
+    {id:'green-onion',zh:'葱',en:'Green onion',price:'$1.59 ea',avgPkg:1.59,wLo:0,wHi:0,popular:false},
+  ]},
+  {id:'mushrooms',label:'Mushrooms 菌菇',isMeat:false,items:[
+    {id:'enoki',zh:'金针菇',en:'Enoki',price:'2 for $2.80',avgPkg:1.4,wLo:0,wHi:0,popular:true},
+    {id:'white-mush',zh:'蘑菇',en:'White mushroom 227g',price:'$2.80 ea',avgPkg:2.8,wLo:0,wHi:0,popular:false},
+    {id:'brown-mush',zh:'褐蘑菇',en:'Brown mushroom 227g',price:'$2.80 ea',avgPkg:2.8,wLo:0,wHi:0,popular:false},
+    {id:'black-fungus',zh:'黑木耳',en:'Black fungus',price:'$8.00 ea',avgPkg:8,wLo:0,wHi:0,popular:false},
+  ]},
+  {id:'noodles',label:'Noodles 面条',isMeat:false,items:[
+    {id:'sweet-potato',zh:'红薯粉丝宽条',en:'Sweet potato noodle wide',price:'$4.50 ea',avgPkg:4.5,wLo:0,wHi:0,popular:true},
+    {id:'lanzhou',zh:'兰州拉面',en:'LanZhou fresh noodle',price:'$3.00 ea',avgPkg:3,wLo:0,wHi:0,popular:true},
+    {id:'rice-verm',zh:'江西米粉',en:'Jiangxi rice vermicelli',price:'$2.50 ea',avgPkg:2.5,wLo:0,wHi:0,popular:false},
+    {id:'long-noodle',zh:'龙须面',en:'Long thin noodle',price:'$3.00 ea',avgPkg:3,wLo:0,wHi:0,popular:false},
+  ]},
+  {id:'sides',label:'Sides 配菜',isMeat:false,items:[
+    {id:'soft-tofu',zh:'软豆腐',en:'Soft tofu 300g',price:'$2.00 ea',avgPkg:2,wLo:0,wHi:0,popular:true},
+    {id:'firm-tofu',zh:'板豆腐',en:'Medium firm tofu 700g',price:'$3.00 ea',avgPkg:3,wLo:0,wHi:0,popular:false},
+    {id:'spam',zh:'午餐肉低钠',en:'Spam 25% less sodium',price:'$6.00 ea',avgPkg:6,wLo:0,wHi:0,popular:false},
+  ]},
+  {id:'dipping',label:'Dipping sauces 蘸料',isMeat:false,items:[
+    {id:'ls-orig',zh:'小肥羊蘸料清香',en:'Little Sheep dip original',price:'$2.00 ea',avgPkg:2,wLo:0,wHi:0,popular:true},
+    {id:'ls-spicy',zh:'小肥羊蘸料香辣',en:'Little Sheep dip spicy',price:'$2.00 ea',avgPkg:2,wLo:0,wHi:0,popular:false},
+    {id:'xlk-sesame',zh:'小龙坎麻酱原味',en:'XIAOLONGKAN sesame dip',price:'$1.90 ea',avgPkg:1.9,wLo:0,wHi:0,popular:true},
+    {id:'sesame-paste',zh:'纯芝麻酱',en:'JoyShare sesame paste',price:'$6.99 ea',avgPkg:6.99,wLo:0,wHi:0,popular:false},
+  ]},
+];
+
+function getQty(cid,iid){return cart[cid+':'+iid]||0;}
+function setQty(cid,iid,q){var k=cid+':'+iid;if(q<=0)delete cart[k];else cart[k]=q;render();}
+function chg(d){ppl=Math.max(1,Math.min(12,ppl+d));document.getElementById('pval').textContent=ppl;document.getElementById('plbl').textContent=ppl===1?'person':'people';render();}
+function setA(v,el){app=v;el.parentNode.querySelectorAll('.pill').forEach(function(b){b.classList.remove('on')});el.classList.add('on');render();}
+function setF(v,el){focus=v;el.parentNode.querySelectorAll('.pill').forEach(function(b){b.classList.remove('on')});el.classList.add('on');render();}
+function setB(v,el){broth=v;var w=el.parentNode;w.querySelectorAll('.pill').forEach(function(b){b.classList.remove('on')});el.classList.add('on');document.getElementById('btip').textContent=brothTips[v];render();}
+function togCat(id){openCats[id]=!openCats[id];renderCats();}
+
+function meatTarget(){
+  var am=appMult[app],fm=focusMult[focus];
+  var base=0.35*ppl*am*fm;
+  return{lo:+(base*0.85).toFixed(2),hi:+(base*1.2).toFixed(2)};
+}
+
+function renderTrackers(){
+  var tgt=meatTarget();
+  var mLo=0,mHi=0;
+  cats.filter(function(c){return c.isMeat}).forEach(function(c){
+    c.items.forEach(function(i){var q=getQty(c.id,i.id);if(q>0){mLo+=i.wLo*q;mHi+=i.wHi*q;}});
+  });
+  mLo=+mLo.toFixed(2);mHi=+mHi.toFixed(2);
+  var soupN=0;cats.find(function(c){return c.id==='soup'}).items.forEach(function(i){soupN+=getQty('soup',i.id);});
+  var soupNeeded=(broth==='water')?0:(broth==='split'||ppl>6)?2:1;
+  var dipN=0;cats.find(function(c){return c.id==='dipping'}).items.forEach(function(i){dipN+=getQty('dipping',i.id);});
+  var dipTarget=Math.max(1,Math.round(ppl/2));
+  var ms='',mm='';
+  if(mLo===0){ms='';mm='target ~'+tgt.lo+'–'+tgt.hi+' lb';}
+  else if(mHi<tgt.lo*0.8){ms='low';mm='need ~'+(tgt.lo-mHi).toFixed(1)+'+ lb more';}
+  else if(mLo<tgt.lo){ms='warn';mm='a little more would help';}
+  else{ms='ok';mm="you're good for "+ppl+(ppl===1?' person':' people');}
+  var ss='',sm='';
+  if(broth==='water'){ss='ok';sm='no base needed';}
+  else if(soupN===0){ss='low';sm='need '+soupNeeded+' pack'+(soupNeeded>1?'s':'');}
+  else if(soupN<soupNeeded){ss='warn';sm='grab 1 more pack';}
+  else{ss='ok';sm='good for your group';}
+  var ds='',dm='';
+  if(dipN===0){ds='low';dm='suggest '+dipTarget+' sauce'+(dipTarget>1?'s':'');}
+  else if(dipN<dipTarget){ds='warn';dm='could use 1 more';}
+  else{ds='ok';dm='good variety';}
+  var mVal=mLo===0?'0 lb':mLo+'–'+mHi+' lb';
+  document.getElementById('trackers').innerHTML=
+    '<div class="tracker'+(ms?' '+ms:'')+'"><div class="tr-lbl">Meat added</div><div class="tr-val">'+mVal+'</div><div class="tr-msg">'+mm+'</div></div>'+
+    '<div class="tracker'+(ss?' '+ss:'')+'"><div class="tr-lbl">Soup base</div><div class="tr-val">'+soupN+' pack'+(soupN!==1?'s':'')+'</div><div class="tr-msg">1 pack feeds up to 6 · '+sm+'</div></div>'+
+    '<div class="tracker'+(ds?' '+ds:'')+'"><div class="tr-lbl">Dipping sauces</div><div class="tr-val">'+dipN+' sauce'+(dipN!==1?'s':'')+'</div><div class="tr-msg">~1 per 2 people · '+dm+'</div></div>';
+}
+
+function renderCats(){
+  var recs=brothRec[broth]||[];
+  var html='';
+  cats.forEach(function(c){
+    var addedN=c.items.filter(function(i){return getQty(c.id,i.id)>0}).length;
+    var recN=c.items.filter(function(i){return recs.indexOf(i.id)>-1}).length;
+    var isOpen=openCats[c.id];
+    html+='<div class="cat-block"><div class="cat-hd" onclick="togCat(\''+c.id+'\')">';
+    html+='<div class="cat-left"><span class="cat-title">'+c.label+'</span>';
+    if(recN>0)html+='<span class="rec-badge">'+recN+' suggested</span>';
+    html+='</div><div class="cat-right"><span class="cat-meta">'+(addedN>0?addedN+' added · ':'')+c.items.length+' items</span><span class="arr'+(isOpen?' open':'')+'">&#9660;</span></div></div>';
+    if(isOpen){
+      html+='<div class="cat-body open">';
+      c.items.forEach(function(i){
+        var q=getQty(c.id,i.id);
+        var added=q>0;
+        var isRec=recs.indexOf(i.id)>-1;
+        html+='<div class="item'+(added?' added':'')+'">';
+        if(i.popular)html+='<div class="pop-dot"></div>';
+        html+='<div class="item-info"><div class="item-zh">'+i.zh+'</div><div class="item-en">'+i.en+'</div></div>';
+        html+='<div class="item-right">';
+        if(isRec)html+='<span class="item-hint">suggested</span>';
+        html+='<div class="item-price">'+i.price+'</div>';
+        html+='<div class="qty-row">';
+        html+='<button class="qbtn" onclick="setQty(\''+c.id+'\',\''+i.id+'\','+(q-1)+')">−</button>';
+        html+='<span class="qval">'+q+'</span>';
+        html+='<button class="qbtn" onclick="setQty(\''+c.id+'\',\''+i.id+'\','+(q+1)+')">+</button>';
+        html+='</div></div></div>';
+      });
+      html+='</div>';
+    }
+    html+='</div>';
+  });
+  document.getElementById('cats').innerHTML=html;
+}
+
+function renderListBar(){
+  var totalQty=0,totLo=0,totHi=0;
+  cats.forEach(function(c){
+    c.items.forEach(function(i){
+      var q=getQty(c.id,i.id);
+      if(q>0){
+        totalQty+=q;
+        if(i.wLo>0){totLo+=i.wLo*q*i.avgPkg/((i.wLo+i.wHi)/2);totHi+=i.wHi*q*i.avgPkg/((i.wLo+i.wHi)/2);}
+        else{totLo+=i.avgPkg*q;totHi+=i.avgPkg*q;}
+      }
+    });
+  });
+  document.getElementById('lcount').textContent=totalQty;
+  document.getElementById('lest').textContent=totalQty===0?'$—':'$'+Math.round(totLo*0.9)+'–$'+Math.round(totHi*1.1);
+}
+
+function calcEst(){
+  var am=appMult[app],fm=focusMult[focus];
+  var meatBase=ppl*0.35*am*fm;
+  var vegBase=ppl*0.35*am*(focus==='veg'?1.3:focus==='meat'?0.7:1);
+  var brothCost=broth==='water'?0:broth==='split'?11.9:5.9;
+  var extras=ppl<=2?9:ppl<=4?15:22;
+  var mid=meatBase*12+vegBase*2.5+brothCost+extras;
+  var lo=Math.round(mid*0.8),hi=Math.round(mid*1.25);
+  document.getElementById('est-range').textContent='$'+lo+'–$'+hi;
+}
+function render(){renderTrackers();renderCats();renderListBar();calcEst();}
+
+function genOrderNum(){
+  var n=new Date(),pad=function(v){return String(v).padStart(2,'0');};
+  return'SMH-'+n.getFullYear()+pad(n.getMonth()+1)+pad(n.getDate())+'-'+pad(n.getHours())+pad(n.getMinutes());
+}
+
+function copyList(){
+  var hasItems=false;
+  cats.forEach(function(c){c.items.forEach(function(i){if(getQty(c.id,i.id)>0)hasItems=true;});});
+  if(!hasItems){alert('Nothing added yet. 清单为空。');return;}
+  var orderNum=genOrderNum();
+  var date=new Date().toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});
+  var lines=['Shabu Meat House Order 涮肉屋订单','Order #: '+orderNum,'Date: '+date,''];
+  cats.forEach(function(c){
+    c.items.forEach(function(i){
+      var q=getQty(c.id,i.id);
+      if(q>0)lines.push(q+'x '+i.zh+' '+i.en);
+    });
+  });
+  lines.push('','WeChat: shabumeat');
+  navigator.clipboard.writeText(lines.join('\n')).then(function(){
+    alert('Copied! Paste into WeChat (shabumeat).\n已复制！粘贴到微信发送。\n\nWe will reply to confirm your order.\n我们将回复确认。');
+  });
+}
+
+render();
+</script>
+</body>
+</html>
+

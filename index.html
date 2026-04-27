@@ -18,20 +18,21 @@
   <link rel="stylesheet" href="styles.css"/>
   <link rel="icon" type="image/png" href="favicon.png"/>
   <style>
-    .hero {
-      background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('hero-bg.jpg') center/cover;
-      min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center;
-    }
-    .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 1rem; }
-    .hero h1 em { font-style: italic; color: var(--blue-accent); display: block; }
-    .hero p { max-width: 520px; margin: 0 auto 0.5rem; color: var(--ink-soft); font-size: 1rem; }
-    .hero p.zh { font-family: 'Noto Sans SC', sans-serif; font-size: 0.9rem; color: var(--blue-deep); margin-bottom: 2rem; }
-    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn-outline { background: transparent; color: var(--blue-accent); border: 1.5px solid var(--blue-accent); padding: 0.8rem 1.8rem; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; }
-    .btn-outline:hover { background: var(--blue-light); }
-    .deals-slide { display: none; }
-    .deals-slide.active { display: block; }
-  </style>
+  .hero {
+    background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('hero-bg.jpg') center/cover no-repeat;
+    min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center;
+  }
+  .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 1rem; color: #fff; }
+  .hero h1 em { font-style: italic; color: #fff; display: block; }
+  .hero h1 span { color: rgba(255,255,255,0.75) !important; }
+  .hero p { max-width: 520px; margin: 0 auto 0.5rem; color: rgba(255,255,255,0.85); font-size: 1rem; }
+  .hero p.zh { font-family: 'Noto Sans SC', sans-serif; font-size: 0.9rem; color: rgba(255,255,255,0.7); margin-bottom: 2rem; }
+  .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.7); padding: 0.8rem 1.8rem; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; }
+  .btn-outline:hover { background: rgba(255,255,255,0.15); }
+  .deals-slide { display: none; }
+  .deals-slide.active { display: block; }
+</style>
 </head>
 <body>
 
@@ -40,6 +41,7 @@
   <ul class="nav-links">
     <li><a href="index.html" class="active">Home</a></li>
     <li><a href="items.html">Shop</a></li>
+    <li><a href="guide.html" class="active">Guide</a></li>
     <li><a href="recipes.html">Recipes</a></li>
   </ul>
 </nav>
@@ -77,6 +79,39 @@
       <h3>Little Sheep Mala Soup Base <span>小肥羊麻辣底料</span></h3>
       <div class="deal-price">$5.90/ea</div>
       <a href="items.html">Shop Now 立即选购 →</a>
+    </div>
+  </div>
+</div>
+<!-- STORE INFO + MAP -->
+<div class="directions-container">
+  <div class="directions-grid">
+    <div class="info-column">
+      <p class="section-label">Visit Us / 门店地址</p>
+      <h2 class="display-title">Shabu Meat House</h2>
+      <div class="contact-block">
+        <h4>📍 Address 地址</h4>
+        <p>3272 Midland Ave, Unit B-112<br/>Scarborough, ON M1V 0C7<br/>North-facing entrance 朝北入口</p>
+        <a href="https://maps.google.com/?q=3272+Midland+Ave+Scarborough+ON" target="_blank" class="maps-link">Open in Google Maps →</a>
+      </div>
+      <div class="contact-block">
+        <h4>⏰ Hours 营业时间</h4>
+        <ul class="hours-list">
+          <li><span>Mon 周一</span><span>12:00 PM – 6:00 PM</span></li>
+          <li><span>Tues 周二</span><span>12:00 PM – 6:00 PM</span></li>
+          <li><span>Wed 周三</span><span>12:00 PM – 4:00 PM</span></li>
+          <li><span>Thurs 周四</span><span>12:00 PM – 4:00 PM</span></li>
+          <li><span>Fri 周五</span><span>12:00 PM – 6:00 PM</span></li>
+          <li><span>Sat 周六</span><span>11:00 AM – 6:00 PM</span></li>
+          <li><span>Sun 周日</span><span>11:00 AM – 6:00 PM</span></li>
+        </ul>
+      </div>
+      <div class="contact-block">
+        <h4>💬 WeChat 微信</h4>
+        <p><strong style="color:var(--blue-deep);">shabumeat</strong><br/>Message us to place an order or ask about availability.<br/><span style="font-family:'Noto Sans SC',sans-serif;font-size:0.9em;">联系我们下单或询问库存。</span></p>
+      </div>
+    </div>
+    <div class="map-column">
+      <iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=779&amp;height=551&amp;hl=en&amp;q=b112-3272 midland ave&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://embed-googlemap.com">embed google map</a></div><style>.mapouter{position:relative;text-align:right;width:100%;height:551px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:551px;}.gmap_iframe {height:551px!important;}</style></div>
     </div>
   </div>
 </div>
@@ -126,39 +161,7 @@
   </div>
 </div>
 
-<!-- STORE INFO + MAP -->
-<div class="directions-container">
-  <div class="directions-grid">
-    <div class="info-column">
-      <p class="section-label">Visit Us / 门店地址</p>
-      <h2 class="display-title">Shabu Meat House</h2>
-      <div class="contact-block">
-        <h4>📍 Address 地址</h4>
-        <p>3272 Midland Ave, Unit B-112<br/>Scarborough, ON M1V 0C7<br/>North-facing entrance 朝北入口</p>
-        <a href="https://maps.google.com/?q=3272+Midland+Ave+Scarborough+ON" target="_blank" class="maps-link">Open in Google Maps →</a>
-      </div>
-      <div class="contact-block">
-        <h4>⏰ Hours 营业时间</h4>
-        <ul class="hours-list">
-          <li><span>Mon 周一</span><span>12:00 PM – 6:00 PM</span></li>
-          <li><span>Tues 周二</span><span>12:00 PM – 6:00 PM</span></li>
-          <li><span>Wed 周三</span><span>12:00 PM – 4:00 PM</span></li>
-          <li><span>Thurs 周四</span><span>12:00 PM – 4:00 PM</span></li>
-          <li><span>Fri 周五</span><span>12:00 PM – 6:00 PM</span></li>
-          <li><span>Sat 周六</span><span>11:00 AM – 6:00 PM</span></li>
-          <li><span>Sun 周日</span><span>11:00 AM – 6:00 PM</span></li>
-        </ul>
-      </div>
-      <div class="contact-block">
-        <h4>💬 WeChat 微信</h4>
-        <p><strong style="color:var(--blue-deep);">shabumeat</strong><br/>Message us to place an order or ask about availability.<br/><span style="font-family:'Noto Sans SC',sans-serif;font-size:0.9em;">联系我们下单或询问库存。</span></p>
-      </div>
-    </div>
-    <div class="map-column">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2878.0267794301556!2d-79.2974!3d43.8217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDQ5JzE4LjEiTiA3OcKwMTcnNTAuNiJX!5e0!3m2!1sen!2sca!4v1625000000000!5m2!1sen!2sca" allowfullscreen="" loading="lazy"></iframe>
-    </div>
-  </div>
-</div>
+
 
 <footer>
   <div class="footer-logo">Shabu <span>Meat House</span></div>

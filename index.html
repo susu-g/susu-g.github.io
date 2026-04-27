@@ -3,199 +3,29 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shabu Meat House</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>Shabu Meat House 涮肉屋 | Premium Hotpot Ingredients Scarborough</title>
+  <meta name="description" content="Premium hotpot ingredients in Scarborough. Fresh meat rolls, soup bases, vegetables. 士嘉堡火锅食材 - 新鲜肉卷、火锅底料、蔬菜。Serving Scarborough, Markham, Richmond Hill, North York, Agincourt."/>
+  <meta name="keywords" content="hotpot, 火锅, Scarborough, 士嘉堡, Markham, 万锦, Richmond Hill, 列治文山, North York, 北约克, Agincourt, meat rolls, 肉卷, soup base, 火锅底料, lamb, 羊肉, beef, 牛肉, Little Sheep, 小肥羊, XIAOLONGKAN, 小龙坎"/>
+  <meta property="og:title" content="Shabu Meat House 涮肉屋 - Premium Hotpot Ingredients Scarborough"/>
+  <meta property="og:description" content="Fresh meat rolls, soup bases, vegetables & more 新鲜肉卷、火锅底料、蔬菜 | Scarborough 士嘉堡"/>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Shabu Meat House","alternateName":"涮肉屋","address":{"@type":"PostalAddress","streetAddress":"3272 Midland Ave Unit B-112","addressLocality":"Scarborough","addressRegion":"ON","postalCode":"M1V 0C7","addressCountry":"CA"}}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="icon" type="image/png" href="favicon.png"/>
   <style>
-    :root {
-      --blue-light: #e8f4f8;
-      --blue-mid: #b8dce8;
-      --blue-accent: #4a9ebe;
-      --blue-deep: #2a7a9e;
-      --ink: #1a2a32;
-      --ink-soft: #4a5a62;
-      --cream: #f9fbfc;
-      --border: #d4eaf3;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; }
-
-    /* NAV */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 5rem; display: flex; align-items: center; justify-content: space-between; height: 68px;
-    }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--ink); text-decoration: none; }
-    .nav-logo span { color: var(--blue-accent); }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-    .nav-links a { text-decoration: none; color: var(--ink-soft); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--blue-accent); }
-    .nav-links .nav-cta { background: var(--blue-accent); color: white; padding: 0.5rem 1.3rem; border-radius: 50px; transition: background 0.2s; }
-    .nav-links .nav-cta:hover { background: var(--blue-deep); color: white; }
-
-    /* HERO */
     .hero {
-      min-height: 90vh; display: grid; grid-template-columns: 1.1fr 0.9fr;
-      align-items: center; gap: 4rem; padding: 5rem 5rem 4rem; position: relative; overflow: hidden;
+      background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('hero-bg.jpg') center/cover;
+      min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center;
     }
-    .hero-bg {
-      position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(ellipse at 80% 20%, rgba(184,220,232,0.35) 0%, transparent 60%),
-                  radial-gradient(ellipse at 10% 80%, rgba(232,244,248,0.5) 0%, transparent 50%);
-    }
-    .hero-text { position: relative; z-index: 1; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: var(--blue-light); border: 1px solid var(--blue-mid);
-      color: var(--blue-deep); font-size: 0.78rem; font-weight: 500;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      padding: 0.4rem 1rem; border-radius: 50px; margin-bottom: 1.8rem;
-    }
-    .hero-badge::before { content: '●'; font-size: 0.5rem; color: var(--blue-accent); }
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 5.5vw, 5rem);
-      font-weight: 700; line-height: 1.08; color: var(--ink); margin-bottom: 1.6rem;
-    }
-    .hero-title em { font-style: italic; color: var(--blue-accent); display: block; }
-    .hero-desc { font-size: 1.05rem; color: var(--ink-soft); max-width: 440px; margin-bottom: 2.5rem; font-weight: 300; line-height: 1.9; }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--blue-accent); color: white; padding: 0.9rem 2.2rem; border-radius: 50px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: background 0.2s, transform 0.2s; }
-    .btn-primary:hover { background: var(--blue-deep); transform: translateY(-2px); }
-    .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--blue-accent); border: 1.5px solid var(--blue-accent); padding: 0.9rem 2.2rem; border-radius: 50px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: all 0.2s; }
-    .btn-secondary:hover { background: var(--blue-light); transform: translateY(-2px); }
-
-    /* HERO VISUAL */
-    .hero-visual { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1rem; }
-    .hero-stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .hero-stat {
-      background: white; border: 1px solid var(--border); border-radius: 18px;
-      padding: 1.6rem 1.5rem; box-shadow: 0 4px 24px rgba(74,158,190,0.07);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .hero-stat:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(74,158,190,0.14); }
-    .hero-stat-icon { font-size: 2.2rem; margin-bottom: 0.7rem; }
-    .hero-stat h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.2rem; }
-    .hero-stat p { font-size: 0.78rem; color: var(--ink-soft); line-height: 1.5; }
-    .hero-stat-wide {
-      background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-accent) 100%);
-      border-radius: 18px; padding: 1.4rem 1.8rem;
-      display: flex; align-items: center; justify-content: space-between;
-      box-shadow: 0 8px 32px rgba(74,158,190,0.25);
-    }
-    .hero-stat-wide p { color: rgba(255,255,255,0.85); font-size: 0.85rem; font-weight: 300; max-width: 200px; line-height: 1.6; }
-    .hero-stat-wide strong { color: white; font-size: 1rem; display: block; margin-bottom: 0.3rem; font-weight: 600; }
-    .hero-wechat { font-size: 2rem; }
-
-    /* FEATURED */
-    .featured { padding: 6rem 5rem; background: white; }
-    .section-header { margin-bottom: 3.5rem; }
-    .section-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blue-accent); margin-bottom: 0.6rem; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; color: var(--ink); line-height: 1.2; }
-    .section-title em { font-style: italic; color: var(--blue-accent); }
-
-    .categories-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-
-    .cat-card {
-      position: relative; border-radius: 20px; overflow: hidden;
-      text-decoration: none; display: block;
-      border: 1px solid var(--border);
-      transition: transform 0.3s, box-shadow 0.3s;
-      background: var(--cream);
-    }
-    .cat-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(74,158,190,0.18); }
-
-    .cat-card-inner { padding: 2.2rem 2rem 2rem; position: relative; z-index: 1; }
-    .cat-emoji { font-size: 3rem; margin-bottom: 1rem; display: block; line-height: 1; }
-    .cat-card-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-accent); margin-bottom: 0.4rem; }
-    .cat-card-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--ink); margin-bottom: 0.4rem; }
-    .cat-card-zh { font-size: 1rem; color: var(--blue-deep); margin-bottom: 0.8rem; font-weight: 400; }
-    .cat-card-desc { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.7; margin-bottom: 1.5rem; max-width: 300px; }
-
-    .cat-items { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
-    .cat-item-tag {
-      background: white; border: 1px solid var(--border);
-      color: var(--ink-soft); font-size: 0.75rem; font-weight: 400;
-      padding: 0.25rem 0.7rem; border-radius: 50px;
-    }
-    .cat-item-tag .zh { color: var(--blue-accent); margin-left: 0.3rem; }
-
-    .cat-link {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      font-size: 0.85rem; font-weight: 500; color: var(--blue-accent);
-      transition: gap 0.2s;
-    }
-    .cat-card:hover .cat-link { gap: 0.7rem; }
-
-    .cat-card-accent {
-      position: absolute; bottom: 0; right: 0;
-      width: 120px; height: 120px;
-      border-radius: 50%;
-      opacity: 0.08;
-      transform: translate(30%, 30%);
-    }
-
-    /* card color accents */
-    .cat-fruits .cat-card-accent { background: #4caf50; }
-    .cat-sliced .cat-card-accent { background: #e53935; }
-    .cat-sides .cat-card-accent { background: #ff9800; }
-    .cat-meats .cat-card-accent { background: #8d6e63; }
-
-    .cat-fruits { border-top: 3px solid #81c784; }
-    .cat-sliced { border-top: 3px solid #ef9a9a; }
-    .cat-sides { border-top: 3px solid #ffcc80; }
-    .cat-meats { border-top: 3px solid #bcaaa4; }
-
-    /* PROMO BANNER */
-    .promo { padding: 4rem 5rem; }
-    .promo-inner {
-      background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-accent) 100%);
-      border-radius: 24px; padding: 3.5rem 4rem;
-      display: grid; grid-template-columns: 1fr auto;
-      align-items: center; gap: 3rem;
-    }
-    .promo h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: white; margin-bottom: 0.7rem; }
-    .promo p { color: rgba(255,255,255,0.8); font-size: 0.95rem; font-weight: 300; line-height: 1.8; }
-    .promo-wechat { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 16px; padding: 1.5rem 2rem; text-align: center; white-space: nowrap; }
-    .promo-wechat p { color: rgba(255,255,255,0.7); font-size: 0.78rem; margin-bottom: 0.3rem; }
-    .promo-wechat strong { color: white; font-size: 1.2rem; display: block; font-family: 'Playfair Display', serif; }
-    .promo-wechat small { color: rgba(255,255,255,0.6); font-size: 0.72rem; }
-
-    /* INFO STRIP */
-    .info-strip { padding: 4rem 5rem; background: white; }
-    .info-strip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-    .info-item { display: flex; align-items: flex-start; gap: 1.2rem; }
-    .info-icon-wrap { width: 48px; height: 48px; border-radius: 12px; background: var(--blue-light); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
-    .info-item h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.3rem; }
-    .info-item p { font-size: 0.83rem; color: var(--ink-soft); line-height: 1.7; }
-
-    /* FOOTER */
-    footer { background: var(--ink); color: rgba(255,255,255,0.5); padding: 3rem 5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: white; font-weight: 700; }
-    .footer-logo span { color: var(--blue-mid); }
-    footer p { font-size: 0.82rem; }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .hero-text > * { animation: fadeUp 0.6s ease both; }
-    .hero-badge { animation-delay: 0.05s; }
-    .hero-title { animation-delay: 0.15s; }
-    .hero-desc { animation-delay: 0.25s; }
-    .hero-actions { animation-delay: 0.35s; }
-
-    /* RESPONSIVE */
-    @media (max-width: 960px) {
-      nav { padding: 0 1.5rem; }
-      .hero { grid-template-columns: 1fr; padding: 4rem 2rem; min-height: auto; gap: 3rem; }
-      .hero-visual { display: none; }
-      .featured, .promo, .info-strip { padding: 4rem 2rem; }
-      .categories-grid { grid-template-columns: 1fr; }
-      .promo-inner { grid-template-columns: 1fr; gap: 2rem; }
-      .info-strip-grid { grid-template-columns: 1fr; }
-      footer { padding: 2rem; flex-direction: column; text-align: center; }
-    }
+    .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 1rem; }
+    .hero h1 em { font-style: italic; color: var(--blue-accent); display: block; }
+    .hero p { max-width: 520px; margin: 0 auto 0.5rem; color: var(--ink-soft); font-size: 1rem; }
+    .hero p.zh { font-family: 'Noto Sans SC', sans-serif; font-size: 0.9rem; color: var(--blue-deep); margin-bottom: 2rem; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-outline { background: transparent; color: var(--blue-accent); border: 1.5px solid var(--blue-accent); padding: 0.8rem 1.8rem; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s; }
+    .btn-outline:hover { background: var(--blue-light); }
+    .deals-slide { display: none; }
+    .deals-slide.active { display: block; }
   </style>
 </head>
 <body>
@@ -203,211 +33,144 @@
 <nav>
   <a class="nav-logo" href="index.html">Shabu <span>Meat House</span></a>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="items.html">All Items</a></li>
-    <!--<li><a href="items.html#order" class="nav-cta">Pre-Order</a></li>-->
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="items.html">Shop</a></li>
+    <li><a href="recipes.html">Recipes</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-text">
-    <div class="hero-badge">Scarborough's Hotpot Specialty Store</div>
-    <h1 class="hero-title">
-      Everything for your
-      <em>perfect hotpot</em>
-    </h1>
-    <p class="hero-desc">Fresh sliced meats, premium soup bases, seasonal vegetables, and all the sides you need — all in one place.</p>
-    <div class="hero-actions">
-      <a href="items.html" class="btn-primary">Browse All Items →</a>
-      <!--<a href="items.html#order" class="btn-secondary">Pre-Order</a>-->
-    </div>
-  </div>
-  <div class="hero-visual">
-    <div class="hero-stat-row">
-      <div class="hero-stat">
-        <div class="hero-stat-icon">🥩</div>
-        <h3>Sliced Meats</h3>
-        <p>Lamb, beef & pork rolls, fresh daily</p>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-icon">🍲</div>
-        <h3>Soup Bases</h3>
-        <p>Mala, tomato, mushroom & more</p>
-      </div>
-    </div>
-    <div class="hero-stat-row">
-      <div class="hero-stat">
-        <div class="hero-stat-icon">🥬</div>
-        <h3>Fresh Produce</h3>
-        <p>Seasonal vegetables & fruits</p>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-icon">🫙</div>
-        <h3>Condiments</h3>
-        <p>Dipping sauces & seasonings</p>
-      </div>
-    </div>
-    <div class="hero-stat-wide">
-      <div>
-        <strong>Order ahead via WeChat</strong>
-        <p>Reserve your items, pick up in store, pay on arrival.</p>
-      </div>
-      <div class="hero-wechat">💬</div>
+  <div class="container">
+    <h1 class="section-title" style="font-size:clamp(2.5rem,6vw,4rem);">Premium Cuts for the<br><em>Perfect Hotpot</em><span style="font-family:'Noto Sans SC',sans-serif;font-size:0.45em;display:block;color:var(--blue-deep);margin-top:0.3rem;">完美火锅所需一切</span></h1>
+    <p>Fresh meat rolls, soup bases, and produce</p>
+    <p class="zh">新鲜肉卷、火锅底料、时令蔬菜</p>
+    <div class="hero-btns">
+      <a href="items.html" class="btn-primary">Browse All Items 浏览商品</a>
+      <a href="recipes.html" class="btn-outline">View Recipes 食谱</a>
     </div>
   </div>
 </section>
+
+<!-- WEEKLY DEALS BANNER -->
+<div class="deals-banner">
+  <div id="dealsCarousel">
+    <div class="deals-slide active">
+      <span class="deal-label">This Week 本周特价</span>
+      <h3>Lamb Shoulder Rolls <span>羊肉卷</span></h3>
+      <div class="deal-price">$13.99/lb</div>
+      <a href="items.html">Shop Now 立即选购 →</a>
+    </div>
+    <div class="deals-slide">
+      <span class="deal-label">Deal 特价</span>
+      <h3>Enoki Mushrooms <span>金针菇</span></h3>
+      <div class="deal-price">2 for $2.80</div>
+      <a href="items.html">Shop Now 立即选购 →</a>
+    </div>
+    <div class="deals-slide">
+      <span class="deal-label">Featured 精选</span>
+      <h3>Little Sheep Mala Soup Base <span>小肥羊麻辣底料</span></h3>
+      <div class="deal-price">$5.90/ea</div>
+      <a href="items.html">Shop Now 立即选购 →</a>
+    </div>
+  </div>
+</div>
 
 <!-- FEATURED CATEGORIES -->
-<section class="featured">
-  <div class="section-header">
-    <p class="section-label">Shop by Category / 分类购物</p>
-    <h2 class="section-title">Our <em>Featured</em> Selections</h2>
-  </div>
-
-  <div class="categories-grid">
-
-    <!-- FRESH FRUITS & VEGETABLES -->
-    <a class="cat-card cat-fruits" href="items.html?cat=vegetables">
-      <div class="cat-card-inner">
-        <span class="cat-emoji">🥬</span>
-        <p class="cat-card-label">Fresh Daily</p>
-        <h3 class="cat-card-title">Fruits & Vegetables</h3>
-        <p class="cat-card-zh">新鲜蔬果</p>
-        <p class="cat-card-desc">Fresh produce — from leafy greens to seasonal fruits, sourced regularly.</p>
-        <div class="cat-items">
-          <span class="cat-item-tag">Napa <span class="zh">大白菜</span></span>
-          <span class="cat-item-tag">Baby Bok Choy <span class="zh">小白菜</span></span>
-          <span class="cat-item-tag">Enoki <span class="zh">金针菇</span></span>
-          <span class="cat-item-tag">Daikon <span class="zh">萝卜</span></span>
-          <span class="cat-item-tag">Tong Ho <span class="zh">茼蒿</span></span>
-          <span class="cat-item-tag">Mango <span class="zh">芒果</span></span>
-          <span class="cat-item-tag">Longan <span class="zh">龙眼</span></span>
-        </div>
-        <span class="cat-link">Shop Produce →</span>
-      </div>
-      <div class="cat-card-accent"></div>
+<section class="container">
+  <p class="section-label">Shop by Category / 分类购物</p>
+  <h2 class="section-title">Featured Selections <span style="font-family:'Noto Sans SC',sans-serif;font-size:0.55em;color:var(--blue-accent);">精选商品</span></h2>
+  <div class="cat-grid">
+    <a class="cat-card" href="items.html">
+      <span class="cat-emoji">🥩</span>
+      <h3>Sliced Meats</h3>
+      <p class="cat-zh">新鲜肉卷</p>
+      <p>Lamb, beef & pork rolls. Thinly sliced for perfect shabu shabu. 羊牛猪肉卷，薄切完美涮涮锅。</p>
     </a>
-
-    <!-- SLICED MEATS -->
-    <a class="cat-card cat-sliced" href="items.html?cat=lamb">
-      <div class="cat-card-inner">
-        <span class="cat-emoji">🥩</span>
-        <p class="cat-card-label">Specialty Cuts</p>
-        <h3 class="cat-card-title">Sliced Meats</h3>
-        <p class="cat-card-zh">肉卷</p>
-        <p class="cat-card-desc">Thinly sliced and rolled meats perfect for shabu shabu — lamb, beef, and pork in a variety of cuts.</p>
-        <div class="cat-items">
-          <span class="cat-item-tag">Lamb Shoulder Rolls <span class="zh">羊肉卷</span></span>
-          <span class="cat-item-tag">Beef Short Plate Rolls <span class="zh">牛五花卷</span></span>
-          <span class="cat-item-tag">Beef Chuck Rolls <span class="zh">牛眉头卷</span></span>
-          <span class="cat-item-tag">Pork Shoulder Rolls <span class="zh">猪梅头肉卷</span></span>
-          <span class="cat-item-tag">NZ Lamb <span class="zh">新西兰羊肉</span></span>
-        </div>
-        <span class="cat-link">Shop Sliced Meats →</span>
-      </div>
-      <div class="cat-card-accent"></div>
+    <a class="cat-card" href="items.html">
+      <span class="cat-emoji">🍲</span>
+      <h3>Soup Bases</h3>
+      <p class="cat-zh">火锅底料</p>
+      <p>Mala, tomato, mushroom & more. Little Sheep & XIAOLONGKAN. 麻辣、番茄、菌菇等口味。</p>
     </a>
-
-    <!-- HOTPOT SIDES -->
-    <a class="cat-card cat-sides" href="items.html?cat=soup">
-      <div class="cat-card-inner">
-        <span class="cat-emoji">🍲</span>
-        <p class="cat-card-label">Complete Your Hotpot</p>
-        <h3 class="cat-card-title">Hotpot Sides</h3>
-        <p class="cat-card-zh">火锅配料</p>
-        <p class="cat-card-desc">Soup bases, noodles, tofu, dipping sauces and all the extras that make your hotpot complete.</p>
-        <div class="cat-items">
-          <span class="cat-item-tag">Little Sheep Soup Base <span class="zh">小肥羊麻辣</span></span>
-          <span class="cat-item-tag">XIAOLONGKAN Soup Base <span class="zh">小龙坎牛油</span></span>
-          <span class="cat-item-tag">Sweet Potato Noodle <span class="zh">红薯粉丝</span></span>
-          <span class="cat-item-tag">Soft Tofu <span class="zh">软豆腐</span></span>
-          <span class="cat-item-tag">Sesame Dipping Sauce <span class="zh">麻酱</span></span>
-        </div>
-        <span class="cat-link">Shop Hotpot Sides →</span>
-      </div>
-      <div class="cat-card-accent"></div>
+    <a class="cat-card" href="items.html">
+      <span class="cat-emoji">🥬</span>
+      <h3>Fresh Produce</h3>
+      <p class="cat-zh">新鲜蔬果</p>
+      <p>Seasonal vegetables & fruits sourced regularly. 时令蔬菜水果，定期采购。</p>
     </a>
-    
-  <!--
-    <!-- MEATS 
-    <a class="cat-card cat-meats" href="items.html?cat=beef">
-      <div class="cat-card-inner">
-        <span class="cat-emoji">🍖</span>
-        <p class="cat-card-label">Premium Cuts</p>
-        <h3 class="cat-card-title">Meats</h3>
-        <p class="cat-card-zh">鲜肉</p>
-        <p class="cat-card-desc">Premium whole cuts and specialty items — from oxtail and ribeye to scalded tripe and beef balls.</p>
-        <div class="cat-items">
-          <span class="cat-item-tag">Beef Ribeye <span class="zh">牛肋眼</span></span>
-          <span class="cat-item-tag">Oxtail <span class="zh">牛尾</span></span>
-          <span class="cat-item-tag">Beef Flat Iron <span class="zh">雪花牛</span></span>
-          <span class="cat-item-tag">Finger Meat <span class="zh">手指肉</span></span>
-          <span class="cat-item-tag">Beef Balls <span class="zh">牛肉丸</span></span>
-          <span class="cat-item-tag">Beef Tripe <span class="zh">牛草肚丝</span></span>
-          
-        </div>
-        <span class="cat-link">Shop All Meats →</span>
-      -->
-      </div>
-      <div class="cat-card-accent"></div>
+    <a class="cat-card" href="items.html">
+      <span class="cat-emoji">🥣</span>
+      <h3>Dipping Sauces</h3>
+      <p class="cat-zh">蘸料调味</p>
+      <p>Sesame paste, dipping sauces, condiments & noodles. 芝麻酱、蘸料、调味品及面条。</p>
     </a>
-
   </div>
 </section>
 
-<!-- PROMO / WECHAT BANNER -->
-<section class="promo">
-  <div class="promo-inner">
-    <div>
-      <h2>Order via WeChat 微信预订</h2>
-      <!--<p>Reserve your items ahead of time — we'll have everything ready for you. Browse our full catalogue, send us your list, and pick up in store. Pay on arrival, no hassle.</p>
-    -->
+<!-- WECHAT PROMO -->
+<div class="wechat-promo">
+  <div>
+    <h2>Order via WeChat 微信订购</h2>
+    <p>Reserve your items ahead of time. Pick up in store, pay on arrival. 提前预订，到店取货，到付款。</p>
+  </div>
+  <div class="wechat-badge">
+    <p>WeChat 微信</p>
+    <strong>shabumeat</strong>
+    <p style="font-size:0.75rem;margin-top:0.3rem;">Message us to order 联系我们下单</p>
+  </div>
+</div>
+
+<!-- STORE INFO + MAP -->
+<div class="directions-container">
+  <div class="directions-grid">
+    <div class="info-column">
+      <p class="section-label">Visit Us / 门店地址</p>
+      <h2 class="display-title">Shabu Meat House</h2>
+      <div class="contact-block">
+        <h4>📍 Address 地址</h4>
+        <p>3272 Midland Ave, Unit B-112<br/>Scarborough, ON M1V 0C7<br/>North-facing entrance 朝北入口</p>
+        <a href="https://maps.google.com/?q=3272+Midland+Ave+Scarborough+ON" target="_blank" class="maps-link">Open in Google Maps →</a>
+      </div>
+      <div class="contact-block">
+        <h4>⏰ Hours 营业时间</h4>
+        <ul class="hours-list">
+          <li><span>Mon 周一</span><span>12:00 PM – 6:00 PM</span></li>
+          <li><span>Tues 周二</span><span>12:00 PM – 6:00 PM</span></li>
+          <li><span>Wed 周三</span><span>12:00 PM – 4:00 PM</span></li>
+          <li><span>Thurs 周四</span><span>12:00 PM – 4:00 PM</span></li>
+          <li><span>Fri 周五</span><span>12:00 PM – 6:00 PM</span></li>
+          <li><span>Sat 周六</span><span>11:00 AM – 6:00 PM</span></li>
+          <li><span>Sun 周日</span><span>11:00 AM – 6:00 PM</span></li>
+        </ul>
+      </div>
+      <div class="contact-block">
+        <h4>💬 WeChat 微信</h4>
+        <p><strong style="color:var(--blue-deep);">shabumeat</strong><br/>Message us to place an order or ask about availability.<br/><span style="font-family:'Noto Sans SC',sans-serif;font-size:0.9em;">联系我们下单或询问库存。</span></p>
+      </div>
     </div>
-    <div class="promo-wechat">
-      <p>WeChat 微信</p>
-      <strong>shabumeat</strong>
-      <small>Message us to order</small>
+    <div class="map-column">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2878.0267794301556!2d-79.2974!3d43.8217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDQ5JzE4LjEiTiA3OcKwMTcnNTAuNiJX!5e0!3m2!1sen!2sca!4v1625000000000!5m2!1sen!2sca" allowfullscreen="" loading="lazy"></iframe>
     </div>
   </div>
-</section>
-
-<!-- INFO STRIP -->
-<section class="info-strip">
-  <div class="info-strip-grid">
-    <div class="info-item">
-      <div class="info-icon-wrap">📍</div>
-      <div>
-        <h4>Visit Us / 门店地址</h4>
-        <p>3272 Midland Ave Unit B-112<br/>Scarborough, ON M1V 0C7<br/> North-facing Entrance</p>
-      </div>
-    </div>
-    <div class="info-item">
-      <div class="info-icon-wrap">🕐</div>
-      <div>
-        <h4>Store Hours / 营业时间</h4>
-        <p>Mon: 12:00PM - 6:00PM <br/> Tues: 12:00PM - 6:00PM <br/> Wed: 12:00PM - 4:00PM 
-          <br/> Thur: 12:00PM - 4:00PM <br/> Fri: 12:00PM - 6:00PM
-          <br/> Sat: 11:00AM - 6:00PM <br/> Sun: 11:00AM - 6:00PM</p>
-      </div>
-    </div>
-    <div class="info-item">
-      <div class="info-icon-wrap">💬</div>
-      <div>
-        <h4>WeChat / 微信订购</h4>
-        <p>Message <strong style="color:var(--blue-deep)">shabumeat</strong> to place an order or ask about availability.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
+</div>
 
 <footer>
   <div class="footer-logo">Shabu <span>Meat House</span></div>
+  <p>3272 Midland Ave Unit B-112, Scarborough, ON M1V 0C7</p>
   <p>© 2025 Shabu Meat House. All rights reserved.</p>
-  <p>WeChat 微信: shabumeat</p>
+  <p>WeChat 微信: <strong style="color:rgba(255,255,255,0.85);">shabumeat</strong></p>
 </footer>
 
+<script>
+// Rotate deals banner
+const slides = document.querySelectorAll('.deals-slide');
+let current = 0;
+setInterval(() => {
+  slides[current].classList.remove('active');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('active');
+}, 4000);
+</script>
 </body>
 </html>

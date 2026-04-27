@@ -154,7 +154,7 @@ let cart=JSON.parse(localStorage.getItem('shabuCart'))||{};
 let currentCat='all';
 let orderNum='',orderDate='';
 
-fetch('./products.json')
+fetch('products.json')
   .then(r=>r.json())
   .then(data=>{products=data;renderProducts();updateCartUI();})
   .catch(()=>{document.getElementById('productsGrid').innerHTML='<p style="color:#e53935;">Could not load products.json. Make sure it is in the same folder as this HTML file.</p>';});

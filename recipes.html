@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recipes 食谱 | Shabu Meat House 涮肉屋</title>
+  <meta name="description" content="Authentic hotpot and Chinese recipes. Dipping sauces, complete hotpot meals, stir-fries, soups & more. 正宗火锅食谱和中餐菜谱。"/>
+  <meta name="keywords" content="hotpot recipes, 火锅食谱, dipping sauce, 蘸料, Chinese recipes, 中餐, Scarborough, 士嘉堡"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Shabu <span>Meat House</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="items.html">Shop</a></li>
+    <li><a href="recipes.html" class="active">Recipes</a></li>
+  </ul>
+</nav>
+
+<section class="container">
+  <p class="section-label">Culinary Guide / 烹饪指南</p>
+
+  <!-- HEADER ROW: title + lang toggle -->
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+    <h1 class="section-title" style="margin-bottom:0;" id="pageTitle">Recipes <span style="font-family:'Noto Sans SC',sans-serif;font-size:0.55em;color:var(--blue-accent);">食谱</span></h1>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">🇬🇧 English</button>
+      <button class="lang-btn" onclick="setLang('zh')">🇨🇳 中文</button>
+    </div>
+  </div>
+
+  <!-- FILTER TABS -->
+  <div class="cat-tabs">
+    <button class="filter-btn active" onclick="filterRecipes('all',this)">All 全部</button>
+    <button class="filter-btn" onclick="filterRecipes('hotpot',this)">🍲 Hotpot 火锅</button>
+    <button class="filter-btn" onclick="filterRecipes('dipping',this)">🥣 Dipping Sauces 蘸料</button>
+    <button class="filter-btn" onclick="filterRecipes('soup',this)">🍜 Soups 汤品</button>
+    <button class="filter-btn" onclick="filterRecipes('stir-fry',this)">🥘 Stir-Fry 炒菜</button>
+    <button class="filter-btn" onclick="filterRecipes('braised',this)">🍖 Braised 炖煮</button>
+    <button class="filter-btn" onclick="filterRecipes('instant-pot',this)">⚡ Instant Pot 快锅</button>
+    <button class="filter-btn" onclick="filterRecipes('vegetarian',this)">🥬 Vegetarian 素食</button>
+    <button class="filter-btn" onclick="filterRecipes('quick',this)">⏱ Quick &lt;30min 快手</button>
+  </div>
+
+  <div class="recipes-grid" id="recipesGrid"></div>
+</section>
+
+<!-- RECIPE MODAL -->
+<div class="recipe-modal" id="recipeModal" onclick="closeModalIfOverlay(event)">
+  <div class="recipe-modal-box" id="recipeModalBox">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Shabu <span>Meat House</span></div>
+  <p>3272 Midland Ave Unit B-112, Scarborough, ON M1V 0C7</p>
+  <p>© 2025 Shabu Meat House. All rights reserved.</p>
+  <p>WeChat 微信: <strong style="color:rgba(255,255,255,0.85);">shabumeat</strong></p>
+</footer>
+
+<script>
+let lang = 'en';
+let activeFilter = 'all';
+
+// ─── RECIPES DATA ───────────────────────────────────────────────────────────
+const recipes = [
+
+  // ── DIPPING SAUCES ──
+  { id:1, tags:['dipping','hotpot','vegetarian','quick'],
+    emoji:'🥣',
+    title:{en:'Classic Sesame Dipping Sauce',zh:'经典麻酱蘸料'},
+    meta:{en:'Dipping Sauce · 2 min',zh:'蘸料 · 2分钟'},
+    desc:{en:'The most popular hotpot dip — creamy, nutty, perfectly balanced.',zh:'最受欢迎的火锅蘸料 — 香浓顺滑，味道完美。'},
+    shabuIngredients:[
+      {en:'JoyShare Pure Sesame Paste',zh:'纯芝麻酱',amount:'3 tbsp',key:'JoyShare Pure Sesame Paste'},
+      {en:'Kikkoman Soy Sauce',zh:'龟甲万酱油',amount:'1 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+      {en:'Kimlan Vinegar',zh:'金兰醋',amount:'1 tsp',key:'Kimlan Vinegar'},
+      {en:'Green Onion',zh:'葱花',amount:'1 tbsp',key:'Green Onion'},
+      {en:'Cilantro',zh:'香菜',amount:'1 tbsp',key:'Cilantro'},
+    ],
+    otherIngredients:[
+      {en:'Warm water',zh:'温水',amount:'2–3 tbsp'},
+      {en:'Sugar',zh:'白糖',amount:'½ tsp'},
+      {en:'Garlic (minced)',zh:'蒜蓉',amount:'1 clove'},
+    ],
+    steps:[
+      {en:'Mix sesame paste with warm water gradually until smooth and pourable.',zh:'将芝麻酱与温水逐渐混合至顺滑。'},
+      {en:'Add soy sauce, vinegar, and sugar. Stir until combined.',zh:'加入酱油、醋和糖，搅拌均匀。'},
+      {en:'Top with green onion, cilantro, and garlic. Mix before eating.',zh:'撒上葱花、香菜和蒜蓉，食用前拌匀。'},
+    ]
+  },
+
+  { id:2, tags:['dipping','hotpot','quick'],
+    emoji:'🌶️',
+    title:{en:'Spicy Garlic Oil Dip',zh:'蒜蓉辣油蘸料'},
+    meta:{en:'Dipping Sauce · 5 min',zh:'蘸料 · 5分钟'},
+    desc:{en:'Fiery and aromatic — perfect for heat lovers.',zh:'火辣芳香，适合喜欢辣味的人。'},
+    shabuIngredients:[
+      {en:'XIAOLONGKAN Red Pepper Powder',zh:'小龙坎干碟辣椒面',amount:'2 tbsp',key:'XIAOLONGKAN Red Pepper Powder'},
+      {en:'Kikkoman Soy Sauce',zh:'龟甲万酱油',amount:'2 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+      {en:'Green Onion',zh:'葱花',amount:'2 tbsp',key:'Green Onion'},
+    ],
+    otherIngredients:[
+      {en:'Garlic (minced)',zh:'蒜蓉',amount:'4 cloves'},
+      {en:'Vegetable oil',zh:'植物油',amount:'¼ cup'},
+      {en:'Sesame oil',zh:'香油',amount:'1 tsp'},
+      {en:'Salt',zh:'盐',amount:'pinch'},
+    ],
+    steps:[
+      {en:'Place pepper powder, garlic, and green onion in a heatproof bowl.',zh:'将辣椒粉、蒜蓉和葱花放入耐热碗中。'},
+      {en:'Heat oil until shimmering, then carefully pour over the spices.',zh:'将油加热至微微冒烟，小心倒在香料上。'},
+      {en:'Cool 2 min, then add soy sauce, sesame oil, and salt.',zh:'冷却2分钟，加入酱油、香油和盐，拌匀。'},
+    ]
+  },
+
+  { id:3, tags:['dipping','hotpot','vegetarian','quick'],
+    emoji:'🥢',
+    title:{en:'Soy-Vinegar Dip',zh:'酱醋蘸料'},
+    meta:{en:'Dipping Sauce · 3 min',zh:'蘸料 · 3分钟'},
+    desc:{en:'Simple and clean — lets the ingredients shine.',zh:'简单清爽，让食材原味更突出。'},
+    shabuIngredients:[
+      {en:'Kikkoman Soy Sauce',zh:'龟甲万酱油',amount:'3 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+      {en:'Kimlan Vinegar',zh:'金兰醋',amount:'2 tbsp',key:'Kimlan Vinegar'},
+      {en:'Green Onion',zh:'葱花',amount:'1 tbsp',key:'Green Onion'},
+      {en:'Cilantro',zh:'香菜',amount:'1 tbsp',key:'Cilantro'},
+    ],
+    otherIngredients:[
+      {en:'Sesame oil',zh:'香油',amount:'1 tsp'},
+      {en:'Chili flakes (optional)',zh:'辣椒片（可选）',amount:'to taste'},
+    ],
+    steps:[
+      {en:'Mix soy sauce, vinegar, and sesame oil in a small bowl.',zh:'在小碗中混合酱油、醋和香油。'},
+      {en:'Add green onion and cilantro.',zh:'加入葱花和香菜。'},
+      {en:'Add chili flakes if desired. Serve.',zh:'如需可加辣椒片，搅拌后食用。'},
+    ]
+  },
+
+  { id:4, tags:['dipping','hotpot','vegetarian','quick'],
+    emoji:'🥜',
+    title:{en:'Peanut Dipping Sauce',zh:'花生酱蘸料'},
+    meta:{en:'Dipping Sauce · 5 min',zh:'蘸料 · 5分钟'},
+    desc:{en:'Rich and savory with a hint of sweetness — great with veggies.',zh:'浓郁鲜美微甜，非常适合搭配蔬菜。'},
+    shabuIngredients:[
+      {en:'Kikkoman Soy Sauce',zh:'龟甲万酱油',amount:'1 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+      {en:'Kimlan Vinegar',zh:'金兰醋',amount:'1 tsp',key:'Kimlan Vinegar'},
+    ],
+    otherIngredients:[
+      {en:'Peanut butter (smooth)',zh:'花生酱',amount:'3 tbsp'},
+      {en:'Warm water',zh:'温水',amount:'3 tbsp'},
+      {en:'Sugar',zh:'糖',amount:'1 tsp'},
+      {en:'Sesame oil',zh:'香油',amount:'½ tsp'},
+      {en:'Garlic (minced)',zh:'蒜蓉',amount:'1 clove'},
+    ],
+    steps:[
+      {en:'Whisk peanut butter with warm water until smooth.',zh:'将花生酱与温水搅拌至顺滑。'},
+      {en:'Add soy sauce, vinegar, sugar, and sesame oil. Mix well.',zh:'加入酱油、醋、糖和香油，拌匀。'},
+      {en:'Stir in garlic. Adjust with water for desired consistency.',zh:'拌入蒜蓉，加水调整浓稠度。'},
+    ]
+  },
+
+  { id:5, tags:['dipping','hotpot','quick'],
+    emoji:'🦐',
+    title:{en:'Light Citrus Seafood Dip',zh:'清爽海鲜蘸料'},
+    meta:{en:'Dipping Sauce · 5 min',zh:'蘸料 · 5分钟'},
+    desc:{en:'Light and citrusy — enhances natural seafood flavors.',zh:'清淡柑橘味，提升海鲜天然风味。'},
+    shabuIngredients:[
+      {en:'Kikkoman Soy Sauce',zh:'龟甲万酱油',amount:'2 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+      {en:'Kimlan Vinegar',zh:'金兰醋',amount:'1 tbsp',key:'Kimlan Vinegar'},
+      {en:'Green Onion',zh:'葱花',amount:'2 tbsp',key:'Green Onion'},
+    ],
+    otherIngredients:[
+      {en:'Lemon juice',zh:'柠檬汁',amount:'1 tbsp'},
+      {en:'Ginger (grated)',zh:'姜蓉',amount:'1 tsp'},
+      {en:'Sesame oil',zh:'香油',amount:'1 tsp'},
+      {en:'Sugar',zh:'糖',amount:'½ tsp'},
+    ],
+    steps:[
+      {en:'Combine soy sauce, lemon juice, and vinegar.',zh:'混合酱油、柠檬汁和醋。'},
+      {en:'Add ginger, green onion, sesame oil, and sugar.',zh:'加入姜蓉、葱花、香油和糖。'},
+      {en:'Stir well and let sit 5 minutes before serving.',zh:'搅拌均匀，静置5分钟后食用。'},
+    ]
+  },
+
+  // ── HOTPOT MEALS ──
+  { id:6, tags:['hotpot'],
+    emoji:'🔥',
+    title:{en:'Classic Mala Hotpot for 4',zh:'经典麻辣火锅 (4人份)'},
+    meta:{en:'Hotpot · Serves 4',zh:'火锅 · 4人份'},
+    desc:{en:'The ultimate spicy & numbing hotpot with all the essentials.',zh:'终极麻辣火锅体验，包含所有必备食材。'},
+    shabuIngredients:[
+      {en:'Little Sheep Mala Soup Base',zh:'小肥羊麻辣底料',amount:'1 pack',key:'Little Sheep Soup Base – Mala Spicy'},
+      {en:'Beef Short Plate Rolls',zh:'牛五花卷',amount:'2 pkgs',key:'Beef Short Plate Rolls'},
+      {en:'Lamb Shoulder Rolls',zh:'羊肉卷',amount:'2 pkgs',key:'Australia Lamb Shoulder Rolls'},
+      {en:'Napa',zh:'大白菜',amount:'1 head',key:'Napa'},
+      {en:'Baby Bok Choy',zh:'小白菜',amount:'1 large',key:'Baby Bok Choy'},
+      {en:'Tong Ho',zh:'茼蒿',amount:'1 large bag',key:'Tong Ho'},
+      {en:'Enoki',zh:'金针菇',amount:'2 packs',key:'Enoki'},
+      {en:'Sweet Potato Noodles',zh:'红薯粉丝',amount:'2 packs',key:'JOYSHARE Sweet Potato Noodle – Wide'},
+      {en:'Medium Firm Tofu',zh:'板豆腐',amount:'2 packs',key:'Medium Firm Tofu 700g'},
+      {en:'Sesame Dipping Sauce',zh:'芝麻蘸料',amount:'to taste',key:'XIAOLONGKAN Sesame Dip – Original'},
+    ],
+    otherIngredients:[{en:'Water',zh:'水',amount:'6 cups'}],
+    steps:[
+      {en:'Fill hotpot with 6 cups water and bring to a boil.',zh:'火锅加入6杯水煮沸。'},
+      {en:'Add mala soup base and stir until dissolved.',zh:'加入麻辣汤底搅拌至溶解。'},
+      {en:'Reduce to medium-low to maintain a gentle simmer.',zh:'转中小火保持微沸状态。'},
+      {en:'Wash and cut vegetables into bite-sized pieces.',zh:'洗净并切菜。'},
+      {en:'Arrange all ingredients on plates around the hotpot.',zh:'将所有食材摆盘放在火锅周围。'},
+      {en:'Cook meat slices by swishing in broth for 15–30 seconds.',zh:'肉片在汤中涮15-30秒至刚熟。'},
+      {en:'Cook vegetables 1–2 min. Enjoy with dipping sauces!',zh:'蔬菜煮1-2分钟。配蘸料享用！'},
+    ]
+  },
+
+  { id:7, tags:['hotpot','quick'],
+    emoji:'🍅',
+    title:{en:'Tomato Soup Hotpot for 2',zh:'番茄火锅 (2人份)'},
+    meta:{en:'Hotpot · Serves 2',zh:'火锅 · 2人份'},
+    desc:{en:'Light, refreshing, naturally sweet — perfect for a cozy dinner.',zh:'清淡爽口，天然甜美，适合温馨晚餐。'},
+    shabuIngredients:[
+      {en:'XIAOLONGKAN Tomato Soup Base',zh:'小龙坎番茄底料',amount:'1 pack',key:'XIAOLONGKAN Soup Base – Tomato'},
+      {en:'Beef Short Plate Rolls',zh:'牛五花卷',amount:'1 pkg',key:'Beef Short Plate Rolls'},
+      {en:'Pork Shoulder Rolls',zh:'猪梅头肉卷',amount:'1 pkg',key:'Pork Shoulder Rolls'},
+      {en:'Baby Napa',zh:'娃娃菜',amount:'1 medium',key:'Baby Napa'},
+      {en:'Enoki',zh:'金针菇',amount:'1 pack',key:'Enoki'},
+      {en:'White Mushrooms',zh:'蘑菇',amount:'1 pack',key:'Mushroom White 227g'},
+      {en:'Soft Tofu',zh:'软豆腐',amount:'1 pack',key:'Soft Tofu 300g'},
+      {en:'LanZhou Noodles',zh:'兰州拉面',amount:'1 pack',key:'LanZhou Fresh Noodle'},
+    ],
+    otherIngredients:[{en:'Water',zh:'水',amount:'4 cups'}],
+    steps:[
+      {en:'Bring 4 cups water to a boil in hotpot.',zh:'火锅加4杯水煮沸。'},
+      {en:'Add tomato soup base and stir until dissolved. Simmer 5 min.',zh:'加入番茄汤底搅拌溶解，小火煮5分钟。'},
+      {en:'Add mushrooms and tofu first as they take longer.',zh:'先下蘑菇和豆腐。'},
+      {en:'Add baby napa and cook 2–3 min.',zh:'加入娃娃菜煮2-3分钟。'},
+      {en:'Swish meat slices until just cooked, about 30 sec.',zh:'快速涮肉片至刚熟约30秒。'},
+      {en:'Add noodles in the final 2 minutes.',zh:'最后2分钟加入面条。'},
+    ]
+  },
+
+  { id:8, tags:['hotpot','vegetarian'],
+    emoji:'🍄',
+    title:{en:'Mushroom Clear Broth Hotpot for 6',zh:'菌菇清汤火锅 (6人份)'},
+    meta:{en:'Hotpot · Serves 6',zh:'火锅 · 6人份'},
+    desc:{en:'Delicate mushroom broth — perfect for vegetarians.',zh:'清淡菌菇汤底，适合素食者。'},
+    shabuIngredients:[
+      {en:'XIAOLONGKAN Clear Soup Base',zh:'小龙坎清汤底料',amount:'2 packs',key:'XIAOLONGKAN Soup Base – Clear'},
+      {en:'Enoki',zh:'金针菇',amount:'4 packs',key:'Enoki'},
+      {en:'White Mushrooms',zh:'蘑菇',amount:'3 packs',key:'Mushroom White 227g'},
+      {en:'Black Fungus',zh:'黑木耳',amount:'1 pack',key:'JOYSHARE Black Fungus'},
+      {en:'Napa',zh:'大白菜',amount:'1 head',key:'Napa'},
+      {en:'Baby Bok Choy',zh:'小白菜',amount:'2 large',key:'Baby Bok Choy'},
+      {en:'Tong Ho',zh:'茼蒿',amount:'2 large bags',key:'Tong Ho'},
+      {en:'Soft Tofu',zh:'软豆腐',amount:'3 packs',key:'Soft Tofu 300g'},
+      {en:'Sweet Potato Noodles',zh:'红薯粉丝',amount:'3 packs',key:'JOYSHARE Sweet Potato Noodle – Wide'},
+    ],
+    otherIngredients:[{en:'Water',zh:'水',amount:'8 cups'}],
+    steps:[
+      {en:'Bring 8 cups water to a boil. Add clear soup base.',zh:'8杯水煮沸，加入清汤底料。'},
+      {en:'Start with mushrooms and tofu — they take longer.',zh:'先下蘑菇和豆腐。'},
+      {en:'Add vegetables and noodles as desired.',zh:'随意加蔬菜和粉丝。'},
+      {en:'Prepare individual dipping sauces. Enjoy!',zh:'准备蘸料碗，尽情享用！'},
+    ]
+  },
+
+  // ── OTHER RECIPES ──
+  { id:9, tags:['stir-fry','vegetarian','quick'],
+    emoji:'🥬',
+    title:{en:'Garlic Blanched Tong Ho',zh:'蒜香茼蒿'},
+    meta:{en:'Vegetable · 10 min',zh:'素菜 · 10分钟'},
+    desc:{en:'Simple, healthy, lets the vegetable shine.',zh:'简单健康，让茼蒿原味更突出。'},
+    shabuIngredients:[
+      {en:'Tong Ho',zh:'茼蒿',amount:'1 large bag',key:'Tong Ho'},
+    ],
+    otherIngredients:[
+      {en:'Garlic (minced)',zh:'蒜蓉',amount:'3 cloves'},
+      {en:'Salt',zh:'盐',amount:'½ tsp'},
+      {en:'Vegetable oil',zh:'植物油',amount:'1 tbsp'},
+      {en:'Sesame oil',zh:'香油',amount:'1 tsp'},
+    ],
+    steps:[
+      {en:'Boil water with a pinch of salt and oil. Blanch tong ho 30–45 sec.',zh:'烧开水加盐和油，焯茼蒿30-45秒。'},
+      {en:'Drain and rinse with cold water. Squeeze out excess water.',zh:'沥干用冷水冲洗，挤出多余水分。'},
+      {en:'Heat oil, sauté garlic until fragrant.',zh:'热油爆香蒜蓉。'},
+      {en:'Add tong ho, salt, and sesame oil. Toss and serve.',zh:'加入茼蒿、盐和香油，快速拌匀即可。'},
+    ]
+  },
+
+  { id:10, tags:['vegetarian','quick'],
+    emoji:'🥗',
+    title:{en:'Sesame Dressing Tofu',zh:'麻酱拌豆腐'},
+    meta:{en:'Cold Dish · 10 min',zh:'凉拌 · 10分钟'},
+    desc:{en:'Refreshing cold dish perfect for summer.',zh:'清爽凉菜，夏日必备。'},
+    shabuIngredients:[
+      {en:'Soft Tofu',zh:'软豆腐',amount:'1 pack',key:'Soft Tofu 300g'},
+      {en:'JoyShare Sesame Paste',zh:'纯芝麻酱',amount:'2 tbsp',key:'JoyShare Pure Sesame Paste'},
+      {en:'Cilantro',zh:'香菜',amount:'2 tbsp',key:'Cilantro'},
+      {en:'Green Onion',zh:'葱花',amount:'1 tbsp',key:'Green Onion'},
+      {en:'Kikkoman Soy Sauce',zh:'酱油',amount:'2 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+    ],
+    otherIngredients:[
+      {en:'Sesame oil',zh:'香油',amount:'1 tsp'},
+      {en:'Sugar',zh:'糖',amount:'½ tsp'},
+      {en:'Chili oil (optional)',zh:'辣椒油（可选）',amount:'1 tsp'},
+    ],
+    steps:[
+      {en:'Drain tofu carefully and cut into cubes. Arrange on plate.',zh:'小心取出豆腐沥干，切块摆盘。'},
+      {en:'Mix sesame paste, soy sauce, sesame oil, and sugar.',zh:'混合芝麻酱、酱油、香油和糖。'},
+      {en:'Pour sauce over tofu. Top with green onion and cilantro.',zh:'将酱汁浇在豆腐上，撒葱花和香菜。'},
+    ]
+  },
+
+  { id:11, tags:['braised','instant-pot','soup'],
+    emoji:'🍲',
+    title:{en:'Tomato Finger Meat Stew (Instant Pot)',zh:'番茄手指肉炖（快锅版）'},
+    meta:{en:'Instant Pot · 45 min',zh:'快锅 · 45分钟'},
+    desc:{en:'Tender meat in rich tomato broth — comfort food at its best.',zh:'嫩滑肉块配浓郁番茄汤，最佳家常菜。'},
+    shabuIngredients:[
+      {en:'Finger Meat',zh:'手指肉',amount:'1.5 lbs',key:'Finger Meat'},
+      {en:'Green Onion',zh:'葱',amount:'2 stalks',key:'Green Onion'},
+      {en:'Kikkoman Soy Sauce',zh:'酱油',amount:'2 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+    ],
+    otherIngredients:[
+      {en:'Tomatoes (large)',zh:'大番茄',amount:'3'},
+      {en:'Potato',zh:'土豆',amount:'2'},
+      {en:'Onion',zh:'洋葱',amount:'1'},
+      {en:'Ginger (sliced)',zh:'姜片',amount:'3 slices'},
+      {en:'Salt',zh:'盐',amount:'1 tsp'},
+      {en:'Sugar',zh:'糖',amount:'1 tsp'},
+      {en:'Water',zh:'水',amount:'2 cups'},
+    ],
+    steps:[
+      {en:'Cut finger meat into 2-inch chunks. Blanch in boiling water 2 min to remove impurities.',zh:'手指肉切2英寸块，焯水2分钟去杂质。'},
+      {en:'Set Instant Pot to sauté. Brown meat on all sides.',zh:'快锅设煎炒模式，将肉各面煎至金黄。'},
+      {en:'Add all remaining ingredients. Close lid.',zh:'加入所有剩余食材，盖上锅盖。'},
+      {en:'Pressure cook on high for 25 minutes.',zh:'高压煮25分钟。'},
+      {en:'Natural release 10 min, then quick release. Adjust seasoning.',zh:'自然泄压10分钟再快速泄压，调整调味。'},
+    ]
+  },
+
+  { id:12, tags:['soup','vegetarian','quick'],
+    emoji:'🍄',
+    title:{en:'Mushroom Tofu Soup',zh:'菌菇豆腐汤'},
+    meta:{en:'Soup · 20 min',zh:'汤 · 20分钟'},
+    desc:{en:'Light, nourishing, and perfect for any season.',zh:'清淡滋补，四季皆宜。'},
+    shabuIngredients:[
+      {en:'Soft Tofu',zh:'软豆腐',amount:'1 pack',key:'Soft Tofu 300g'},
+      {en:'Enoki',zh:'金针菇',amount:'1 pack',key:'Enoki'},
+      {en:'White Mushrooms',zh:'蘑菇',amount:'1 pack',key:'Mushroom White 227g'},
+      {en:'Napa',zh:'大白菜',amount:'½ head',key:'Napa'},
+      {en:'Green Onion',zh:'葱',amount:'2 stalks',key:'Green Onion'},
+      {en:'Kikkoman Soy Sauce',zh:'酱油',amount:'1 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+    ],
+    otherIngredients:[
+      {en:'Vegetable broth',zh:'蔬菜高汤',amount:'6 cups'},
+      {en:'Ginger',zh:'姜',amount:'2 slices'},
+      {en:'Salt',zh:'盐',amount:'to taste'},
+      {en:'Sesame oil',zh:'香油',amount:'1 tsp'},
+    ],
+    steps:[
+      {en:'Bring broth to a boil with ginger.',zh:'高汤与姜片煮沸。'},
+      {en:'Add napa and mushrooms. Simmer 5 min.',zh:'加白菜和蘑菇，煮5分钟。'},
+      {en:'Add tofu cubes. Simmer 3 more min.',zh:'加豆腐块再煮3分钟。'},
+      {en:'Season with soy sauce and salt. Add green onion and sesame oil.',zh:'用酱油和盐调味，加葱花和香油。'},
+    ]
+  },
+
+  { id:13, tags:['stir-fry','vegetarian','quick'],
+    emoji:'🥬',
+    title:{en:'Stir-Fried Baby Bok Choy',zh:'清炒小白菜'},
+    meta:{en:'Stir-Fry · 8 min',zh:'炒菜 · 8分钟'},
+    desc:{en:'Classic Chinese stir-fry — simple and delicious.',zh:'经典中式炒菜，简单美味。'},
+    shabuIngredients:[
+      {en:'Baby Bok Choy',zh:'小白菜',amount:'1 large',key:'Baby Bok Choy'},
+    ],
+    otherIngredients:[
+      {en:'Garlic (sliced)',zh:'蒜片',amount:'3 cloves'},
+      {en:'Vegetable oil',zh:'植物油',amount:'2 tbsp'},
+      {en:'Salt',zh:'盐',amount:'½ tsp'},
+    ],
+    steps:[
+      {en:'Wash and separate bok choy. Cut larger pieces in half.',zh:'洗净并分开白菜梗，较大的纵切对半。'},
+      {en:'Heat wok on high. Add oil and swirl.',zh:'大火热锅，加油转动均匀。'},
+      {en:'Add garlic and stir-fry 10 sec until fragrant.',zh:'加蒜片爆香约10秒。'},
+      {en:'Add bok choy and stir-fry vigorously 2–3 min. Season with salt.',zh:'加白菜大火快炒2-3分钟，用盐调味。'},
+    ]
+  },
+
+  { id:14, tags:['braised'],
+    emoji:'🍖',
+    title:{en:'Braised Oxtail',zh:'红烧牛尾'},
+    meta:{en:'Braised · 2.5 hrs',zh:'炖煮 · 2.5小时'},
+    desc:{en:'Rich, fall-off-the-bone tender oxtail in savory sauce.',zh:'浓郁入味，肉质软烂的红烧牛尾。'},
+    shabuIngredients:[
+      {en:'Beef Ox Tail',zh:'牛尾',amount:'2 lbs',key:'Beef Ox Tail'},
+      {en:'Green Onion',zh:'葱',amount:'3 stalks',key:'Green Onion'},
+      {en:'Kikkoman Soy Sauce',zh:'酱油',amount:'¼ cup',key:'Kikkoman Premium Soy Sauce 750ml'},
+    ],
+    otherIngredients:[
+      {en:'Ginger',zh:'姜',amount:'4 slices'},
+      {en:'Star anise',zh:'八角',amount:'2'},
+      {en:'Dark soy sauce',zh:'老抽',amount:'2 tbsp'},
+      {en:'Rice wine',zh:'料酒',amount:'2 tbsp'},
+      {en:'Rock sugar',zh:'冰糖',amount:'2 tbsp'},
+      {en:'Water',zh:'水',amount:'4 cups'},
+    ],
+    steps:[
+      {en:'Blanch oxtail in boiling water 5 min. Drain and rinse.',zh:'牛尾在沸水中焯5分钟，沥干冲洗。'},
+      {en:'Heat oil, sauté ginger, green onion, and star anise.',zh:'热油，爆香姜片、葱段和八角。'},
+      {en:'Add oxtail and brown all sides.',zh:'加牛尾，各面煎至金黄。'},
+      {en:'Add soy sauces, rice wine, rock sugar, and water to cover.',zh:'加酱油、老抽、料酒、冰糖和水。'},
+      {en:'Simmer covered 2 hours until tender, then reduce sauce until thick.',zh:'盖锅炖2小时至软烂，再收汁至浓稠。'},
+    ]
+  },
+
+  { id:15, tags:['stir-fry','quick'],
+    emoji:'🐑',
+    title:{en:'Lamb Cumin Stir-Fry',zh:'孜然炒羊肉'},
+    meta:{en:'Stir-Fry · 15 min',zh:'炒菜 · 15分钟'},
+    desc:{en:'Aromatic Xinjiang-style lamb with bold spices.',zh:'香气浓郁的新疆风味孜然羊肉。'},
+    shabuIngredients:[
+      {en:'Lamb Shoulder Rolls',zh:'羊肉卷',amount:'1 pkg',key:'Australia Lamb Shoulder Rolls'},
+      {en:'Green Onion',zh:'葱段',amount:'2 stalks',key:'Green Onion'},
+      {en:'Cilantro (optional)',zh:'香菜（可选）',amount:'handful',key:'Cilantro'},
+      {en:'Kikkoman Soy Sauce',zh:'酱油',amount:'1 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+    ],
+    otherIngredients:[
+      {en:'Onion (sliced)',zh:'洋葱片',amount:'1'},
+      {en:'Cumin powder',zh:'孜然粉',amount:'2 tsp'},
+      {en:'Chili flakes',zh:'辣椒片',amount:'1 tsp'},
+      {en:'Salt',zh:'盐',amount:'½ tsp'},
+      {en:'Vegetable oil',zh:'植物油',amount:'2 tbsp'},
+    ],
+    steps:[
+      {en:'Separate lamb rolls into pieces.',zh:'将羊肉卷分成单片。'},
+      {en:'Heat wok on very high heat. Add oil.',zh:'大火热锅，加油。'},
+      {en:'Stir-fry lamb quickly 1–2 min until just cooked.',zh:'快速翻炒羊肉1-2分钟至刚熟。'},
+      {en:'Add onion and stir-fry 1 min.',zh:'加洋葱片炒1分钟。'},
+      {en:'Add cumin, chili, soy sauce, and salt. Toss well.',zh:'加孜然粉、辣椒片、酱油和盐，拌匀。'},
+      {en:'Add green onion and cilantro. Serve immediately.',zh:'加葱段和香菜，立即上桌。'},
+    ]
+  },
+
+  { id:16, tags:['braised','instant-pot'],
+    emoji:'🐷',
+    title:{en:'Pork Belly Adobo',zh:'猪腩阿斗波'},
+    meta:{en:'Braised · 45 min',zh:'炖煮 · 45分钟'},
+    desc:{en:'Filipino-style braised pork belly with rich sauce.',zh:'菲律宾风味红烧猪腩，酱汁浓郁。'},
+    shabuIngredients:[
+      {en:'Pork Belly Skin Off Thick Cut',zh:'无皮猪腩片',amount:'2 lbs',key:'Pork Belly Skin Off Thick Cut'},
+      {en:'Kikkoman Soy Sauce',zh:'酱油',amount:'⅓ cup',key:'Kikkoman Premium Soy Sauce 750ml'},
+      {en:'Kimlan Vinegar',zh:'金兰醋',amount:'¼ cup',key:'Kimlan Vinegar'},
+    ],
+    otherIngredients:[
+      {en:'Garlic (crushed)',zh:'蒜瓣（拍碎）',amount:'6 cloves'},
+      {en:'Bay leaves',zh:'月桂叶',amount:'2'},
+      {en:'Black peppercorns',zh:'黑胡椒粒',amount:'1 tsp'},
+      {en:'Water',zh:'水',amount:'1 cup'},
+      {en:'Sugar',zh:'糖',amount:'1 tbsp'},
+    ],
+    steps:[
+      {en:'Cut pork into 2-inch pieces.',zh:'猪腩切成2英寸块。'},
+      {en:'Combine all ingredients in a pot. Bring to a boil.',zh:'所有食材放入锅中，大火煮沸。'},
+      {en:'Reduce heat, cover, and simmer 30 min.',zh:'转小火盖锅炖30分钟。'},
+      {en:'Remove lid, add sugar, increase heat to reduce sauce until thick.',zh:'揭盖加糖，大火收汁至浓稠。'},
+      {en:'Serve with rice.',zh:'配米饭食用。'},
+    ]
+  },
+
+  { id:17, tags:['soup','quick'],
+    emoji:'🍜',
+    title:{en:'Beef Noodle Soup',zh:'牛肉面'},
+    meta:{en:'Soup · 25 min',zh:'汤 · 25分钟'},
+    desc:{en:'Comforting noodle soup with tender beef slices.',zh:'温暖舒适的牛肉汤面。'},
+    shabuIngredients:[
+      {en:'Beef Short Plate',zh:'牛五花',amount:'0.5 lb',key:'Beef Short Plate'},
+      {en:'LanZhou Fresh Noodles',zh:'兰州拉面',amount:'2 packs',key:'LanZhou Fresh Noodle'},
+      {en:'Baby Bok Choy',zh:'小白菜',amount:'1 small',key:'Baby Bok Choy'},
+      {en:'Green Onion',zh:'葱',amount:'2 stalks',key:'Green Onion'},
+      {en:'Kikkoman Soy Sauce',zh:'酱油',amount:'2 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+    ],
+    otherIngredients:[
+      {en:'Beef broth',zh:'牛肉高汤',amount:'6 cups'},
+      {en:'Ginger',zh:'姜',amount:'3 slices'},
+      {en:'Salt',zh:'盐',amount:'to taste'},
+      {en:'White pepper',zh:'白胡椒粉',amount:'¼ tsp'},
+    ],
+    steps:[
+      {en:'Slice beef thinly. Cut bok choy and green onion.',zh:'牛肉切薄片，白菜和葱切段。'},
+      {en:'Bring broth with ginger to a boil. Season with soy sauce, salt, pepper.',zh:'高汤与姜片煮沸，用酱油、盐和白胡椒调味。'},
+      {en:'Cook noodles in broth 2–3 min.',zh:'在汤中煮面条2-3分钟。'},
+      {en:'Add beef and bok choy. Cook 1–2 min until just done.',zh:'加牛肉片和白菜，煮1-2分钟至刚熟。'},
+      {en:'Divide into bowls, top with green onion.',zh:'分碗，撒葱花即可。'},
+    ]
+  },
+
+  { id:18, tags:['stir-fry','quick'],
+    emoji:'🍜',
+    title:{en:'Beef Noodle Stir-Fry',zh:'牛肉炒面'},
+    meta:{en:'Stir-Fry · 20 min',zh:'炒菜 · 20分钟'},
+    desc:{en:'Quick, satisfying, and packed with flavor.',zh:'快手、满足、味道丰富。'},
+    shabuIngredients:[
+      {en:'Beef Short Plate Rolls',zh:'牛五花卷',amount:'1 pkg',key:'Beef Short Plate Rolls'},
+      {en:'LanZhou Fresh Noodles',zh:'兰州拉面',amount:'2 packs',key:'LanZhou Fresh Noodle'},
+      {en:'Baby Bok Choy',zh:'小白菜',amount:'1 small',key:'Baby Bok Choy'},
+      {en:'Green Onion',zh:'葱',amount:'2 stalks',key:'Green Onion'},
+      {en:'Kikkoman Soy Sauce',zh:'酱油',amount:'2 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+    ],
+    otherIngredients:[
+      {en:'Oyster sauce',zh:'蚝油',amount:'1 tbsp'},
+      {en:'Sesame oil',zh:'香油',amount:'1 tsp'},
+      {en:'Garlic',zh:'蒜',amount:'2 cloves'},
+      {en:'Vegetable oil',zh:'植物油',amount:'3 tbsp'},
+    ],
+    steps:[
+      {en:'Cook noodles, drain and set aside.',zh:'煮熟面条沥干备用。'},
+      {en:'Stir-fry beef on high heat until just cooked. Remove.',zh:'大火炒牛肉至刚熟盛起。'},
+      {en:'Stir-fry garlic and bok choy 1 min.',zh:'炒蒜蓉和白菜1分钟。'},
+      {en:'Add noodles, beef, soy sauce, and oyster sauce. Toss over high heat.',zh:'加面条、牛肉、酱油和蚝油，大火翻炒。'},
+      {en:'Finish with green onion and sesame oil.',zh:'加葱和香油，再翻炒一次即可。'},
+    ]
+  },
+
+  { id:19, tags:['soup','vegetarian'],
+    emoji:'🥘',
+    title:{en:'Napa Cabbage Soup',zh:'白菜豆腐汤'},
+    meta:{en:'Soup · 25 min',zh:'汤 · 25分钟'},
+    desc:{en:'Simple, nourishing homestyle soup.',zh:'简单滋补的家常汤。'},
+    shabuIngredients:[
+      {en:'Napa',zh:'大白菜',amount:'1 head',key:'Napa'},
+      {en:'Firm Tofu',zh:'硬豆腐',amount:'1 pack',key:'Firm Tofu 500g'},
+      {en:'Enoki',zh:'金针菇',amount:'1 pack',key:'Enoki'},
+      {en:'Green Onion',zh:'葱',amount:'2 stalks',key:'Green Onion'},
+    ],
+    otherIngredients:[
+      {en:'Vegetable or chicken broth',zh:'蔬菜或鸡汤',amount:'8 cups'},
+      {en:'Ginger',zh:'姜',amount:'2 slices'},
+      {en:'Salt',zh:'盐',amount:'to taste'},
+      {en:'White pepper',zh:'白胡椒粉',amount:'¼ tsp'},
+    ],
+    steps:[
+      {en:'Bring broth to boil with ginger.',zh:'高汤与姜片煮沸。'},
+      {en:'Add napa and simmer 10 min.',zh:'加白菜煮10分钟。'},
+      {en:'Add tofu and enoki. Simmer 5 more min.',zh:'加豆腐和金针菇再煮5分钟。'},
+      {en:'Season with salt and white pepper. Top with green onion.',zh:'用盐和白胡椒调味，加葱花。'},
+    ]
+  },
+
+  { id:20, tags:['soup','quick'],
+    emoji:'🥣',
+    title:{en:'Egg Drop Soup',zh:'蛋花汤'},
+    meta:{en:'Soup · 10 min',zh:'汤 · 10分钟'},
+    desc:{en:'Classic comforting soup — light and silky.',zh:'经典暖心汤，清淡丝滑。'},
+    shabuIngredients:[
+      {en:'Green Onion',zh:'葱花',amount:'2 tbsp',key:'Green Onion'},
+      {en:'Kikkoman Soy Sauce',zh:'酱油',amount:'1 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+    ],
+    otherIngredients:[
+      {en:'Chicken broth',zh:'鸡汤',amount:'6 cups'},
+      {en:'Eggs',zh:'鸡蛋',amount:'2'},
+      {en:'Cornstarch + water',zh:'玉米淀粉+水',amount:'1 tbsp each'},
+      {en:'Sesame oil',zh:'香油',amount:'1 tsp'},
+      {en:'Salt + white pepper',zh:'盐+白胡椒粉',amount:'to taste'},
+    ],
+    steps:[
+      {en:'Bring broth to a boil. Season with soy sauce, salt, and pepper.',zh:'鸡汤煮沸，用酱油、盐和白胡椒调味。'},
+      {en:'Mix cornstarch with water. Stir into soup.',zh:'玉米淀粉与水混合，加入汤中搅拌。'},
+      {en:'Beat eggs. Slowly drizzle into simmering soup while stirring gently.',zh:'鸡蛋打散，慢慢倒入微沸汤中轻轻搅拌。'},
+      {en:'Remove from heat. Add sesame oil and green onion.',zh:'离火，加香油和葱花。'},
+    ]
+  },
+
+  { id:21, tags:['braised','soup'],
+    emoji:'🥬',
+    title:{en:'Clear Daikon & Lamb Stew',zh:'白萝卜炖羊肉'},
+    meta:{en:'Slow Cook · 1.5 hrs',zh:'慢炖 · 1.5小时'},
+    desc:{en:'Clean, warming broth with tender lamb.',zh:'清甜暖胃汤，羊肉软嫩。'},
+    shabuIngredients:[
+      {en:'Lamb Leg Boneless Cube',zh:'无骨羊腿块',amount:'1.5 lbs',key:'Lamb Leg Boneless Cube'},
+      {en:'Daikon',zh:'白萝卜',amount:'1 piece',key:'Daikon'},
+      {en:'Green Onion',zh:'葱',amount:'2 stalks',key:'Green Onion'},
+    ],
+    otherIngredients:[
+      {en:'Ginger',zh:'姜片',amount:'3 slices'},
+      {en:'Salt',zh:'盐',amount:'to taste'},
+      {en:'White pepper',zh:'白胡椒粉',amount:'to taste'},
+      {en:'Water',zh:'水',amount:'6 cups'},
+    ],
+    steps:[
+      {en:'Parboil lamb 5 min to remove impurities. Rinse with cold water.',zh:'将羊腿肉焯水5分钟去杂质，冷水冲洗。'},
+      {en:'Cut daikon into chunks.',zh:'萝卜切块。'},
+      {en:'Simmer lamb, daikon, ginger, and green onion 1.5 hours.',zh:'与萝卜、姜片和葱段中小火慢炖1.5小时。'},
+      {en:'Season with salt and white pepper.',zh:'用盐和白胡椒粉调味。'},
+    ]
+  },
+
+  { id:22, tags:['braised','soup'],
+    emoji:'🐄',
+    title:{en:'Daikon & Oxtail Stew',zh:'白萝卜炖牛尾'},
+    meta:{en:'Slow Cook · 2 hrs',zh:'慢炖 · 2小时'},
+    desc:{en:'Hearty, nourishing stew with rich natural broth.',zh:'丰盛滋补炖菜，汤头浓郁天然。'},
+    shabuIngredients:[
+      {en:'Beef Ox Tail',zh:'牛尾',amount:'2 lbs',key:'Beef Ox Tail'},
+      {en:'Daikon',zh:'白萝卜',amount:'1 piece',key:'Daikon'},
+    ],
+    otherIngredients:[
+      {en:'Ginger',zh:'姜',amount:'3 slices'},
+      {en:'Salt',zh:'盐',amount:'to taste'},
+      {en:'Water',zh:'水',amount:'8 cups'},
+    ],
+    steps:[
+      {en:'Parboil oxtail to clean. Rinse with cold water.',zh:'牛尾焯水去杂质，冷水冲洗。'},
+      {en:'Slow cook with daikon and ginger for 2 hours.',zh:'与萝卜和姜片慢炖2小时。'},
+      {en:'Season with salt to taste.',zh:'加盐调味即可。'},
+    ]
+  },
+
+  { id:23, tags:['quick','stir-fry'],
+    emoji:'🥩',
+    title:{en:'Beef & Onion Flash-Fry',zh:'洋葱肥牛'},
+    meta:{en:'Stir-Fry · 10 min',zh:'炒菜 · 10分钟'},
+    desc:{en:'Quick weeknight favourite — savory and satisfying.',zh:'快手家常菜，鲜美满足。'},
+    shabuIngredients:[
+      {en:'Beef Short Plate Rolls',zh:'牛五花卷',amount:'1 pkg',key:'Beef Short Plate Rolls'},
+      {en:'Kikkoman Soy Sauce',zh:'酱油',amount:'1.5 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+    ],
+    otherIngredients:[
+      {en:'Onion (sliced)',zh:'洋葱丝',amount:'1 large'},
+      {en:'Oyster sauce',zh:'蚝油',amount:'1 tbsp'},
+      {en:'Black pepper',zh:'黑胡椒',amount:'½ tsp'},
+      {en:'Vegetable oil',zh:'植物油',amount:'2 tbsp'},
+    ],
+    steps:[
+      {en:'Sauté sliced onions until fragrant and soft.',zh:'炒软洋葱至出香味。'},
+      {en:'Add beef rolls and stir-fry until just browned.',zh:'加牛肉卷炒至刚变色。'},
+      {en:'Season with soy sauce, oyster sauce, and black pepper. Serve.',zh:'加酱油、蚝油和黑胡椒调味，即可上桌。'},
+    ]
+  },
+
+  { id:24, tags:['quick'],
+    emoji:'🍖',
+    title:{en:'Spam & Egg Ramen',zh:'午餐肉餐蛋面'},
+    meta:{en:'Lunch · 15 min',zh:'午餐 · 15分钟'},
+    desc:{en:'Beloved Hong Kong-style lunch bowl.',zh:'港式午餐经典。'},
+    shabuIngredients:[
+      {en:'Spam (25% Less Sodium)',zh:'低钠午餐肉',amount:'½ can',key:'Spam 340g (25% Less Sodium)'},
+      {en:'LanZhou Fresh Noodles',zh:'兰州拉面',amount:'1 pack',key:'LanZhou Fresh Noodle'},
+      {en:'Baby Bok Choy',zh:'小白菜',amount:'1 small',key:'Baby Bok Choy'},
+    ],
+    otherIngredients:[
+      {en:'Egg',zh:'鸡蛋',amount:'1'},
+      {en:'Chicken broth or water',zh:'鸡汤或水',amount:'2 cups'},
+      {en:'Soy sauce',zh:'酱油',amount:'1 tbsp'},
+    ],
+    steps:[
+      {en:'Pan-fry spam slices until crispy on both sides.',zh:'将午餐肉两面煎至金黄酥脆。'},
+      {en:'Cook noodles in broth. Add bok choy last 1 min.',zh:'在高汤中煮面，最后1分钟加小白菜。'},
+      {en:'Fry egg sunny-side up. Arrange in bowl with spam on top.',zh:'煎太阳蛋，摆碗，午餐肉放面上即可。'},
+    ]
+  },
+
+  { id:25, tags:['quick','stir-fry'],
+    emoji:'🍅',
+    title:{en:'Beef Gyudon Bowl',zh:'日式肥牛饭'},
+    meta:{en:'Quick Meal · 15 min',zh:'快手 · 15分钟'},
+    desc:{en:'Japanese-style rice bowl with savoury beef.',zh:'日式肥牛饭，鲜美下饭。'},
+    shabuIngredients:[
+      {en:'Beef Short Plate Rolls',zh:'牛五花卷',amount:'1 pkg',key:'Beef Short Plate Rolls'},
+      {en:'Kikkoman Soy Sauce',zh:'酱油',amount:'3 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+    ],
+    otherIngredients:[
+      {en:'Onion (sliced)',zh:'洋葱丝',amount:'1'},
+      {en:'Sugar',zh:'糖',amount:'1 tsp'},
+      {en:'Dashi or water',zh:'高汤或水',amount:'½ cup'},
+      {en:'Cooked rice',zh:'米饭',amount:'2 bowls'},
+    ],
+    steps:[
+      {en:'Simmer sliced onions in soy sauce, sugar, and dashi until soft.',zh:'用生抽、糖和高汤煮软洋葱丝。'},
+      {en:'Add beef rolls and cook until just done.',zh:'加入牛五花卷煮至变色。'},
+      {en:'Pour over hot rice. Serve immediately.',zh:'淋在热米饭上，立即食用。'},
+    ]
+  },
+
+  { id:26, tags:['vegetarian','quick'],
+    emoji:'🍄',
+    title:{en:'Enoki Mushroom Salad',zh:'凉拌金针菇'},
+    meta:{en:'Cold Dish · 10 min',zh:'凉拌 · 10分钟'},
+    desc:{en:'Light and refreshing — a great hotpot side.',zh:'清爽凉拌，火锅好搭档。'},
+    shabuIngredients:[
+      {en:'Enoki',zh:'金针菇',amount:'2 packs',key:'Enoki'},
+      {en:'Green Onion',zh:'葱',amount:'2 stalks',key:'Green Onion'},
+      {en:'Kikkoman Soy Sauce',zh:'酱油',amount:'2 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
+      {en:'Kimlan Vinegar',zh:'金兰醋',amount:'1 tbsp',key:'Kimlan Vinegar'},
+    ],
+    otherIngredients:[
+      {en:'Sesame oil',zh:'香油',amount:'1 tsp'},
+      {en:'Chili oil (optional)',zh:'辣椒油（可选）',amount:'1 tsp'},
+    ],
+    steps:[
+      {en:'Blanch enoki 1 min. Drain and rinse cold.',zh:'金针菇焯水1分钟，沥干冷水冲洗。'},
+      {en:'Mix soy sauce, vinegar, sesame oil. Pour over enoki.',zh:'混合酱油、醋和香油，倒在金针菇上。'},
+      {en:'Top with green onion and chili oil if desired.',zh:'撒葱花，可加辣椒油。'},
+    ]
+  },
+
+];
+
+// ─── RENDER ─────────────────────────────────────────────────────────────────
+function renderRecipes() {
+  const grid = document.getElementById('recipesGrid');
+  const filtered = activeFilter === 'all' ? recipes : recipes.filter(r => r.tags.includes(activeFilter));
+
+  grid.innerHTML = filtered.map(r => {
+    const isEn = lang === 'en';
+    const primary = t => `<span style="font-weight:700;font-size:1em;">${t[lang]}</span>`;
+    const secondary = t => `<span style="font-weight:400;opacity:0.65;font-size:0.88em;display:block;font-family:'Noto Sans SC',sans-serif;">${t[lang === 'en' ? 'zh' : 'en']}</span>`;
+    return `
+      <div class="recipe-card" onclick="openRecipe(${r.id})">
+        <div class="recipe-header">
+          <span class="recipe-meta">${r.meta[lang]}</span>
+          <div class="recipe-title-en" style="font-size:1.1rem;">${r.emoji} ${primary(r.title)}</div>
+          <div class="recipe-title-zh">${secondary(r.title)}</div>
+        </div>
+        <div class="recipe-content" style="border-top:1px solid #f0f4f7;padding-top:1rem;margin-bottom:1rem;flex:1;">
+          <p style="font-size:0.88rem;color:var(--ink-soft);line-height:1.6;">${r.desc[lang]}</p>
+          <p style="font-size:0.8rem;color:var(--ink-soft);margin-top:0.5rem;font-family:'Noto Sans SC',sans-serif;opacity:0.7;">${r.desc[lang === 'en' ? 'zh' : 'en']}</p>
+        </div>
+        <button class="btn-add-recipe" onclick="event.stopPropagation();openRecipe(${r.id})">
+          ${isEn ? 'View Recipe & Add to List' : '查看食谱并添加到清单'} →
+        </button>
+      </div>`;
+  }).join('');
+}
+
+function openRecipe(id) {
+  const r = recipes.find(x => x.id === id);
+  if (!r) return;
+  const isEn = lang === 'en';
+  const box = document.getElementById('recipeModalBox');
+
+  const shabuRows = r.shabuIngredients.map(i =>
+    `<div class="ingredient-row shabu">
+      <span>✓ <strong>${i.en}</strong> <span class="ing-zh">${i.zh}</span></span>
+      <span>${i.amount}</span>
+    </div>`).join('');
+
+  const otherRows = r.otherIngredients.map(i =>
+    `<div class="ingredient-row other">
+      <span>${i.en} <span class="ing-zh">${i.zh}</span></span>
+      <span>${i.amount}</span>
+    </div>`).join('');
+
+  const stepItems = r.steps.map(s =>
+    `<li class="step-item">
+      <div class="step-num"></div>
+      <div class="step-text">${s[lang]}<span class="zh">${s[lang === 'en' ? 'zh' : 'en']}</span></div>
+    </li>`).join('');
+
+  box.innerHTML = `
+    <div class="recipe-modal-head">
+      <button class="recipe-modal-close" onclick="closeRecipe()">×</button>
+      <h2>${r.emoji} ${r.title[lang]}</h2>
+      <div class="zh" style="font-family:'Noto Sans SC',sans-serif;color:var(--blue-deep);font-size:0.95rem;">${r.title[lang === 'en' ? 'zh' : 'en']}</div>
+    </div>
+    <div class="recipe-modal-body">
+      <p class="ingredient-section-title shabu">✓ ${isEn ? 'Available at Shabu Meat House' : '涮肉屋有售'}</p>
+      ${shabuRows}
+      ${r.otherIngredients.length ? `<p class="ingredient-section-title other">${isEn ? 'Other ingredients needed' : '其他所需食材'}</p>${otherRows}` : ''}
+      <p class="ingredient-section-title" style="color:var(--ink);margin-top:1.5rem;">${isEn ? '📝 Instructions' : '📝 步骤'}</p>
+      <ul class="steps-list">${stepItems}</ul>
+    </div>
+    <div class="recipe-modal-foot">
+      <button class="btn-add-shabu" onclick="addShabuToCart(${id})">
+        🛒 ${isEn ? 'Add Shabu Items to My List' : '添加涮肉屋食材到清单'}
+      </button>
+      <button class="btn-copy-recipe" onclick="copyRecipe(${id})">
+        📋 ${isEn ? 'Copy Full Recipe' : '复制完整食谱'}
+      </button>
+    </div>`;
+
+  document.getElementById('recipeModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeRecipe() {
+  document.getElementById('recipeModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function closeModalIfOverlay(e) {
+  if (e.target.id === 'recipeModal') closeRecipe();
+}
+
+function addShabuToCart(id) {
+  const r = recipes.find(x => x.id === id);
+  if (!r) return;
+  let cart = JSON.parse(localStorage.getItem('shabuCart')) || {};
+  r.shabuIngredients.forEach(ing => {
+    const key = ing.key;
+    if (!cart[key]) {
+      cart[key] = { name: ing.en, zh: ing.zh, qty: 1, price: 0, unit: ing.amount, key, sizeLabel: ing.amount };
+    } else {
+      cart[key].qty += 1;
+    }
+  });
+  localStorage.setItem('shabuCart', JSON.stringify(cart));
+  const isEn = lang === 'en';
+  alert(isEn
+    ? `✅ ${r.shabuIngredients.length} items added to your shopping list!\nView your list on the Shop page.`
+    : `✅ ${r.shabuIngredients.length} 件商品已添加到购物清单！\n在商品页查看您的清单。`);
+}
+
+function copyRecipe(id) {
+  const r = recipes.find(x => x.id === id);
+  if (!r) return;
+  let text = `${r.title.en} / ${r.title.zh}\n${r.meta.en}\n\n`;
+  text += `Ingredients from Shabu Meat House 涮肉屋食材:\n`;
+  r.shabuIngredients.forEach(i => { text += `- ${i.amount} ${i.en} ${i.zh}\n`; });
+  if (r.otherIngredients.length) {
+    text += `\nOther ingredients 其他食材:\n`;
+    r.otherIngredients.forEach(i => { text += `- ${i.amount} ${i.en} ${i.zh}\n`; });
+  }
+  text += `\nInstructions 步骤:\n`;
+  r.steps.forEach((s, i) => { text += `${i+1}. ${s.en}\n   ${s.zh}\n`; });
+  text += `\n— From Shabu Meat House Recipes | WeChat: shabumeat`;
+  navigator.clipboard.writeText(text).then(() => {
+    alert(lang === 'en' ? '✅ Recipe copied to clipboard!' : '✅ 食谱已复制到剪贴板！');
+  });
+}
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderRecipes();
+}
+
+function filterRecipes(filter, btn) {
+  activeFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderRecipes();
+}
+
+renderRecipes();
+</script>
+</body>
+</html>

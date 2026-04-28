@@ -178,7 +178,6 @@ function updateQty(idx, change) {
   if (!cart[p.name]) cart[p.name] = {
     key: p.name,
     name: p.name,
-    fullName: "Ben & Jerry's " + p.name,
     zh: p.zh,
     price: p.price,
     unit: 'per pint',
@@ -218,8 +217,9 @@ function openModal() {
     body.innerHTML = '<div class="order-meta">Order # <span>' + orderNum + '</span> &nbsp;·&nbsp; ' + orderDate + '</div>'
       + items.map(function(item) {
           return '<div class="modal-list-item"><div>'
-            + '<div class="modal-item-name">' + (item.fullName || item.name) + '</div>'
-            + '<div class="modal-item-detail">' + item.qty + 'x &middot; ' + (item.unit || '') + (item.price != null ? ' &middot; $' + item.price.toFixed(2) : '') + '</div>'
+            + '<div class="modal-item-zh">' + item.zh + '</div>'
+            + '<div class="modal-item-name">' + item.name + '</div>'
+            + '<div class="modal-item-detail">' + item.qty + 'x &middot; ' + (item.price != null ? '$' + item.price.toFixed(2) : '') + '</div>'
             + '</div><button class="modal-item-remove" onclick="removeItem(\'' + item.name.replace(/'/g, "\\'") + '\')">×</button></div>';
         }).join('')
       + '<div class="tax-note">⚠️ Prices before tax.</div>';
@@ -246,7 +246,7 @@ function copyForWeChat() {
   var date = new Date().toLocaleDateString('en-CA', { year:'numeric', month:'long', day:'numeric' });
   var text = 'Shabu Meat House Order 涮肉屋订单\nOrder #: ' + orderNum + '\nDate: ' + date + '\n\n';
   items.forEach(function(item) {
-    text += item.qty + 'x ' + (item.fullName || item.name) + '\n';
+    text += item.qty + 'x ' + item.zh + ' ' + item.name + '\n';
   });
   text += '\nWeChat: shabumeat';
   navigator.clipboard.writeText(text).then(function() {

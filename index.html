@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shabu Meat House 涮肉屋 | Premium Hotpot Ingredients Scarborough</title>
+  <title>Shabu Meat House 涮了吧 | Premium Hotpot Ingredients</title>
   <meta name="description" content="Shabu Meat House in Scarborough sells premium hotpot ingredients — fresh lamb rolls, beef rolls, pork rolls, soup bases, vegetables, tofu & noodles. 士嘉堡涮肉屋专卖新鲜肉卷、火锅底料、蔬菜豆腐。Serving Scarborough, Markham, Richmond Hill, North York, Agincourt, Milliken."/>
   <meta name="keywords" content="hotpot store Scarborough, 火锅食材士嘉堡, hotpot ingredients Toronto, shabu shabu Scarborough, 涮涮锅多伦多, lamb rolls Scarborough, 羊肉卷, beef rolls Toronto, 牛肉卷, pork rolls, 猪肉卷, hot pot meat Toronto, Little Sheep soup base, 小肥羊, XIAOLONGKAN, 小龙坎, hotpot soup base, 火锅底料, fresh vegetables hotpot, Markham hotpot, Richmond Hill hotpot, North York hotpot, Agincourt grocery, 万锦, 列治文山, 北约克, 士嘉堡, Asian grocery Scarborough, 亚洲超市, Chinese grocery Toronto"/>
   <meta name="robots" content="index, follow"/>
@@ -11,9 +11,9 @@
   <meta name="geo.placename" content="Scarborough, Ontario"/>
   <link rel="alternate" hreflang="zh-Hans" href="https://shabumeathouse.ca/index.html"/>
   <link rel="alternate" hreflang="en" href="https://shabumeathouse.ca/index.html"/>
-  <meta property="og:title" content="Shabu Meat House 涮肉屋 - Premium Hotpot Ingredients Scarborough"/>
+  <meta property="og:title" content="Shabu Meat House 涮了吧 - Premium Hotpot Ingredients"/>
   <meta property="og:description" content="Fresh meat rolls, soup bases, vegetables & more 新鲜肉卷、火锅底料、蔬菜 | Scarborough 士嘉堡"/>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Shabu Meat House","alternateName":"涮肉屋","address":{"@type":"PostalAddress","streetAddress":"3272 Midland Ave Unit B-112","addressLocality":"Scarborough","addressRegion":"ON","postalCode":"M1V 0C7","addressCountry":"CA"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Shabu Meat House","alternateName":"涮了吧","address":{"@type":"PostalAddress","streetAddress":"3272 Midland Ave Unit B-112","addressLocality":"Scarborough","addressRegion":"ON","postalCode":"M1V 0C7","addressCountry":"CA"}}</script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css"/>
   <link rel="icon" type="image/png" href="favicon.png"/>
@@ -32,6 +32,10 @@
   .btn-outline:hover { background: rgba(255,255,255,0.15); }
   .deals-slide { display: none; }
   .deals-slide.active { display: block; }
+  .wechat-block .flex-container { display: flex; align-items: flex-start; gap: 1rem; }
+  @media (max-width: 1000px) {
+    .wechat-block .flex-container { flex-direction: column; }
+  }
 </style>
 </head>
 <body>
@@ -40,7 +44,7 @@
   <a class="nav-logo" href="index.html">Shabu <span>Meat House</span></a>
   <ul class="nav-links">
     <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="items.html">Shop</a></li>
+    <li><a href="items.html">Items</a></li>
     <li><a href="guide.html" class="active">Guide</a></li>
     <li><a href="recipes.html">Recipes</a></li>
   </ul>
@@ -105,13 +109,16 @@
           <li><span>Sun 周日</span><span>11:00 AM – 6:00 PM</span></li>
         </ul>
       </div>
-      <div class="contact-block">
+      <div class="contact-block wechat-block">
         <h4>💬 WeChat 微信</h4>
-        <p><strong style="color:var(--blue-deep);">shabumeat</strong><br/>Message us to place an order or ask about availability.<br/><span style="font-family:'Noto Sans SC',sans-serif;font-size:0.9em;">联系我们下单或询问库存。</span></p>
+        <div class="flex-container">
+          <p><strong style="color:var(--blue-deep);">shabumeat</strong><br/>Message us to place an order or ask about availability.<br/><span style="font-family:'Noto Sans SC',sans-serif;font-size:0.9em;">联系我们下单或询问库存。</span></p>
+          <img src="wechat.png" alt="WeChat QR Code" style="width:100px; height:100px; flex-shrink:0;">
+        </div>
       </div>
     </div>
     <div class="map-column">
-      <iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=779&amp;height=551&amp;hl=en&amp;q=b112-3272 midland ave&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://embed-googlemap.com">embed google map</a></div><style>.mapouter{position:relative;text-align:right;width:100%;height:551px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:551px;}.gmap_iframe {height:551px!important;}</style></div>
+      <iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=667&amp;height=504&amp;hl=en&amp;q=3272 midland ave b112&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://embed-googlemap.com">embed google map</a></div><style>.mapouter{position:relative;text-align:right;width:100%;height:551px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:551px;}.gmap_iframe {height:551px!important;}</style></div>
     </div>
   </div>
 </div>

@@ -16,7 +16,7 @@
   <a class="nav-logo" href="index.html">Shabu <span>Meat House</span></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="items.html">Shop</a></li>
+    <li><a href="items.html">Items</a></li>
     <li><a href="guide.html" class="active">Guide</a></li>
     <li><a href="recipes.html" class="active">Recipes</a></li>
   </ul>
@@ -367,7 +367,7 @@ function addShabuToCart(id) {
   localStorage.setItem('shabuCart', JSON.stringify(cart));
   const isEn = lang === 'en';
   alert(isEn
-    ? `✅ ${r.shabuIngredients.length} items added to your shopping list!\nView your list on the Shop page.`
+    ? `✅ ${r.shabuIngredients.length} items added to your shopping list!\nView your list on the Items page.`
     : `✅ ${r.shabuIngredients.length} 件商品已添加到购物清单！\n在商品页查看您的清单。`);
 }
 

@@ -196,7 +196,6 @@
     @media (max-width: 600px) {
       .p-lbl { min-width: 52px; }
       .pill { font-size: 0.72rem; padding: 3px 10px; }
-      .item-en { display: none; }
       .item-hint { display: none; }
       .trackers { grid-template-columns: 1fr 1fr; }
     }
@@ -211,7 +210,7 @@
   <a class="nav-logo" href="index.html">Shabu <span>Meat House</span></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="items.html">Shop</a></li>
+    <li><a href="items.html">Items</a></li>
     <li><a href="guide.html" class="active">Guide</a></li>
     <li><a href="recipes.html">Recipes</a></li>
   </ul>
@@ -260,6 +259,11 @@
         <button class="pill" onclick="setB('split',this)">Split pot 鸳鸯锅</button>
         <div class="broth-tip" id="btip">Little Sheep Mala or XIAOLONGKAN Tallow Spicy. Start with half a pack if spice-sensitive.</div>
       </div>
+    </div>
+    <div class="p-row">
+      <span class="p-lbl">Language 语言</span>
+      <button class="pill on" onclick="setLang('zh',this)">中文</button>
+      <button class="pill" onclick="setLang('en',this)">English</button>
     </div>
     <div style="border-top:1px solid var(--border);margin-top:0.9rem;padding-top:0.9rem;display:flex;align-items:baseline;gap:8px">
       <span style="font-size:0.78rem;color:var(--ink-soft)">Estimated spend</span>
@@ -321,7 +325,7 @@
 </footer>
 
 <script>
-var ppl=2,app='normal',focus='balanced',broth='mala';
+var ppl=2,app='normal',focus='balanced',broth='mala',lang='zh';
 var cart={};
 var openCats={lamb:true,beef:true,pork:true,soup:true,veg:false,mushrooms:false,noodles:false,sides:false,dipping:true};
 var appMult={light:0.7,normal:1,heavy:1.35};
@@ -406,6 +410,7 @@ function chg(d){ppl=Math.max(1,Math.min(12,ppl+d));document.getElementById('pval
 function setA(v,el){app=v;el.parentNode.querySelectorAll('.pill').forEach(function(b){b.classList.remove('on')});el.classList.add('on');render();}
 function setF(v,el){focus=v;el.parentNode.querySelectorAll('.pill').forEach(function(b){b.classList.remove('on')});el.classList.add('on');render();}
 function setB(v,el){broth=v;var w=el.parentNode;w.querySelectorAll('.pill').forEach(function(b){b.classList.remove('on')});el.classList.add('on');document.getElementById('btip').textContent=brothTips[v];render();}
+function setLang(v,el){lang=v;el.parentNode.querySelectorAll('.pill').forEach(function(b){b.classList.remove('on')});el.classList.add('on');render();}
 function togCat(id){openCats[id]=!openCats[id];renderCats();}
 
 function meatTarget(){
@@ -441,9 +446,9 @@ function renderTrackers(){
   else{ds='ok';dm='good variety';}
   var mVal=mLo===0?'0 lb':mLo+'–'+mHi+' lb';
   document.getElementById('trackers').innerHTML=
-    '<div class="tracker'+(ms?' '+ms:'')+'"><div class="tr-lbl">Meat added</div><div class="tr-val">'+mVal+'</div><div class="tr-msg">'+mm+'</div></div>'+
-    '<div class="tracker'+(ss?' '+ss:'')+'"><div class="tr-lbl">Soup base</div><div class="tr-val">'+soupN+' pack'+(soupN!==1?'s':'')+'</div><div class="tr-msg">1 pack feeds up to 6 · '+sm+'</div></div>'+
-    '<div class="tracker'+(ds?' '+ds:'')+'"><div class="tr-lbl">Dipping sauces</div><div class="tr-val">'+dipN+' sauce'+(dipN!==1?'s':'')+'</div><div class="tr-msg">~1 per 2 people · '+dm+'</div></div>';
+    '<div class="tracker'+(ms?' '+ms:'')+'"><div class="tr-lbl">Meat added 肉类</div><div class="tr-val">'+mVal+'</div><div class="tr-msg">'+mm+'</div></div>'+
+    '<div class="tracker'+(ss?' '+ss:'')+'"><div class="tr-lbl">Soup base 汤底</div><div class="tr-val">'+soupN+' pack'+(soupN!==1?'s':'')+'</div><div class="tr-msg">1 pack feeds up to 6 · '+sm+'</div></div>'+
+    '<div class="tracker'+(ds?' '+ds:'')+'"><div class="tr-lbl">Dipping sauces 蘸料</div><div class="tr-val">'+dipN+' sauce'+(dipN!==1?'s':'')+'</div><div class="tr-msg">~1 per 2 people · '+dm+'</div></div>';
 }
 
 function renderCats(){
@@ -465,7 +470,7 @@ function renderCats(){
         var isRec=recs.indexOf(i.id)>-1;
         html+='<div class="item'+(added?' added':'')+'">';
         if(i.popular)html+='<div class="pop-dot"></div>';
-        html+='<div class="item-info"><div class="item-zh">'+i.zh+'</div><div class="item-en">'+i.en+'</div></div>';
+        html+='<div class="item-info"><div class="item-zh">'+(lang==='zh'?i.zh:i.en)+'</div></div>';
         html+='<div class="item-right">';
         if(isRec)html+='<span class="item-hint">suggested</span>';
         html+='<div class="item-price">'+i.price+'</div>';

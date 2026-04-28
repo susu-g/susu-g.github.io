@@ -803,7 +803,7 @@ function addShabuToCart(id) {
   r.shabuIngredients.forEach(ing => {
     const key = ing.key;
     if (!cart[key]) {
-      cart[key] = { name: ing.en, zh: ing.zh, qty: 1, price: 0, unit: ing.amount, key, sizeLabel: ing.amount };
+      cart[key] = { name: ing.en, zh: ing.zh, qty: 1, price: 0, unit: '', key, sizeLabel: '' };
     } else {
       cart[key].qty += 1;
     }

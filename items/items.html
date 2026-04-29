@@ -10,7 +10,7 @@
   <meta name="geo.region" content="CA-ON"/>
   <meta name="geo.placename" content="Scarborough, Ontario"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="../styles.css"/>
   <link rel="icon" type="image/png" href="favicon.png"/>
   <style>
     /* items-specific */
@@ -22,14 +22,14 @@
 
 <!-- SIDE NAV — DESKTOP -->
 <nav class="sidenav">
-  <a href="index.html" class="sidenav-logo">
+  <a href="../home/index.html" class="sidenav-logo">
     
     <span class="sidenav-logo-text">Shabu Meat House</span>
   </a>
 
   <div class="sidenav-section">
     <div class="sidenav-section-label">Pages</div>
-    <a href="index.html" class="sidenav-link">
+    <a href="../home/index.html" class="sidenav-link">
       <span class="sidenav-link-icon">🏠</span>
       <span class="sidenav-link-text">Home</span>
     </a>
@@ -37,15 +37,15 @@
       <span class="sidenav-link-icon"></span>
       <span class="sidenav-link-text">Items</span>
     </a>
-    <a href="guide.html" class="sidenav-link">
+    <a href="../guide/guide.html" class="sidenav-link">
       <span class="sidenav-link-icon"></span>
       <span class="sidenav-link-text">Guide</span>
     </a>
-    <a href="recipes.html" class="sidenav-link">
+    <a href="../recipes/recipes.html" class="sidenav-link">
       <span class="sidenav-link-icon"></span>
       <span class="sidenav-link-text">Recipes</span>
     </a>
-    <a href="icecream.html" class="sidenav-link">
+    <a href="../benjerry/icecream.html" class="sidenav-link">
       <span class="sidenav-link-icon"></span>
       <span class="sidenav-link-text">Ice Cream</span>
     </a>
@@ -101,7 +101,7 @@
       <span class="sidenav-cat-icon">🥫</span>
       <span class="sidenav-cat-text">Dipping 蘸料</span>
     </button>
-    <a href="icecream.html" class="sidenav-cat">
+    <a href="../benjerry/icecream.html" class="sidenav-cat">
       <span class="sidenav-cat-icon">🍦</span>
       <span class="sidenav-cat-text">Ice Cream 冰淇淋</span>
     </a>
@@ -111,15 +111,15 @@
 <!-- MOBILE NAV -->
 <div class="mobile-nav">
   <div class="mobile-nav-bar">
-    <a href="index.html" class="mobile-nav-logo">Shabu Meat House</a>
+    <a href="../home/index.html" class="mobile-nav-logo">Shabu Meat House</a>
     <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰</button>
   </div>
   <div class="mobile-nav-dropdown" id="mobileNavDropdown">
-    <a href="index.html" class="mobile-nav-link">Home</a>
-    <a href="items.html" class="mobile-nav-link active">Items</a>
-    <a href="guide.html" class="mobile-nav-link">Guide</a>
-    <a href="recipes.html" class="mobile-nav-link">Recipes</a>
-    <a href="icecream.html" class="mobile-nav-link">Ice Cream</a>
+    <a href="../home/index.html" class="mobile-nav-link">Home</a>
+    <a href="../items/items.html" class="mobile-nav-link active">Items</a>
+    <a href="../guide/guide.html" class="mobile-nav-link">Guide</a>
+    <a href="../recipes/recipes.html" class="mobile-nav-link">Recipes</a>
+    <a href="../benjerry/icecream.html" class="mobile-nav-link">Ice Cream</a>
     <div class="mobile-nav-divider"></div>
     <div class="mobile-cat-label">Browse by category</div>
     <div class="mobile-cat-grid">
@@ -323,7 +323,7 @@ function renderProducts() {
   const renderCard = p => {
     const idx = products.indexOf(p);
     const soldOut = p.stock === 'sold-out';
-    const imgHtml = p.image ? `<img src="items/${p.image}" alt="${p.name}" class="product-image" loading="lazy"/>` : '';
+    const imgHtml = p.image ? `<img src="imgs/${p.image}" alt="${p.name}" class="product-image" loading="lazy"/>` : '';
     const approxHtml = (p.approxWeight && p.approxTotal) ? `<div class="product-approx">~${p.approxWeight} · approx. ${p.approxTotal}/pkg</div>` : '';
     const dealHtml = p.dealPrice ? `<div class="product-deal-badge">🏷 ${p.dealPrice}</div>` : '';
     const slicedBadge = isSlicedMeat(p) && currentCat !== 'all' ? '<span style="font-size:0.65rem;background:#e8f0e4;color:#3a6a2a;padding:2px 6px;border-radius:3px;font-weight:600;margin-bottom:4px;display:inline-block;"></span><br>' : '';

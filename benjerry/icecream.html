@@ -13,7 +13,7 @@
   <meta property="og:description" content="Half Baked, Tonight Dough, Cherry Garcia, Chunky Monkey & more. $7.99/pint in stock now at Shabu Meat House, 3272 Midland Ave, Scarborough."/>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Shabu Meat House","alternateName":"涮了吧","url":"https://shabumeathouse.ca","address":{"@type":"PostalAddress","streetAddress":"3272 Midland Ave Unit B-112","addressLocality":"Scarborough","addressRegion":"ON","postalCode":"M1V 0C7","addressCountry":"CA"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Ben & Jerry's Ice Cream","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Half Baked"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Tonight Dough"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Cherry Garcia"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Chunky Monkey"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Chocolate Chip Cookie Dough"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Cookie Dough CORE"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Brownie Batter CORE"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's S'more Please"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Chocolate Therapy"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Cold Brew Caramel Latte"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Ice Cream Sammie"},"price":"7.99","priceCurrency":"CAD"}]}}</script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="../styles.css"/>
   <link rel="icon" type="image/png" href="favicon.png"/>
   <style>
     /* icecream-specific: taller image for pint cans */
@@ -24,45 +24,45 @@
 <body>
 
 <nav class="sidenav">
-  <a href="index.html" class="sidenav-logo">
+  <a href="../home/index.html" class="sidenav-logo">
     <span class="sidenav-logo-icon">涮</span>
     <span class="sidenav-logo-text">Shabu Meat House</span>
   </a>
   <div class="sidenav-section">
     <div class="sidenav-section-label">Pages</div>
-    <a href="index.html" class="sidenav-link"><span class="sidenav-link-icon">🏠</span><span class="sidenav-link-text">Home</span></a>
-    <a href="items.html" class="sidenav-link"><span class="sidenav-link-icon">🛒</span><span class="sidenav-link-text">Items</span></a>
-    <a href="guide.html" class="sidenav-link"><span class="sidenav-link-icon">📋</span><span class="sidenav-link-text">Guide</span></a>
-    <a href="recipes.html" class="sidenav-link"><span class="sidenav-link-icon">🍜</span><span class="sidenav-link-text">Recipes</span></a>
-    <a href="icecream.html" class="sidenav-link active"><span class="sidenav-link-icon">🍦</span><span class="sidenav-link-text">Ice Cream</span></a>
+    <a href="../home/index.html" class="sidenav-link"><span class="sidenav-link-icon">🏠</span><span class="sidenav-link-text">Home</span></a>
+    <a href="../items/items.html" class="sidenav-link"><span class="sidenav-link-icon">🛒</span><span class="sidenav-link-text">Items</span></a>
+    <a href="../guide/guide.html" class="sidenav-link"><span class="sidenav-link-icon">📋</span><span class="sidenav-link-text">Guide</span></a>
+    <a href="../recipes/recipes.html" class="sidenav-link"><span class="sidenav-link-icon">🍜</span><span class="sidenav-link-text">Recipes</span></a>
+    <a href="../benjerry/icecream.html" class="sidenav-link active"><span class="sidenav-link-icon">🍦</span><span class="sidenav-link-text">Ice Cream</span></a>
   </div>
   <div class="sidenav-section" style="flex:1;overflow-y:auto">
     <div class="sidenav-section-label">Browse</div>
-    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🐑</span><span class="sidenav-cat-text">Lamb 羊肉</span></a>
-    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥩</span><span class="sidenav-cat-text">Beef 牛肉</span></a>
-    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🐷</span><span class="sidenav-cat-text">Pork 猪肉</span></a>
-    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍵</span><span class="sidenav-cat-text">Soup 汤底</span></a>
-    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥬</span><span class="sidenav-cat-text">Veg 蔬菜</span></a>
-    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍄</span><span class="sidenav-cat-text">Mushrooms 菌菇</span></a>
-    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍜</span><span class="sidenav-cat-text">Noodles 面条</span></a>
-    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥣</span><span class="sidenav-cat-text">Sides 配菜</span></a>
-    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🫙</span><span class="sidenav-cat-text">Condiments 调料</span></a>
-    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥫</span><span class="sidenav-cat-text">Dipping 蘸料</span></a>
-    <a href="icecream.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍦</span><span class="sidenav-cat-text">Ice Cream 冰淇淋</span></a>
+    <a href="../items/items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🐑</span><span class="sidenav-cat-text">Lamb 羊肉</span></a>
+    <a href="../items/items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥩</span><span class="sidenav-cat-text">Beef 牛肉</span></a>
+    <a href="../items/items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🐷</span><span class="sidenav-cat-text">Pork 猪肉</span></a>
+    <a href="../items/items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍵</span><span class="sidenav-cat-text">Soup 汤底</span></a>
+    <a href="../items/items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥬</span><span class="sidenav-cat-text">Veg 蔬菜</span></a>
+    <a href="../items/items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍄</span><span class="sidenav-cat-text">Mushrooms 菌菇</span></a>
+    <a href="../items/items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍜</span><span class="sidenav-cat-text">Noodles 面条</span></a>
+    <a href="../items/items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥣</span><span class="sidenav-cat-text">Sides 配菜</span></a>
+    <a href="../items/items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🫙</span><span class="sidenav-cat-text">Condiments 调料</span></a>
+    <a href="../items/items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥫</span><span class="sidenav-cat-text">Dipping 蘸料</span></a>
+    <a href="../benjerry/icecream.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍦</span><span class="sidenav-cat-text">Ice Cream 冰淇淋</span></a>
   </div>
 </nav>
 
 <div class="mobile-nav">
   <div class="mobile-nav-bar">
-    <a href="index.html" class="mobile-nav-logo">Shabu Meat House</a>
+    <a href="../home/index.html" class="mobile-nav-logo">Shabu Meat House</a>
     <button class="mobile-nav-toggle" onclick="document.getElementById('mobileNavDD').classList.toggle('open')">☰</button>
   </div>
   <div class="mobile-nav-dropdown" id="mobileNavDD">
-    <a href="index.html" class="mobile-nav-link">Home</a>
-    <a href="items.html" class="mobile-nav-link">Shop</a>
-    <a href="guide.html" class="mobile-nav-link">Guide</a>
-    <a href="recipes.html" class="mobile-nav-link">Recipes</a>
-    <a href="icecream.html" class="mobile-nav-link active">Ice Cream</a>
+    <a href="../home/index.html" class="mobile-nav-link">Home</a>
+    <a href="../items/items.html" class="mobile-nav-link">Shop</a>
+    <a href="../guide/guide.html" class="mobile-nav-link">Guide</a>
+    <a href="../recipes/recipes.html" class="mobile-nav-link">Recipes</a>
+    <a href="../benjerry/icecream.html" class="mobile-nav-link active">Ice Cream</a>
   </div>
 </div>
 
@@ -110,17 +110,17 @@
 
 <script>
 var products = [
-  { name:'Half Baked', zh:'半烤冰淇淋', price:7.99, image:'icecream/can-eng-half-baked-detail-open (2).avif' },
-  { name:'Tonight Dough', zh:'今晚饼干面团', price:7.99, image:'icecream/can-eng-tonight-dough-detail-open (1).avif' },
-  { name:'Cherry Garcia', zh:'樱桃加西亚', price:7.99, image:'icecream/can-eng-cherry-garcia-detail-open.avif' },
-  { name:'Chunky Monkey', zh:'大块猴子', price:7.99, image:'icecream/44055_CA_Chunky-Monkey_ENG (1).avif' },
-  { name:'Chocolate Chip Cookie Dough', zh:'巧克力曲奇饼团', price:7.99, image:'icecream/can-eng-chocolate-chip-cookie-dough-detail-open (2).avif' },
-  { name:'Cookie Dough CORE', zh:'曲奇面团核心', price:7.99, image:'icecream/chocolate-chip-cookie-dough-core-eng-detail-open (1).avif' },
-  { name:'Brownie Batter CORE', zh:'布朗尼面糊核心', price:7.99, image:'icecream/brownie-batter-core-en-detail.avif' },
-  { name:"S'more Please!", zh:'烤棉花糖夹心', price:7.99, image:'icecream/can-eng-smore-please-detail-open.png' },
-  { name:'Chocolate Therapy', zh:'巧克力疗愈', price:7.99, image:'icecream/can-eng-chocolate-therapy-detail-open.avif' },
-  { name:'Cold Brew Caramel Latte', zh:'冷萃焦糖拿铁', price:7.99, image:'icecream/44056_CA_Cold-Brew-Caramel-Latte_ENG.avif' },
-  { name:'Ice Cream Sammie', zh:'冰淇淋三明治', price:7.99, image:'icecream/40274_CA_IC_Ice-Cream-Sammie_ENG_473ml_Open-374x479.avif' },
+  { name:'Half Baked', zh:'半烤冰淇淋', price:7.99, image:'../ben/can-eng-half-baked-detail-open (2).avif' },
+  { name:'Tonight Dough', zh:'今晚饼干面团', price:7.99, image:'../ben/can-eng-tonight-dough-detail-open (1).avif' },
+  { name:'Cherry Garcia', zh:'樱桃加西亚', price:7.99, image:'../ben/can-eng-cherry-garcia-detail-open.avif' },
+  { name:'Chunky Monkey', zh:'大块猴子', price:7.99, image:'../ben/44055_CA_Chunky-Monkey_ENG (1).avif' },
+  { name:'Chocolate Chip Cookie Dough', zh:'巧克力曲奇饼团', price:7.99, image:'../ben/can-eng-chocolate-chip-cookie-dough-detail-open (2).avif' },
+  { name:'Cookie Dough CORE', zh:'曲奇面团核心', price:7.99, image:'../ben/chocolate-chip-cookie-dough-core-eng-detail-open (1).avif' },
+  { name:'Brownie Batter CORE', zh:'布朗尼面糊核心', price:7.99, image:'../ben/brownie-batter-core-en-detail.avif' },
+  { name:"S'more Please!", zh:'烤棉花糖夹心', price:7.99, image:'../ben/can-eng-smore-please-detail-open.png' },
+  { name:'Chocolate Therapy', zh:'巧克力疗愈', price:7.99, image:'../ben/can-eng-chocolate-therapy-detail-open.avif' },
+  { name:'Cold Brew Caramel Latte', zh:'冷萃焦糖拿铁', price:7.99, image:'../ben/44056_CA_Cold-Brew-Caramel-Latte_ENG.avif' },
+  { name:'Ice Cream Sammie', zh:'冰淇淋三明治', price:7.99, image:'../ben/40274_CA_IC_Ice-Cream-Sammie_ENG_473ml_Open-374x479.avif' },
 ];
 
 // Shared cart with items.html

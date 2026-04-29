@@ -11,107 +11,30 @@
   <meta name="geo.placename" content="Scarborough, Ontario"/>
   <meta property="og:title" content="Ben & Jerry's Ice Cream in Scarborough | Shabu Meat House"/>
   <meta property="og:description" content="Half Baked, Tonight Dough, Cherry Garcia, Chunky Monkey & more. $7.99/pint in stock now at Shabu Meat House, 3272 Midland Ave, Scarborough."/>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Shabu Meat House","alternateName":"涮肉屋","url":"https://shabumeathouse.ca","address":{"@type":"PostalAddress","streetAddress":"3272 Midland Ave Unit B-112","addressLocality":"Scarborough","addressRegion":"ON","postalCode":"M1V 0C7","addressCountry":"CA"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Ben & Jerry's Ice Cream","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Half Baked"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Tonight Dough"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Cherry Garcia"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Chunky Monkey"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Chocolate Chip Cookie Dough"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Cookie Dough CORE"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Brownie Batter CORE"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's S'more Please"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Chocolate Therapy"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Cold Brew Caramel Latte"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Ice Cream Sammie"},"price":"7.99","priceCurrency":"CAD"}]}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Shabu Meat House","alternateName":"涮了吧","url":"https://shabumeathouse.ca","address":{"@type":"PostalAddress","streetAddress":"3272 Midland Ave Unit B-112","addressLocality":"Scarborough","addressRegion":"ON","postalCode":"M1V 0C7","addressCountry":"CA"},"hasOfferCatalog":{"@type":"OfferCatalog","name":"Ben & Jerry's Ice Cream","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Half Baked"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Tonight Dough"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Cherry Garcia"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Chunky Monkey"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Chocolate Chip Cookie Dough"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Cookie Dough CORE"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Brownie Batter CORE"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's S'more Please"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Chocolate Therapy"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Cold Brew Caramel Latte"},"price":"7.99","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Product","name":"Ben & Jerry's Ice Cream Sammie"},"price":"7.99","priceCurrency":"CAD"}]}}</script>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css"/>
   <link rel="icon" type="image/png" href="favicon.png"/>
   <style>
-    nav{display:none}
-    .sidenav{position:fixed;left:0;top:0;bottom:0;width:52px;background:#1a2a32;z-index:1000;display:flex;flex-direction:column;transition:width 0.22s cubic-bezier(.4,0,.2,1);overflow:hidden}
-    .sidenav:hover{width:210px}
-    .sidenav-logo{display:flex;align-items:center;gap:10px;padding:18px 14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.08);width:100%;flex-shrink:0}
-    .sidenav-logo-icon{width:24px;height:24px;background:#4a9ebe;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;font-family:'DM Sans',sans-serif}
-    .sidenav-logo-text{font-family:'Playfair Display',serif;font-size:13px;color:white;white-space:nowrap;opacity:0;transition:opacity 0.15s}
-    .sidenav:hover .sidenav-logo-text{opacity:1}
-    .sidenav-section{width:100%;padding:8px 0 4px;border-bottom:1px solid rgba(255,255,255,0.06)}
-    .sidenav-section-label{font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);padding:0 14px 4px;white-space:nowrap;opacity:0;transition:opacity 0.15s}
-    .sidenav:hover .sidenav-section-label{opacity:1}
-    .sidenav-link{display:flex;align-items:center;gap:10px;padding:8px 14px;text-decoration:none;color:rgba(255,255,255,0.65);font-family:'DM Sans',sans-serif;font-size:13px;white-space:nowrap;transition:color 0.15s,background 0.15s;width:100%}
-    .sidenav-link:hover{color:white;background:rgba(255,255,255,0.07)}
-    .sidenav-link.active{color:#4a9ebe}
-    .sidenav-link-icon{width:24px;text-align:center;flex-shrink:0;font-size:14px}
-    .sidenav-link-text{opacity:0;transition:opacity 0.15s}
-    .sidenav:hover .sidenav-link-text{opacity:1}
-    .sidenav-cat{display:flex;align-items:center;gap:10px;padding:5px 14px;color:rgba(255,255,255,0.45);font-family:'DM Sans',sans-serif;font-size:12px;white-space:nowrap;text-decoration:none;width:100%}
-    .sidenav-cat:hover{color:rgba(255,255,255,0.85)}
-    .sidenav-cat-icon{width:24px;text-align:center;flex-shrink:0;font-size:11px}
-    .sidenav-cat-text{opacity:0;transition:opacity 0.15s}
-    .sidenav:hover .sidenav-cat-text{opacity:1}
-    .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;z-index:1000;background:#1a2a32;padding:0 16px}
-    .mobile-nav-bar{display:flex;align-items:center;justify-content:space-between;height:48px}
-    .mobile-nav-logo{font-family:'Playfair Display',serif;font-size:15px;color:white;text-decoration:none}
-    .mobile-nav-toggle{background:none;border:none;color:white;font-size:20px;cursor:pointer;padding:4px 8px}
-    .mobile-nav-dropdown{display:none;background:#1a2a32;border-top:1px solid rgba(255,255,255,0.1);padding:8px 0 12px}
-    .mobile-nav-dropdown.open{display:block}
-    .mobile-nav-link{display:block;padding:9px 16px;color:rgba(255,255,255,0.75);text-decoration:none;font-family:'DM Sans',sans-serif;font-size:14px}
-    .mobile-nav-link:hover{color:white}
-    .mobile-nav-link.active{color:#4a9ebe}
-    body{font-family:'Noto Sans SC','DM Sans',sans-serif;background:#f7f3ee;margin-left:52px}
-    @media(max-width:768px){body{margin-left:0;padding-top:48px}.sidenav{display:none}.mobile-nav{display:block}.modal-foot{flex-direction:column}.products-wrap{padding:12px 12px 80px}.page-header{padding:14px 12px 10px}}
-    .notice-banner{background:#1a2a32;color:rgba(255,255,255,0.8);padding:8px 20px;font-size:0.8rem;text-align:center;font-family:'DM Sans',sans-serif}
-    .notice-banner strong{color:white}
-    .page-header{padding:20px 20px 12px;border-bottom:2px solid #1a2a32;background:#f7f3ee}
-    .page-header h1{font-family:'Playfair Display',serif;font-size:1.6rem;color:#1a2a32;margin-bottom:2px}
-    .page-header p{font-size:0.8rem;color:#6a7a82}
-    .page-header p.seo{font-size:0.78rem;color:#8a9aa2;margin-top:4px;max-width:600px}
-    .products-wrap{padding:16px 20px 80px}
-    .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;grid-auto-rows:1fr}
-    @media(max-width:1100px){.products-grid{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:700px){.products-grid{grid-template-columns:repeat(2,1fr)}}
-    .product-card{background:white;border:1px solid #e0d8cf;border-radius:6px;padding:10px;display:flex;flex-direction:column;justify-content:space-between;transition:box-shadow 0.15s}
-    .product-card:hover{box-shadow:0 3px 12px rgba(0,0,0,0.08)}
-    .product-image{width:100%;height:140px;object-fit:contain;border-radius:4px;margin-bottom:8px;background:#f7f3ee;padding:6px}
-    .product-zh{font-family:'Noto Sans SC',sans-serif;font-size:0.9rem;font-weight:500;color:#1a2a32;margin-bottom:1px}
-    .product-name{font-size:0.72rem;color:#6a7a82;margin-bottom:4px;line-height:1.3}
-    .product-price{font-size:0.88rem;font-weight:700;color:#1a2a32;margin-bottom:4px}
-    .qty-controls{display:flex;align-items:center;gap:6px;margin-top:auto;padding-top:6px}
-    .qty-btn{width:26px;height:26px;border:1px solid #c8bfb3;border-radius:4px;background:white;color:#1a2a32;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.12s;font-family:'DM Sans',sans-serif}
-    .qty-btn:hover{background:#1a2a32;color:white;border-color:#1a2a32}
-    .qty-val{font-size:0.88rem;font-weight:700;color:#1a2a32;min-width:18px;text-align:center}
-    .floating-cart{position:fixed;bottom:20px;right:20px;background:#1a2a32;color:white;padding:10px 18px;border-radius:6px;cursor:pointer;font-weight:700;box-shadow:0 4px 16px rgba(26,42,50,0.35);z-index:9999;font-family:'DM Sans',sans-serif;font-size:0.88rem;display:none;letter-spacing:0.01em}
-    .floating-cart.visible{display:block}
-    .modal-overlay{position:fixed;inset:0;background:rgba(26,42,50,0.6);z-index:200;display:none;align-items:center;justify-content:center;backdrop-filter:blur(3px)}
-    .modal-overlay.active{display:flex}
-    .modal-box{background:#f7f3ee;border-radius:8px;width:90%;max-width:540px;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;position:relative}
-    .modal-head{padding:16px 20px 12px;border-bottom:1px solid #e0d8cf;background:#1a2a32}
-    .modal-head h2{font-family:'Playfair Display',serif;font-size:1.1rem;color:white;margin-bottom:2px}
-    .modal-head p{font-size:0.75rem;color:rgba(255,255,255,0.55);font-family:'DM Sans',sans-serif}
-    .modal-close{position:absolute;top:14px;right:16px;background:rgba(255,255,255,0.15);border:none;width:26px;height:26px;border-radius:4px;font-size:1rem;cursor:pointer;color:white;display:flex;align-items:center;justify-content:center}
-    .modal-body{padding:14px 20px;overflow-y:auto;flex:1}
-    .modal-list-item{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 10px;background:white;border:1px solid #e0d8cf;border-radius:5px;margin-bottom:6px;gap:8px}
-    .modal-item-name{font-size:0.88rem;color:#1a2a32;font-weight:500}
-    .modal-item-detail{font-size:0.72rem;color:#8a9aa2;margin-top:2px}
-    .modal-item-remove{background:none;border:none;color:#c8371a;cursor:pointer;font-size:1rem;opacity:0.5;flex-shrink:0}
-    .modal-item-remove:hover{opacity:1}
-    .est-spend{background:#1a2a32;border-radius:5px;padding:10px 14px;margin-top:10px;display:flex;align-items:baseline;gap:8px}
-    .est-spend-label{font-size:0.75rem;color:rgba(255,255,255,0.6);font-family:'DM Sans',sans-serif}
-    .est-spend-val{font-size:1.1rem;font-weight:700;color:white}
-    .est-spend-note{font-size:0.68rem;color:rgba(255,255,255,0.4)}
-    .tax-note{font-size:0.72rem;color:#8a9aa2;margin-top:8px;font-style:italic;font-family:'DM Sans',sans-serif}
-    .modal-foot{padding:12px 20px;border-top:1px solid #e0d8cf;display:flex;gap:8px;flex-wrap:wrap;background:#f7f3ee}
-    .modal-foot button{flex:1;min-width:100px;padding:9px;border-radius:5px;font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;border:none}
-    .btn-copy{background:#1a2a32;color:white}
-    .btn-copy:hover{background:#2a3a42}
-    .btn-share{background:white;color:#1a2a32;border:1px solid #c8bfb3!important}
-    .btn-share:hover{border-color:#1a2a32!important}
-    .btn-clear{background:white;color:#c8371a;border:1px solid #e0d8cf!important}
-    .btn-clear:hover{border-color:#c8371a!important}
+    /* icecream-specific: taller image for pint cans */
+    .product-image { height: 140px; padding: 6px; }
+    .products-grid { grid-auto-rows: 1fr; }
   </style>
 </head>
 <body>
 
 <nav class="sidenav">
   <a href="index.html" class="sidenav-logo">
-   
+    <span class="sidenav-logo-icon">涮</span>
     <span class="sidenav-logo-text">Shabu Meat House</span>
   </a>
   <div class="sidenav-section">
     <div class="sidenav-section-label">Pages</div>
-    <a href="index.html" class="sidenav-link"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Home</span></a>
-    <a href="items.html" class="sidenav-link"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Items</span></a>
-    <a href="guide.html" class="sidenav-link"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Guide</span></a>
-    <a href="recipes.html" class="sidenav-link"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Recipes</span></a>
-    <a href="icecream.html" class="sidenav-link active"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Ice Cream</span></a>
+    <a href="index.html" class="sidenav-link"><span class="sidenav-link-icon">🏠</span><span class="sidenav-link-text">Home</span></a>
+    <a href="items.html" class="sidenav-link"><span class="sidenav-link-icon">🛒</span><span class="sidenav-link-text">Items</span></a>
+    <a href="guide.html" class="sidenav-link"><span class="sidenav-link-icon">📋</span><span class="sidenav-link-text">Guide</span></a>
+    <a href="recipes.html" class="sidenav-link"><span class="sidenav-link-icon">🍜</span><span class="sidenav-link-text">Recipes</span></a>
+    <a href="icecream.html" class="sidenav-link active"><span class="sidenav-link-icon">🍦</span><span class="sidenav-link-text">Ice Cream</span></a>
   </div>
   <div class="sidenav-section" style="flex:1;overflow-y:auto">
     <div class="sidenav-section-label">Browse</div>
@@ -187,20 +110,20 @@
 
 <script>
 var products = [
-  { name:"Half Baked", zh:"半烤冰淇淋", price:7.99, image:"icecream/can-eng-half-baked-detail-open (2).avif" },
-  { name:"Tonight Dough", zh:"今晚饼干面团", price:7.99, image:"icecream/can-eng-tonight-dough-detail-open (1).avif" },
-  { name:"Cherry Garcia", zh:"樱桃加西亚", price:7.99, image:"icecream/can-eng-cherry-garcia-detail-open.avif" },
-  { name:"Chunky Monkey", zh:"大块猴子", price:7.99, image:"icecream/44055_CA_Chunky-Monkey_ENG (1).avif" },
-  { name:"Chocolate Chip Cookie Dough", zh:"巧克力曲奇饼团", price:7.99, image:"icecream/can-eng-chocolate-chip-cookie-dough-detail-open (2).avif" },
-  { name:"Cookie Dough CORE", zh:"曲奇面团核心", price:7.99, image:"icecream/chocolate-chip-cookie-dough-core-eng-detail-open (1).avif" },
-  { name:"Brownie Batter CORE", zh:"布朗尼面糊核心", price:7.99, image:"icecream/brownie-batter-core-en-detail.avif" },
-  { name:"S'more Please!", zh:"烤棉花糖夹心", price:7.99, image:"icecream/can-eng-smore-please-detail-open.png" },
-  { name:"Chocolate Therapy", zh:"巧克力疗愈", price:7.99, image:"icecream/can-eng-chocolate-therapy-detail-open.avif" },
-  { name:"Cold Brew Caramel Latte", zh:"冷萃焦糖拿铁", price:7.99, image:"icecream/44056_CA_Cold-Brew-Caramel-Latte_ENG.avif" },
-  { name:"Ice Cream Sammie", zh:"冰淇淋三明治", price:7.99, image:"icecream/40274_CA_IC_Ice-Cream-Sammie_ENG_473ml_Open-374x479.avif" },
+  { name:'Half Baked', zh:'半烤冰淇淋', price:7.99, image:'icecream/can-eng-half-baked-detail-open (2).avif' },
+  { name:'Tonight Dough', zh:'今晚饼干面团', price:7.99, image:'icecream/can-eng-tonight-dough-detail-open (1).avif' },
+  { name:'Cherry Garcia', zh:'樱桃加西亚', price:7.99, image:'icecream/can-eng-cherry-garcia-detail-open.avif' },
+  { name:'Chunky Monkey', zh:'大块猴子', price:7.99, image:'icecream/44055_CA_Chunky-Monkey_ENG (1).avif' },
+  { name:'Chocolate Chip Cookie Dough', zh:'巧克力曲奇饼团', price:7.99, image:'icecream/can-eng-chocolate-chip-cookie-dough-detail-open (2).avif' },
+  { name:'Cookie Dough CORE', zh:'曲奇面团核心', price:7.99, image:'icecream/chocolate-chip-cookie-dough-core-eng-detail-open (1).avif' },
+  { name:'Brownie Batter CORE', zh:'布朗尼面糊核心', price:7.99, image:'icecream/brownie-batter-core-en-detail.avif' },
+  { name:"S'more Please!", zh:'烤棉花糖夹心', price:7.99, image:'icecream/can-eng-smore-please-detail-open.png' },
+  { name:'Chocolate Therapy', zh:'巧克力疗愈', price:7.99, image:'icecream/can-eng-chocolate-therapy-detail-open.avif' },
+  { name:'Cold Brew Caramel Latte', zh:'冷萃焦糖拿铁', price:7.99, image:'icecream/44056_CA_Cold-Brew-Caramel-Latte_ENG.avif' },
+  { name:'Ice Cream Sammie', zh:'冰淇淋三明治', price:7.99, image:'icecream/40274_CA_IC_Ice-Cream-Sammie_ENG_473ml_Open-374x479.avif' },
 ];
 
-// Share cart with items.html using same localStorage key
+// Shared cart with items.html
 var cart = JSON.parse(localStorage.getItem('shabuCart')) || {};
 
 function renderProducts() {
@@ -234,7 +157,7 @@ function updateQty(idx, change) {
 }
 
 function updateCartUI() {
-  var count = Object.values(cart).reduce(function(s,i){return s+i.qty;}, 0);
+  var count = Object.values(cart).reduce(function(s,i){ return s + i.qty; }, 0);
   document.getElementById('cartCount').textContent = count;
   var fc = document.getElementById('floatingCart');
   if (count > 0) fc.classList.add('visible');
@@ -243,8 +166,34 @@ function updateCartUI() {
 
 function genRef() { return '#' + Math.random().toString(36).substr(2,5).toUpperCase(); }
 
-function calcTotal() {
-  return Object.values(cart).reduce(function(s,i){return s+i.price*i.qty;}, 0);
+// Same range logic as items.html — handles mixed cart with weighted items from hotpot page
+function calcEstSpend() {
+  var items = Object.values(cart);
+  var hasWeighted = false;
+  var fixedTotal = 0;
+  var weightedLo = 0, weightedHi = 0;
+  items.forEach(function(item) {
+    if (item.approxTotal) {
+      hasWeighted = true;
+      var cleaned = item.approxTotal.replace(/[~$]/g, '');
+      var parts = cleaned.split(/[–—\-]/);
+      var lo = parseFloat(parts[0]) || 0;
+      var hi = parts.length > 1 ? parseFloat(parts[1]) : lo;
+      weightedLo += lo * item.qty;
+      weightedHi += hi * item.qty;
+    } else {
+      fixedTotal += (item.price || 0) * item.qty;
+    }
+  });
+  if (hasWeighted) {
+    var totalLo = weightedLo + fixedTotal;
+    var totalHi = weightedHi + fixedTotal;
+    var lo = Math.floor(totalLo / 5) * 5;
+    var hi = Math.ceil(totalHi / 5) * 5;
+    return { type:'range', lo:lo, hi:hi };
+  } else {
+    return { type:'fixed', total: Math.round(fixedTotal * 100) / 100 };
+  }
 }
 
 function openModal() {
@@ -253,39 +202,58 @@ function openModal() {
   if (!items.length) {
     body.innerHTML = '<div style="text-align:center;padding:2rem;color:#8a9aa2;"><p>Your wishlist is empty.</p><p style="font-family:\'Noto Sans SC\',sans-serif;margin-top:0.5rem;font-size:0.85rem;">心愿单为空。</p></div>';
   } else {
-    var total = calcTotal();
+    var est = calcEstSpend();
+    var estHtml = est.type === 'range'
+      ? '<div class="est-spend"><span class="est-spend-label">You might spend around</span><span class="est-spend-val">$' + est.lo + '–$' + est.hi + '</span><span class="est-spend-note">before tax · weight-based</span></div>'
+      : est.total > 0
+        ? '<div class="est-spend"><span class="est-spend-label">Subtotal</span><span class="est-spend-val">$' + est.total.toFixed(2) + '</span><span class="est-spend-note">+ tax</span></div>'
+        : '';
     var itemsHtml = items.map(function(item) {
+      var priceDisplay = item.approxTotal
+        ? item.qty + 'x · approx. ' + item.approxTotal + '/pkg'
+        : item.sizeLabel
+          ? item.qty + 'x · ' + item.sizeLabel
+          : item.dealPrice
+            ? item.qty + 'x · ' + item.dealPrice
+            : item.qty + 'x · $' + (item.price || 0).toFixed(2);
+      var safeKey = (item.key || item.name).replace(/'/g, "\\'");
       return '<div class="modal-list-item"><div>'
-        + '<div class="modal-item-name"> ' + item.name + '</div>'
-        + '<div class="modal-item-detail">' + item.qty + 'x</div>'
-        + '</div><button class="modal-item-remove" onclick="removeItem(\'' + item.name.replace(/'/g,"\\'") + '\')">×</button></div>';
+        + (item.zh ? '<div class="modal-item-zh">' + item.zh + '</div>' : '')
+        + '<div class="modal-item-name">' + item.name + '</div>'
+        + '<div class="modal-item-detail">' + priceDisplay + '</div>'
+        + '</div><button class="modal-item-remove" onclick="removeItem(\'' + safeKey + '\')">×</button></div>';
     }).join('');
-    body.innerHTML = itemsHtml
-      + '<div class="est-spend"><span class="est-spend-label">Subtotal</span><span class="est-spend-val">$' + total.toFixed(2) + '</span><span class="est-spend-note">+ tax</span></div>'
-      + '<div class="tax-note">Visit us in-store to purchase · 请到店购买</div>';
+    body.innerHTML = itemsHtml + estHtml + '<div class="tax-note">Prices before tax · 价格未含税 · Visit us in-store to purchase · 请到店购买</div>';
   }
   document.getElementById('modalOverlay').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
-function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); document.body.style.overflow=''; }
-function overlayClose(e) { if (e.target.id==='modalOverlay') closeModal(); }
+function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); document.body.style.overflow = ''; }
+function overlayClose(e) { if (e.target.id === 'modalOverlay') closeModal(); }
 
 function removeItem(name) {
   delete cart[name];
   localStorage.setItem('shabuCart', JSON.stringify(cart));
-  updateCartUI(); renderProducts(); openModal();
+  updateCartUI();
+  renderProducts();
+  openModal();
 }
 
 function buildCopyText() {
   var items = Object.values(cart);
   if (!items.length) return null;
   var ref = genRef();
-  var date = new Date().toLocaleDateString('en-CA',{year:'numeric',month:'short',day:'numeric'});
-  var total = calcTotal();
+  var date = new Date().toLocaleDateString('en-CA', { year:'numeric', month:'short', day:'numeric' });
+  var est = calcEstSpend();
   var text = ref + ' · ' + date + '\n\n';
-  items.forEach(function(item){ text += item.qty + item.name + '\n'; });
-  text += '\nSubtotal: $' + total.toFixed(2) + ' + tax';
+  items.forEach(function(item) {
+    text += item.qty + 'x ' + (item.zh ? item.zh + ' ' : '') + item.name;
+    if (item.sizeLabel) text += ' (' + item.sizeLabel + ')';
+    text += '\n';
+  });
+  if (est.type === 'range') text += '\nApprox. $' + est.lo + '–$' + est.hi + ' before tax (weight-based)';
+  else if (est.total > 0) text += '\nSubtotal: $' + est.total.toFixed(2) + ' + tax';
   text += '\n\nShabu Meat House · 3272 Midland Ave, Scarborough';
   return text;
 }
@@ -293,21 +261,24 @@ function buildCopyText() {
 function copyList() {
   var text = buildCopyText();
   if (!text) { alert('Your wishlist is empty! 心愿单为空！'); return; }
-  navigator.clipboard.writeText(text).then(function(){ alert('List copied — see you in store! 🎉\n清单已复制，期待您的到来！'); });
+  navigator.clipboard.writeText(text).then(function() { alert('List copied — see you in store! 🎉\n清单已复制，期待您的到来！'); });
 }
 
 function shareList() {
   var text = buildCopyText();
   if (!text) { alert('Your wishlist is empty! 心愿单为空！'); return; }
-  if (navigator.share) { navigator.share({title:'My Shabu Meat House Wishlist',text:text}); }
-  else { navigator.clipboard.writeText(text).then(function(){ alert('List copied — see you in store! 🎉\n清单已复制，期待您的到来！'); }); }
+  if (navigator.share) { navigator.share({ title:'My Shabu Meat House Wishlist', text:text }); }
+  else { navigator.clipboard.writeText(text).then(function() { alert('List copied — see you in store! 🎉\n清单已复制，期待您的到来！'); }); }
 }
 
 function clearCart() {
   if (!Object.keys(cart).length) return;
   if (confirm('Clear wishlist? 清空心愿单？')) {
-    cart = {}; localStorage.removeItem('shabuCart');
-    updateCartUI(); closeModal(); renderProducts();
+    cart = {};
+    localStorage.removeItem('shabuCart');
+    updateCartUI();
+    closeModal();
+    renderProducts();
   }
 }
 

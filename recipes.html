@@ -10,45 +10,6 @@
   <link rel="stylesheet" href="styles.css"/>
   <link rel="icon" type="image/png" href="favicon.png"/>
   <style>
-    nav { display: none; }
-    body { background: #f7f3ee; margin-left: 52px; }
-    @media (max-width: 768px) { body { margin-left: 0; padding-top: 48px; } }
-
-    /* ── SIDE NAV ── */
-    .sidenav{position:fixed;left:0;top:0;bottom:0;width:52px;background:#1a2a32;z-index:1000;display:flex;flex-direction:column;overflow:hidden;transition:width 0.22s cubic-bezier(.4,0,.2,1)}
-    .sidenav:hover{width:210px}
-    .sidenav-logo{display:flex;align-items:center;gap:10px;padding:18px 14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.08);width:100%;flex-shrink:0}
-    .sidenav-logo-icon{width:24px;height:24px;background:#4a9ebe;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;font-family:'DM Sans',sans-serif}
-    .sidenav-logo-text{font-family:'Playfair Display',serif;font-size:13px;color:white;white-space:nowrap;opacity:0;transition:opacity 0.15s}
-    .sidenav:hover .sidenav-logo-text{opacity:1}
-    .sidenav-section{width:100%;padding:8px 0 4px;border-bottom:1px solid rgba(255,255,255,0.06)}
-    .sidenav-section-label{font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);padding:0 14px 4px;white-space:nowrap;opacity:0;transition:opacity 0.15s}
-    .sidenav:hover .sidenav-section-label{opacity:1}
-    .sidenav-link{display:flex;align-items:center;gap:10px;padding:8px 14px;text-decoration:none;color:rgba(255,255,255,0.65);font-family:'DM Sans',sans-serif;font-size:13px;white-space:nowrap;transition:color 0.15s,background 0.15s;width:100%}
-    .sidenav-link:hover{color:white;background:rgba(255,255,255,0.07)}
-    .sidenav-link.active{color:#4a9ebe}
-    .sidenav-link-icon{width:24px;text-align:center;flex-shrink:0;font-size:14px}
-    .sidenav-link-text{opacity:0;transition:opacity 0.15s}
-    .sidenav:hover .sidenav-link-text{opacity:1}
-    .sidenav-cat{display:flex;align-items:center;gap:10px;padding:5px 14px;color:rgba(255,255,255,0.45);font-family:'DM Sans',sans-serif;font-size:12px;white-space:nowrap;text-decoration:none;width:100%}
-    .sidenav-cat:hover{color:rgba(255,255,255,0.85)}
-    .sidenav-cat-icon{width:24px;text-align:center;flex-shrink:0;font-size:11px}
-    .sidenav-cat-text{opacity:0;transition:opacity 0.15s}
-    .sidenav:hover .sidenav-cat-text{opacity:1}
-
-    /* ── MOBILE NAV ── */
-    .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;z-index:1000;background:#1a2a32;padding:0 16px}
-    .mobile-nav-bar{display:flex;align-items:center;justify-content:space-between;height:48px}
-    .mobile-nav-logo{font-family:'Playfair Display',serif;font-size:15px;color:white;text-decoration:none}
-    .mobile-nav-toggle{background:none;border:none;color:white;font-size:20px;cursor:pointer;padding:4px 8px}
-    .mobile-nav-dropdown{display:none;background:#1a2a32;border-top:1px solid rgba(255,255,255,0.1);padding:8px 0 12px}
-    .mobile-nav-dropdown.open{display:block}
-    .mobile-nav-link{display:block;padding:9px 16px;color:rgba(255,255,255,0.75);text-decoration:none;font-family:'DM Sans',sans-serif;font-size:14px}
-    .mobile-nav-link:hover{color:white}
-    .mobile-nav-link.active{color:#4a9ebe}
-    @media(max-width:768px){.sidenav{display:none}.mobile-nav{display:block}}
-
-    /* ── PAGE ── */
     .container { max-width: 1000px; margin: 0 auto; padding: 24px 24px 60px; }
     .page-header { padding-bottom: 16px; border-bottom: 2px solid #1a2a32; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
     .page-header h1 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #1a2a32; margin-bottom: 2px; }
@@ -133,11 +94,11 @@
   </a>
   <div class="sidenav-section">
     <div class="sidenav-section-label">Pages</div>
-    <a href="index.html" class="sidenav-link"><span class="sidenav-link-icon">🏠</span><span class="sidenav-link-text">Home</span></a>
-    <a href="items.html" class="sidenav-link"><span class="sidenav-link-icon">🛍</span><span class="sidenav-link-text">Items</span></a>
-    <a href="guide.html" class="sidenav-link"><span class="sidenav-link-icon">📋</span><span class="sidenav-link-text">Guide</span></a>
-    <a href="recipes.html" class="sidenav-link active"><span class="sidenav-link-icon">🍲</span><span class="sidenav-link-text">Recipes</span></a>
-    <a href="icecream.html" class="sidenav-link"><span class="sidenav-link-icon">🍦</span><span class="sidenav-link-text">Ice Cream</span></a>
+    <a href="index.html" class="sidenav-link"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Home</span></a>
+    <a href="items.html" class="sidenav-link"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Items</span></a>
+    <a href="guide.html" class="sidenav-link"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Guide</span></a>
+    <a href="recipes.html" class="sidenav-link active"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Recipes</span></a>
+    <a href="icecream.html" class="sidenav-link"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Ice Cream</span></a>
   </div>
   <div class="sidenav-section" style="flex:1;overflow-y:auto">
     <div class="sidenav-section-label">Browse</div>

@@ -96,7 +96,7 @@
   <a class="nav-logo" href="index.html">Shabu <span>Meat House</span></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
-    <li><a href="items.html">Items</a></li>
+    <li><a href="items.html">Shop</a></li>
     <li><a href="guide.html">Guide</a></li>
     <li><a href="recipes.html">Recipes</a></li>
   </ul>
@@ -104,7 +104,12 @@
 
 <section class="container">
   <p class="section-label">Ice Cream / 冰淇淋</p>
-  <h1 class="section-title">Ben &amp; Jerry's <span style="font-family:'Noto Sans SC',sans-serif;font-size:.6em;color:#4a9ebe;"></span></h1>
+  <h1 class="section-title">Ben &amp; Jerry's <span style="font-family:'Noto Sans SC',sans-serif;font-size:.6em;color:#4a9ebe;">本杰瑞冰淇淋</span></h1>
+  <p style="color:#4a5a62;margin-bottom:0.5rem;font-size:.9rem;">All flavours <strong>$7.99 / pint</strong> &nbsp;·&nbsp; In stock now &nbsp;·&nbsp; Available in-store, Scarborough</p>
+  <p style="color:#4a5a62;margin-bottom:2rem;font-size:.82rem;max-width:620px;">
+    Looking for <strong>Ben and Jerry's in Scarborough</strong>? We carry B&amp;J pints including Half Baked, Tonight Dough, Cherry Garcia, Chunky Monkey, Cookie Dough CORE, Brownie Batter CORE, S'more Please, Chocolate Therapy, Cold Brew Caramel Latte, and Ice Cream Sammie — all $7.99 at 3272 Midland Ave.
+  </p>
+
   <div class="products-grid" id="productsGrid"></div>
 </section>
 
@@ -124,9 +129,9 @@
     </div>
     <div class="modal-body" id="modalBody"></div>
     <div class="modal-foot">
-      <button class="btn-wechat" onclick="copyForWeChat()">Copy to Send via WeChat 复制发送</button>
-      <button class="btn-print-modal" onclick="window.print()">Print 打印</button>
-      <button class="btn-clear-modal" onclick="clearCart()">Clear 清空</button>
+      <button class="btn-wechat" onclick="copyForWeChat()">📋 Copy to Send via WeChat 复制发送</button>
+      <button class="btn-print-modal" onclick="window.print()">🖨️ Print 打印</button>
+      <button class="btn-clear-modal" onclick="clearCart()">🗑️ Clear 清空</button>
     </div>
   </div>
 </div>
@@ -153,7 +158,7 @@ var products = [
   { name: "Ice Cream Sammie", zh: "冰淇淋三明治", price: 7.99, image: "icecream/40274_CA_IC_Ice-Cream-Sammie_ENG_473ml_Open-374x479.avif" },
 ];
 
-var cart = JSON.parse(localStorage.getItem('shabuCart')) || {};
+var cart = JSON.parse(localStorage.getItem('shabuCartIC')) || {};
 
 function renderProducts() {
   var grid = document.getElementById('productsGrid');
@@ -161,9 +166,9 @@ function renderProducts() {
     var qty = cart[p.name] ? cart[p.name].qty : 0;
     var safeKey = p.name.replace(/[^a-zA-Z0-9]/g, '');
     return '<div class="product-card">'
-      + '<img src="' + p.image + '" alt="' + p.name + ' pint Scarborough" class="product-image" loading="lazy"/>'
+      + '<img src="' + p.image + '" alt="Ben and Jerrys ' + p.name + ' pint Scarborough" class="product-image" loading="lazy"/>'
       + '<div class="product-zh">' + p.zh + '</div>'
-      + '<div class="product-name">' + p.name + '</div>'
+      + '<div class="product-name">Ben &amp; Jerry\'s ' + p.name + '</div>'
       + '<div class="product-price">$' + p.price.toFixed(2) + ' / pint</div>'
       + '<div class="qty-controls">'
       + '<button class="qty-btn" onclick="updateQty(' + idx + ',-1)">-</button>'
@@ -175,18 +180,10 @@ function renderProducts() {
 
 function updateQty(idx, change) {
   var p = products[idx];
-  if (!cart[p.name]) cart[p.name] = {
-    key: p.name,
-    name: p.name,
-    zh: p.zh,
-    price: p.price,
-    unit: 'per pint',
-    cat: 'sides',
-    qty: 0
-  };
+  if (!cart[p.name]) cart[p.name] = { name: p.name, zh: p.zh, price: p.price, qty: 0 };
   cart[p.name].qty += change;
   if (cart[p.name].qty <= 0) delete cart[p.name];
-  localStorage.setItem('shabuCart', JSON.stringify(cart));
+  localStorage.setItem('shabuCartIC', JSON.stringify(cart));
   var safeKey = p.name.replace(/[^a-zA-Z0-9]/g, '');
   var el = document.getElementById('qty-' + safeKey);
   if (el) el.textContent = cart[p.name] ? cart[p.name].qty : 0;
@@ -217,9 +214,8 @@ function openModal() {
     body.innerHTML = '<div class="order-meta">Order # <span>' + orderNum + '</span> &nbsp;·&nbsp; ' + orderDate + '</div>'
       + items.map(function(item) {
           return '<div class="modal-list-item"><div>'
-            + '<div class="modal-item-zh">' + item.zh + '</div>'
-            + '<div class="modal-item-name">' + item.name + '</div>'
-            + '<div class="modal-item-detail">' + item.qty + 'x &middot; ' + (item.price != null ? '$' + item.price.toFixed(2) : '') + '</div>'
+            + '<div class="modal-item-name">Ben &amp; Jerry\'s ' + item.name + '</div>'
+            + '<div class="modal-item-detail">' + item.qty + 'x &middot; $' + item.price.toFixed(2) + '/pint</div>'
             + '</div><button class="modal-item-remove" onclick="removeItem(\'' + item.name.replace(/'/g, "\\'") + '\')">×</button></div>';
         }).join('')
       + '<div class="tax-note">⚠️ Prices before tax.</div>';
@@ -233,7 +229,7 @@ function overlayClose(e) { if (e.target.id === 'modalOverlay') closeModal(); }
 
 function removeItem(name) {
   delete cart[name];
-  localStorage.setItem('shabuCart', JSON.stringify(cart));
+  localStorage.setItem('shabuCartIC', JSON.stringify(cart));
   updateCartUI();
   renderProducts();
   openModal();
@@ -245,9 +241,7 @@ function copyForWeChat() {
   var orderNum = genOrderNum();
   var date = new Date().toLocaleDateString('en-CA', { year:'numeric', month:'long', day:'numeric' });
   var text = 'Shabu Meat House Order 涮肉屋订单\nOrder #: ' + orderNum + '\nDate: ' + date + '\n\n';
-  items.forEach(function(item) {
-    text += item.qty + 'x ' + item.zh + ' ' + item.name + '\n';
-  });
+  items.forEach(function(item) { text += item.qty + 'x Ben & Jerry\'s ' + item.name + '\n'; });
   text += '\nWeChat: shabumeat';
   navigator.clipboard.writeText(text).then(function() {
     alert('Copied! Paste into WeChat (shabumeat).\n已复制！粘贴到微信发送。\n\nWe will reply to confirm.\n我们将回复确认。');
@@ -258,7 +252,7 @@ function clearCart() {
   if (!Object.keys(cart).length) return;
   if (confirm('Clear all items? 清空所有商品？')) {
     cart = {};
-    localStorage.removeItem('shabuCart');
+    localStorage.removeItem('shabuCartIC');
     updateCartUI();
     closeModal();
     renderProducts();

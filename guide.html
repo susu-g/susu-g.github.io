@@ -9,220 +9,200 @@
   <link rel="stylesheet" href="styles.css"/>
   <link rel="icon" type="image/png" href="favicon.png"/>
   <style>
-    .planner-box {
-      background: var(--blue-light);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.4rem 1.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .p-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 0.8rem;
-    }
+    nav { display: none; }
+    body { background: #f7f3ee; margin-left: 52px; }
+    @media (max-width: 768px) { body { margin-left: 0; padding-top: 48px; } }
+
+    /* ── SIDE NAV ── */
+    .sidenav { position:fixed;left:0;top:0;bottom:0;width:52px;background:#1a2a32;z-index:1000;display:flex;flex-direction:column;align-items:center;transition:width 0.22s cubic-bezier(.4,0,.2,1);overflow:hidden; }
+    .sidenav:hover { width:210px; }
+    .sidenav-logo { display:flex;align-items:center;gap:10px;padding:18px 14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.08);width:100%;flex-shrink:0; }
+    .sidenav-logo-icon { width:24px;height:24px;background:#4a9ebe;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;font-family:'DM Sans',sans-serif; }
+    .sidenav-logo-text { font-family:'Playfair Display',serif;font-size:13px;color:white;white-space:nowrap;opacity:0;transition:opacity 0.15s; }
+    .sidenav:hover .sidenav-logo-text { opacity:1; }
+    .sidenav-section { width:100%;padding:8px 0 4px;border-bottom:1px solid rgba(255,255,255,0.06); }
+    .sidenav-section-label { font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);padding:0 14px 4px;white-space:nowrap;opacity:0;transition:opacity 0.15s; }
+    .sidenav:hover .sidenav-section-label { opacity:1; }
+    .sidenav-link { display:flex;align-items:center;gap:10px;padding:8px 14px;text-decoration:none;color:rgba(255,255,255,0.65);font-family:'DM Sans',sans-serif;font-size:13px;white-space:nowrap;transition:color 0.15s,background 0.15s;width:100%; }
+    .sidenav-link:hover { color:white;background:rgba(255,255,255,0.07); }
+    .sidenav-link.active { color:#4a9ebe; }
+    .sidenav-link-icon { width:24px;text-align:center;flex-shrink:0;font-size:14px; }
+    .sidenav-link-text { opacity:0;transition:opacity 0.15s; }
+    .sidenav:hover .sidenav-link-text { opacity:1; }
+    .sidenav-cat { display:flex;align-items:center;gap:10px;padding:5px 14px;color:rgba(255,255,255,0.45);font-family:'DM Sans',sans-serif;font-size:12px;white-space:nowrap;cursor:pointer;text-decoration:none;width:100%; }
+    .sidenav-cat:hover { color:rgba(255,255,255,0.85); }
+    .sidenav-cat-icon { width:24px;text-align:center;flex-shrink:0;font-size:11px; }
+    .sidenav-cat-text { opacity:0;transition:opacity 0.15s; }
+    .sidenav:hover .sidenav-cat-text { opacity:1; }
+
+    /* ── MOBILE NAV ── */
+    .mobile-nav { display:none;position:fixed;top:0;left:0;right:0;z-index:1000;background:#1a2a32;padding:0 16px; }
+    .mobile-nav-bar { display:flex;align-items:center;justify-content:space-between;height:48px; }
+    .mobile-nav-logo { font-family:'Playfair Display',serif;font-size:15px;color:white;text-decoration:none; }
+    .mobile-nav-toggle { background:none;border:none;color:white;font-size:20px;cursor:pointer;padding:4px 8px; }
+    .mobile-nav-dropdown { display:none;background:#1a2a32;border-top:1px solid rgba(255,255,255,0.1);padding:8px 0 12px; }
+    .mobile-nav-dropdown.open { display:block; }
+    .mobile-nav-link { display:block;padding:9px 16px;color:rgba(255,255,255,0.75);text-decoration:none;font-family:'DM Sans',sans-serif;font-size:14px; }
+    .mobile-nav-link:hover { color:white; }
+    .mobile-nav-link.active { color:#4a9ebe; }
+    @media (max-width:768px) { .sidenav { display:none; } .mobile-nav { display:block; } }
+
+    /* ── PAGE ── */
+    .page-wrap { max-width: 800px; margin: 0 auto; padding: 24px 24px 80px; }
+    .page-header { padding-bottom: 16px; border-bottom: 2px solid #1a2a32; margin-bottom: 20px; }
+    .page-header h1 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #1a2a32; margin-bottom: 4px; }
+    .page-header p { font-size: 0.85rem; color: #6a7a82; }
+    .section-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #8a9aa2; margin-bottom: 4px; font-family: 'DM Sans', sans-serif; }
+
+    /* ── PLANNER ── */
+    .planner-box { background: white; border: 1px solid #e0d8cf; border-radius: 6px; padding: 16px; margin-bottom: 16px; }
+    .p-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
     .p-row:last-child { margin-bottom: 0; }
-    .p-lbl {
-      font-size: 0.8rem;
-      color: var(--ink-soft);
-      min-width: 62px;
-      flex-shrink: 0;
-      font-family: 'Noto Sans SC', sans-serif;
-    }
-    .pill {
-      padding: 4px 13px;
-      border-radius: 50px;
-      border: 1.5px solid var(--border);
-      background: white;
-      color: var(--ink);
-      font-size: 0.8rem;
-      cursor: pointer;
-      white-space: nowrap;
-      font-family: 'DM Sans', sans-serif;
-      transition: all 0.15s;
-    }
-    .pill:hover { border-color: var(--blue-accent); color: var(--blue-accent); }
-    .pill.on {
-      background: var(--blue-accent);
-      border-color: var(--blue-accent);
-      color: white;
-    }
+    .p-lbl { font-size: 0.8rem; color: #6a7a82; min-width: 62px; flex-shrink: 0; font-family: 'Noto Sans SC', sans-serif; }
+    .pill { padding: 4px 12px; border-radius: 4px; border: 1px solid #c8bfb3; background: #f7f3ee; color: #4a5a62; font-size: 0.78rem; cursor: pointer; white-space: nowrap; font-family: 'DM Sans', sans-serif; transition: all 0.12s; }
+    .pill:hover { border-color: #1a2a32; color: #1a2a32; }
+    .pill.on { background: #1a2a32; border-color: #1a2a32; color: white; }
     .ctr { display: flex; align-items: center; gap: 8px; }
-    .cbtn {
-      width: 28px; height: 28px;
-      border-radius: 8px;
-      border: 1.5px solid var(--border);
-      background: white;
-      color: var(--ink);
-      font-size: 16px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: border-color 0.15s;
-    }
-    .cbtn:hover { border-color: var(--blue-accent); }
-    .cval { font-size: 18px; font-weight: 700; color: var(--blue-deep); min-width: 18px; text-align: center; }
-    .broth-tip {
-      font-size: 0.78rem;
-      color: var(--blue-deep);
-      background: rgba(74,158,190,0.12);
-      border-radius: 8px;
-      padding: 5px 10px;
-      margin-top: 5px;
-      width: 100%;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .trackers {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 10px;
-      margin-bottom: 1.5rem;
-    }
-    .tracker {
-      background: white;
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      padding: 0.85rem 1rem;
-    }
-    .tracker.ok { border-color: #4caf50; background: #f0faf0; }
-    .tracker.warn { border-color: #ff9800; background: #fff8f0; }
+    .cbtn { width: 26px; height: 26px; border-radius: 4px; border: 1px solid #c8bfb3; background: #f7f3ee; color: #1a2a32; font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.12s; }
+    .cbtn:hover { background: #1a2a32; color: white; border-color: #1a2a32; }
+    .cval { font-size: 16px; font-weight: 700; color: #1a2a32; min-width: 18px; text-align: center; }
+    .broth-tip { font-size: 0.76rem; color: #4a5a62; background: #f0ebe3; border-radius: 4px; padding: 6px 10px; margin-top: 6px; width: 100%; font-family: 'DM Sans', sans-serif; }
+    .est-strip { display: flex; align-items: baseline; gap: 8px; padding-top: 12px; border-top: 1px solid #e0d8cf; margin-top: 12px; }
+    .est-num { font-size: 1.3rem; font-weight: 700; color: #1a2a32; }
+    .est-note { font-size: 0.72rem; color: #8a9aa2; }
+
+    /* ── TRACKERS ── */
+    .trackers { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 16px; }
+    .tracker { background: white; border: 1px solid #e0d8cf; border-radius: 6px; padding: 10px 12px; }
+    .tracker.ok { border-color: #4caf50; background: #f2faf2; }
+    .tracker.warn { border-color: #ff9800; background: #fffaf2; }
     .tracker.low { border-color: #e53935; background: #fff5f5; }
-    .tr-lbl { font-size: 0.72rem; color: var(--ink-soft); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .tr-lbl { font-size: 0.68rem; color: #8a9aa2; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
     .tracker.ok .tr-lbl, .tracker.ok .tr-val, .tracker.ok .tr-msg { color: #2e7d32; }
     .tracker.warn .tr-lbl, .tracker.warn .tr-val, .tracker.warn .tr-msg { color: #e65100; }
     .tracker.low .tr-lbl, .tracker.low .tr-val, .tracker.low .tr-msg { color: #c62828; }
-    .tr-val { font-size: 1.1rem; font-weight: 700; color: var(--ink); }
-    .tr-msg { font-size: 0.72rem; color: var(--ink-soft); margin-top: 3px; }
-    .cat-block {
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 10px;
-    }
-    .cat-hd {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 11px 14px;
-      cursor: pointer;
-      background: white;
-      transition: background 0.15s;
-    }
-    .cat-hd:hover { background: var(--blue-light); }
+    .tr-val { font-size: 1rem; font-weight: 700; color: #1a2a32; }
+    .tr-msg { font-size: 0.68rem; color: #8a9aa2; margin-top: 2px; }
+
+    /* ── CATEGORIES ── */
+    .cat-block { border: 1px solid #e0d8cf; border-radius: 6px; overflow: hidden; margin-bottom: 8px; }
+    .cat-hd { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; cursor: pointer; background: white; transition: background 0.12s; }
+    .cat-hd:hover { background: #f7f3ee; }
     .cat-left { display: flex; align-items: center; gap: 8px; }
-    .cat-title { font-size: 0.9rem; font-weight: 700; color: var(--ink); font-family: 'DM Sans', sans-serif; }
-    .rec-badge {
-      font-size: 0.68rem;
-      background: var(--blue-light);
-      color: var(--blue-deep);
-      border: 1px solid rgba(74,158,190,0.3);
-      padding: 2px 8px;
-      border-radius: 50px;
-    }
+    .cat-title { font-size: 0.88rem; font-weight: 700; color: #1a2a32; font-family: 'DM Sans', sans-serif; }
+    .rec-badge { font-size: 0.65rem; background: #e8f0e4; color: #3a6a2a; border: 1px solid #c8dcc0; padding: 2px 7px; border-radius: 3px; }
     .cat-right { display: flex; align-items: center; gap: 8px; }
-    .cat-meta { font-size: 0.75rem; color: var(--ink-soft); }
-    .arr { font-size: 10px; color: var(--ink-soft); transition: transform 0.2s; display: inline-block; }
+    .cat-meta { font-size: 0.72rem; color: #8a9aa2; }
+    .arr { font-size: 10px; color: #8a9aa2; transition: transform 0.2s; display: inline-block; }
     .arr.open { transform: rotate(180deg); }
-    .cat-body { display: none; border-top: 1px solid var(--border); }
+    .cat-body { display: none; border-top: 1px solid #e0d8cf; }
     .cat-body.open { display: block; }
-    .item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 9px 14px;
-      border-bottom: 1px solid var(--border);
-      background: white;
-      transition: background 0.1s;
-    }
+    .item { display: flex; align-items: center; gap: 10px; padding: 8px 14px; border-bottom: 1px solid #f0ebe3; background: white; transition: background 0.1s; }
     .item:last-child { border-bottom: none; }
-    .item:hover { background: var(--blue-light); }
-    .item.added { background: #f0faf0; }
-    .pop-dot { width: 5px; height: 5px; border-radius: 50%; background: #ff9800; flex-shrink: 0; }
+    .item:hover { background: #f7f3ee; }
+    .item.added { background: #f2faf2; }
+    .pop-dot { width: 5px; height: 5px; border-radius: 50%; background: #c8a050; flex-shrink: 0; }
     .item-info { flex: 1; min-width: 0; }
-    .item-zh { font-size: 0.88rem; color: var(--blue-deep); font-family: 'Noto Sans SC', sans-serif; font-weight: 500; }
+    .item-zh { font-size: 0.85rem; color: #1a2a32; font-family: 'Noto Sans SC', sans-serif; font-weight: 500; }
     .item.added .item-zh { color: #2e7d32; }
-    .item-en { font-size: 0.75rem; color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .item-right { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
-    .item-hint {
-      font-size: 0.68rem;
-      color: var(--blue-deep);
-      background: var(--blue-light);
-      border: 1px solid rgba(74,158,190,0.3);
-      padding: 2px 7px;
-      border-radius: 50px;
-      white-space: nowrap;
-    }
-    .item-price { font-size: 0.78rem; color: var(--ink-soft); white-space: nowrap; }
-    .qty-row { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
-    .qbtn {
-      width: 22px; height: 22px;
-      border-radius: 6px;
-      border: 1.5px solid var(--border);
-      background: white;
-      color: var(--ink);
-      font-size: 14px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      line-height: 1;
-      transition: border-color 0.15s;
-    }
-    .qbtn:hover { border-color: var(--blue-accent); }
+    .item-en { font-size: 0.72rem; color: #8a9aa2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .item-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .item-hint { font-size: 0.65rem; color: #3a6a2a; background: #e8f0e4; border: 1px solid #c8dcc0; padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
+    .item-price { font-size: 0.75rem; color: #6a7a82; white-space: nowrap; }
+    .qty-row { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+    .qbtn { width: 22px; height: 22px; border-radius: 4px; border: 1px solid #c8bfb3; background: #f7f3ee; color: #1a2a32; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; transition: all 0.12s; }
+    .qbtn:hover { background: #1a2a32; color: white; border-color: #1a2a32; }
     .item.added .qbtn { border-color: #81c784; }
-    .qval { font-size: 0.85rem; font-weight: 700; color: var(--ink); min-width: 14px; text-align: center; }
-    .list-bar {
-      background: var(--blue-deep);
-      color: white;
-      border-radius: 12px;
-      padding: 0.9rem 1.2rem;
-      margin-top: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .list-info { font-size: 0.85rem; color: rgba(255,255,255,0.85); }
+    .qval { font-size: 0.82rem; font-weight: 700; color: #1a2a32; min-width: 14px; text-align: center; }
+
+    /* ── LIST BAR ── */
+    .list-bar { background: #1a2a32; color: white; border-radius: 6px; padding: 12px 16px; margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .list-info { font-size: 0.82rem; color: rgba(255,255,255,0.75); font-family: 'DM Sans', sans-serif; }
     .list-info span { font-weight: 700; color: white; }
-    .copy-btn {
-      padding: 8px 18px;
-      border-radius: 8px;
-      border: 1.5px solid rgba(255,255,255,0.5);
-      background: transparent;
-      color: white;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      transition: background 0.15s;
-    }
-    .copy-btn:hover { background: rgba(255,255,255,0.15); }
+    .copy-btn { padding: 7px 16px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.4); background: transparent; color: white; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.12s; }
+    .copy-btn:hover { background: rgba(255,255,255,0.12); }
+    .share-btn { padding: 7px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.2); background: transparent; color: rgba(255,255,255,0.7); font-size: 0.8rem; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.12s; }
+    .share-btn:hover { color: white; border-color: rgba(255,255,255,0.4); }
+
+    /* ── STORE INFO ── */
+    .store-section { background: white; border: 1px solid #e0d8cf; border-radius: 6px; padding: 16px; margin-top: 20px; }
+    .contact-block { margin-bottom: 12px; }
+    .contact-block:last-child { margin-bottom: 0; }
+    .contact-block h4 { font-size: 0.82rem; font-weight: 700; color: #1a2a32; margin-bottom: 5px; font-family: 'DM Sans', sans-serif; }
+    .contact-block p { font-size: 0.82rem; color: #4a5a62; line-height: 1.65; }
+    .maps-link { display: inline-block; margin-top: 4px; font-size: 0.78rem; color: #4a9ebe; text-decoration: none; }
+    .maps-link:hover { text-decoration: underline; }
+    .hours-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .hours-list li { display: flex; justify-content: space-between; font-size: 0.78rem; color: #4a5a62; padding: 2px 0; border-bottom: 1px solid #f0ebe3; }
+    .map-column iframe { width: 100%; height: 300px; border: none; border-radius: 6px; margin-top: 12px; }
+
+    footer { background: #1a2a32; color: rgba(255,255,255,0.6); padding: 1.5rem 2rem; text-align: center; font-size: 0.82rem; font-family: 'DM Sans', sans-serif; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: white; margin-bottom: 6px; }
+    .footer-logo span { color: #4a9ebe; }
+    footer p { margin-bottom: 3px; }
+
     @media (max-width: 600px) {
       .p-lbl { min-width: 52px; }
-      .pill { font-size: 0.72rem; padding: 3px 10px; }
+      .pill { font-size: 0.72rem; padding: 3px 9px; }
+      .item-en { display: none; }
       .item-hint { display: none; }
       .trackers { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 380px) {
-      .trackers { grid-template-columns: 1fr; }
+      .list-bar { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="index.html">Shabu <span>Meat House</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="items.html">Items</a></li>
-    <li><a href="guide.html" class="active">Guide</a></li>
-    <li><a href="recipes.html">Recipes</a></li>
-  </ul>
+<!-- SIDE NAV -->
+<nav class="sidenav">
+  <a href="index.html" class="sidenav-logo">
+    <div class="sidenav-logo-icon">S</div>
+    <span class="sidenav-logo-text">Shabu Meat House</span>
+  </a>
+  <div class="sidenav-section">
+    <div class="sidenav-section-label">Pages</div>
+    <a href="index.html" class="sidenav-link"><span class="sidenav-link-icon">🏠</span><span class="sidenav-link-text">Home</span></a>
+    <a href="items.html" class="sidenav-link"><span class="sidenav-link-icon">🛍</span><span class="sidenav-link-text">Shop</span></a>
+    <a href="guide.html" class="sidenav-link active"><span class="sidenav-link-icon">📋</span><span class="sidenav-link-text">Guide</span></a>
+    <a href="recipes.html" class="sidenav-link"><span class="sidenav-link-icon">🍲</span><span class="sidenav-link-text">Recipes</span></a>
+    <a href="icecream.html" class="sidenav-link"><span class="sidenav-link-icon">🍦</span><span class="sidenav-link-text">Ice Cream</span></a>
+  </div>
+  <div class="sidenav-section" style="flex:1;overflow-y:auto">
+    <div class="sidenav-section-label">Browse</div>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🐑</span><span class="sidenav-cat-text">Lamb 羊肉</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥩</span><span class="sidenav-cat-text">Beef 牛肉</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🐷</span><span class="sidenav-cat-text">Pork 猪肉</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍵</span><span class="sidenav-cat-text">Soup 汤底</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥬</span><span class="sidenav-cat-text">Veg 蔬菜</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍄</span><span class="sidenav-cat-text">Mushrooms 菌菇</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍜</span><span class="sidenav-cat-text">Noodles 面条</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥣</span><span class="sidenav-cat-text">Sides 配菜</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🫙</span><span class="sidenav-cat-text">Condiments 调料</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥫</span><span class="sidenav-cat-text">Dipping 蘸料</span></a>
+    <a href="icecream.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍦</span><span class="sidenav-cat-text">Ice Cream 冰淇淋</span></a>
+  </div>
 </nav>
 
-<section class="container" style="padding-top: 2rem;">
-  <p class="section-label">Interactive Guide / 购物指南</p>
-  <h1 class="section-title">Plan Your Hotpot <span style="font-family:'Noto Sans SC',sans-serif;font-size:0.55em;color:var(--blue-accent);">火锅计划</span></h1>
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <div class="mobile-nav-bar">
+    <a href="index.html" class="mobile-nav-logo">Shabu Meat House</a>
+    <button class="mobile-nav-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')">☰</button>
+  </div>
+  <div class="mobile-nav-dropdown" id="mobileNav">
+    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="items.html" class="mobile-nav-link">🛍 Shop</a>
+    <a href="guide.html" class="mobile-nav-link active">📋 Guide</a>
+    <a href="recipes.html" class="mobile-nav-link">🍲 Recipes</a>
+    <a href="icecream.html" class="mobile-nav-link">🍦 Ice Cream</a>
+  </div>
+</div>
 
-  <div class="notice-banner" style="border-radius:10px;margin-bottom:1.5rem;">
-    <strong>No online ordering</strong> — this is a planning guide only. Visit us in-store or message WeChat: <strong>shabumeat</strong> to order.
-    <span style="font-family:'Noto Sans SC',sans-serif;opacity:0.85;margin-left:4px;">此清单仅为购物指引，请到店或微信下单。</span>
+<div class="page-wrap">
+  <div class="page-header">
+    <p class="section-label">Interactive Guide / 购物指南</p>
+    <h1>Plan Your Hotpot <span style="font-family:'Noto Sans SC',sans-serif;font-size:0.55em;color:#4a9ebe;">火锅计划</span></h1>
+    <p>Tell us about your group and we'll help you figure out what to get. Add items to your wishlist and copy it to bring to the store.</p>
   </div>
 
   <!-- PLANNER -->
@@ -234,7 +214,7 @@
         <span class="cval" id="pval">2</span>
         <button class="cbtn" onclick="chg(1)">+</button>
       </div>
-      <span style="font-size:0.8rem;color:var(--ink-soft)" id="plbl">people</span>
+      <span style="font-size:0.8rem;color:#8a9aa2" id="plbl">people</span>
     </div>
     <div class="p-row">
       <span class="p-lbl">Appetite 食量</span>
@@ -250,7 +230,7 @@
     </div>
     <div class="p-row" style="align-items:flex-start">
       <span class="p-lbl" style="padding-top:5px">Broth 汤底</span>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;flex:1">
+      <div style="display:flex;flex-wrap:wrap;gap:5px;flex:1">
         <button class="pill on" onclick="setB('mala',this)">Mala 麻辣</button>
         <button class="pill" onclick="setB('tomato',this)">Tomato 番茄</button>
         <button class="pill" onclick="setB('mushroom',this)">Mushroom 菌菇</button>
@@ -265,58 +245,55 @@
       <button class="pill on" onclick="setLang('zh',this)">中文</button>
       <button class="pill" onclick="setLang('en',this)">English</button>
     </div>
-    <div style="border-top:1px solid var(--border);margin-top:0.9rem;padding-top:0.9rem;display:flex;align-items:baseline;gap:8px">
-      <span style="font-size:0.78rem;color:var(--ink-soft)">Estimated spend</span>
-      <span style="font-size:1.3rem;font-weight:700;color:var(--blue-deep)" id="est-range">$—</span>
-      <span style="font-size:0.72rem;color:var(--ink-soft)">before tax · weight-based</span>
+    <div class="est-strip">
+      <span style="font-size:0.78rem;color:#8a9aa2">Estimated spend</span>
+      <span class="est-num" id="est-range">$—</span>
+      <span class="est-note">before tax · weight-based</span>
     </div>
   </div>
 
-  <!-- TRACKERS -->
   <div class="trackers" id="trackers"></div>
-
-  <!-- CATEGORIES -->
   <div id="cats"></div>
 
-  <!-- LIST BAR -->
   <div class="list-bar">
-    <div class="list-info"><span id="lcount">0</span> items added &nbsp;·&nbsp; est. <span id="lest">$—</span> &nbsp;·&nbsp; before tax, weight-based</div>
-    <button class="copy-btn" onclick="copyList()">&#128203; Copy for WeChat 复制发送</button>
-  </div>
-</section>
-<!-- STORE INFO + MAP -->
-<div class="directions-container">
-  <div class="directions-grid">
-    <div class="info-column">
-      <p class="section-label">Visit Us / 门店地址</p>
-      <h2 class="display-title">Shabu Meat House</h2>
-      <div class="contact-block">
-        <h4>📍 Address 地址</h4>
-        <p>3272 Midland Ave, Unit B-112<br/>Scarborough, ON M1V 0C7<br/>North-facing entrance 朝北入口</p>
-        <a href="https://maps.google.com/?q=3272+Midland+Ave+Scarborough+ON" target="_blank" class="maps-link">Open in Google Maps →</a>
-      </div>
-      <div class="contact-block">
-        <h4>⏰ Hours 营业时间</h4>
-        <ul class="hours-list">
-          <li><span>Mon 周一</span><span>12:00 PM – 6:00 PM</span></li>
-          <li><span>Tues 周二</span><span>12:00 PM – 6:00 PM</span></li>
-          <li><span>Wed 周三</span><span>12:00 PM – 4:00 PM</span></li>
-          <li><span>Thurs 周四</span><span>12:00 PM – 4:00 PM</span></li>
-          <li><span>Fri 周五</span><span>12:00 PM – 6:00 PM</span></li>
-          <li><span>Sat 周六</span><span>11:00 AM – 6:00 PM</span></li>
-          <li><span>Sun 周日</span><span>11:00 AM – 6:00 PM</span></li>
-        </ul>
-      </div>
-      <div class="contact-block">
-        <h4>💬 WeChat 微信</h4>
-        <p><strong style="color:var(--blue-deep);">shabumeat</strong><br/>Message us to place an order or ask about availability.<br/><span style="font-family:'Noto Sans SC',sans-serif;font-size:0.9em;">联系我们下单或询问库存。</span></p>
-      </div>
+    <div class="list-info"><span id="lcount">0</span> items · est. <span id="lest">$—</span></div>
+    <div style="display:flex;gap:6px;">
+      <button class="copy-btn" onclick="copyList()">📋 Copy List 复制清单</button>
+      <button class="share-btn" onclick="shareList()">↗ Share</button>
     </div>
-    <div class="map-column">
-      <iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=779&amp;height=551&amp;hl=en&amp;q=b112-3272 midland ave&amp;t=&amp;z=17&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://embed-googlemap.com">embed google map</a></div><style>.mapouter{position:relative;text-align:right;width:100%;height:551px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:551px;}.gmap_iframe {height:551px!important;}</style></div>
+  </div>
+
+  <!-- STORE INFO -->
+  <div class="store-section">
+    <p class="section-label" style="margin-bottom:10px">Visit Us / 门店地址</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div>
+        <div class="contact-block">
+          <h4>📍 Address 地址</h4>
+          <p>3272 Midland Ave, Unit B-112<br/>Scarborough, ON M1V 0C7<br/>North-facing entrance 朝北入口</p>
+          <a href="https://maps.google.com/?q=3272+Midland+Ave+Scarborough+ON" target="_blank" class="maps-link">Open in Google Maps →</a>
+        </div>
+        <div class="contact-block">
+          <h4>⏰ Hours 营业时间</h4>
+          <ul class="hours-list">
+            <li><span>Mon–Tue 周一二</span><span>12–6 PM</span></li>
+            <li><span>Wed–Thu 周三四</span><span>12–4 PM</span></li>
+            <li><span>Fri 周五</span><span>12–6 PM</span></li>
+            <li><span>Sat–Sun 周六日</span><span>11 AM–6 PM</span></li>
+          </ul>
+        </div>
+        <div class="contact-block">
+          <h4>💬 WeChat 微信</h4>
+          <p><strong style="color:#1a2a32;">shabumeat</strong><br/>Have questions about availability? Message us.<br/><span style="font-family:'Noto Sans SC',sans-serif;font-size:0.85em;color:#6a7a82;">有库存问题？微信联系我们。</span></p>
+        </div>
+      </div>
+      <div>
+        <iframe src="https://maps.google.com/maps?width=667&height=300&hl=en&q=3272+midland+ave+b112&t=&z=17&ie=UTF8&iwloc=B&output=embed" style="width:100%;height:280px;border:none;border-radius:6px;" loading="lazy"></iframe>
+      </div>
     </div>
   </div>
 </div>
+
 <footer>
   <div class="footer-logo">Shabu <span>Meat House</span></div>
   <p>3272 Midland Ave Unit B-112, Scarborough, ON M1V 0C7</p>
@@ -338,26 +315,24 @@ var brothTips={
   water:'No base needed. Add ginger and green onion to taste.',
   split:'Pick one spicy + one mild. Both in stock.'
 };
-var brothRec={
-  mala:['ls-mala','xlk-tallow'],tomato:['ls-tomato','xlk-tomato'],
-  mushroom:['ls-mushroom'],clear:['xlk-clear'],water:[],split:['ls-mala','xlk-clear']
-};
+var brothRec={mala:['ls-mala','xlk-tallow'],tomato:['ls-tomato','xlk-tomato'],mushroom:['ls-mushroom'],clear:['xlk-clear'],water:[],split:['ls-mala','xlk-clear']};
 var cats=[
   {id:'lamb',label:'Lamb 羊肉',isMeat:true,items:[
-    {id:'aus-lamb',zh:'澳大利亚羊肉卷',en:'Australia lamb shoulder rolls',price:'$13.99/lb',avgPkg:10.7,wLo:0.65,wHi:0.85,popular:false},
-    {id:'nz-lamb',zh:'新西兰羊肉卷',en:'New Zealand lamb shoulder rolls',price:'$15.99/lb',avgPkg:12.8,wLo:0.7,wHi:0.9,popular:true},
+    {id:'aus-lamb',zh:'澳大利亚羊肉卷',en:'Australia lamb shoulder rolls',price:'$13.99/lb',avgPkg:10.7,wLo:0.65,wHi:0.85,popular:true,approxTotal:'$9.10–$11.90'},
+    {id:'nz-lamb',zh:'新西兰羊肉卷',en:'New Zealand lamb shoulder rolls',price:'$15.99/lb',avgPkg:12.8,wLo:0.7,wHi:0.9,popular:false,approxTotal:'$11.19–$14.39'},
+    {id:'lamb-leg',zh:'无骨羊腿块',en:'Lamb leg boneless cube',price:'$12.99/lb',avgPkg:14.9,wLo:1.0,wHi:1.3,popular:false,approxTotal:'$12.99–$16.89'},
+    {id:'mutton',zh:'有骨老羊腿块',en:'Mutton leg bone-in cube',price:'$10.99/lb',avgPkg:12.1,wLo:1.0,wHi:1.3,popular:false,approxTotal:'$10.99–$14.29'},
   ]},
   {id:'beef',label:'Beef 牛肉',isMeat:true,items:[
-    {id:'beef-short',zh:'牛五花卷',en:'Beef short plate rolls',price:'$10.99/lb',avgPkg:9.7,wLo:0.78,wHi:0.98,popular:true},
-    {id:'beef-chuck',zh:'牛眉头卷',en:'Beef chuck rolls',price:'$14.99/lb',avgPkg:11.9,wLo:0.7,wHi:0.9,popular:false},
+    {id:'beef-short',zh:'牛五花卷',en:'Beef short plate rolls',price:'$10.99/lb',avgPkg:9.7,wLo:0.78,wHi:0.98,popular:true,approxTotal:'$7.70–$9.90'},
+    {id:'beef-chuck',zh:'牛眉头卷',en:'Beef chuck rolls',price:'$14.99/lb',avgPkg:11.9,wLo:0.7,wHi:0.9,popular:true,approxTotal:'$10.49–$13.49'},
     {id:'beef-balls',zh:'牛肉丸',en:'Beef balls',price:'$8.00 ea',avgPkg:8,wLo:0,wHi:0,popular:false},
-    {id:'omasum',zh:'金钱肚丝',en:'Beef honeycomb tripe Scalded',price:'$8.00 ea',avgPkg:8,wLo:0,wHi:0,popular:false},
     {id:'omasum',zh:'牛百叶丝',en:'Beef omasum scalded',price:'$8.00 ea',avgPkg:8,wLo:0,wHi:0,popular:false},
-    {id:'omasum',zh:'牛草肚丝',en:'Beef tripe scalded',price:'$8.00 ea',avgPkg:8,wLo:0,wHi:0,popular:false},
-
+    {id:'oxtail',zh:'牛尾',en:'Beef ox tail',price:'$13.99/lb',avgPkg:16.1,wLo:1.0,wHi:1.3,popular:false,approxTotal:'$13.99–$18.19'},
   ]},
   {id:'pork',label:'Pork 猪肉',isMeat:true,items:[
-    {id:'pork-shoulder',zh:'猪梅头肉卷',en:'Pork shoulder rolls',price:'$7.88/lb',avgPkg:6.3,wLo:0.7,wHi:0.9,popular:false},
+    {id:'pork-shoulder',zh:'猪梅头肉卷',en:'Pork shoulder rolls',price:'$7.88/lb',avgPkg:6.3,wLo:0.7,wHi:0.9,popular:true,approxTotal:'$5.52–$7.09'},
+    {id:'pork-belly',zh:'无皮猪腩片',en:'Pork belly thick cut',price:'$7.99/lb',avgPkg:6.4,wLo:0.7,wHi:0.9,popular:false,approxTotal:'$5.59–$7.19'},
   ]},
   {id:'soup',label:'Soup bases 汤底',isMeat:false,items:[
     {id:'ls-mala',zh:'小肥羊麻辣底料',en:'Little Sheep mala spicy',price:'$5.90 ea',avgPkg:5.9,wLo:0,wHi:0,popular:true},
@@ -379,27 +354,24 @@ var cats=[
     {id:'enoki',zh:'金针菇',en:'Enoki',price:'2 for $2.80',avgPkg:1.4,wLo:0,wHi:0,popular:true},
     {id:'white-mush',zh:'蘑菇',en:'White mushroom 227g',price:'$2.80 ea',avgPkg:2.8,wLo:0,wHi:0,popular:false},
     {id:'brown-mush',zh:'褐蘑菇',en:'Brown mushroom 227g',price:'$2.80 ea',avgPkg:2.8,wLo:0,wHi:0,popular:false},
-     ]},
+    {id:'black-fungus',zh:'黑木耳',en:'Black fungus',price:'$8.00 ea',avgPkg:8,wLo:0,wHi:0,popular:false},
+  ]},
   {id:'noodles',label:'Noodles 面条',isMeat:false,items:[
     {id:'sweet-potato',zh:'红薯粉丝宽条',en:'Sweet potato noodle wide',price:'$4.50 ea',avgPkg:4.5,wLo:0,wHi:0,popular:true},
-    {id:'sweet-potato',zh:'红薯粉丝中条',en:'Sweet potato noodle round (medium)',price:'$4.50 ea',avgPkg:4.5,wLo:0,wHi:0,popular:true},
     {id:'lanzhou',zh:'兰州拉面',en:'LanZhou fresh noodle',price:'$3.00 ea',avgPkg:3,wLo:0,wHi:0,popular:true},
     {id:'rice-verm',zh:'江西米粉',en:'Jiangxi rice vermicelli',price:'$2.50 ea',avgPkg:2.5,wLo:0,wHi:0,popular:false},
     {id:'long-noodle',zh:'龙须面',en:'Long thin noodle',price:'$3.00 ea',avgPkg:3,wLo:0,wHi:0,popular:false},
   ]},
   {id:'sides',label:'Sides 配菜',isMeat:false,items:[
     {id:'soft-tofu',zh:'软豆腐',en:'Soft tofu 300g',price:'$2.00 ea',avgPkg:2,wLo:0,wHi:0,popular:true},
-    {id:'medium-firm-tofu',zh:'板豆腐',en:'Medium firm tofu 700g',price:'$3.00 ea',avgPkg:3,wLo:0,wHi:0,popular:false},
-    {id:'firm-tofu',zh:'硬豆腐',en:'Firm tofu 500g',price:'$3.50 ea',avgPkg:2,wLo:0,wHi:0,popular:true},
-    {id:'extra-firm-tofu',zh:'特硬豆腐',en:'Extra firm tofu 350g',price:'$4.00 ea',avgPkg:3,wLo:0,wHi:0,popular:false},
-    {id:'black-fungus',zh:'黑木耳',en:'Black fungus',price:'$8.00 ea',avgPkg:8,wLo:0,wHi:0,popular:false},
+    {id:'firm-tofu',zh:'板豆腐',en:'Medium firm tofu 700g',price:'$3.00 ea',avgPkg:3,wLo:0,wHi:0,popular:false},
     {id:'spam',zh:'午餐肉低钠',en:'Spam 25% less sodium',price:'$6.00 ea',avgPkg:6,wLo:0,wHi:0,popular:false},
   ]},
   {id:'dipping',label:'Dipping sauces 蘸料',isMeat:false,items:[
-    {id:'ls-orig',zh:'小肥羊蘸料清香',en:'Little Sheep dip original',price:'$2.00 ea',avgPkg:2,wLo:0,wHi:0,popular:false},
+    {id:'ls-orig',zh:'小肥羊蘸料清香',en:'Little Sheep dip original',price:'$2.00 ea',avgPkg:2,wLo:0,wHi:0,popular:true},
     {id:'ls-spicy',zh:'小肥羊蘸料香辣',en:'Little Sheep dip spicy',price:'$2.00 ea',avgPkg:2,wLo:0,wHi:0,popular:false},
-    {id:'xlk-sesame',zh:'小龙坎麻酱原味',en:'XIAOLONGKAN sesame dip',price:'$1.90 ea',avgPkg:1.9,wLo:0,wHi:0,popular:false},
-    {id:'xlk-sesame-spicy',zh:'小龙坎麻酱香辣',en:'XIAOLONGKAN sesame dip spicy',price:'$1.90 ea',avgPkg:1.9,wLo:0,wHi:0,popular:true},
+    {id:'xlk-sesame',zh:'小龙坎麻酱原味',en:'XIAOLONGKAN sesame dip',price:'$1.90 ea',avgPkg:1.9,wLo:0,wHi:0,popular:true},
+    {id:'xlk-sesame-spicy',zh:'小龙坎麻酱香辣',en:'XIAOLONGKAN sesame dip spicy',price:'$1.90 ea',avgPkg:1.9,wLo:0,wHi:0,popular:false},
     {id:'sesame-paste',zh:'纯芝麻酱',en:'JoyShare sesame paste',price:'$6.99 ea',avgPkg:6.99,wLo:0,wHi:0,popular:false},
   ]},
 ];
@@ -413,18 +385,40 @@ function setB(v,el){broth=v;var w=el.parentNode;w.querySelectorAll('.pill').forE
 function setLang(v,el){lang=v;el.parentNode.querySelectorAll('.pill').forEach(function(b){b.classList.remove('on')});el.classList.add('on');render();}
 function togCat(id){openCats[id]=!openCats[id];renderCats();}
 
-function meatTarget(){
+function meatTarget(){var am=appMult[app],fm=focusMult[focus],base=0.35*ppl*am*fm;return{lo:+(base*0.85).toFixed(2),hi:+(base*1.2).toFixed(2)};}
+
+function calcEst(){
   var am=appMult[app],fm=focusMult[focus];
-  var base=0.35*ppl*am*fm;
-  return{lo:+(base*0.85).toFixed(2),hi:+(base*1.2).toFixed(2)};
+  var meatBase=ppl*0.35*am*fm,vegBase=ppl*0.35*am*(focus==='veg'?1.3:focus==='meat'?0.7:1);
+  var brothCost=broth==='water'?0:broth==='split'?11.9:5.9;
+  var extras=ppl<=2?9:ppl<=4?15:22;
+  var mid=meatBase*12+vegBase*2.5+brothCost+extras;
+  var lo=Math.floor(mid*0.8/5)*5,hi=Math.ceil(mid*1.25/5)*5;
+  document.getElementById('est-range').textContent='$'+lo+'–$'+hi;
+}
+
+function calcListEst(){
+  var hasWeighted=false,fixedTotal=0,wLo=0,wHi=0;
+  cats.forEach(function(c){c.items.forEach(function(i){
+    var q=getQty(c.id,i.id);if(q<=0)return;
+    if(i.approxTotal){
+      hasWeighted=true;
+      var cleaned=i.approxTotal.replace(/[$~]/g,'');
+      var parts=cleaned.split(/[\u2013\u2014\-]/);
+      var lo=parseFloat(parts[0])||0,hi=parts.length>1?parseFloat(parts[1]):lo;
+      wLo+=lo*q;wHi+=hi*q;
+    } else {
+      fixedTotal+=i.avgPkg*q;
+    }
+  });});
+  if(hasWeighted){var lo=Math.floor((wLo+fixedTotal)/5)*5,hi=Math.ceil((wHi+fixedTotal)/5)*5;return'$'+lo+'–$'+hi;}
+  else if(fixedTotal>0){return'$'+fixedTotal.toFixed(2)+' + tax';}
+  return '$—';
 }
 
 function renderTrackers(){
-  var tgt=meatTarget();
-  var mLo=0,mHi=0;
-  cats.filter(function(c){return c.isMeat}).forEach(function(c){
-    c.items.forEach(function(i){var q=getQty(c.id,i.id);if(q>0){mLo+=i.wLo*q;mHi+=i.wHi*q;}});
-  });
+  var tgt=meatTarget(),mLo=0,mHi=0;
+  cats.filter(function(c){return c.isMeat}).forEach(function(c){c.items.forEach(function(i){var q=getQty(c.id,i.id);if(q>0){mLo+=i.wLo*q;mHi+=i.wHi*q;}});});
   mLo=+mLo.toFixed(2);mHi=+mHi.toFixed(2);
   var soupN=0;cats.find(function(c){return c.id==='soup'}).items.forEach(function(i){soupN+=getQty('soup',i.id);});
   var soupNeeded=(broth==='water')?0:(broth==='split'||ppl>6)?2:1;
@@ -438,7 +432,7 @@ function renderTrackers(){
   var ss='',sm='';
   if(broth==='water'){ss='ok';sm='no base needed';}
   else if(soupN===0){ss='low';sm='need '+soupNeeded+' pack'+(soupNeeded>1?'s':'');}
-  else if(soupN<soupNeeded){ss='warn';sm='grab 1 more pack';}
+  else if(soupN<soupNeeded){ss='warn';sm='grab 1 more';}
   else{ss='ok';sm='good for your group';}
   var ds='',dm='';
   if(dipN===0){ds='low';dm='suggest '+dipTarget+' sauce'+(dipTarget>1?'s':'');}
@@ -452,8 +446,7 @@ function renderTrackers(){
 }
 
 function renderCats(){
-  var recs=brothRec[broth]||[];
-  var html='';
+  var recs=brothRec[broth]||[],html='';
   cats.forEach(function(c){
     var addedN=c.items.filter(function(i){return getQty(c.id,i.id)>0}).length;
     var recN=c.items.filter(function(i){return recs.indexOf(i.id)>-1}).length;
@@ -461,24 +454,19 @@ function renderCats(){
     html+='<div class="cat-block"><div class="cat-hd" onclick="togCat(\''+c.id+'\')">';
     html+='<div class="cat-left"><span class="cat-title">'+c.label+'</span>';
     if(recN>0)html+='<span class="rec-badge">'+recN+' suggested</span>';
-    html+='</div><div class="cat-right"><span class="cat-meta">'+(addedN>0?addedN+' added · ':'')+c.items.length+' items</span><span class="arr'+(isOpen?' open':'')+'">&#9660;</span></div></div>';
+    html+='</div><div class="cat-right"><span class="cat-meta">'+(addedN>0?addedN+' added · ':'')+c.items.length+' items</span><span class="arr'+(isOpen?' open':'')+'">▾</span></div></div>';
     if(isOpen){
       html+='<div class="cat-body open">';
       c.items.forEach(function(i){
-        var q=getQty(c.id,i.id);
-        var added=q>0;
-        var isRec=recs.indexOf(i.id)>-1;
+        var q=getQty(c.id,i.id),added=q>0,isRec=recs.indexOf(i.id)>-1;
         html+='<div class="item'+(added?' added':'')+'">';
         if(i.popular)html+='<div class="pop-dot"></div>';
-        html+='<div class="item-info"><div class="item-zh">'+(lang==='zh'?i.zh:i.en)+'</div></div>';
+        html+='<div class="item-info"><div class="item-zh">'+(lang==='zh'?i.zh:i.en)+'</div><div class="item-en">'+(lang==='zh'?i.en:i.zh)+'</div></div>';
         html+='<div class="item-right">';
         if(isRec)html+='<span class="item-hint">suggested</span>';
         html+='<div class="item-price">'+i.price+'</div>';
-        html+='<div class="qty-row">';
-        html+='<button class="qbtn" onclick="setQty(\''+c.id+'\',\''+i.id+'\','+(q-1)+')">−</button>';
-        html+='<span class="qval">'+q+'</span>';
-        html+='<button class="qbtn" onclick="setQty(\''+c.id+'\',\''+i.id+'\','+(q+1)+')">+</button>';
-        html+='</div></div></div>';
+        html+='<div class="qty-row"><button class="qbtn" onclick="setQty(\''+c.id+'\',\''+i.id+'\','+(q-1)+')">−</button><span class="qval">'+q+'</span><button class="qbtn" onclick="setQty(\''+c.id+'\',\''+i.id+'\','+(q+1)+')">+</button></div>';
+        html+='</div></div>';
       });
       html+='</div>';
     }
@@ -488,59 +476,43 @@ function renderCats(){
 }
 
 function renderListBar(){
-  var totalQty=0,totLo=0,totHi=0;
-  cats.forEach(function(c){
-    c.items.forEach(function(i){
-      var q=getQty(c.id,i.id);
-      if(q>0){
-        totalQty+=q;
-        if(i.wLo>0){totLo+=i.wLo*q*i.avgPkg/((i.wLo+i.wHi)/2);totHi+=i.wHi*q*i.avgPkg/((i.wLo+i.wHi)/2);}
-        else{totLo+=i.avgPkg*q;totHi+=i.avgPkg*q;}
-      }
-    });
-  });
+  var totalQty=0;
+  cats.forEach(function(c){c.items.forEach(function(i){totalQty+=getQty(c.id,i.id);});});
   document.getElementById('lcount').textContent=totalQty;
-  document.getElementById('lest').textContent=totalQty===0?'$—':'$'+Math.round(totLo*0.9)+'–$'+Math.round(totHi*1.1);
+  document.getElementById('lest').textContent=calcListEst();
 }
 
-function calcEst(){
-  var am=appMult[app],fm=focusMult[focus];
-  var meatBase=ppl*0.35*am*fm;
-  var vegBase=ppl*0.35*am*(focus==='veg'?1.3:focus==='meat'?0.7:1);
-  var brothCost=broth==='water'?0:broth==='split'?11.9:5.9;
-  var extras=ppl<=2?9:ppl<=4?15:22;
-  var mid=meatBase*12+vegBase*2.5+brothCost+extras;
-  var lo=Math.round(mid*0.8),hi=Math.round(mid*1.25);
-  document.getElementById('est-range').textContent='$'+lo+'–$'+hi;
-}
 function render(){renderTrackers();renderCats();renderListBar();calcEst();}
 
-function genOrderNum(){
-  var n=new Date(),pad=function(v){return String(v).padStart(2,'0');};
-  return'SMH-'+n.getFullYear()+pad(n.getMonth()+1)+pad(n.getDate())+'-'+pad(n.getHours())+pad(n.getMinutes());
+function genRef(){return '#'+Math.random().toString(36).substr(2,5).toUpperCase();}
+
+function buildCopyText(){
+  var hasItems=false;
+  cats.forEach(function(c){c.items.forEach(function(i){if(getQty(c.id,i.id)>0)hasItems=true;});});
+  if(!hasItems)return null;
+  var ref=genRef(),date=new Date().toLocaleDateString('en-CA',{year:'numeric',month:'short',day:'numeric'});
+  var lines=[ref+' · '+date,''];
+  cats.forEach(function(c){c.items.forEach(function(i){var q=getQty(c.id,i.id);if(q>0)lines.push(q+'x '+i.zh+' '+i.en);});});
+  var est=calcListEst();
+  if(est!=='$—')lines.push('','Approx. '+est+' before tax');
+  lines.push('','Shabu Meat House · 3272 Midland Ave, Scarborough');
+  return lines.join('\n');
 }
 
 function copyList(){
-  var hasItems=false;
-  cats.forEach(function(c){c.items.forEach(function(i){if(getQty(c.id,i.id)>0)hasItems=true;});});
-  if(!hasItems){alert('Nothing added yet. 清单为空。');return;}
-  var orderNum=genOrderNum();
-  var date=new Date().toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});
-  var lines=['Shabu Meat House Order 涮肉屋订单','Order #: '+orderNum,'Date: '+date,''];
-  cats.forEach(function(c){
-    c.items.forEach(function(i){
-      var q=getQty(c.id,i.id);
-      if(q>0)lines.push(q+'x '+i.zh+' '+i.en);
-    });
-  });
-  lines.push('','WeChat: shabumeat');
-  navigator.clipboard.writeText(lines.join('\n')).then(function(){
-    alert('Copied! Paste into WeChat (shabumeat).\n已复制！粘贴到微信发送。\n\nWe will reply to confirm your order.\n我们将回复确认。');
-  });
+  var text=buildCopyText();
+  if(!text){alert('Nothing added yet. 清单为空。');return;}
+  navigator.clipboard.writeText(text).then(function(){alert('List copied — see you in store! 🎉\n清单已复制，期待您的到来！');});
+}
+
+function shareList(){
+  var text=buildCopyText();
+  if(!text){alert('Nothing added yet. 清单为空。');return;}
+  if(navigator.share){navigator.share({title:'My Shabu Meat House Wishlist',text:text});}
+  else{navigator.clipboard.writeText(text).then(function(){alert('List copied — see you in store! 🎉\n清单已复制，期待您的到来！');});}
 }
 
 render();
 </script>
 </body>
 </html>
-

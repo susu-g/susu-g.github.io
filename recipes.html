@@ -9,47 +9,192 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css"/>
   <link rel="icon" type="image/png" href="favicon.png"/>
+  <style>
+    nav { display: none; }
+    body { background: #f7f3ee; margin-left: 52px; }
+    @media (max-width: 768px) { body { margin-left: 0; padding-top: 48px; } }
+
+    /* ── SIDE NAV ── */
+    .sidenav{position:fixed;left:0;top:0;bottom:0;width:52px;background:#1a2a32;z-index:1000;display:flex;flex-direction:column;overflow:hidden;transition:width 0.22s cubic-bezier(.4,0,.2,1)}
+    .sidenav:hover{width:210px}
+    .sidenav-logo{display:flex;align-items:center;gap:10px;padding:18px 14px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.08);width:100%;flex-shrink:0}
+    .sidenav-logo-icon{width:24px;height:24px;background:#4a9ebe;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;font-family:'DM Sans',sans-serif}
+    .sidenav-logo-text{font-family:'Playfair Display',serif;font-size:13px;color:white;white-space:nowrap;opacity:0;transition:opacity 0.15s}
+    .sidenav:hover .sidenav-logo-text{opacity:1}
+    .sidenav-section{width:100%;padding:8px 0 4px;border-bottom:1px solid rgba(255,255,255,0.06)}
+    .sidenav-section-label{font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.3);padding:0 14px 4px;white-space:nowrap;opacity:0;transition:opacity 0.15s}
+    .sidenav:hover .sidenav-section-label{opacity:1}
+    .sidenav-link{display:flex;align-items:center;gap:10px;padding:8px 14px;text-decoration:none;color:rgba(255,255,255,0.65);font-family:'DM Sans',sans-serif;font-size:13px;white-space:nowrap;transition:color 0.15s,background 0.15s;width:100%}
+    .sidenav-link:hover{color:white;background:rgba(255,255,255,0.07)}
+    .sidenav-link.active{color:#4a9ebe}
+    .sidenav-link-icon{width:24px;text-align:center;flex-shrink:0;font-size:14px}
+    .sidenav-link-text{opacity:0;transition:opacity 0.15s}
+    .sidenav:hover .sidenav-link-text{opacity:1}
+    .sidenav-cat{display:flex;align-items:center;gap:10px;padding:5px 14px;color:rgba(255,255,255,0.45);font-family:'DM Sans',sans-serif;font-size:12px;white-space:nowrap;text-decoration:none;width:100%}
+    .sidenav-cat:hover{color:rgba(255,255,255,0.85)}
+    .sidenav-cat-icon{width:24px;text-align:center;flex-shrink:0;font-size:11px}
+    .sidenav-cat-text{opacity:0;transition:opacity 0.15s}
+    .sidenav:hover .sidenav-cat-text{opacity:1}
+
+    /* ── MOBILE NAV ── */
+    .mobile-nav{display:none;position:fixed;top:0;left:0;right:0;z-index:1000;background:#1a2a32;padding:0 16px}
+    .mobile-nav-bar{display:flex;align-items:center;justify-content:space-between;height:48px}
+    .mobile-nav-logo{font-family:'Playfair Display',serif;font-size:15px;color:white;text-decoration:none}
+    .mobile-nav-toggle{background:none;border:none;color:white;font-size:20px;cursor:pointer;padding:4px 8px}
+    .mobile-nav-dropdown{display:none;background:#1a2a32;border-top:1px solid rgba(255,255,255,0.1);padding:8px 0 12px}
+    .mobile-nav-dropdown.open{display:block}
+    .mobile-nav-link{display:block;padding:9px 16px;color:rgba(255,255,255,0.75);text-decoration:none;font-family:'DM Sans',sans-serif;font-size:14px}
+    .mobile-nav-link:hover{color:white}
+    .mobile-nav-link.active{color:#4a9ebe}
+    @media(max-width:768px){.sidenav{display:none}.mobile-nav{display:block}}
+
+    /* ── PAGE ── */
+    .container { max-width: 1000px; margin: 0 auto; padding: 24px 24px 60px; }
+    .page-header { padding-bottom: 16px; border-bottom: 2px solid #1a2a32; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+    .page-header h1 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: #1a2a32; margin-bottom: 2px; }
+    .page-header p { font-size: 0.8rem; color: #6a7a82; }
+    .section-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: #8a9aa2; margin-bottom: 4px; font-family: 'DM Sans', sans-serif; }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle { display: flex; gap: 6px; }
+    .lang-btn { padding: 5px 12px; border: 1px solid #c8bfb3; border-radius: 4px; background: #f7f3ee; color: #6a7a82; font-size: 0.78rem; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.12s; }
+    .lang-btn.active { background: #1a2a32; color: white; border-color: #1a2a32; }
+
+    /* ── FILTER TABS ── */
+    .cat-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+    .filter-btn { padding: 5px 14px; border: 1px solid #c8bfb3; border-radius: 4px; background: white; color: #4a5a62; font-size: 0.78rem; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.12s; }
+    .filter-btn:hover { border-color: #1a2a32; color: #1a2a32; }
+    .filter-btn.active { background: #1a2a32; color: white; border-color: #1a2a32; }
+
+    /* ── RECIPE GRID ── */
+    .recipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .recipe-card {
+      background: white; border: 1px solid #e0d8cf; border-radius: 6px;
+      padding: 0; display: flex; flex-direction: column; cursor: pointer;
+      transition: box-shadow 0.15s, border-color 0.15s; overflow: hidden;
+    }
+    .recipe-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.08); border-color: #b0a898; }
+    .recipe-header { padding: 14px 14px 10px; border-bottom: 1px solid #f0ebe3; }
+    .recipe-meta { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: #8a9aa2; display: block; margin-bottom: 5px; font-family: 'DM Sans', sans-serif; }
+    .recipe-title-en { font-family: 'Playfair Display', serif; font-size: 1rem; color: #1a2a32; margin-bottom: 2px; }
+    .recipe-title-zh { font-size: 0.75rem; color: #8a9aa2; }
+    .recipe-content { padding: 10px 14px; flex: 1; }
+    .recipe-content p { font-size: 0.8rem; color: #6a7a82; line-height: 1.55; }
+    .btn-add-recipe {
+      margin: 0 14px 14px; padding: 8px 14px; background: #1a2a32; color: white;
+      border: none; border-radius: 4px; font-size: 0.78rem; font-weight: 600;
+      cursor: pointer; font-family: 'DM Sans', sans-serif; text-align: left;
+      transition: background 0.12s;
+    }
+    .btn-add-recipe:hover { background: #2a3a42; }
+
+    /* ── RECIPE MODAL ── */
+    .recipe-modal { position: fixed; inset: 0; background: rgba(26,42,50,0.6); z-index: 200; display: none; align-items: center; justify-content: center; backdrop-filter: blur(3px); }
+    .recipe-modal.active { display: flex; }
+    .recipe-modal-box { background: #f7f3ee; border-radius: 8px; width: 90%; max-width: 580px; max-height: 85vh; overflow: hidden; display: flex; flex-direction: column; position: relative; }
+    .recipe-modal-head { padding: 16px 20px 12px; border-bottom: 1px solid #e0d8cf; background: #1a2a32; }
+    .recipe-modal-head h2 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: white; margin-bottom: 2px; }
+    .recipe-modal-head .zh { font-family: 'Noto Sans SC', sans-serif; color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+    .recipe-modal-close { position: absolute; top: 14px; right: 16px; background: rgba(255,255,255,0.15); border: none; width: 26px; height: 26px; border-radius: 4px; font-size: 1rem; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center; }
+    .recipe-modal-body { padding: 16px 20px; overflow-y: auto; flex: 1; }
+    .ingredient-section-title { font-size: 0.78rem; font-weight: 700; color: #1a2a32; margin: 12px 0 6px; font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
+    .ingredient-section-title.shabu { color: #2e7d32; }
+    .ingredient-section-title.other { color: #6a7a82; }
+    .ingredient-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 8px; border-radius: 4px; margin-bottom: 3px; font-size: 0.82rem; }
+    .ingredient-row.shabu { background: #f2faf2; color: #1a5a22; }
+    .ingredient-row.other { background: #f7f3ee; color: #4a5a62; }
+    .ing-zh { font-family: 'Noto Sans SC', sans-serif; font-size: 0.75em; color: #8a9aa2; margin-left: 5px; }
+    .steps-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+    .step-item { display: flex; gap: 10px; }
+    .step-num { width: 20px; height: 20px; background: #1a2a32; color: white; border-radius: 3px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; counter-increment: step; font-family: 'DM Sans', sans-serif; margin-top: 1px; }
+    .steps-list { counter-reset: step; }
+    .step-item .step-num::before { content: counter(step); }
+    .step-text { font-size: 0.82rem; color: #1a2a32; line-height: 1.55; }
+    .step-text .zh { display: block; font-family: 'Noto Sans SC', sans-serif; font-size: 0.88em; color: #8a9aa2; margin-top: 2px; }
+    .recipe-modal-foot { padding: 12px 20px; border-top: 1px solid #e0d8cf; display: flex; gap: 8px; flex-wrap: wrap; background: #f7f3ee; }
+    .btn-add-shabu { flex: 2; padding: 9px; border-radius: 4px; background: #1a2a32; color: white; border: none; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+    .btn-add-shabu:hover { background: #2a3a42; }
+    .btn-copy-recipe { flex: 1; padding: 9px; border-radius: 4px; background: white; color: #1a2a32; border: 1px solid #c8bfb3; font-size: 0.8rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+    .btn-copy-recipe:hover { border-color: #1a2a32; }
+
+    footer { background: #1a2a32; color: rgba(255,255,255,0.6); padding: 1.5rem 2rem; text-align: center; font-size: 0.82rem; font-family: 'DM Sans', sans-serif; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: white; margin-bottom: 6px; }
+    .footer-logo span { color: #4a9ebe; }
+    footer p { margin-bottom: 3px; }
+  </style>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="index.html">Shabu <span>Meat House</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="items.html">Items</a></li>
-    <li><a href="guide.html" class="active">Guide</a></li>
-    <li><a href="recipes.html" class="active">Recipes</a></li>
-  </ul>
+<!-- SIDE NAV -->
+<nav class="sidenav">
+  <a href="index.html" class="sidenav-logo">
+    <div class="sidenav-logo-icon">S</div>
+    <span class="sidenav-logo-text">Shabu Meat House</span>
+  </a>
+  <div class="sidenav-section">
+    <div class="sidenav-section-label">Pages</div>
+    <a href="index.html" class="sidenav-link"><span class="sidenav-link-icon">🏠</span><span class="sidenav-link-text">Home</span></a>
+    <a href="items.html" class="sidenav-link"><span class="sidenav-link-icon">🛍</span><span class="sidenav-link-text">Shop</span></a>
+    <a href="guide.html" class="sidenav-link"><span class="sidenav-link-icon">📋</span><span class="sidenav-link-text">Guide</span></a>
+    <a href="recipes.html" class="sidenav-link active"><span class="sidenav-link-icon">🍲</span><span class="sidenav-link-text">Recipes</span></a>
+    <a href="icecream.html" class="sidenav-link"><span class="sidenav-link-icon">🍦</span><span class="sidenav-link-text">Ice Cream</span></a>
+  </div>
+  <div class="sidenav-section" style="flex:1;overflow-y:auto">
+    <div class="sidenav-section-label">Browse</div>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🐑</span><span class="sidenav-cat-text">Lamb 羊肉</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥩</span><span class="sidenav-cat-text">Beef 牛肉</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🐷</span><span class="sidenav-cat-text">Pork 猪肉</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍵</span><span class="sidenav-cat-text">Soup 汤底</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥬</span><span class="sidenav-cat-text">Veg 蔬菜</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍄</span><span class="sidenav-cat-text">Mushrooms 菌菇</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍜</span><span class="sidenav-cat-text">Noodles 面条</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥣</span><span class="sidenav-cat-text">Sides 配菜</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🫙</span><span class="sidenav-cat-text">Condiments 调料</span></a>
+    <a href="items.html" class="sidenav-cat"><span class="sidenav-cat-icon">🥫</span><span class="sidenav-cat-text">Dipping 蘸料</span></a>
+    <a href="icecream.html" class="sidenav-cat"><span class="sidenav-cat-icon">🍦</span><span class="sidenav-cat-text">Ice Cream 冰淇淋</span></a>
+  </div>
 </nav>
 
-<section class="container">
-  <p class="section-label">Culinary Guide / 烹饪指南</p>
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <div class="mobile-nav-bar">
+    <a href="index.html" class="mobile-nav-logo">Shabu Meat House</a>
+    <button class="mobile-nav-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')">☰</button>
+  </div>
+  <div class="mobile-nav-dropdown" id="mobileNav">
+    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="items.html" class="mobile-nav-link">🛍 Shop</a>
+    <a href="guide.html" class="mobile-nav-link">📋 Guide</a>
+    <a href="recipes.html" class="mobile-nav-link active">🍲 Recipes</a>
+    <a href="icecream.html" class="mobile-nav-link">🍦 Ice Cream</a>
+  </div>
+</div>
 
-  <!-- HEADER ROW: title + lang toggle -->
-  <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
-    <h1 class="section-title" style="margin-bottom:0;" id="pageTitle">Recipes <span style="font-family:'Noto Sans SC',sans-serif;font-size:0.55em;color:var(--blue-accent);">食谱</span></h1>
+<div class="container">
+  <div class="page-header">
+    <div>
+      <p class="section-label">Culinary Guide / 烹饪指南</p>
+      <h1>Recipes <span style="font-family:'Noto Sans SC',sans-serif;font-size:0.55em;color:#4a9ebe;">食谱</span></h1>
+      <p>Hotpot meals, dipping sauces & more — using ingredients from our store</p>
+    </div>
     <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('en')">🇬🇧 English</button>
-      <button class="lang-btn" onclick="setLang('zh')">🇨🇳 中文</button>
+      <button class="lang-btn active" onclick="setLang('en')">English</button>
+      <button class="lang-btn" onclick="setLang('zh')">中文</button>
     </div>
   </div>
 
-  <!-- FILTER TABS -->
   <div class="cat-tabs">
     <button class="filter-btn active" onclick="filterRecipes('all',this)">All 全部</button>
     <button class="filter-btn" onclick="filterRecipes('hotpot',this)">🍲 Hotpot 火锅</button>
     <button class="filter-btn" onclick="filterRecipes('dipping',this)">🥣 Dipping Sauces 蘸料</button>
-
   </div>
 
   <div class="recipes-grid" id="recipesGrid"></div>
-</section>
+</div>
 
 <!-- RECIPE MODAL -->
 <div class="recipe-modal" id="recipeModal" onclick="closeModalIfOverlay(event)">
-  <div class="recipe-modal-box" id="recipeModalBox">
-    <!-- filled by JS -->
-  </div>
+  <div class="recipe-modal-box" id="recipeModalBox"></div>
 </div>
 
 <footer>
@@ -63,12 +208,8 @@
 let lang = 'en';
 let activeFilter = 'all';
 
-// ─── RECIPES DATA ───────────────────────────────────────────────────────────
 const recipes = [
-
-  // ── DIPPING SAUCES ──
-  { id:1, tags:['dipping','hotpot','vegetarian','quick'],
-    emoji:'🥣',
+  { id:1, tags:['dipping','hotpot','vegetarian','quick'], emoji:'🥣',
     title:{en:'Classic Sesame Dipping Sauce',zh:'经典麻酱蘸料'},
     meta:{en:'Dipping Sauce · 2 min',zh:'蘸料 · 2分钟'},
     desc:{en:'The most popular hotpot dip — creamy, nutty, perfectly balanced.',zh:'最受欢迎的火锅蘸料 — 香浓顺滑，味道完美。'},
@@ -79,20 +220,14 @@ const recipes = [
       {en:'Green Onion',zh:'葱花',amount:'1 tbsp',key:'Green Onion'},
       {en:'Cilantro',zh:'香菜',amount:'1 tbsp',key:'Cilantro'},
     ],
-    otherIngredients:[
-      {en:'Warm water',zh:'温水',amount:'2–3 tbsp'},
-      {en:'Sugar',zh:'白糖',amount:'½ tsp'},
-      {en:'Garlic (minced)',zh:'蒜蓉',amount:'1 clove'},
-    ],
+    otherIngredients:[{en:'Warm water',zh:'温水',amount:'2–3 tbsp'},{en:'Sugar',zh:'白糖',amount:'½ tsp'},{en:'Garlic (minced)',zh:'蒜蓉',amount:'1 clove'}],
     steps:[
       {en:'Mix sesame paste with warm water gradually until smooth and pourable.',zh:'将芝麻酱与温水逐渐混合至顺滑。'},
       {en:'Add soy sauce, vinegar, and sugar. Stir until combined.',zh:'加入酱油、醋和糖，搅拌均匀。'},
       {en:'Top with green onion, cilantro, and garlic. Mix before eating.',zh:'撒上葱花、香菜和蒜蓉，食用前拌匀。'},
     ]
   },
-
-  { id:2, tags:['dipping','hotpot','quick'],
-    emoji:'🌶️',
+  { id:2, tags:['dipping','hotpot','quick'], emoji:'🌶️',
     title:{en:'Spicy Garlic Oil Dip',zh:'蒜蓉辣油蘸料'},
     meta:{en:'Dipping Sauce · 5 min',zh:'蘸料 · 5分钟'},
     desc:{en:'Fiery and aromatic — perfect for heat lovers.',zh:'火辣芳香，适合喜欢辣味的人。'},
@@ -101,21 +236,14 @@ const recipes = [
       {en:'Kikkoman Soy Sauce',zh:'龟甲万酱油',amount:'2 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
       {en:'Green Onion',zh:'葱花',amount:'2 tbsp',key:'Green Onion'},
     ],
-    otherIngredients:[
-      {en:'Garlic (minced)',zh:'蒜蓉',amount:'4 cloves'},
-      {en:'Vegetable oil',zh:'植物油',amount:'¼ cup'},
-      {en:'Sesame oil',zh:'香油',amount:'1 tsp'},
-      {en:'Salt',zh:'盐',amount:'pinch'},
-    ],
+    otherIngredients:[{en:'Garlic (minced)',zh:'蒜蓉',amount:'4 cloves'},{en:'Vegetable oil',zh:'植物油',amount:'¼ cup'},{en:'Sesame oil',zh:'香油',amount:'1 tsp'},{en:'Salt',zh:'盐',amount:'pinch'}],
     steps:[
       {en:'Place pepper powder, garlic, and green onion in a heatproof bowl.',zh:'将辣椒粉、蒜蓉和葱花放入耐热碗中。'},
       {en:'Heat oil until shimmering, then carefully pour over the spices.',zh:'将油加热至微微冒烟，小心倒在香料上。'},
       {en:'Cool 2 min, then add soy sauce, sesame oil, and salt.',zh:'冷却2分钟，加入酱油、香油和盐，拌匀。'},
     ]
   },
-
-  { id:3, tags:['dipping','hotpot','vegetarian','quick'],
-    emoji:'🥢',
+  { id:3, tags:['dipping','hotpot','vegetarian','quick'], emoji:'🥢',
     title:{en:'Soy-Vinegar Dip',zh:'酱醋蘸料'},
     meta:{en:'Dipping Sauce · 3 min',zh:'蘸料 · 3分钟'},
     desc:{en:'Simple and clean — lets the ingredients shine.',zh:'简单清爽，让食材原味更突出。'},
@@ -125,19 +253,14 @@ const recipes = [
       {en:'Green Onion',zh:'葱花',amount:'1 tbsp',key:'Green Onion'},
       {en:'Cilantro',zh:'香菜',amount:'1 tbsp',key:'Cilantro'},
     ],
-    otherIngredients:[
-      {en:'Sesame oil',zh:'香油',amount:'1 tsp'},
-      {en:'Chili flakes (optional)',zh:'辣椒片（可选）',amount:'to taste'},
-    ],
+    otherIngredients:[{en:'Sesame oil',zh:'香油',amount:'1 tsp'},{en:'Chili flakes (optional)',zh:'辣椒片（可选）',amount:'to taste'}],
     steps:[
       {en:'Mix soy sauce, vinegar, and sesame oil in a small bowl.',zh:'在小碗中混合酱油、醋和香油。'},
       {en:'Add green onion and cilantro.',zh:'加入葱花和香菜。'},
       {en:'Add chili flakes if desired. Serve.',zh:'如需可加辣椒片，搅拌后食用。'},
     ]
   },
-
-  { id:4, tags:['dipping','hotpot','vegetarian','quick'],
-    emoji:'🥜',
+  { id:4, tags:['dipping','hotpot','vegetarian','quick'], emoji:'🥜',
     title:{en:'Peanut Dipping Sauce',zh:'花生酱蘸料'},
     meta:{en:'Dipping Sauce · 5 min',zh:'蘸料 · 5分钟'},
     desc:{en:'Rich and savory with a hint of sweetness — great with veggies.',zh:'浓郁鲜美微甜，非常适合搭配蔬菜。'},
@@ -145,46 +268,14 @@ const recipes = [
       {en:'Kikkoman Soy Sauce',zh:'龟甲万酱油',amount:'1 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
       {en:'Kimlan Vinegar',zh:'金兰醋',amount:'1 tsp',key:'Kimlan Vinegar'},
     ],
-    otherIngredients:[
-      {en:'Peanut butter (smooth)',zh:'花生酱',amount:'3 tbsp'},
-      {en:'Warm water',zh:'温水',amount:'3 tbsp'},
-      {en:'Sugar',zh:'糖',amount:'1 tsp'},
-      {en:'Sesame oil',zh:'香油',amount:'½ tsp'},
-      {en:'Garlic (minced)',zh:'蒜蓉',amount:'1 clove'},
-    ],
+    otherIngredients:[{en:'Peanut butter (smooth)',zh:'花生酱',amount:'3 tbsp'},{en:'Warm water',zh:'温水',amount:'3 tbsp'},{en:'Sugar',zh:'糖',amount:'1 tsp'},{en:'Sesame oil',zh:'香油',amount:'½ tsp'},{en:'Garlic (minced)',zh:'蒜蓉',amount:'1 clove'}],
     steps:[
       {en:'Whisk peanut butter with warm water until smooth.',zh:'将花生酱与温水搅拌至顺滑。'},
       {en:'Add soy sauce, vinegar, sugar, and sesame oil. Mix well.',zh:'加入酱油、醋、糖和香油，拌匀。'},
       {en:'Stir in garlic. Adjust with water for desired consistency.',zh:'拌入蒜蓉，加水调整浓稠度。'},
     ]
   },
-
-  { id:5, tags:['dipping','hotpot','quick'],
-    emoji:'🦐',
-    title:{en:'Light Citrus Seafood Dip',zh:'清爽海鲜蘸料'},
-    meta:{en:'Dipping Sauce · 5 min',zh:'蘸料 · 5分钟'},
-    desc:{en:'Light and citrusy — enhances natural seafood flavors.',zh:'清淡柑橘味，提升海鲜天然风味。'},
-    shabuIngredients:[
-      {en:'Kikkoman Soy Sauce',zh:'龟甲万酱油',amount:'2 tbsp',key:'Kikkoman Premium Soy Sauce 750ml'},
-      {en:'Kimlan Vinegar',zh:'金兰醋',amount:'1 tbsp',key:'Kimlan Vinegar'},
-      {en:'Green Onion',zh:'葱花',amount:'2 tbsp',key:'Green Onion'},
-    ],
-    otherIngredients:[
-      {en:'Lemon juice',zh:'柠檬汁',amount:'1 tbsp'},
-      {en:'Ginger (grated)',zh:'姜蓉',amount:'1 tsp'},
-      {en:'Sesame oil',zh:'香油',amount:'1 tsp'},
-      {en:'Sugar',zh:'糖',amount:'½ tsp'},
-    ],
-    steps:[
-      {en:'Combine soy sauce, lemon juice, and vinegar.',zh:'混合酱油、柠檬汁和醋。'},
-      {en:'Add ginger, green onion, sesame oil, and sugar.',zh:'加入姜蓉、葱花、香油和糖。'},
-      {en:'Stir well and let sit 5 minutes before serving.',zh:'搅拌均匀，静置5分钟后食用。'},
-    ]
-  },
-
-  // ── HOTPOT MEALS ──
-  { id:6, tags:['hotpot'],
-    emoji:'🔥',
+  { id:5, tags:['hotpot'], emoji:'🔥',
     title:{en:'Classic Mala Hotpot for 4',zh:'经典麻辣火锅 (4人份)'},
     meta:{en:'Hotpot · Serves 4',zh:'火锅 · 4人份'},
     desc:{en:'The ultimate spicy & numbing hotpot with all the essentials.',zh:'终极麻辣火锅体验，包含所有必备食材。'},
@@ -193,7 +284,6 @@ const recipes = [
       {en:'Beef Short Plate Rolls',zh:'牛五花卷',amount:'2 pkgs',key:'Beef Short Plate Rolls'},
       {en:'Lamb Shoulder Rolls',zh:'羊肉卷',amount:'2 pkgs',key:'Australia Lamb Shoulder Rolls'},
       {en:'Napa',zh:'大白菜',amount:'1 head',key:'Napa'},
-      {en:'Baby Bok Choy',zh:'小白菜',amount:'1 large',key:'Baby Bok Choy'},
       {en:'Tong Ho',zh:'茼蒿',amount:'1 large bag',key:'Tong Ho'},
       {en:'Enoki',zh:'金针菇',amount:'2 packs',key:'Enoki'},
       {en:'Sweet Potato Noodles',zh:'红薯粉丝',amount:'2 packs',key:'JOYSHARE Sweet Potato Noodle – Wide'},
@@ -211,9 +301,7 @@ const recipes = [
       {en:'Cook vegetables 1–2 min. Enjoy with dipping sauces!',zh:'蔬菜煮1-2分钟。配蘸料享用！'},
     ]
   },
-
-  { id:7, tags:['hotpot','quick'],
-    emoji:'🍅',
+  { id:6, tags:['hotpot','quick'], emoji:'🍅',
     title:{en:'Tomato Soup Hotpot for 2',zh:'番茄火锅 (2人份)'},
     meta:{en:'Hotpot · Serves 2',zh:'火锅 · 2人份'},
     desc:{en:'Light, refreshing, naturally sweet — perfect for a cozy dinner.',zh:'清淡爽口，天然甜美，适合温馨晚餐。'},
@@ -237,9 +325,7 @@ const recipes = [
       {en:'Add noodles in the final 2 minutes.',zh:'最后2分钟加入面条。'},
     ]
   },
-
-  { id:8, tags:['hotpot','vegetarian'],
-    emoji:'🍄',
+  { id:7, tags:['hotpot','vegetarian'], emoji:'🍄',
     title:{en:'Mushroom Clear Broth Hotpot for 6',zh:'菌菇清汤火锅 (6人份)'},
     meta:{en:'Hotpot · Serves 6',zh:'火锅 · 6人份'},
     desc:{en:'Delicate mushroom broth — perfect for vegetarians.',zh:'清淡菌菇汤底，适合素食者。'},
@@ -249,7 +335,6 @@ const recipes = [
       {en:'White Mushrooms',zh:'蘑菇',amount:'3 packs',key:'Mushroom White 227g'},
       {en:'Black Fungus',zh:'黑木耳',amount:'1 pack',key:'JOYSHARE Black Fungus'},
       {en:'Napa',zh:'大白菜',amount:'1 head',key:'Napa'},
-      {en:'Baby Bok Choy',zh:'小白菜',amount:'2 large',key:'Baby Bok Choy'},
       {en:'Tong Ho',zh:'茼蒿',amount:'2 large bags',key:'Tong Ho'},
       {en:'Soft Tofu',zh:'软豆腐',amount:'3 packs',key:'Soft Tofu 300g'},
       {en:'Sweet Potato Noodles',zh:'红薯粉丝',amount:'3 packs',key:'JOYSHARE Sweet Potato Noodle – Wide'},
@@ -262,34 +347,27 @@ const recipes = [
       {en:'Prepare individual dipping sauces. Enjoy!',zh:'准备蘸料碗，尽情享用！'},
     ]
   }
-
-
 ];
 
-// ─── RENDER ─────────────────────────────────────────────────────────────────
 function renderRecipes() {
   const grid = document.getElementById('recipesGrid');
   const filtered = activeFilter === 'all' ? recipes : recipes.filter(r => r.tags.includes(activeFilter));
-
   grid.innerHTML = filtered.map(r => {
     const isEn = lang === 'en';
-    const primary = t => `<span style="font-weight:700;font-size:1em;">${t[lang]}</span>`;
-    const secondary = t => `<span style="font-weight:400;opacity:0.65;font-size:0.88em;display:block;font-family:'Noto Sans SC',sans-serif;">${t[lang === 'en' ? 'zh' : 'en']}</span>`;
-    return `
-      <div class="recipe-card" onclick="openRecipe(${r.id})">
-        <div class="recipe-header">
-          <span class="recipe-meta">${r.meta[lang]}</span>
-          <div class="recipe-title-en" style="font-size:1.1rem;">${r.emoji} ${primary(r.title)}</div>
-          <div class="recipe-title-zh">${secondary(r.title)}</div>
-        </div>
-        <div class="recipe-content" style="border-top:1px solid #f0f4f7;padding-top:1rem;margin-bottom:1rem;flex:1;">
-          <p style="font-size:0.88rem;color:var(--ink-soft);line-height:1.6;">${r.desc[lang]}</p>
-          <p style="font-size:0.8rem;color:var(--ink-soft);margin-top:0.5rem;font-family:'Noto Sans SC',sans-serif;opacity:0.7;">${r.desc[lang === 'en' ? 'zh' : 'en']}</p>
-        </div>
-        <button class="btn-add-recipe" onclick="event.stopPropagation();openRecipe(${r.id})">
-          ${isEn ? 'View Recipe & Add to List' : '查看食谱并添加到清单'} →
-        </button>
-      </div>`;
+    return `<div class="recipe-card" onclick="openRecipe(${r.id})">
+      <div class="recipe-header">
+        <span class="recipe-meta">${r.meta[lang]}</span>
+        <div class="recipe-title-en">${r.emoji} ${r.title[lang]}</div>
+        <div class="recipe-title-zh" style="font-family:'Noto Sans SC',sans-serif;">${r.title[lang === 'en' ? 'zh' : 'en']}</div>
+      </div>
+      <div class="recipe-content">
+        <p>${r.desc[lang]}</p>
+        <p style="font-family:'Noto Sans SC',sans-serif;font-size:0.75rem;color:#8a9aa2;margin-top:4px;">${r.desc[lang === 'en' ? 'zh' : 'en']}</p>
+      </div>
+      <button class="btn-add-recipe" onclick="event.stopPropagation();openRecipe(${r.id})">
+        ${isEn ? 'View Recipe & Add to List' : '查看食谱并添加到清单'} →
+      </button>
+    </div>`;
   }).join('');
 }
 
@@ -298,47 +376,33 @@ function openRecipe(id) {
   if (!r) return;
   const isEn = lang === 'en';
   const box = document.getElementById('recipeModalBox');
-
   const shabuRows = r.shabuIngredients.map(i =>
-    `<div class="ingredient-row shabu">
-      <span>✓ <strong>${i.en}</strong> <span class="ing-zh">${i.zh}</span></span>
-      <span>${i.amount}</span>
-    </div>`).join('');
-
+    `<div class="ingredient-row shabu"><span>✓ <strong>${i.en}</strong> <span class="ing-zh">${i.zh}</span></span><span>${i.amount}</span></div>`).join('');
   const otherRows = r.otherIngredients.map(i =>
-    `<div class="ingredient-row other">
-      <span>${i.en} <span class="ing-zh">${i.zh}</span></span>
-      <span>${i.amount}</span>
-    </div>`).join('');
-
+    `<div class="ingredient-row other"><span>${i.en} <span class="ing-zh">${i.zh}</span></span><span>${i.amount}</span></div>`).join('');
   const stepItems = r.steps.map(s =>
-    `<li class="step-item">
-      <div class="step-num"></div>
-      <div class="step-text">${s[lang]}<span class="zh">${s[lang === 'en' ? 'zh' : 'en']}</span></div>
-    </li>`).join('');
-
+    `<li class="step-item"><div class="step-num"></div><div class="step-text">${s[lang]}<span class="zh">${s[lang === 'en' ? 'zh' : 'en']}</span></div></li>`).join('');
   box.innerHTML = `
     <div class="recipe-modal-head">
       <button class="recipe-modal-close" onclick="closeRecipe()">×</button>
       <h2>${r.emoji} ${r.title[lang]}</h2>
-      <div class="zh" style="font-family:'Noto Sans SC',sans-serif;color:var(--blue-deep);font-size:0.95rem;">${r.title[lang === 'en' ? 'zh' : 'en']}</div>
+      <div class="zh">${r.title[lang === 'en' ? 'zh' : 'en']}</div>
     </div>
     <div class="recipe-modal-body">
       <p class="ingredient-section-title shabu">✓ ${isEn ? 'Available at Shabu Meat House' : '涮肉屋有售'}</p>
       ${shabuRows}
       ${r.otherIngredients.length ? `<p class="ingredient-section-title other">${isEn ? 'Other ingredients needed' : '其他所需食材'}</p>${otherRows}` : ''}
-      <p class="ingredient-section-title" style="color:var(--ink);margin-top:1.5rem;">${isEn ? '📝 Instructions' : '📝 步骤'}</p>
+      <p class="ingredient-section-title" style="margin-top:1.25rem">${isEn ? '📝 Instructions' : '📝 步骤'}</p>
       <ul class="steps-list">${stepItems}</ul>
     </div>
     <div class="recipe-modal-foot">
       <button class="btn-add-shabu" onclick="addShabuToCart(${id})">
-        🛒 ${isEn ? 'Add Shabu Items to My List' : '添加涮肉屋食材到清单'}
+        📝 ${isEn ? 'Add Shabu Items to Wishlist' : '添加涮肉屋食材到心愿单'}
       </button>
       <button class="btn-copy-recipe" onclick="copyRecipe(${id})">
-        📋 ${isEn ? 'Copy Full Recipe' : '复制完整食谱'}
+        📋 ${isEn ? 'Copy Recipe' : '复制食谱'}
       </button>
     </div>`;
-
   document.getElementById('recipeModal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -347,45 +411,36 @@ function closeRecipe() {
   document.getElementById('recipeModal').classList.remove('active');
   document.body.style.overflow = '';
 }
-
-function closeModalIfOverlay(e) {
-  if (e.target.id === 'recipeModal') closeRecipe();
-}
+function closeModalIfOverlay(e) { if (e.target.id === 'recipeModal') closeRecipe(); }
 
 function addShabuToCart(id) {
   const r = recipes.find(x => x.id === id);
   if (!r) return;
   let cart = JSON.parse(localStorage.getItem('shabuCart')) || {};
   r.shabuIngredients.forEach(ing => {
-    const key = ing.key;
-    if (!cart[key]) {
-      cart[key] = { name: ing.en, zh: ing.zh, qty: 1, price: 0, unit: '', key, sizeLabel: '' };
-    } else {
-      cart[key].qty += 1;
-    }
+    if (!cart[ing.key]) cart[ing.key] = { name: ing.en, zh: ing.zh, qty: 1, price: 0, unit: '', key: ing.key, sizeLabel: '' };
+    else cart[ing.key].qty += 1;
   });
   localStorage.setItem('shabuCart', JSON.stringify(cart));
   const isEn = lang === 'en';
-  alert(isEn
-    ? `✅ ${r.shabuIngredients.length} items added to your shopping list!\nView your list on the Items page.`
-    : `✅ ${r.shabuIngredients.length} 件商品已添加到购物清单！\n在商品页查看您的清单。`);
+  alert(isEn ? `✅ ${r.shabuIngredients.length} items added to your wishlist!\nView your list on the Shop page.` : `✅ ${r.shabuIngredients.length} 件商品已添加到心愿单！\n在商品页查看。`);
 }
 
 function copyRecipe(id) {
   const r = recipes.find(x => x.id === id);
   if (!r) return;
   let text = `${r.title.en} / ${r.title.zh}\n${r.meta.en}\n\n`;
-  text += `Ingredients from Shabu Meat House 涮肉屋食材:\n`;
+  text += `From Shabu Meat House:\n`;
   r.shabuIngredients.forEach(i => { text += `- ${i.amount} ${i.en} ${i.zh}\n`; });
   if (r.otherIngredients.length) {
-    text += `\nOther ingredients 其他食材:\n`;
+    text += `\nOther ingredients:\n`;
     r.otherIngredients.forEach(i => { text += `- ${i.amount} ${i.en} ${i.zh}\n`; });
   }
-  text += `\nInstructions 步骤:\n`;
-  r.steps.forEach((s, i) => { text += `${i+1}. ${s.en}\n   ${s.zh}\n`; });
-  text += `\n— From Shabu Meat House Recipes | WeChat: shabumeat`;
+  text += `\nInstructions:\n`;
+  r.steps.forEach((s, i) => { text += `${i+1}. ${s.en}\n`; });
+  text += `\n— Shabu Meat House · 3272 Midland Ave, Scarborough`;
   navigator.clipboard.writeText(text).then(() => {
-    alert(lang === 'en' ? '✅ Recipe copied to clipboard!' : '✅ 食谱已复制到剪贴板！');
+    alert(lang === 'en' ? '✅ Recipe copied!' : '✅ 食谱已复制！');
   });
 }
 

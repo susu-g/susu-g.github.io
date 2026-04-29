@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Recipes 食谱 | Shabu Meat House 涮肉屋</title>
+  <title>Recipes 食谱 | Shabu Meat House 涮了吧</title>
   <meta name="description" content="Authentic hotpot and Chinese recipes. Dipping sauces, complete hotpot meals, stir-fries, soups & more. 正宗火锅食谱和中餐菜谱。"/>
   <meta name="keywords" content="hotpot recipes, 火锅食谱, dipping sauce, 蘸料, Chinese recipes, 中餐, Scarborough, 士嘉堡"/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"/>
@@ -133,11 +133,11 @@
   </a>
   <div class="sidenav-section">
     <div class="sidenav-section-label">Pages</div>
-    <a href="index.html" class="sidenav-link"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Home</span></a>
-    <a href="items.html" class="sidenav-link"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Items</span></a>
-    <a href="guide.html" class="sidenav-link"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Guide</span></a>
-    <a href="recipes.html" class="sidenav-link active"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Recipes</span></a>
-    <a href="icecream.html" class="sidenav-link"><span class="sidenav-link-icon"></span><span class="sidenav-link-text">Ice Cream</span></a>
+    <a href="index.html" class="sidenav-link"><span class="sidenav-link-icon">🏠</span><span class="sidenav-link-text">Home</span></a>
+    <a href="items.html" class="sidenav-link"><span class="sidenav-link-icon">🛍</span><span class="sidenav-link-text">Items</span></a>
+    <a href="guide.html" class="sidenav-link"><span class="sidenav-link-icon">📋</span><span class="sidenav-link-text">Guide</span></a>
+    <a href="recipes.html" class="sidenav-link active"><span class="sidenav-link-icon">🍲</span><span class="sidenav-link-text">Recipes</span></a>
+    <a href="icecream.html" class="sidenav-link"><span class="sidenav-link-icon">🍦</span><span class="sidenav-link-text">Ice Cream</span></a>
   </div>
   <div class="sidenav-section" style="flex:1;overflow-y:auto">
     <div class="sidenav-section-label">Browse</div>
@@ -162,11 +162,11 @@
     <button class="mobile-nav-toggle" onclick="document.getElementById('mobileNav').classList.toggle('open')">☰</button>
   </div>
   <div class="mobile-nav-dropdown" id="mobileNav">
-    <a href="index.html" class="mobile-nav-link">Home</a>
-    <a href="items.html" class="mobile-nav-link">Items</a>
-    <a href="guide.html" class="mobile-nav-link">Guide</a>
-    <a href="recipes.html" class="mobile-nav-link active">Recipes</a>
-    <a href="icecream.html" class="mobile-nav-link">Ice Cream</a>
+    <a href="index.html" class="mobile-nav-link"> Home</a>
+    <a href="items.html" class="mobile-nav-link"> Items</a>
+    <a href="guide.html" class="mobile-nav-link"> Guide</a>
+    <a href="recipes.html" class="mobile-nav-link active"> Recipes</a>
+    <a href="icecream.html" class="mobile-nav-link"> Ice Cream</a>
   </div>
 </div>
 
@@ -389,7 +389,7 @@ function openRecipe(id) {
       <div class="zh">${r.title[lang === 'en' ? 'zh' : 'en']}</div>
     </div>
     <div class="recipe-modal-body">
-      <p class="ingredient-section-title shabu">✓ ${isEn ? 'Available at Shabu Meat House' : '涮肉屋有售'}</p>
+      <p class="ingredient-section-title shabu">✓ ${isEn ? 'Available at Shabu Meat House' : '涮了吧有售'}</p>
       ${shabuRows}
       ${r.otherIngredients.length ? `<p class="ingredient-section-title other">${isEn ? 'Other ingredients needed' : '其他所需食材'}</p>${otherRows}` : ''}
       <p class="ingredient-section-title" style="margin-top:1.25rem">${isEn ? '📝 Instructions' : '📝 步骤'}</p>
@@ -397,7 +397,7 @@ function openRecipe(id) {
     </div>
     <div class="recipe-modal-foot">
       <button class="btn-add-shabu" onclick="addShabuToCart(${id})">
-        📝 ${isEn ? 'Add Shabu Items to Wishlist' : '添加涮肉屋食材到心愿单'}
+        📝 ${isEn ? 'Add Shabu Items to Wishlist' : '添加涮了吧食材到心愿单'}
       </button>
       <button class="btn-copy-recipe" onclick="copyRecipe(${id})">
         📋 ${isEn ? 'Copy Recipe' : '复制食谱'}
@@ -413,13 +413,44 @@ function closeRecipe() {
 }
 function closeModalIfOverlay(e) { if (e.target.id === 'recipeModal') closeRecipe(); }
 
+// Price lookup from items.html product list
+const productPrices = {
+  'JoyShare Pure Sesame Paste': { price: 6.99, unit: 'per ea', approxTotal: null },
+  'Kikkoman Premium Soy Sauce 750ml': { price: 8.00, unit: 'per ea', approxTotal: null },
+  'Kimlan Vinegar': { price: 6.00, unit: 'per ea', approxTotal: null },
+  'Green Onion': { price: 1.59, unit: 'per ea', approxTotal: null },
+  'Cilantro': { price: 1.89, unit: 'per ea', approxTotal: null },
+  'XIAOLONGKAN Red Pepper Powder': { price: 3.99, unit: 'per ea', approxTotal: null },
+  'Little Sheep Soup Base – Mala Spicy': { price: 5.90, unit: 'per ea', approxTotal: null },
+  'Beef Short Plate Rolls': { price: 10.99, unit: 'per lb', approxTotal: '$7.70–$9.90' },
+  'Australia Lamb Shoulder Rolls': { price: 13.99, unit: 'per lb', approxTotal: '$9.10–$11.90' },
+  'Napa': { price: 1.79, unit: 'per lb', approxTotal: '$3.58–$5.37' },
+  'Tong Ho': { price: 2.99, unit: 'per lb', approxTotal: null },
+  'Enoki': { price: 1.60, unit: 'per ea', approxTotal: null },
+  'JOYSHARE Sweet Potato Noodle – Wide': { price: 4.50, unit: 'per ea', approxTotal: null },
+  'Medium Firm Tofu 700g': { price: 3.00, unit: 'per ea', approxTotal: null },
+  'XIAOLONGKAN Sesame Dip – Original': { price: 1.90, unit: 'per ea', approxTotal: null },
+  'XIAOLONGKAN Soup Base – Tomato': { price: 6.00, unit: 'per ea', approxTotal: null },
+  'Pork Shoulder Rolls': { price: 7.88, unit: 'per lb', approxTotal: '$5.52–$7.09' },
+  'Baby Napa': { price: 2.59, unit: 'per lb', approxTotal: null },
+  'Mushroom White 227g': { price: 2.80, unit: 'per ea', approxTotal: null },
+  'Soft Tofu 300g': { price: 2.00, unit: 'per ea', approxTotal: null },
+  'LanZhou Fresh Noodle': { price: 3.00, unit: 'per ea', approxTotal: null },
+  'XIAOLONGKAN Soup Base – Clear': { price: 5.00, unit: 'per ea', approxTotal: null },
+  'JOYSHARE Black Fungus': { price: 8.00, unit: 'per ea', approxTotal: null },
+};
+
 function addShabuToCart(id) {
   const r = recipes.find(x => x.id === id);
   if (!r) return;
   let cart = JSON.parse(localStorage.getItem('shabuCart')) || {};
   r.shabuIngredients.forEach(ing => {
-    if (!cart[ing.key]) cart[ing.key] = { name: ing.en, zh: ing.zh, qty: 1, price: 0, unit: '', key: ing.key, sizeLabel: '' };
-    else cart[ing.key].qty += 1;
+    const p = productPrices[ing.key] || { price: 0, unit: 'ea', approxTotal: null };
+    if (!cart[ing.key]) {
+      cart[ing.key] = { name: ing.en, zh: ing.zh, qty: 1, price: p.price, unit: p.unit, key: ing.key, sizeLabel: '', approxTotal: p.approxTotal };
+    } else {
+      cart[ing.key].qty += 1;
+    }
   });
   localStorage.setItem('shabuCart', JSON.stringify(cart));
   const isEn = lang === 'en';

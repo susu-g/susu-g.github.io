@@ -726,7 +726,7 @@
 <!-- PAGE HEADER -->
 <div class="page-header">
   <h1>Full Catalogue <span style="font-family:'Noto Sans SC',sans-serif;font-size:0.6em;color:#4a9ebe;">全部商品</span></h1>
-  <p>In-house sliced meat rolls, soup bases, vegetables & more · 现切肉卷、火锅底料、新鲜蔬菜</p>
+  <p>meat rolls, soup bases, vegetables & more · 现切肉卷、火锅底料、新鲜蔬菜</p>
 </div>
 
 <!-- FILTER BAR -->
@@ -904,13 +904,13 @@ function renderProducts() {
     const imgHtml = p.image ? `<img src="items/${p.image}" alt="${p.name}" class="product-image" loading="lazy"/>` : '';
     const approxHtml = (p.approxWeight && p.approxTotal) ? `<div class="product-approx">~${p.approxWeight} · approx. ${p.approxTotal}/pkg</div>` : '';
     const dealHtml = p.dealPrice ? `<div class="product-deal-badge">🏷 ${p.dealPrice}</div>` : '';
-    const slicedBadge = isSlicedMeat(p) && currentCat !== 'all' ? '<span style="font-size:0.65rem;background:#e8f0e4;color:#3a6a2a;padding:2px 6px;border-radius:3px;font-weight:600;margin-bottom:4px;display:inline-block;">In-house sliced 现切</span><br>' : '';
+    const slicedBadge = isSlicedMeat(p) && currentCat !== 'all' ? '<span style="font-size:0.65rem;background:#e8f0e4;color:#3a6a2a;padding:2px 6px;border-radius:3px;font-weight:600;margin-bottom:4px;display:inline-block;"></span><br>' : '';
     return `<div class="product-card${soldOut ? ' sold-out' : ''}">${imgHtml}${soldOut ? '<span class="stock-badge-coming">Unavailable</span>' : ''}${slicedBadge}<div class="product-zh">${p.zh}</div><div class="product-name">${p.name}</div><div class="product-price">$${p.price.toFixed(2)} / ${p.unit}</div>${approxHtml}${dealHtml}${buildControls(p, idx, soldOut)}</div>`;
   };
 
   let html = '';
   if (showMeatHeader) {
-    html += `<div style="grid-column:1/-1;padding:8px 0 4px;border-bottom:2px solid #1a2a32;margin-bottom:4px;display:flex;align-items:baseline;gap:10px;"><span style="font-family:'Playfair Display',serif;font-size:1rem;color:#1a2a32;font-weight:700;">🔪 In-House Sliced Meats</span><span style="font-family:'Noto Sans SC',sans-serif;font-size:0.75rem;color:#6a7a82;">现切肉卷 · Lamb, Beef & Pork rolls</span></div>`;
+    html += `<div style="grid-column:1/-1;padding:8px 0 4px;border-bottom:2px solid #1a2a32;margin-bottom:4px;display:flex;align-items:baseline;gap:10px;"><span style="font-family:'Playfair Display',serif;font-size:1rem;color:#1a2a32;font-weight:700;">Hot Pot Meat</span><span style="font-family:'Noto Sans SC',sans-serif;font-size:0.75rem;color:#6a7a82;"> · Lamb, Beef & Pork rolls</span></div>`;
     html += sliced.map(renderCard).join('');
     if (rest.length > 0) {
       html += `<div style="grid-column:1/-1;padding:12px 0 4px;border-bottom:1px solid #e0d8cf;margin-bottom:4px;margin-top:8px;"><span style="font-size:0.8rem;color:#6a7a82;font-family:'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:0.06em;">Everything Else</span></div>`;

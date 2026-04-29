@@ -102,7 +102,7 @@
 
 <nav class="sidenav">
   <a href="index.html" class="sidenav-logo">
-    <div class="sidenav-logo-icon">S</div>
+   
     <span class="sidenav-logo-text">Shabu Meat House</span>
   </a>
   <div class="sidenav-section">
@@ -211,7 +211,7 @@ function renderProducts() {
     return '<div class="product-card">'
       + '<img src="' + p.image + '" alt="Ben and Jerrys ' + p.name + ' pint Scarborough" class="product-image" loading="lazy"/>'
       + '<div class="product-zh">' + p.zh + '</div>'
-      + '<div class="product-name">Ben &amp; Jerry\'s ' + p.name + '</div>'
+      + '<div class="product-name"> ' + p.name + '</div>'
       + '<div class="product-price">$' + p.price.toFixed(2) + ' / pint</div>'
       + '<div class="qty-controls">'
       + '<button class="qty-btn" onclick="updateQty(' + idx + ',-1)">−</button>'
@@ -256,7 +256,7 @@ function openModal() {
     var total = calcTotal();
     var itemsHtml = items.map(function(item) {
       return '<div class="modal-list-item"><div>'
-        + '<div class="modal-item-name">Ben &amp; Jerry\'s ' + item.name + '</div>'
+        + '<div class="modal-item-name"> ' + item.name + '</div>'
         + '<div class="modal-item-detail">' + item.qty + 'x</div>'
         + '</div><button class="modal-item-remove" onclick="removeItem(\'' + item.name.replace(/'/g,"\\'") + '\')">×</button></div>';
     }).join('');
@@ -284,7 +284,7 @@ function buildCopyText() {
   var date = new Date().toLocaleDateString('en-CA',{year:'numeric',month:'short',day:'numeric'});
   var total = calcTotal();
   var text = ref + ' · ' + date + '\n\n';
-  items.forEach(function(item){ text += item.qty + 'x Ben & Jerry\'s ' + item.name + '\n'; });
+  items.forEach(function(item){ text += item.qty + item.name + '\n'; });
   text += '\nSubtotal: $' + total.toFixed(2) + ' + tax';
   text += '\n\nShabu Meat House · 3272 Midland Ave, Scarborough';
   return text;

@@ -3,181 +3,824 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Menu | Shabu Meat House 涮肉屋</title>
+  <title>Shop | Shabu Meat House 涮肉屋</title>
   <meta name="description" content="Shop all hotpot ingredients at Shabu Meat House Scarborough. Lamb rolls, beef rolls, pork rolls, tong ho, napa, enoki, tofu, noodles, soup bases & more. 士嘉堡涮肉屋 - 羊肉卷、牛肉卷、茼蒿、白菜、金针菇、豆腐、面条、火锅底料。"/>
   <meta name="keywords" content="lamb rolls Scarborough, 羊肉卷, beef rolls Toronto, 牛肉卷, pork rolls, 猪肉卷, hotpot meat Toronto, tong ho, 茼蒿, napa cabbage hotpot, 大白菜, baby bok choy, 小白菜, enoki mushrooms, 金针菇, daikon, 萝卜, mango Toronto, 芒果, longan, 龙眼, pear, 秋月梨, tofu, 豆腐, sweet potato noodles, 红薯粉丝, lanzhou noodles, 兰州拉面, Little Sheep soup base, 小肥羊, XIAOLONGKAN, 小龙坎, sesame paste, 芝麻酱, hotpot ingredients Scarborough, 火锅食材士嘉堡, Asian grocery Scarborough, Markham, Richmond Hill, North York, Agincourt, 万锦, 列治文山, 北约克"/>
   <meta name="robots" content="index, follow"/>
   <meta name="geo.region" content="CA-ON"/>
   <meta name="geo.placename" content="Scarborough, Ontario"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="styles.css"/>
   <link rel="icon" type="image/png" href="favicon.png"/>
   <style>
-    body{font-family:'Noto Sans SC','DM Sans',sans-serif;}
-    .notice-banner{background:#e8f4f8;border-bottom:1px solid #b8dce8;padding:.75rem 2rem;font-size:.85rem;color:#2a7a9e;text-align:center;}
-    .notice-banner strong{font-weight:700;}
-    .notice-zh{font-family:'Noto Sans SC',sans-serif;margin-left:.5rem;opacity:.85;}
-    .product-zh{font-family:'Noto Sans SC',sans-serif;font-size:1rem;font-weight:500;color:#2a7a9e;margin-bottom:2px;}
-    .product-name{font-size:.82rem;color:#4a5a62;margin-bottom:4px;}
-    .product-approx{font-size:.75rem;color:#888;font-style:italic;margin-bottom:4px;}
-    .product-deal-badge{display:inline-block;background:#3587e5;color:white;font-size:.72rem;padding:2px 8px;border-radius:4px;font-weight:600;margin-bottom:6px;}
-    .product-image{display:block;width:20%;height:50px;object-fit:cover;border-radius:8px;margin-bottom:8px;}
-    .product-card.sold-out{opacity:.5;}
-    .stock-badge-coming{display:inline-block;font-size:.68rem;background:#aaa;color:white;padding:2px 7px;border-radius:50px;font-weight:600;text-transform:uppercase;margin-bottom:4px;}
-    .size-select{width:100%;padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:.82rem;font-family:'Noto Sans SC','DM Sans',sans-serif;background:white;cursor:pointer;margin-bottom:8px;}
-    .controls-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;}
-    .stock-toggle{display:flex;align-items:center;gap:.5rem;font-size:.85rem;color:var(--ink-soft);cursor:pointer;font-family:'Noto Sans SC','DM Sans',sans-serif;}
-    .stock-toggle input{accent-color:#4a9ebe;cursor:pointer;}
-    .guide-btn{background:#e8f4f8;border:1px solid #b8dce8;color:#2a7a9e;padding:6px 16px;border-radius:50px;font-size:.82rem;font-weight:500;cursor:pointer;font-family:'Noto Sans SC','DM Sans',sans-serif;}
-    .guide-panel{background:#f0f8fb;border:1px solid #b8dce8;border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;display:none;}
-    .guide-panel.active{display:block;}
-    .guide-panel h3{font-size:.95rem;color:#1a2a32;margin-bottom:.8rem;font-family:'Playfair Display',serif;}
-    .people-btns{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;}
-    .people-btn{padding:5px 14px;border-radius:50px;border:1.5px solid #b8dce8;background:white;font-size:.82rem;cursor:pointer;font-family:'Noto Sans SC','DM Sans',sans-serif;}
-    .people-btn.active{background:#4a9ebe;border-color:#4a9ebe;color:white;}
-    .recs{background:white;border-radius:8px;padding:1rem 1.2rem;display:none;}
-    .recs.active{display:block;}
-    .recs h4{font-size:.88rem;color:#1a2a32;margin-bottom:.5rem;}
-    .recs ul{list-style:none;display:flex;flex-direction:column;gap:.3rem;}
-    .recs li{font-size:.82rem;color:#4a5a62;padding-left:1rem;position:relative;}
-    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
-    .modal-overlay.active{display:flex;}
-    .modal-box{background:white;border-radius:16px;width:90%;max-width:560px;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;position:relative;}
-    .modal-head{padding:1.2rem 1.5rem .8rem;border-bottom:1px solid #eee;}
-    .modal-head h2{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:.5rem;}
-    .modal-notice{background:#e8f4f8;border:1px solid #b8dce8;border-radius:8px;padding:.5rem .8rem;font-size:.78rem;color:#2a7a9e;}
-    .modal-notice .zh{font-family:'Noto Sans SC',sans-serif;display:block;margin-top:2px;opacity:.85;}
-    .modal-close{position:absolute;top:1rem;right:1rem;background:#f0f0f0;border:none;width:30px;height:30px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;}
-    .modal-body{padding:1.2rem 1.5rem;overflow-y:auto;flex:1;}
-    .order-meta{font-size:.78rem;color:#888;margin-bottom:1rem;padding:.5rem .8rem;background:#f9f9f9;border-radius:6px;}
-    .order-meta span{font-weight:700;color:#2a7a9e;}
-    .modal-list-item{display:flex;justify-content:space-between;align-items:flex-start;padding:.7rem .8rem;background:#f9fbfc;border-radius:8px;margin-bottom:.6rem;gap:.8rem;}
-    .modal-item-zh{font-family:'Noto Sans SC',sans-serif;font-size:.9rem;color:#2a7a9e;font-weight:500;}
-    .modal-item-name{font-size:.78rem;color:#4a5a62;}
-    .modal-item-detail{font-size:.75rem;color:#888;margin-top:2px;}
-    .modal-item-remove{background:none;border:none;color:#e53935;cursor:pointer;font-size:1.1rem;opacity:.6;flex-shrink:0;}
-    .modal-item-remove:hover{opacity:1;}
-    .tax-note{font-size:.75rem;color:#888;margin-top:1rem;padding:.5rem .8rem;background:#fffde7;border-radius:6px;font-style:italic;}
-    .modal-foot{padding:1rem 1.5rem;border-top:1px solid #eee;display:flex;gap:.6rem;flex-wrap:wrap;}
-    .modal-foot button{flex:1;min-width:100px;padding:.7rem;border-radius:8px;font-family:'Noto Sans SC','DM Sans',sans-serif;font-size:.82rem;font-weight:600;cursor:pointer;border:none;}
-    .btn-wechat{background:#4a9ebe;color:white;}
-    .btn-wechat:hover{background:#2a7a9e;}
-    .btn-print-modal{background:white;color:#4a9ebe;border:1.5px solid #4a9ebe!important;}
-    .btn-clear-modal{background:white;color:#e53935;border:1.5px solid #eee!important;}
-    .floating-cart{position:fixed;bottom:2rem;right:2rem;background:#2a7a9e;color:white;padding:.9rem 1.6rem;border-radius:50px;cursor:pointer;font-weight:700;box-shadow:0 8px 24px rgba(42,122,158,.4);z-index:9999;font-family:'Noto Sans SC','DM Sans',sans-serif;font-size:.95rem;display:none;}
-    .floating-cart.visible{display:block;}
-    @media print{nav,footer,.floating-cart,.notice-banner,.modal-foot,.modal-close{display:none!important;}.modal-overlay{background:white!important;position:static!important;display:block!important;}.modal-box{box-shadow:none!important;max-height:none!important;}}
-    @media(max-width:768px){.controls-row{flex-direction:column;align-items:flex-start;}.modal-foot{flex-direction:column;}}
+    /* ── RESET NAV ── */
+    nav { display: none; }
+
+    /* ── SIDE NAV — DESKTOP ── */
+    .sidenav {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: 52px;
+      background: #1a2a32;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0;
+      transition: width 0.22s cubic-bezier(.4,0,.2,1);
+      overflow: hidden;
+    }
+    .sidenav:hover {
+      width: 210px;
+    }
+    .sidenav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 14px;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      width: 100%;
+      flex-shrink: 0;
+    }
+    .sidenav-logo-icon {
+      width: 24px; height: 24px;
+      background: #4a9ebe;
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: white;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .sidenav-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      color: white;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .sidenav:hover .sidenav-logo-text { opacity: 1; }
+
+    .sidenav-section {
+      width: 100%;
+      padding: 8px 0 4px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .sidenav-section-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+      padding: 0 14px 4px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .sidenav:hover .sidenav-section-label { opacity: 1; }
+
+    .sidenav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      text-decoration: none;
+      color: rgba(255,255,255,0.65);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      white-space: nowrap;
+      transition: color 0.15s, background 0.15s;
+      width: 100%;
+    }
+    .sidenav-link:hover { color: white; background: rgba(255,255,255,0.07); }
+    .sidenav-link.active { color: #4a9ebe; }
+    .sidenav-link-icon { width: 24px; text-align: center; flex-shrink: 0; font-size: 14px; }
+    .sidenav-link-text {
+      opacity: 0;
+      transition: opacity 0.15s;
+      font-size: 13px;
+    }
+    .sidenav:hover .sidenav-link-text { opacity: 1; }
+
+    .sidenav-cat {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 5px 14px;
+      text-decoration: none;
+      color: rgba(255,255,255,0.45);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: color 0.15s;
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+    }
+    .sidenav-cat:hover { color: rgba(255,255,255,0.85); }
+    .sidenav-cat.active { color: #4a9ebe; }
+    .sidenav-cat-icon { width: 24px; text-align: center; flex-shrink: 0; font-size: 11px; }
+    .sidenav-cat-text { opacity: 0; transition: opacity 0.15s; }
+    .sidenav:hover .sidenav-cat-text { opacity: 1; }
+
+    /* ── MOBILE NAV ── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: #1a2a32;
+      padding: 0 16px;
+    }
+    .mobile-nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 48px;
+    }
+    .mobile-nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      color: white;
+      text-decoration: none;
+    }
+    .mobile-nav-toggle {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+    .mobile-nav-dropdown {
+      display: none;
+      background: #1a2a32;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 8px 0 12px;
+    }
+    .mobile-nav-dropdown.open { display: block; }
+    .mobile-nav-link {
+      display: block;
+      padding: 9px 16px;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+    }
+    .mobile-nav-link:hover { color: white; }
+    .mobile-nav-link.active { color: #4a9ebe; }
+    .mobile-nav-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 6px 16px;
+    }
+    .mobile-cat-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+      padding: 6px 16px 2px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .mobile-cat-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 6px 16px;
+    }
+    .mobile-cat-btn {
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.08);
+      border: none;
+      border-radius: 4px;
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+    }
+    .mobile-cat-btn:hover { background: rgba(255,255,255,0.15); color: white; }
+    .mobile-cat-btn.active { background: #4a9ebe; color: white; }
+
+    /* ── PAGE LAYOUT ── */
+    body {
+      font-family: 'Noto Sans SC', 'DM Sans', sans-serif;
+      background: #f7f3ee;
+      margin-left: 52px;
+    }
+    @media (max-width: 768px) {
+      body { margin-left: 0; padding-top: 48px; }
+      .sidenav { display: none; }
+      .mobile-nav { display: block; }
+    }
+
+    /* ── NOTICE BANNER ── */
+    .notice-banner {
+      background: #1a2a32;
+      color: rgba(255,255,255,0.8);
+      padding: 8px 20px;
+      font-size: 0.8rem;
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .notice-banner strong { color: white; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 20px 20px 12px;
+      border-bottom: 2px solid #1a2a32;
+      background: #f7f3ee;
+    }
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: #1a2a32;
+      margin-bottom: 2px;
+    }
+    .page-header p {
+      font-size: 0.8rem;
+      color: #6a7a82;
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      background: #f7f3ee;
+      padding: 10px 20px;
+      border-bottom: 1px solid #e0d8cf;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    @media (max-width: 768px) {
+      .filter-bar { top: 48px; }
+    }
+    .search-input {
+      padding: 6px 14px;
+      border: 1px solid #c8bfb3;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      font-family: 'Noto Sans SC', 'DM Sans', sans-serif;
+      background: white;
+      outline: none;
+      width: 180px;
+    }
+    .search-input:focus { border-color: #1a2a32; }
+    .filter-btn {
+      padding: 5px 12px;
+      border: 1px solid #c8bfb3;
+      border-radius: 4px;
+      background: white;
+      color: #4a5a62;
+      font-size: 0.78rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      white-space: nowrap;
+      transition: all 0.12s;
+    }
+    .filter-btn:hover { border-color: #1a2a32; color: #1a2a32; }
+    .filter-btn.active { background: #1a2a32; color: white; border-color: #1a2a32; }
+    .stock-toggle {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      color: #6a7a82;
+      cursor: pointer;
+      margin-left: auto;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .stock-toggle input { accent-color: #4a9ebe; cursor: pointer; }
+
+    /* ── PRODUCTS GRID ── */
+    .products-wrap { padding: 16px 20px 80px; }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 1100px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 700px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ── PRODUCT CARD ── */
+    .product-card {
+      background: white;
+      border: 1px solid #e0d8cf;
+      border-radius: 6px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.15s;
+    }
+    .product-card:hover { box-shadow: 0 3px 12px rgba(0,0,0,0.08); }
+    .product-card.sold-out { opacity: 0.5; }
+
+    .product-image {
+      width: 100%;
+      height: 110px;
+      object-fit: contain;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      background: #f7f3ee;
+      padding: 4px;
+    }
+    .product-zh {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1a2a32;
+      margin-bottom: 1px;
+    }
+    .product-name {
+      font-size: 0.72rem;
+      color: #6a7a82;
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .product-price {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1a2a32;
+      margin-bottom: 2px;
+    }
+    .product-approx {
+      font-size: 0.68rem;
+      color: #8a9aa2;
+      font-style: italic;
+      margin-bottom: 5px;
+    }
+    .product-deal-badge {
+      display: inline-block;
+      background: #c8371a;
+      color: white;
+      font-size: 0.68rem;
+      padding: 2px 7px;
+      border-radius: 3px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .stock-badge-coming {
+      display: inline-block;
+      font-size: 0.65rem;
+      background: #b0b8bc;
+      color: white;
+      padding: 2px 7px;
+      border-radius: 3px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .size-select {
+      width: 100%;
+      padding: 5px 8px;
+      border: 1px solid #e0d8cf;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-family: 'Noto Sans SC', 'DM Sans', sans-serif;
+      background: white;
+      cursor: pointer;
+      margin-bottom: 6px;
+    }
+
+    /* ── QTY CONTROLS ── */
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: auto;
+      padding-top: 6px;
+    }
+    .qty-btn {
+      width: 26px; height: 26px;
+      border: 1px solid #c8bfb3;
+      border-radius: 4px;
+      background: white;
+      color: #1a2a32;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.12s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .qty-btn:hover { background: #1a2a32; color: white; border-color: #1a2a32; }
+    .qty-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+    .qty-val {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1a2a32;
+      min-width: 18px;
+      text-align: center;
+    }
+
+    /* ── GUIDE PANEL ── */
+    .guide-panel {
+      background: white;
+      border: 1px solid #e0d8cf;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 0 20px 14px;
+      display: none;
+    }
+    .guide-panel.active { display: block; }
+    .guide-panel h3 { font-size: 0.9rem; color: #1a2a32; margin-bottom: 8px; font-family: 'Playfair Display', serif; }
+    .people-btns { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .people-btn {
+      padding: 4px 12px;
+      border: 1px solid #c8bfb3;
+      border-radius: 4px;
+      background: white;
+      font-size: 0.78rem;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .people-btn.active { background: #1a2a32; color: white; border-color: #1a2a32; }
+    .recs { background: #f7f3ee; border-radius: 4px; padding: 10px 12px; display: none; }
+    .recs.active { display: block; }
+    .recs h4 { font-size: 0.82rem; color: #1a2a32; margin-bottom: 6px; }
+    .recs ul { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+    .recs li { font-size: 0.78rem; color: #4a5a62; padding-left: 12px; position: relative; }
+    .recs li::before { content: '✓'; position: absolute; left: 0; color: #4a9ebe; font-weight: 700; }
+
+    /* ── FLOATING WISHLIST ── */
+    .floating-cart {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      background: #1a2a32;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(26,42,50,0.35);
+      z-index: 9999;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      display: none;
+      letter-spacing: 0.01em;
+    }
+    .floating-cart.visible { display: block; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(26,42,50,0.6);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(3px);
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-box {
+      background: #f7f3ee;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 540px;
+      max-height: 85vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .modal-head {
+      padding: 16px 20px 12px;
+      border-bottom: 1px solid #e0d8cf;
+      background: #1a2a32;
+    }
+    .modal-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: white;
+      margin-bottom: 2px;
+    }
+    .modal-head p {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.55);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .modal-close {
+      position: absolute; top: 14px; right: 16px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      width: 26px; height: 26px;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-body { padding: 14px 20px; overflow-y: auto; flex: 1; }
+    .modal-list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 8px 10px;
+      background: white;
+      border: 1px solid #e0d8cf;
+      border-radius: 5px;
+      margin-bottom: 6px;
+      gap: 8px;
+    }
+    .modal-item-zh {
+      font-family: 'Noto Sans SC', sans-serif;
+      font-size: 0.88rem;
+      color: #1a2a32;
+      font-weight: 500;
+    }
+    .modal-item-name { font-size: 0.72rem; color: #6a7a82; }
+    .modal-item-detail { font-size: 0.7rem; color: #8a9aa2; margin-top: 2px; }
+    .modal-item-remove {
+      background: none; border: none;
+      color: #c8371a;
+      cursor: pointer; font-size: 1rem;
+      opacity: 0.5; flex-shrink: 0;
+    }
+    .modal-item-remove:hover { opacity: 1; }
+    .est-spend {
+      background: #1a2a32;
+      border-radius: 5px;
+      padding: 10px 14px;
+      margin-top: 10px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .est-spend-label { font-size: 0.75rem; color: rgba(255,255,255,0.6); font-family: 'DM Sans', sans-serif; }
+    .est-spend-val { font-size: 1.1rem; font-weight: 700; color: white; }
+    .est-spend-note { font-size: 0.68rem; color: rgba(255,255,255,0.4); }
+    .tax-note {
+      font-size: 0.72rem; color: #8a9aa2;
+      margin-top: 8px; font-style: italic;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .modal-foot {
+      padding: 12px 20px;
+      border-top: 1px solid #e0d8cf;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      background: #f7f3ee;
+    }
+    .modal-foot button {
+      flex: 1; min-width: 100px;
+      padding: 9px;
+      border-radius: 5px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-copy { background: #1a2a32; color: white; }
+    .btn-copy:hover { background: #2a3a42; }
+    .btn-share { background: white; color: #1a2a32; border: 1px solid #c8bfb3 !important; }
+    .btn-share:hover { border-color: #1a2a32 !important; }
+    .btn-clear { background: white; color: #c8371a; border: 1px solid #e0d8cf !important; }
+    .btn-clear:hover { border-color: #c8371a !important; }
+
+    @media (max-width: 768px) {
+      .modal-foot { flex-direction: column; }
+      .products-wrap { padding: 12px 12px 80px; }
+      .filter-bar { padding: 8px 12px; }
+      .page-header { padding: 14px 12px 10px; }
+      .guide-panel { margin: 0 12px 12px; }
+    }
+    @media print {
+      .sidenav, .mobile-nav, .floating-cart, .notice-banner, .modal-foot, .modal-close { display: none !important; }
+    }
   </style>
 </head>
 <body>
 
-<div class="notice-banner">
-  &#8505;&#65039; <strong>No online ordering &#26080;&#22312;&#32447;&#35746;&#36141;</strong> &mdash; This list is a planning guide only. Visit us in-store or message WeChat to order.
-  <span class="notice-zh">&#27492;&#28165;&#21333;&#20165;&#20026;&#36141;&#29289;&#25351;&#21335;&#12290;&#35831;&#21040;&#24215;&#25110;&#36890;&#36807;&#24494;&#20449;&#19979;&#21333;&#12290;</span>
-</div>
+<!-- SIDE NAV — DESKTOP -->
+<nav class="sidenav">
+  <a href="index.html" class="sidenav-logo">
+    <div class="sidenav-logo-icon">S</div>
+    <span class="sidenav-logo-text">Shabu Meat House</span>
+  </a>
 
-<nav>
-  <a class="nav-logo" href="index.html">Shabu <span>Meat House</span></a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="items.html" class="active">Items</a></li>
-    <li><a href="guide.html" class="active">Guide</a></li>
-    <li><a href="recipes.html">Recipes</a></li>
-  </ul>
+  <div class="sidenav-section">
+    <div class="sidenav-section-label">Pages</div>
+    <a href="index.html" class="sidenav-link">
+      <span class="sidenav-link-icon">🏠</span>
+      <span class="sidenav-link-text">Home</span>
+    </a>
+    <a href="items.html" class="sidenav-link active">
+      <span class="sidenav-link-icon">🛍</span>
+      <span class="sidenav-link-text">Shop</span>
+    </a>
+    <a href="guide.html" class="sidenav-link">
+      <span class="sidenav-link-icon">📋</span>
+      <span class="sidenav-link-text">Guide</span>
+    </a>
+    <a href="recipes.html" class="sidenav-link">
+      <span class="sidenav-link-icon">🍲</span>
+      <span class="sidenav-link-text">Recipes</span>
+    </a>
+    <a href="icecream.html" class="sidenav-link">
+      <span class="sidenav-link-icon">🍦</span>
+      <span class="sidenav-link-text">Ice Cream</span>
+    </a>
+  </div>
+
+  <div class="sidenav-section" style="flex:1;overflow-y:auto">
+    <div class="sidenav-section-label">Browse</div>
+    <button class="sidenav-cat active" onclick="sideNavCat('all',this)">
+      <span class="sidenav-cat-icon">≡</span>
+      <span class="sidenav-cat-text">All 全部</span>
+    </button>
+    <button class="sidenav-cat" onclick="sideNavCat('lamb',this)">
+      <span class="sidenav-cat-icon">🐑</span>
+      <span class="sidenav-cat-text">Lamb 羊肉</span>
+    </button>
+    <button class="sidenav-cat" onclick="sideNavCat('beef',this)">
+      <span class="sidenav-cat-icon">🥩</span>
+      <span class="sidenav-cat-text">Beef 牛肉</span>
+    </button>
+    <button class="sidenav-cat" onclick="sideNavCat('pork',this)">
+      <span class="sidenav-cat-icon">🐷</span>
+      <span class="sidenav-cat-text">Pork 猪肉</span>
+    </button>
+    <button class="sidenav-cat" onclick="sideNavCat('soup',this)">
+      <span class="sidenav-cat-icon">🍵</span>
+      <span class="sidenav-cat-text">Soup 汤底</span>
+    </button>
+    <button class="sidenav-cat" onclick="sideNavCat('vegetables',this)">
+      <span class="sidenav-cat-icon">🥬</span>
+      <span class="sidenav-cat-text">Veg 蔬菜</span>
+    </button>
+    <button class="sidenav-cat" onclick="sideNavCat('mushrooms',this)">
+      <span class="sidenav-cat-icon">🍄</span>
+      <span class="sidenav-cat-text">Mushrooms 菌菇</span>
+    </button>
+    <button class="sidenav-cat" onclick="sideNavCat('noodles',this)">
+      <span class="sidenav-cat-icon">🍜</span>
+      <span class="sidenav-cat-text">Noodles 面条</span>
+    </button>
+    <button class="sidenav-cat" onclick="sideNavCat('fruits',this)">
+      <span class="sidenav-cat-icon">🍑</span>
+      <span class="sidenav-cat-text">Fruits 水果</span>
+    </button>
+    <button class="sidenav-cat" onclick="sideNavCat('sides',this)">
+      <span class="sidenav-cat-icon">🥣</span>
+      <span class="sidenav-cat-text">Sides 配菜</span>
+    </button>
+    <button class="sidenav-cat" onclick="sideNavCat('condiments',this)">
+      <span class="sidenav-cat-icon">🫙</span>
+      <span class="sidenav-cat-text">Condiments 调料</span>
+    </button>
+    <button class="sidenav-cat" onclick="sideNavCat('dipping',this)">
+      <span class="sidenav-cat-icon">🥫</span>
+      <span class="sidenav-cat-text">Dipping 蘸料</span>
+    </button>
+    <a href="icecream.html" class="sidenav-cat">
+      <span class="sidenav-cat-icon">🍦</span>
+      <span class="sidenav-cat-text">Ice Cream 冰淇淋</span>
+    </a>
+  </div>
 </nav>
 
-<section class="container">
-  <p class="section-label">Our Products / &#25105;&#20204;&#30340;&#20135;&#21697;</p>
-  <h1 class="section-title">Full Catalogue <span style="font-family:'Noto Sans SC',sans-serif;font-size:.6em;color:#4a9ebe;">&#20840;&#37096;&#21830;&#21697;</span></h1>
-
-  <div style="margin-bottom:2rem;display:flex;flex-direction:column;gap:1rem;">
-  <input type="text" id="searchInput" placeholder="Search / 搜索 (e.g. Beef, 羊肉)..." onkeyup="renderProducts()" style="padding:12px 25px;border-radius:50px;border:1.5px solid var(--border);width:100%;max-width:500px;outline:none;font-family:'Noto Sans SC',inherit;"/>
-  <div class="controls-row">
-    <button class="guide-btn" onclick="toggleGuide()"> Shopping Guide 购物指南</button>
-    <label class="stock-toggle">
-      <input type="checkbox" id="showSoldOut" onchange="renderProducts()"/>
-      Show unavailable items 显示及将上架商品
-    </label>
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <div class="mobile-nav-bar">
+    <a href="index.html" class="mobile-nav-logo">Shabu Meat House</a>
+    <button class="mobile-nav-toggle" onclick="toggleMobileNav()">☰</button>
   </div>
-  <div class="guide-panel" id="guidePanel">
-    <h3>How many people? 几位用餐？</h3>
-    <div class="people-btns">
-      <button class="people-btn" onclick="selectPeople(2,this)">2 people 2人</button>
-      <button class="people-btn" onclick="selectPeople(4,this)">4 people 4人</button>
-      <button class="people-btn" onclick="selectPeople(6,this)">6 people 6人</button>
-      <button class="people-btn" onclick="selectPeople(8,this)">8+ people 8+人</button>
+  <div class="mobile-nav-dropdown" id="mobileNavDropdown">
+    <a href="index.html" class="mobile-nav-link">🏠 Home</a>
+    <a href="items.html" class="mobile-nav-link active">🛍 Shop</a>
+    <a href="guide.html" class="mobile-nav-link">📋 Guide</a>
+    <a href="recipes.html" class="mobile-nav-link">🍲 Recipes</a>
+    <a href="icecream.html" class="mobile-nav-link">🍦 Ice Cream</a>
+    <div class="mobile-nav-divider"></div>
+    <div class="mobile-cat-label">Browse by category</div>
+    <div class="mobile-cat-grid">
+      <button class="mobile-cat-btn active" onclick="mobileCat('all',this)">All</button>
+      <button class="mobile-cat-btn" onclick="mobileCat('lamb',this)">Lamb 羊肉</button>
+      <button class="mobile-cat-btn" onclick="mobileCat('beef',this)">Beef 牛肉</button>
+      <button class="mobile-cat-btn" onclick="mobileCat('pork',this)">Pork 猪肉</button>
+      <button class="mobile-cat-btn" onclick="mobileCat('soup',this)">Soup 汤底</button>
+      <button class="mobile-cat-btn" onclick="mobileCat('vegetables',this)">Veg 蔬菜</button>
+      <button class="mobile-cat-btn" onclick="mobileCat('mushrooms',this)">Mushrooms</button>
+      <button class="mobile-cat-btn" onclick="mobileCat('noodles',this)">Noodles 面条</button>
+      <button class="mobile-cat-btn" onclick="mobileCat('fruits',this)">Fruits 水果</button>
+      <button class="mobile-cat-btn" onclick="mobileCat('sides',this)">Sides 配菜</button>
+      <button class="mobile-cat-btn" onclick="mobileCat('condiments',this)">Condiments</button>
+      <button class="mobile-cat-btn" onclick="mobileCat('dipping',this)">Dipping 蘸料</button>
     </div>
-    <div class="recs" id="recs"></div>
   </div>
-   <div style="display:flex;flex-wrap:wrap;gap:8px;">
-  <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('all')">All 全部</button>
-  <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('lamb')">Lamb 羊肉</button>
-  <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('beef')">Beef 牛肉</button>
-  <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('pork')">Pork 猪肉</button>
-  <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('soup')">Soup 汤底</button>
-  <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('noodles')">Noodles 面条</button>
-  <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('vegetables')">Veg 蔬菜</button>
-  <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('mushrooms')">Mushrooms 菌菇</button>
-  <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('fruits')">Fruits 水果</button>
-  <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="window.location.href='icecream.html'">Ice Cream 冰淇淋</button>
-  <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('sides')">Sides 配菜</button>
-  <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('condiments')">Condiments 调料</button>
-  <button class="qty-btn" style="width:auto;padding:0 15px;border-radius:50px;" onclick="filterByCat('dipping')">Dipping 蘸料</button>
 </div>
-</div>
-<div class="products-grid" id="productsGrid"><p style="color:#999;">Loading products...</p></div>
-</section>
 
+<!-- NOTICE BANNER -->
+<div class="notice-banner">
+  Visit us today — everything you need for hotpot, in one place · 来店选购，火锅所需一应俱全
+  &nbsp;·&nbsp; <strong>Have questions? WeChat 微信: shabumeat</strong>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>Full Catalogue <span style="font-family:'Noto Sans SC',sans-serif;font-size:0.6em;color:#4a9ebe;">全部商品</span></h1>
+  <p>In-house sliced meat rolls, soup bases, vegetables & more · 现切肉卷、火锅底料、新鲜蔬菜</p>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <input type="text" id="searchInput" class="search-input" placeholder="Search 搜索..." onkeyup="renderProducts()"/>
+  <button class="filter-btn active" onclick="filterByCat('all',this)">All 全部</button>
+  <button class="filter-btn" onclick="filterByCat('lamb',this)">Lamb 羊肉</button>
+  <button class="filter-btn" onclick="filterByCat('beef',this)">Beef 牛肉</button>
+  <button class="filter-btn" onclick="filterByCat('pork',this)">Pork 猪肉</button>
+  <button class="filter-btn" onclick="filterByCat('soup',this)">Soup 汤底</button>
+  <button class="filter-btn" onclick="filterByCat('vegetables',this)">Veg 蔬菜</button>
+  <button class="filter-btn" onclick="filterByCat('mushrooms',this)">Mushrooms</button>
+  <button class="filter-btn" onclick="filterByCat('noodles',this)">Noodles 面条</button>
+  <button class="filter-btn" onclick="filterByCat('fruits',this)">Fruits 水果</button>
+  <button class="filter-btn" onclick="filterByCat('sides',this)">Sides 配菜</button>
+  <button class="filter-btn" onclick="filterByCat('condiments',this)">Condiments</button>
+  <button class="filter-btn" onclick="filterByCat('dipping',this)">Dipping 蘸料</button>
+  <button class="filter-btn" onclick="window.location.href='icecream.html'">🍦 Ice Cream</button>
+  <label class="stock-toggle">
+    <input type="checkbox" id="showSoldOut" onchange="renderProducts()"/>
+    Show unavailable
+  </label>
+</div>
+
+<!-- GUIDE PANEL -->
+<div class="guide-panel" id="guidePanel">
+  <h3>How many people? 几位用餐？</h3>
+  <div class="people-btns">
+    <button class="people-btn" onclick="selectPeople(2,this)">2 people 2人</button>
+    <button class="people-btn" onclick="selectPeople(4,this)">4 people 4人</button>
+    <button class="people-btn" onclick="selectPeople(6,this)">6 people 6人</button>
+    <button class="people-btn" onclick="selectPeople(8,this)">8+ people 8+人</button>
+  </div>
+  <div class="recs" id="recs"></div>
+</div>
+
+<!-- PRODUCTS GRID -->
+<div class="products-wrap">
+  <div class="products-grid" id="productsGrid">
+    <p style="color:#999;">Loading products...</p>
+  </div>
+</div>
+
+<!-- FLOATING WISHLIST -->
 <div class="floating-cart" id="floatingCart" onclick="openModal()">
-   My List 我的清单 (<span id="cartCount">0</span>)
+  📝 My Wishlist 我的心愿单 (<span id="cartCount">0</span>)
 </div>
 
+<!-- WISHLIST MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="overlayClose(event)">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">×</button>
     <div class="modal-head">
-      <h2>My Shopping List 我的清单</h2>
-      <div class="modal-notice">
-        <strong>Planning guide only — not a checkout. 仅为购物指引 — 非结账系统。</strong>
-        <span class="zh">复制后通过微信 shabumeat 发送，我们将回复确认。</span>
-      </div>
+      <h2>My Hotpot Wishlist 我的火锅心愿单</h2>
+      <p>Plan your visit · 规划您的购物</p>
     </div>
     <div class="modal-body" id="modalBody"></div>
     <div class="modal-foot">
-      <button class="btn-wechat" onclick="copyForWeChat()">Copy to Send via WeChat 复制发送</button>
-      <button class="btn-print-modal" onclick="window.print()">Print 打印</button>
-      <button class="btn-clear-modal" onclick="clearCart()">Clear 清空</button>
+      <button class="btn-copy" onclick="copyList()">📋 Copy List 复制清单</button>
+      <button class="btn-share" onclick="shareList()">↗ Share 分享</button>
+      <button class="btn-clear" onclick="clearCart()">Clear 清空</button>
     </div>
   </div>
 </div>
 
 <script>
-let products=[];
-let cart=JSON.parse(localStorage.getItem('shabuCart'))||{};
-let currentCat='all';
-let orderNum='',orderDate='';
+let products = [];
+let cart = JSON.parse(localStorage.getItem('shabuCart')) || {};
+let currentCat = 'all';
 
+// Rolls/sliced first within each meat category, then chunks/cubes
 products = [
+  // LAMB — rolls first
   { "name": "Australia Lamb Shoulder Rolls", "zh": "澳大利亚羊肉卷", "price": 13.99, "unit": "per lb", "cat": "lamb", "type": "package", "approxWeight": "0.65–0.85 lb", "approxTotal": "$9.10–$11.90", "stock": "in-stock" },
   { "name": "New Zealand Lamb Shoulder Rolls", "zh": "新西兰羊肉卷", "price": 15.99, "unit": "per lb", "cat": "lamb", "type": "package", "approxWeight": "0.7–0.9 lb", "approxTotal": "$11.19–$14.39", "stock": "in-stock" },
   { "name": "Lamb Leg Boneless Cube", "zh": "无骨羊腿块", "price": 12.99, "unit": "per lb", "cat": "lamb", "type": "weight", "approxWeight": "1.0–1.3 lb", "approxTotal": "$12.99–$16.89", "stock": "in-stock" },
   { "name": "Mutton Leg Bone-In Cube", "zh": "有骨老羊腿块", "price": 10.99, "unit": "per lb", "cat": "lamb", "type": "weight", "approxWeight": "1.0–1.3 lb", "approxTotal": "$10.99–$14.29", "stock": "in-stock" },
 
+  // BEEF — rolls first, then cuts, then offal
   { "name": "Beef Short Plate Rolls", "zh": "牛五花卷", "price": 10.99, "unit": "per lb", "cat": "beef", "type": "package", "approxWeight": "0.78–0.98 lb", "approxTotal": "$7.70–$9.90", "stock": "in-stock" },
   { "name": "Beef Chuck Rolls", "zh": "牛眉头卷", "price": 14.99, "unit": "per lb", "cat": "beef", "type": "package", "approxWeight": "0.7–0.9 lb", "approxTotal": "$10.49–$13.49", "stock": "in-stock" },
   { "name": "Beef Flat Iron Sliced", "zh": "雪花牛肉片", "price": 14.99, "unit": "per lb", "cat": "beef", "type": "weight", "approxWeight": "0.7–0.9 lb", "approxTotal": "$10.49–$13.49", "stock": "sold-out" },
   { "name": "Beef Ribeye", "zh": "牛肋眼", "price": 21.99, "unit": "per lb", "cat": "beef", "type": "weight", "approxWeight": "0.7–0.9 lb", "approxTotal": "$15.39–$19.79", "stock": "sold-out" },
-  { "name": "Beef Ox Tail", "zh": "牛尾", "price": 13.99, "unit": "per lb", "cat": "beef", "type": "weight", "approxWeight": "1.0-1.3 lb", "approxTotal": "$13.99–$18.19", "stock": "in-stock" },
+  { "name": "Beef Ox Tail", "zh": "牛尾", "price": 13.99, "unit": "per lb", "cat": "beef", "type": "weight", "approxWeight": "1.0–1.3 lb", "approxTotal": "$13.99–$18.19", "stock": "in-stock" },
   { "name": "Beef Balls", "zh": "牛肉丸", "price": 8.00, "unit": "per ea", "cat": "beef", "type": "fixed", "stock": "in-stock" },
   { "name": "Beef Omasum Scalded", "zh": "牛百叶丝", "price": 8.00, "unit": "per ea", "cat": "beef", "type": "fixed", "stock": "in-stock" },
   { "name": "Beef Honeycomb Tripe Scalded", "zh": "金钱肚丝", "price": 8.00, "unit": "per ea", "cat": "beef", "type": "fixed", "stock": "in-stock" },
   { "name": "Beef Tripe Scalded", "zh": "牛草肚丝", "price": 8.00, "unit": "per ea", "cat": "beef", "type": "fixed", "stock": "in-stock" },
 
+  // PORK — rolls first
   { "name": "Pork Shoulder Rolls", "zh": "猪梅头肉卷", "price": 7.88, "unit": "per lb", "cat": "pork", "type": "package", "approxWeight": "0.7–0.9 lb", "approxTotal": "$5.52–$7.09", "stock": "in-stock" },
   { "name": "Pork Belly Skin Off Thick Cut", "zh": "无皮猪腩片", "price": 7.99, "unit": "per lb", "cat": "pork", "type": "weight", "approxWeight": "0.7–0.9 lb", "approxTotal": "$5.59–$7.19", "stock": "in-stock" },
 
-  { "name": "Finger Meat", "zh": "手指肉", "price": 11.99, "unit": "per lb", "cat": "other", "type": "weight", "approxWeight": "3-4 lb", "approxTotal": "$35.97–$47.96", "stock": "in-stock" },
+  { "name": "Finger Meat", "zh": "手指肉", "price": 11.99, "unit": "per lb", "cat": "other", "type": "weight", "approxWeight": "3–4 lb", "approxTotal": "$35.97–$47.96", "stock": "in-stock" },
 
   { "name": "Little Sheep Soup Base – Mala Spicy", "zh": "小肥羊麻辣火锅底料", "price": 5.90, "unit": "per ea", "cat": "soup", "type": "fixed", "stock": "in-stock", "image": "little-sheep-mala.png" },
   { "name": "Little Sheep Soup Base – Mushroom", "zh": "小肥羊菌菇火锅底料", "price": 5.90, "unit": "per ea", "cat": "soup", "type": "fixed", "stock": "in-stock", "image": "little-sheep-mushroom.png" },
@@ -204,7 +847,6 @@ products = [
   { "name": "Cilantro", "zh": "香菜", "price": 1.89, "unit": "per ea", "cat": "vegetables", "type": "deal", "dealPrice": "2 for $3.00", "stock": "in-stock" },
   { "name": "Tong Ho", "zh": "茼蒿", "price": 2.99, "unit": "per lb", "cat": "vegetables", "type": "tong-ho", "sizeOptions": [{"label":"Small bag","approxWeight":"~0.5 lb","approxTotal":"~$1.50"},{"label":"Large bag","approxWeight":"~1 lb","approxTotal":"~$2.99"}], "stock": "in-stock" },
 
-
   { "name": "Mushroom White 227g", "zh": "蘑菇", "price": 2.80, "unit": "per ea", "cat": "mushrooms", "type": "fixed", "stock": "in-stock", "image": "mushroom-white-227g.png" },
   { "name": "Mushroom Brown 227g", "zh": "褐蘑菇", "price": 2.80, "unit": "per ea", "cat": "mushrooms", "type": "fixed", "stock": "in-stock", "image": "mushroom-brown-227g.png" },
   { "name": "Enoki", "zh": "金针菇", "price": 1.60, "unit": "per ea", "cat": "mushrooms", "type": "deal", "dealPrice": "2 for $2.80", "stock": "in-stock", "image": "enoki-china-green.png" },
@@ -221,17 +863,6 @@ products = [
   { "name": "Firm Tofu 500g", "zh": "硬豆腐", "price": 3.50, "unit": "per ea", "cat": "sides", "type": "fixed", "stock": "in-stock", "image": "tofu-firm-purple.png" },
   { "name": "Extra Firm Tofu 350g", "zh": "特硬豆腐", "price": 4.00, "unit": "per ea", "cat": "sides", "type": "fixed", "stock": "in-stock", "image": "tofu-extra-firm.png" },
   { "name": "Spam 340g (25% Less Sodium)", "zh": "午餐肉低钠", "price": 6.00, "unit": "per ea", "cat": "sides", "type": "fixed", "stock": "in-stock", "image": "spam-25.png" },
-  { "name": "Ben & Jerry's Half Baked", "zh": "半烤冰淇淋", "price": 7.99, "unit": "per ea", "cat": "dessert", "type": "fixed", "stock": "in-stock" },
-  { "name": "Ben & Jerry's Tonight Dough", "zh": "今晚饼干面团", "price": 7.99, "unit": "per ea", "cat": "dessert", "type": "fixed", "stock": "in-stock" },
-  { "name": "Ben & Jerry's Cherry Garcia", "zh": "樱桃加西亚", "price": 7.99, "unit": "per ea", "cat": "dessert", "type": "fixed", "stock": "in-stock" },
-  { "name": "Ben & Jerry's Chunky Monkey", "zh": "大块猴子", "price": 7.99, "unit": "per ea", "cat": "dessert", "type": "fixed", "stock": "in-stock" },
-  { "name": "Ben & Jerry's Chocolate Chip Cookie Dough", "zh": "巧克力曲奇饼团", "price": 7.99, "unit": "per ea", "cat": "dessert", "type": "fixed", "stock": "in-stock" },
-  { "name": "Ben & Jerry's Cookie Dough CORE", "zh": "曲奇面团核心", "price": 7.99, "unit": "per ea", "cat": "dessert", "type": "fixed", "stock": "in-stock" },
-  { "name": "Ben & Jerry's Brownie Batter CORE", "zh": "布朗尼面糊核心", "price": 7.99, "unit": "per ea", "cat": "dessert", "type": "fixed", "stock": "in-stock" },
-  { "name": "Ben & Jerry's S'more Please!", "zh": "烤棉花糖夹心", "price": 7.99, "unit": "per ea", "cat": "dessert", "type": "fixed", "stock": "in-stock" },
-  { "name": "Ben & Jerry's Chocolate Therapy", "zh": "巧克力疗愈", "price": 7.99, "unit": "per ea", "cat": "dessert", "type": "fixed", "stock": "in-stock" },
-  { "name": "Ben & Jerry's Cold Brew Caramel Latte", "zh": "冷萃焦糖拿铁", "price": 7.99, "unit": "per ea", "cat": "dessert", "type": "fixed", "stock": "in-stock" },
-  { "name": "Ben & Jerry's Ice Cream Sammie", "zh": "冰淇淋三明治", "price": 7.99, "unit": "per ea", "cat": "dessert", "type": "fixed", "stock": "in-stock" },
 
   { "name": "Kikkoman Premium Soy Sauce 750ml", "zh": "龟甲万特选大豆酱油", "price": 8.00, "unit": "per ea", "cat": "condiments", "type": "fixed", "stock": "in-stock", "image": "kikkoman-soy-sauce.png" },
   { "name": "Kimlan Vinegar", "zh": "金兰醋", "price": 6.00, "unit": "per ea", "cat": "condiments", "type": "fixed", "stock": "in-stock", "image": "kimlan-vinegar.png" },
@@ -243,144 +874,277 @@ products = [
   { "name": "XIAOLONGKAN Sesame Dip – Original", "zh": "小龙坎麻酱原味", "price": 1.90, "unit": "per ea", "cat": "dipping", "type": "fixed", "stock": "in-stock", "image": "xlk-original-dip.png" },
   { "name": "XIAOLONGKAN Sesame Dip – Spicy", "zh": "小龙坎麻酱香辣", "price": 1.90, "unit": "per ea", "cat": "dipping", "type": "fixed", "stock": "in-stock", "image": "xlk-spicy-dip.png" }
 ];
+
 renderProducts();
 updateCartUI();
 
-function genOrderNum(){
-  const n=new Date(),pad=v=>String(v).padStart(2,'0');
-  orderNum=`SMH-${n.getFullYear()}${pad(n.getMonth()+1)}${pad(n.getDate())}-${pad(n.getHours())}${pad(n.getMinutes())}`;
-  orderDate=n.toLocaleDateString('en-CA',{year:'numeric',month:'long',day:'numeric'});
+function isSlicedMeat(p) {
+  return ['lamb','beef','pork'].includes(p.cat) && (p.type === 'package' || p.name.toLowerCase().match(/roll|slice|sliced/));
 }
 
-function renderProducts(){
-  const grid=document.getElementById('productsGrid');
-  const search=document.getElementById('searchInput').value.toLowerCase();
-  const showSoldOut=document.getElementById('showSoldOut').checked;
-  const filtered=products.filter(p=>{
-    const ms=p.name.toLowerCase().includes(search)||(p.zh&&p.zh.includes(search));
-    const mc=currentCat==='all'||p.cat===currentCat;
-    const mst=showSoldOut||p.stock!=='sold-out';
-    return ms&&mc&&mst;
+function renderProducts() {
+  const grid = document.getElementById('productsGrid');
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const showSoldOut = document.getElementById('showSoldOut').checked;
+  const filtered = products.filter(p => {
+    const ms = p.name.toLowerCase().includes(search) || (p.zh && p.zh.includes(search));
+    const mc = currentCat === 'all' || p.cat === currentCat;
+    const mst = showSoldOut || p.stock !== 'sold-out';
+    return ms && mc && mst;
   });
-  if(!filtered.length){grid.innerHTML='<p style="color:#999;text-align:center;padding:3rem;">No items found</p>';return;}
-  grid.innerHTML=filtered.map(p=>{
-    const idx=products.indexOf(p);
-    const soldOut=p.stock==='sold-out';
-    const priceDisplay='$'+p.price.toFixed(2);
-    const imgHtml=p.image?`<img src="items/${p.image}" alt="${p.name}" class="product-image"/>`:'';
-    const approxHtml=(p.approxWeight&&p.approxTotal)?`<div class="product-approx">~${p.approxWeight} &middot; approx. ${p.approxTotal}/pkg</div>`:'';
-    const dealHtml=p.dealPrice?`<div class="product-deal-badge">&#127991;&#65039; ${p.dealPrice}</div>`:'';
-    return`<div class="product-card${soldOut?' sold-out':''}">${imgHtml}${soldOut?'<span class="stock-badge-coming">Unavailable</span>':''}<div class="product-zh">${p.zh}</div><div class="product-name">${p.name}</div><div class="product-price">${priceDisplay} / ${p.unit}</div>${approxHtml}${dealHtml}${buildControls(p,idx,soldOut)}</div>`;
-  }).join('');
+  if (!filtered.length) { grid.innerHTML = '<p style="color:#999;text-align:center;padding:3rem;grid-column:1/-1;">No items found</p>'; return; }
+
+  const sliced = filtered.filter(p => isSlicedMeat(p));
+  const rest = filtered.filter(p => !isSlicedMeat(p));
+  const showMeatHeader = (currentCat === 'all') && sliced.length > 0;
+
+  const renderCard = p => {
+    const idx = products.indexOf(p);
+    const soldOut = p.stock === 'sold-out';
+    const imgHtml = p.image ? `<img src="items/${p.image}" alt="${p.name}" class="product-image" loading="lazy"/>` : '';
+    const approxHtml = (p.approxWeight && p.approxTotal) ? `<div class="product-approx">~${p.approxWeight} · approx. ${p.approxTotal}/pkg</div>` : '';
+    const dealHtml = p.dealPrice ? `<div class="product-deal-badge">🏷 ${p.dealPrice}</div>` : '';
+    const slicedBadge = isSlicedMeat(p) && currentCat !== 'all' ? '<span style="font-size:0.65rem;background:#e8f0e4;color:#3a6a2a;padding:2px 6px;border-radius:3px;font-weight:600;margin-bottom:4px;display:inline-block;">In-house sliced 现切</span><br>' : '';
+    return `<div class="product-card${soldOut ? ' sold-out' : ''}">${imgHtml}${soldOut ? '<span class="stock-badge-coming">Unavailable</span>' : ''}${slicedBadge}<div class="product-zh">${p.zh}</div><div class="product-name">${p.name}</div><div class="product-price">$${p.price.toFixed(2)} / ${p.unit}</div>${approxHtml}${dealHtml}${buildControls(p, idx, soldOut)}</div>`;
+  };
+
+  let html = '';
+  if (showMeatHeader) {
+    html += `<div style="grid-column:1/-1;padding:8px 0 4px;border-bottom:2px solid #1a2a32;margin-bottom:4px;display:flex;align-items:baseline;gap:10px;"><span style="font-family:'Playfair Display',serif;font-size:1rem;color:#1a2a32;font-weight:700;">🔪 In-House Sliced Meats</span><span style="font-family:'Noto Sans SC',sans-serif;font-size:0.75rem;color:#6a7a82;">现切肉卷 · Lamb, Beef & Pork rolls</span></div>`;
+    html += sliced.map(renderCard).join('');
+    if (rest.length > 0) {
+      html += `<div style="grid-column:1/-1;padding:12px 0 4px;border-bottom:1px solid #e0d8cf;margin-bottom:4px;margin-top:8px;"><span style="font-size:0.8rem;color:#6a7a82;font-family:'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:0.06em;">Everything Else</span></div>`;
+      html += rest.map(renderCard).join('');
+    }
+  } else {
+    html += filtered.map(renderCard).join('');
+  }
+  grid.innerHTML = html;
 }
 
-function buildControls(p,idx,soldOut){
-  if(soldOut)return`<div class="qty-controls"><button class="qty-btn" disabled style="opacity:.4;cursor:not-allowed;width:100%;">Unavailable</button></div>`;
-  if(p.type==='deal'){
-     return`<div class="qty-controls" style="flex-direction:column;gap:6px;"><button class="qty-btn" style="width:50%;height:30px;border-radius:8px;background:#4a9ebe;color:white;border-color:#4a9ebe;" onclick="addDeal(${idx},'single')">+ Single ($${p.price.toFixed(2)})</button><button class="qty-btn" style="width:50%;height:38px;border-radius:8px;background:#3587e5;color:white;border-color:#4a9ebe;" onclick="addDeal(${idx},'deal')">${p.dealPrice}</button></div>`;
+function buildControls(p, idx, soldOut) {
+  if (soldOut) return `<div class="qty-controls"><button class="qty-btn" disabled style="width:100%;opacity:.4;cursor:not-allowed;">Unavailable</button></div>`;
+  if (p.type === 'deal') {
+    return `<div class="qty-controls" style="flex-direction:column;gap:5px;"><button class="qty-btn" style="width:100%;font-size:0.75rem;" onclick="addDeal(${idx},'single')">+ Single ($${p.price.toFixed(2)})</button><button class="qty-btn" style="width:100%;font-size:0.75rem;background:#c8371a;color:white;border-color:#c8371a;" onclick="addDeal(${idx},'deal')">${p.dealPrice}</button></div>`;
   }
-  if(p.sizeOptions){
-    const opts=p.sizeOptions.map((s,i)=>`<option value="${i}">${s.label} &middot; ${s.approxWeight} &middot; ${s.approxTotal}</option>`).join('');
-    const safeKey=p.name.replace(/[^a-zA-Z0-9]/g,'');
-    return`<select class="size-select" id="size-${idx}">${opts}</select><div class="qty-controls"><button class="qty-btn" onclick="updateQty(${idx},-1)">-</button><span class="qty-val" id="qty-${safeKey}">0</span><button class="qty-btn" onclick="updateQty(${idx},1)">+</button></div>`;
+  if (p.sizeOptions) {
+    const opts = p.sizeOptions.map((s, i) => `<option value="${i}">${s.label} · ${s.approxWeight} · ${s.approxTotal}</option>`).join('');
+    const safeKey = p.name.replace(/[^a-zA-Z0-9]/g, '');
+    return `<select class="size-select" id="size-${idx}">${opts}</select><div class="qty-controls"><button class="qty-btn" onclick="updateQty(${idx},-1)">-</button><span class="qty-val" id="qty-${safeKey}">0</span><button class="qty-btn" onclick="updateQty(${idx},1)">+</button></div>`;
   }
-  const safeKey=p.name.replace(/[^a-zA-Z0-9]/g,'');
-  const qty=Object.values(cart).find(c=>c.name===p.name)?.qty||0;
-  return`<div class="qty-controls"><button class="qty-btn" onclick="updateQty(${idx},-1)">-</button><span class="qty-val" id="qty-${safeKey}">${qty}</span><button class="qty-btn" onclick="updateQty(${idx},1)">+</button></div>`;
+  const safeKey = p.name.replace(/[^a-zA-Z0-9]/g, '');
+  const qty = Object.values(cart).find(c => c.name === p.name)?.qty || 0;
+  return `<div class="qty-controls"><button class="qty-btn" onclick="updateQty(${idx},-1)">-</button><span class="qty-val" id="qty-${safeKey}">${qty}</span><button class="qty-btn" onclick="updateQty(${idx},1)">+</button></div>`;
 }
 
-function updateQty(idx,change){
-  const p=products[idx];
-  const sizeEl=document.getElementById(`size-${idx}`);
-  let key=p.name,sizeLabel='';
-  if(sizeEl&&p.sizeOptions){
-    const si=parseInt(sizeEl.value);
-    const s=p.sizeOptions[si];
-    key=`${p.name}__${s.label}`;
-    sizeLabel=`${s.label} (${s.approxWeight}, ${s.approxTotal})`;
+function updateQty(idx, change) {
+  const p = products[idx];
+  const sizeEl = document.getElementById(`size-${idx}`);
+  let key = p.name, sizeLabel = '';
+  if (sizeEl && p.sizeOptions) {
+    const si = parseInt(sizeEl.value);
+    const s = p.sizeOptions[si];
+    key = `${p.name}__${s.label}`;
+    sizeLabel = `${s.label} (${s.approxWeight}, ${s.approxTotal})`;
   }
-  if(!cart[key])cart[key]={...p,qty:0,key,sizeLabel};
-  cart[key].qty+=change;
-  if(cart[key].qty<=0)delete cart[key];
-  localStorage.setItem('shabuCart',JSON.stringify(cart));
-  // Update qty display in place - no re-render to prevent jumping
-  const safeKey=p.name.replace(/[^a-zA-Z0-9]/g,'');
-  const qtyEl=document.getElementById('qty-'+safeKey);
-  if(qtyEl) qtyEl.textContent=cart[key]?.qty||0;
+  if (!cart[key]) cart[key] = { ...p, qty: 0, key, sizeLabel };
+  cart[key].qty += change;
+  if (cart[key].qty <= 0) delete cart[key];
+  localStorage.setItem('shabuCart', JSON.stringify(cart));
+  const safeKey = p.name.replace(/[^a-zA-Z0-9]/g, '');
+  const qtyEl = document.getElementById('qty-' + safeKey);
+  if (qtyEl) qtyEl.textContent = cart[key]?.qty || 0;
   updateCartUI();
 }
 
-function addDeal(idx,type){
-  const p=products[idx];
-  const key=type==='deal'?`${p.name}__deal`:p.name;
-  const label=type==='deal'?p.dealPrice:`1x ($${p.price.toFixed(2)})`;
-  if(!cart[key])cart[key]={...p,qty:0,key,sizeLabel:label};
-  cart[key].qty+=1;
-  localStorage.setItem('shabuCart',JSON.stringify(cart));
+function addDeal(idx, type) {
+  const p = products[idx];
+  const key = type === 'deal' ? `${p.name}__deal` : p.name;
+  const label = type === 'deal' ? p.dealPrice : `1x ($${p.price.toFixed(2)})`;
+  if (!cart[key]) cart[key] = { ...p, qty: 0, key, sizeLabel: label };
+  cart[key].qty += 1;
+  localStorage.setItem('shabuCart', JSON.stringify(cart));
   updateCartUI();
 }
 
-function updateCartUI(){
-  const count=Object.values(cart).reduce((s,i)=>s+i.qty,0);
-  document.getElementById('cartCount').textContent=count;
-  const fc=document.getElementById('floatingCart');
-  if(count>0)fc.classList.add('visible');
+function updateCartUI() {
+  const count = Object.values(cart).reduce((s, i) => s + i.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  const fc = document.getElementById('floatingCart');
+  if (count > 0) fc.classList.add('visible');
   else fc.classList.remove('visible');
 }
 
-function openModal(){
-  genOrderNum();
-  const body=document.getElementById('modalBody');
-  const items=Object.values(cart);
-  if(!items.length){
-    body.innerHTML='<div style="text-align:center;padding:2rem;color:#999;"><p>Your list is empty.</p><p style="font-family:\'Noto Sans SC\',sans-serif;margin-top:.5rem;">清单为空。</p></div>';
-  }else{
-    body.innerHTML=`<div class="order-meta">Order # <span>${orderNum}</span> &nbsp;&middot;&nbsp; ${orderDate}</div>${items.map(item=>`<div class="modal-list-item"><div><div class="modal-item-zh">${item.zh}</div><div class="modal-item-name">${item.name}</div><div class="modal-item-detail">${item.qty}x &middot; ${item.price!=null?'$'+item.price.toFixed(2):''}</div></div><button class="modal-item-remove" onclick="removeItem('${(item.key||item.name).replace(/'/g,"\\'")}')">&#215;</button></div>`).join('')}<div class="tax-note">&#9888;&#65039; Prices are before tax. Some items may be subject to HST. 价格未含税。</div>`;
+function genRef() {
+  return '#' + Math.random().toString(36).substr(2,5).toUpperCase();
+}
+
+function calcEstSpend() {
+  const items = Object.values(cart);
+  let hasWeighted = false;
+  let fixedTotal = 0;
+  let weightedLo = 0, weightedHi = 0;
+  items.forEach(item => {
+    if (item.approxTotal) {
+      hasWeighted = true;
+      // Strip everything except digits, dots, and the dash/em-dash separator
+      // approxTotal looks like "$9.10–$11.90" or "~$2.59"
+      const cleaned = item.approxTotal.replace(/[~$]/g, '');
+      // Split on em-dash (U+2013), en-dash (U+2014), or hyphen
+      const parts = cleaned.split(/[–—\-]/);
+      const lo = parseFloat(parts[0]) || 0;
+      const hi = parts.length > 1 ? parseFloat(parts[1]) : lo;
+      weightedLo += lo * item.qty;
+      weightedHi += hi * item.qty;
+    } else {
+      fixedTotal += (item.price || 0) * item.qty;
+    }
+  });
+  if (hasWeighted) {
+    const totalLo = weightedLo + fixedTotal;
+    const totalHi = weightedHi + fixedTotal;
+    // Round lo down to nearest 5, hi up to nearest 5
+    const lo = Math.floor(totalLo / 5) * 5;
+    const hi = Math.ceil(totalHi / 5) * 5;
+    return { type: 'range', lo, hi };
+  } else {
+    return { type: 'fixed', total: Math.round(fixedTotal * 100) / 100 };
+  }
+}
+
+function openModal() {
+  const body = document.getElementById('modalBody');
+  const items = Object.values(cart);
+  if (!items.length) {
+    body.innerHTML = '<div style="text-align:center;padding:2rem;color:#999;"><p>Your wishlist is empty.</p><p style="font-family:\'Noto Sans SC\',sans-serif;margin-top:.5rem;font-size:0.85rem;">心愿单为空。</p></div>';
+  } else {
+    const est = calcEstSpend();
+    const estHtml = est.type === 'range'
+      ? `<div class="est-spend"><span class="est-spend-label">You might spend around</span><span class="est-spend-val">$${est.lo}–$${est.hi}</span><span class="est-spend-note">before tax · weight-based</span></div>`
+      : est.total > 0
+        ? `<div class="est-spend"><span class="est-spend-label">Subtotal</span><span class="est-spend-val">$${est.total.toFixed(2)}</span><span class="est-spend-note">+ tax</span></div>`
+        : '';
+    const itemRows = items.map(item => {
+      const priceDisplay = item.approxTotal
+        ? item.qty + 'x · approx. ' + item.approxTotal + '/pkg'
+        : item.sizeLabel
+          ? item.qty + 'x · ' + item.sizeLabel
+          : item.dealPrice
+            ? item.qty + 'x · ' + item.dealPrice
+            : item.qty + 'x · $' + (item.price||0).toFixed(2);
+      const safeKey = (item.key || item.name).replace(/'/g, "\'");
+      return '<div class="modal-list-item"><div><div class="modal-item-zh">' + item.zh + '</div><div class="modal-item-name">' + item.name + '</div><div class="modal-item-detail">' + priceDisplay + '</div></div><button class="modal-item-remove" onclick="removeItem(\'' + safeKey + '\')">×</button></div>';
+    }).join('');
+    body.innerHTML = itemRows + estHtml + '<div class="tax-note">Prices before tax · 价格未含税 · Visit us in-store to purchase · 请到店购买</div>';
   }
   document.getElementById('modalOverlay').classList.add('active');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
 
-function closeModal(){document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow='';}
-function overlayClose(e){if(e.target.id==='modalOverlay')closeModal();}
+function closeModal() { document.getElementById('modalOverlay').classList.remove('active'); document.body.style.overflow = ''; }
+function overlayClose(e) { if (e.target.id === 'modalOverlay') closeModal(); }
 
-function removeItem(key){
+function removeItem(key) {
   delete cart[key];
-  localStorage.setItem('shabuCart',JSON.stringify(cart));
-  updateCartUI();openModal();
+  localStorage.setItem('shabuCart', JSON.stringify(cart));
+  updateCartUI();
+  openModal();
 }
 
-function copyForWeChat(){
-  const items=Object.values(cart);
-  if(!items.length){alert('Your list is empty!');return;}
-  let text=`Shabu Meat House Order 涮肉屋订单\nOrder #: ${orderNum}\nDate: ${orderDate}\n\n`;
-  items.forEach(item=>{
-    text+=`${item.qty}x ${item.zh} ${item.name}`;
-    if(item.sizeLabel)text+=` (${item.sizeLabel})`;
-    text+='\n';
+function buildCopyText() {
+  const items = Object.values(cart);
+  const ref = genRef();
+  const date = new Date().toLocaleDateString('en-CA', { year: 'numeric', month: 'short', day: 'numeric' });
+  const est = calcEstSpend();
+  let text = `${ref} · ${date}\n\n`;
+  items.forEach(item => {
+    text += `${item.qty}x ${item.zh} ${item.name}`;
+    if (item.sizeLabel) text += ` (${item.sizeLabel})`;
+    text += '\n';
   });
-  text+=`\nWeChat: shabumeat`;
-  navigator.clipboard.writeText(text).then(()=>alert('Copied! Paste into WeChat (shabumeat).\n已复制！粘贴到微信发送。\n\nWe will reply to confirm your order.\n我们将回复确认。'));
+  if (est.type === 'range') text += `\nApprox. $${est.lo}–$${est.hi} before tax (weight-based)`;
+  else if (est.total > 0) text += `\nSubtotal: $${est.total.toFixed(2)} + tax`;
+  text += '\n\nShabu Meat House · 3272 Midland Ave, Scarborough';
+  return text;
 }
 
-function clearCart(){
-  if(!Object.keys(cart).length)return;
-  if(confirm('Clear all items? 清空所有商品？')){cart={};localStorage.removeItem('shabuCart');updateCartUI();closeModal();}
+function copyList() {
+  const items = Object.values(cart);
+  if (!items.length) { alert('Your wishlist is empty! 心愿单为空！'); return; }
+  navigator.clipboard.writeText(buildCopyText()).then(() => {
+    alert('List copied — see you in store! 🎉\n清单已复制，期待您的到来！');
+  });
 }
 
-function filterByCat(cat){currentCat=cat;renderProducts();}
-function toggleGuide(){document.getElementById('guidePanel').classList.toggle('active');}
-function selectPeople(n,btn){
-  document.querySelectorAll('.people-btn').forEach(b=>b.classList.remove('active'));
+function shareList() {
+  const items = Object.values(cart);
+  if (!items.length) { alert('Your wishlist is empty! 心愿单为空！'); return; }
+  const text = buildCopyText();
+  if (navigator.share) {
+    navigator.share({ title: 'My Shabu Meat House Wishlist', text });
+  } else {
+    navigator.clipboard.writeText(text).then(() => {
+      alert('List copied — see you in store! 🎉\n清单已复制，期待您的到来！');
+    });
+  }
+}
+
+function clearCart() {
+  if (!Object.keys(cart).length) return;
+  if (confirm('Clear wishlist? 清空心愿单？')) {
+    cart = {};
+    localStorage.removeItem('shabuCart');
+    updateCartUI();
+    closeModal();
+  }
+}
+
+function filterByCat(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  // sync side nav
+  document.querySelectorAll('.sidenav-cat').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.mobile-cat-btn').forEach(b => b.classList.remove('active'));
+  renderProducts();
+}
+
+function sideNavCat(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll('.sidenav-cat').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const data={
-    2:['1-2 meat varieties 肉类1-2种','1 soup base 汤底1个','2-3 vegetable types 蔬菜2-3种','1 noodle pack 面条1包','1-2 dipping sauces 蘸料1-2种'],
-    4:['3-4 meat varieties 肉类3-4种','1-2 soup bases 汤底1-2个','3-4 vegetable types 蔬菜3-4种','2 noodle packs 面条2包','2-3 dipping sauces 蘸料2-3种'],
-    6:['4-5 meat varieties 肉类4-5种','2 soup bases 汤底2个','5-6 vegetable types 蔬菜5-6种','3 noodle packs 面条3包','3-4 dipping sauces 蘸料3-4种'],
-    8:['5-6 meat varieties 肉类5-6种','2-3 soup bases 汤底2-3个','6-8 vegetable types 蔬菜6-8种','3-4 noodle packs 面条3-4包','4-5 dipping sauces 蘸料4-5种'],
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  renderProducts();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function mobileCat(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll('.mobile-cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  renderProducts();
+  toggleMobileNav();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleMobileNav() {
+  document.getElementById('mobileNavDropdown').classList.toggle('open');
+}
+
+function toggleGuide() { document.getElementById('guidePanel').classList.toggle('active'); }
+
+function selectPeople(n, btn) {
+  document.querySelectorAll('.people-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const data = {
+    2: ['1–2 meat varieties 肉类1–2种', '1 soup base 汤底1个', '2–3 vegetable types 蔬菜2–3种', '1 noodle pack 面条1包', '1–2 dipping sauces 蘸料1–2种'],
+    4: ['3–4 meat varieties 肉类3–4种', '1–2 soup bases 汤底1–2个', '3–4 vegetable types 蔬菜3–4种', '2 noodle packs 面条2包', '2–3 dipping sauces 蘸料2–3种'],
+    6: ['4–5 meat varieties 肉类4–5种', '2 soup bases 汤底2个', '5–6 vegetable types 蔬菜5–6种', '3 noodle packs 面条3包', '3–4 dipping sauces 蘸料3–4种'],
+    8: ['5–6 meat varieties 肉类5–6种', '2–3 soup bases 汤底2–3个', '6–8 vegetable types 蔬菜6–8种', '3–4 noodle packs 面条3–4包', '4–5 dipping sauces 蘸料4–5种'],
   };
-  const recs=document.getElementById('recs');
-  recs.innerHTML=`<h4>We recommend 建议:</h4><ul>${data[n].map(r=>`<li>${r}</li>`).join('')}</ul>`;
+  const recs = document.getElementById('recs');
+  recs.innerHTML = `<h4>We suggest 建议:</h4><ul>${data[n].map(r => `<li>${r}</li>`).join('')}</ul>`;
   recs.classList.add('active');
 }
 </script>
